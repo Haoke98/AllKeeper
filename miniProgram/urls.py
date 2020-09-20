@@ -1,7 +1,10 @@
 from django.urls import path
 
-from .views import getAllKino
+from .views import *
 
 urlpatterns = [
-    path('getKino<int:id>', getAllKino),
+    path('getFilm<int:id>', getFilm),
+    path('getOpenid<str:js_code>', getUserOpenid),
+    path('getAccessToken', getAccessToken),
+    path('getSlider', getSlider)
 ]

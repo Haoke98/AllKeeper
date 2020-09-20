@@ -1,14 +1,21 @@
 from django.contrib import admin
 
-from .models import kino, episode
+from .models import *
 
 
 # Register your models here.
-@admin.register(kino)
+
+
+@admin.register(settings)
+class settingsAdmin(admin.ModelAdmin):
+    list_display = ['app_name', 'app_id', 'app_secret']
+
+
+@admin.register(film)
 class kinoAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'cover', ]
 
 
-@admin.register(episode)
+@admin.register(video)
 class episodeAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'content', 'kino']
+    list_display = ['id', 'name', 'cover', 'url', 'belongTo']
