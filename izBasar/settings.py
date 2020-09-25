@@ -71,16 +71,23 @@ WSGI_APPLICATION = 'izBasar.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+import platform
 
+WINDOWS = 'Windows'
+LINUX = 'Linux'
+MYSQL_SERVER_HOST = "undefined by sadam"
+if platform.system() == WINDOWS:
+    MYSQL_SERVER_HOST = '62.234.6.136'
+else:
+    MYSQL_SERVER_HOST = 'localhost'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'izbasar',
         'USER': 'root',
         'PASSWORD': '1a2b3c4d5',
-        # 'HOST': 'localhost',
-        'PORT': '10083',
-        'HOST': 'cdb-gux3y6oe.cd.tencentcdb.com',
+        'PORT': '3306',
+        'HOST': MYSQL_SERVER_HOST,
     }
 }
 
