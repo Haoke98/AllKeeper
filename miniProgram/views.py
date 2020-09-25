@@ -1,6 +1,6 @@
 import json
-import requests
 
+import requests
 from django.http import HttpResponse
 
 # from django.http import request
@@ -29,6 +29,14 @@ def getAccessToken(request):
     print(res.text)
     return HttpResponse(res.text, content_type='application/json,charset=utf-8')
 
+
+def getSubcribtionsAccessToken(request):
+    app = settings.objects.first()
+    subcribtion = app.subcribtion
+    print(subcribtion.app_id, subcribtion.app_secret)
+    url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + subcribtion.app_id + "&secret=" + subcribtion.app_secret
+    res = requests.get(url)
+    return HttpResponse(res.text, content_type='application/json,charset=utf-8')
 
 def getUserOpenid(request, js_code):
     app = settings.objects.first()
