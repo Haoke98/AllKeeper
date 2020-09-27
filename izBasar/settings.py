@@ -21,13 +21,27 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 's3va_7)!ovu!=3j55p2m9@yk0h4-w!l9&v&m#9-(9xduye*@p='
 
+import platform
+
+WINDOWS = 'Windows'
+LINUX = 'Linux'
+SADAM_SET = {
+    "MYSQL_SERVER_HOST": "undefined by sadam",
+    "DEBUG": False,
+}
+if platform.system() == WINDOWS:
+    SADAM_SET['MYSQL_SERVER_HOST'] = '62.234.6.136'
+    SADAM_SET["DEBUG"] = True
+else:
+    SADAM_SET["MYSQL_SERVER_HOST"] = 'localhost'
+    SADAM_SET["DEBUG"] = False
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = SADAM_SET.get("DEBUG")
 
 ALLOWED_HOSTS = ['*']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,15 +85,6 @@ WSGI_APPLICATION = 'izBasar.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-import platform
-
-WINDOWS = 'Windows'
-LINUX = 'Linux'
-MYSQL_SERVER_HOST = "undefined by sadam"
-if platform.system() == WINDOWS:
-    MYSQL_SERVER_HOST = '62.234.6.136'
-else:
-    MYSQL_SERVER_HOST = 'localhost'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -87,7 +92,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': '1a2b3c4d5',
         'PORT': '3306',
-        'HOST': MYSQL_SERVER_HOST,
+        'HOST': SADAM_SET["MYSQL_SERVER_HOST"],
     }
 }
 

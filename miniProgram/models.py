@@ -2,9 +2,14 @@ from django.db import models
 
 
 # Create your models here.
-class user(models.Model):
+class User(models.Model):
     openid = models.CharField(max_length=44)
+    vip_expiredTime = models.DateTimeField(verbose_name="VIP过期时间", null=True)
+    last_changed_time = models.DateTimeField(auto_now=True)
+    firstTimeLogin = models.DateTimeField(auto_now_add=True, null=True)
 
+    def __str__(self):
+        return self.openid
 
 class film(models.Model):
     id = models.AutoField(primary_key=True)
@@ -45,6 +50,7 @@ class settings(models.Model):
     app_secret = models.CharField(max_length=32)
     sliders = models.ManyToManyField(to=video)
     subcribtion = models.ForeignKey(to=subcribtions, on_delete=models.PROTECT, null=True)
+    enableVIP_mode = models.BooleanField(verbose_name="是否启动VIP模式")
 
     def __str__(self):
         return self.app_name

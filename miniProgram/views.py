@@ -38,6 +38,7 @@ def getSubcribtionsAccessToken(request):
     res = requests.get(url)
     return HttpResponse(res.text, content_type='application/json,charset=utf-8')
 
+
 def getUserOpenid(request, js_code):
     app = settings.objects.first()
     url = 'https://api.weixin.qq.com/sns/jscode2session'
@@ -51,8 +52,29 @@ def getUserOpenid(request, js_code):
         'js_code': js_code
     }
     res = requests.post(url, data, headers=header)
-    print(res.text)
-    return HttpResponse(res.text, content_type='application/json,charset=utf-8')
+    res_json = res.json()
+    openid = res_json['openid']
+    print(res_json)
+    curr_user, is_created = User.objects.get_or_create(openid=openid,
+                                                       defaults={'vip_expiredTime': datetime.datetime.now()})
+    if (is_created):
+        print("数据库里找不到关于该用户的任何信息，创建了新的空间给该用户", curr_user)
+    else:
+        print("数据库里找到了了该用户", curr_user)
+    vip_expiredTime = curr_user.vip_expiredTime.timestamp()
+    print(vip_expiredTime)
+    vip_expiredTime = int(str(vip_expiredTime)[:10] + "000")
+    print(vip_expiredTime)
+    curr_userJson = {
+        "openid": curr_user.openid,
+        "vip_expiredTime": vip_expiredTime,
+    }
+
+    print(curr_userJson)
+    result = {'err_msg': "OK", 'objects': [], "curr_user": curr_userJson,
+              "enableVIP_mode": app.enableVIP_mode}
+    result = json.dumps(result, ensure_ascii=False)
+    return HttpResponse(result, content_type='application/json,charset=utf-8')
 
 
 def getFilm(request, id):
