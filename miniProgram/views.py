@@ -1,13 +1,32 @@
+import datetime
 import json
 
 import requests
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.utils import timezone
 
-# from django.http import request
 from .models import *
 
 
 # Create your views here.
+def buyVIP(request, openid):
+    curr_user = User.objects.filter(openid=openid).first()
+    print(curr_user)
+    now = timezone.now()
+    print(now)
+    new_month = now.month + 1
+    new_year = now.year
+    if new_month > 12:
+        new_year += 1
+        new_month = 1
+    newDatetime = datetime.datetime(year=new_year, month=new_month, day=now.day, hour=now.hour, minute=now.minute,
+                                    second=now.second, tzinfo=now.tzinfo)
+    print(newDatetime)
+    curr_user.vip_expiredTime = newDatetime
+    curr_user.save()
+    return JsonResponse(curr_user.json())
+
+
 def getSlider(request):
     result = {'err_msg': "OK", 'objects': []}
     app = settings.objects.first()
@@ -61,18 +80,9 @@ def getUserOpenid(request, js_code):
         print("数据库里找不到关于该用户的任何信息，创建了新的空间给该用户", curr_user)
     else:
         print("数据库里找到了了该用户", curr_user)
-    vip_expiredTime = curr_user.vip_expiredTime.timestamp()
-    print(vip_expiredTime)
-    vip_expiredTime = int(str(vip_expiredTime)[:10] + "000")
-    print(vip_expiredTime)
-    curr_userJson = {
-        "openid": curr_user.openid,
-        "vip_expiredTime": vip_expiredTime,
-    }
-
-    print(curr_userJson)
-    result = {'err_msg': "OK", 'objects': [], "curr_user": curr_userJson,
-              "enableVIP_mode": app.enableVIP_mode}
+    print(curr_user.json())
+    result = {'err_msg': "OK", 'objects': [], "curr_user": curr_user.json(),
+              "settings": app.json()}
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 

@@ -7,5 +7,6 @@ urlpatterns = [
     path('getOpenid<str:js_code>', getUserOpenid),
     path('getAccessToken', getAccessToken),
     path('getSlider', getSlider),
-    path('getSubcribtionAccessToken', getSubcribtionsAccessToken)
+    path('getSubcribtionAccessToken', getSubcribtionsAccessToken),
+    path('buyVIP<str:openid>', buyVIP)
 ]

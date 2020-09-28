@@ -1,7 +1,9 @@
 from django.db import models
 
-
 # Create your models here.
+from django.utils import timezone
+
+
 class User(models.Model):
     openid = models.CharField(max_length=44)
     vip_expiredTime = models.DateTimeField(verbose_name="VIP过期时间", null=True)
@@ -10,6 +12,27 @@ class User(models.Model):
 
     def __str__(self):
         return self.openid
+
+    def json(self):
+        isVIP = False
+        now = timezone.now()
+        dateTimeDelta = self.vip_expiredTime - now
+        vipAlert = "VIPئەزارىمىزنى قىزغىن قارشى ئالىمىز"
+        if dateTimeDelta.days == 0:
+            vipAlert = "VIPئەزالىقىڭىزنىڭ ۋاقتى ئۆتىدىغانغا نەچچە سائەتلا ۋاقىت قالدى"
+        else:
+            if dateTimeDelta.days <= 15:
+                vipAlert = "كۈنلا ۋاقىت قالدى" + str(dateTimeDelta.days) + "VIPئەزالىقىڭىز ۋاقتى ئۆتىدىغانغا يەنە "
+                vipAlert = "VIPئەزالىقىڭىزنىڭ ۋاقتى پەقەت%dكۈنلا قالدى" % (dateTimeDelta.days)
+        if now < self.vip_expiredTime:
+            isVIP = True
+        userJson = {
+            "openid": self.openid,
+            "isVIP": isVIP,
+            "vipAlert": vipAlert
+        }
+        return userJson
+
 
 class film(models.Model):
     id = models.AutoField(primary_key=True)
@@ -51,6 +74,13 @@ class settings(models.Model):
     sliders = models.ManyToManyField(to=video)
     subcribtion = models.ForeignKey(to=subcribtions, on_delete=models.PROTECT, null=True)
     enableVIP_mode = models.BooleanField(verbose_name="是否启动VIP模式")
+    VIPprice = models.FloatField(verbose_name="一个月会员价", null=True)
 
     def __str__(self):
         return self.app_name
+
+    def json(self):
+        return {
+            "enableVIP_mode": self.enableVIP_mode,
+            "VIPprice": self.VIPprice,
+        }

@@ -16,7 +16,7 @@ class subcribtionsAdmin(admin.ModelAdmin):
 
 @admin.register(settings)
 class settingsAdmin(admin.ModelAdmin):
-    list_display = ['app_name', 'enableVIP_mode', 'app_id', 'app_secret', 'subcribtion']
+    list_display = ['app_name', 'enableVIP_mode', 'app_id', 'app_secret', 'subcribtion', 'VIPprice']
 
 
 @admin.register(film)
