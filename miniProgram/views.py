@@ -3,7 +3,6 @@ import json
 
 import requests
 from django.http import HttpResponse, JsonResponse
-from django.utils import timezone
 
 from .models import *
 
@@ -30,7 +29,7 @@ def buyVIP(request, openid):
 def getSlider(request):
     result = {'err_msg': "OK", 'objects': []}
     app = settings.objects.first()
-    sliders = app.sliders.all()
+    sliders = app.sliders.order_by('-last_changed_time')
     dicts = []
     for per in sliders:
         video_dic = {'name': per.name,
@@ -74,14 +73,18 @@ def getUserOpenid(request, js_code):
     res_json = res.json()
     openid = res_json['openid']
     print(res_json)
-    curr_user, is_created = User.objects.get_or_create(openid=openid,
-                                                       defaults={'vip_expiredTime': datetime.datetime.now()})
-    if (is_created):
+    curr_user, isCreated = User.objects.get_or_create(openid=openid,
+                                                      defaults={'vip_expiredTime': timezone.now(),
+                                                                })
+    if (isCreated):
         print("数据库里找不到关于该用户的任何信息，创建了新的空间给该用户", curr_user)
     else:
         print("数据库里找到了了该用户", curr_user)
-    print(curr_user.json())
-    result = {'err_msg': "OK", 'objects': [], "curr_user": curr_user.json(),
+    curr_user.last_login_time = timezone.now()
+    curr_user.save()
+    curr_user_json = curr_user.json()
+    print(curr_user_json)
+    result = {'err_msg': "OK", 'objects': [], "curr_user": curr_user_json,
               "settings": app.json()}
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')
@@ -92,7 +95,7 @@ def getFilm(request, id):
     result = {'err_msg': "OK", 'objects': []}
     dicts = []
     if id == 0:
-        films = film.objects.all()
+        films = film.objects.order_by('-last_changed_time')
         for per in films:
             video_dic = {'name': per.name,
                          'cover': per.cover, 'id': per.id}
@@ -102,7 +105,7 @@ def getFilm(request, id):
         films = film.objects.get(id=id)
         per = films
         dict_episodes = []
-        episodes = video.objects.filter(belongTo=per)
+        episodes = video.objects.filter(belongTo=per).order_by('-episode_num', '-last_changed_time')
         for per_eposide in episodes:
             dict_episodes.append({'name': per_eposide.name, 'url': per_eposide.url})
         video_dic = {'name': per.name,

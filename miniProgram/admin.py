@@ -4,26 +4,33 @@ from .models import *
 
 
 # Register your models here.
+
+class MyModelAdmin(admin.ModelAdmin):
+    list_display = list(admin.ModelAdmin.list_display) + ['last_changed_time']
+
+
 @admin.register(User)
-class userAdmin(admin.ModelAdmin):
-    list_display = ['openid', 'vip_expiredTime', 'last_changed_time', 'firstTimeLogin']
+class userAdmin(MyModelAdmin):
+    list_display = MyModelAdmin.list_display + ['last_login_time', 'vip_expiredTime', 'firstTimeLogin']
 
 
 @admin.register(subcribtions)
 class subcribtionsAdmin(admin.ModelAdmin):
-    list_display = ['name', 'app_id', 'app_secret']
+    list_display = MyModelAdmin.list_display + ['app_id', 'app_secret']
 
 
 @admin.register(settings)
 class settingsAdmin(admin.ModelAdmin):
-    list_display = ['app_name', 'enableVIP_mode', 'app_id', 'app_secret', 'subcribtion', 'VIPprice']
+    list_display = MyModelAdmin.list_display + ['enableVIP_mode', 'app_id', 'app_secret', 'subcribtion', 'VIPprice']
+    list_display_links = ['__str__', 'subcribtion']
 
 
 @admin.register(film)
 class kinoAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'cover', ]
+    list_display = MyModelAdmin.list_display + ['id', 'cover', ]
 
 
 @admin.register(video)
-class episodeAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'cover', 'url', 'belongTo']
+class videoAdmin(admin.ModelAdmin):
+    list_display = MyModelAdmin.list_display + ['episode_num', 'belongTo', 'id', 'cover', 'url', ]
+    list_display_links = list(admin.ModelAdmin.list_display_links) + ['belongTo', '__str__']
