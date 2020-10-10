@@ -10,14 +10,10 @@ from .models import *
 
 
 # Create your views here.
-def getBanner(request):
-    app = settings.objects.first()
-    return redirect(to=app.banner)
+def UrlRedirector(request, id):
+    url = RedirectUrlRelation.objects.get(id=id).redirectUrl
+    return redirect(to=url)
 
-
-def getDialogBackground(request):
-    app = settings.objects.first()
-    return redirect(to=app.dialogBackground)
 
 
 @csrf_exempt

@@ -10,6 +10,23 @@ class MyModelAdmin(admin.ModelAdmin):
     list_display = list(admin.ModelAdmin.list_display) + ['last_changed_time']
 
 
+@admin.register(RedirectUrlRelation)
+class UrlRedirectorAdmin(MyModelAdmin):
+    list_display = MyModelAdmin.list_display + ['id', '_url', '_redirectUrl']
+
+    def _redirectUrl(self, obj):
+        x = mark_safe('<a href="%s">%s</a>' % (obj.redirectUrl, obj.redirectUrl))
+        print(x)
+        return x
+
+    def _url(self, obj):
+        x = mark_safe('<a href="/miniProgram/UrlRedirector%d">/miniProgram/UrlRedirector%d</a>' % (obj.id, obj.id))
+        print(x)
+        return x
+
+    _redirectUrl.allow_tags = True
+
+
 @admin.register(User)
 class userAdmin(MyModelAdmin):
     list_display = MyModelAdmin.list_display + ['last_login_time', 'vip_expiredTime', 'avatar', 'nickName', '_gender',
@@ -44,7 +61,7 @@ class subcribtionsAdmin(admin.ModelAdmin):
 @admin.register(settings)
 class settingsAdmin(admin.ModelAdmin):
     list_display = MyModelAdmin.list_display + ['enableVIP_mode', 'VIPprice', 'app_id', 'app_secret', 'subcribtion',
-                                                'banner', 'dialogBackground']
+                                                ]
     list_display_links = ['__str__', 'subcribtion']
 
 

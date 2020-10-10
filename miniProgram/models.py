@@ -14,6 +14,13 @@ class MyModel(models.Model):
     #     # self.last_changed_time =
     #     super().save(*args, **kwargs)
 
+class RedirectUrlRelation(MyModel):
+    name = models.CharField(max_length=50, null=True)
+    id = models.IntegerField(primary_key=True)
+    redirectUrl = models.CharField(max_length=500)
+
+    def __str__(self):
+        return "%s(URL重定向关系)" % (self.name)
 
 class User(MyModel):
     openid = models.CharField(max_length=44)
@@ -104,8 +111,6 @@ class settings(MyModel):
     subcribtion = models.ForeignKey(to=subcribtions, on_delete=models.PROTECT, null=True)
     enableVIP_mode = models.BooleanField(verbose_name="是否启动VIP模式")
     VIPprice = models.FloatField(verbose_name="一个月会员价", null=True)
-    dialogBackground = models.CharField(max_length=500, null=True)
-    banner = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return self.app_name

@@ -10,6 +10,5 @@ urlpatterns = [
     path('getSubcribtionAccessToken', getSubcribtionsAccessToken),
     path('buyVIP<str:openid>', buyVIP),
     path('updateUserInfo', updateUserInfo),
-    path('getDialogBackground', getDialogBackground),
-    path('getBanner', getBanner),
+    path('UrlRedirector<int:id>', UrlRedirector),
 ]
