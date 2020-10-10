@@ -10,10 +10,34 @@ from .models import *
 
 
 # Create your views here.
+@csrf_exempt
+def getArticleInfo(request):
+    data_dic = json.loads(request.body)
+    print(data_dic['url'])
+    res = requests.get(data_dic['url']).text
+    # print(res)
+    title = getContent(res, 'title')
+    image = getContent(res, 'image')
+    description = getContent(res, 'description')
+    print(title, '\n\n', image, '\n\n', description)
+    result = {'err_msg': "OK", 'title': title, "description": description,
+              "cover_url": image}
+    result = json.dumps(result, ensure_ascii=False)
+    return HttpResponse(result, content_type='application/json,charset=utf-8')
+
+
+def getContent(data, str):
+    sss = '<meta property="og:%s" content="' % (str)
+    head_index = data.find(sss) + sss.__len__()
+    print(head_index)
+    end_index = head_index + data[head_index:-1].find('" />')
+    print(end_index)
+    return data[head_index:end_index]
+
+
 def UrlRedirector(request, id):
     url = RedirectUrlRelation.objects.get(id=id).redirectUrl
     return redirect(to=url)
-
 
 
 @csrf_exempt

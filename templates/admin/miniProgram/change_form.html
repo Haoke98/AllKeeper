@@ -161,6 +161,29 @@
     <input type="file" id="file" name="myfile"/>
     <input type="button" οnclick="UpladFile()" value="上传"/>
     <input type="button" οnclick="cancleUploadFile()" value="取消"/>
+    公众号文章URL:
+    <input type="text" value="" onchange="getInfoFromUrl(value)">
+    <div id="ArticleInfo"></div>
+    <script>
+        function getInfoFromUrl(value) {
+            console.log(value);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/miniProgram/getArticleInfo", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify({url: value}));
+            xhr.onreadystatechange = (e) => {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    json_res = JSON.parse(xhr.responseText);
+                    console.log(json_res);
+                    document.getElementById("ArticleInfo").innerHTML = json_res.title + "<img src='" + json_res.cover_url + "'>" + json_res.description;
+                    {#var jsonContent = JSON.parse(xhr.responseText);#}
+                    {#access_token = jsonContent.access_token;#}
+                    {#h2_accessToken.innerHTML = access_token;#}
+                }
+            }
+        }
+    </script>
     {% if change %}{% if not is_popup %}
         <ul class="object-tools">
             {% block object-tools-items %}
