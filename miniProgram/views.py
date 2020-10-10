@@ -3,11 +3,33 @@ import json
 
 import requests
 from django.http import HttpResponse, JsonResponse
+from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import *
 
 
 # Create your views here.
+def getBanner(request):
+    app = settings.objects.first()
+    return redirect(to=app.banner)
+
+
+def getDialogBackground(request):
+    app = settings.objects.first()
+    return redirect(to=app.dialogBackground)
+
+
+@csrf_exempt
+def updateUserInfo(request):
+    openid = request.GET.get('openid')
+    data_dic = json.loads(request.body)
+    curr_user = User.objects.filter(openid=openid)[0]
+    curr_user.updateUserInfo(data_dic)
+    print(openid, data_dic)
+    return HttpResponse("update is ok.")
+
+
 def buyVIP(request, openid):
     curr_user = User.objects.filter(openid=openid).first()
     print(curr_user)

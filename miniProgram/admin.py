@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
 from .models import *
 
@@ -11,7 +12,28 @@ class MyModelAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class userAdmin(MyModelAdmin):
-    list_display = MyModelAdmin.list_display + ['last_login_time', 'vip_expiredTime', 'firstTimeLogin']
+    list_display = MyModelAdmin.list_display + ['last_login_time', 'vip_expiredTime', 'avatar', 'nickName', '_gender',
+                                                'language', 'city', 'province', 'country', 'firstTimeLogin']
+
+    def avatar(self, obj):
+        try:
+            if obj.avatarUrl == None:
+                img = ''
+            else:
+                img = mark_safe('<img src="%s" width="50px" />' % (obj.avatarUrl,))
+        except Exception as e:
+            img = ''
+        return img
+
+    def _gender(self, obj):
+        if obj.gender == 0:
+            return "女"
+        elif obj.gender == 1:
+            return "男"
+        else:
+            return "-"
+
+    avatar.allow_tags = True
 
 
 @admin.register(subcribtions)
@@ -21,7 +43,8 @@ class subcribtionsAdmin(admin.ModelAdmin):
 
 @admin.register(settings)
 class settingsAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['enableVIP_mode', 'app_id', 'app_secret', 'subcribtion', 'VIPprice']
+    list_display = MyModelAdmin.list_display + ['enableVIP_mode', 'VIPprice', 'app_id', 'app_secret', 'subcribtion',
+                                                'banner', 'dialogBackground']
     list_display_links = ['__str__', 'subcribtion']
 
 

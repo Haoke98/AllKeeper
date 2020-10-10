@@ -8,5 +8,8 @@ urlpatterns = [
     path('getAccessToken', getAccessToken),
     path('getSlider', getSlider),
     path('getSubcribtionAccessToken', getSubcribtionsAccessToken),
-    path('buyVIP<str:openid>', buyVIP)
+    path('buyVIP<str:openid>', buyVIP),
+    path('updateUserInfo', updateUserInfo),
+    path('getDialogBackground', getDialogBackground),
+    path('getBanner', getBanner),
 ]

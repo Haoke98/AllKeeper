@@ -10,12 +10,33 @@ class MyModel(models.Model):
     class Meta:
         abstract = True
 
+    # def save(self, *args, **kwargs):
+    #     # self.last_changed_time =
+    #     super().save(*args, **kwargs)
+
 
 class User(MyModel):
     openid = models.CharField(max_length=44)
     vip_expiredTime = models.DateTimeField(verbose_name="VIP过期时间", null=True)
     firstTimeLogin = models.DateTimeField(auto_now_add=True, null=True)
     last_login_time = models.DateTimeField(verbose_name='最近一次登陆时间', null=True)
+    nickName = models.CharField(max_length=100, null=True)
+    gender = models.IntegerField(null=True)
+    language = models.CharField(max_length=4, null=True)
+    city = models.CharField(max_length=50, null=True)
+    province = models.CharField(max_length=50, null=True)
+    country = models.CharField(max_length=50, null=True)
+    avatarUrl = models.URLField(null=True)
+
+    def updateUserInfo(self, json_data):
+        self.nickName = json_data['nickName']
+        self.gender = json_data['gender']
+        self.language = json_data['language']
+        self.city = json_data['city']
+        self.province = json_data['province']
+        self.country = json_data['country']
+        self.avatarUrl = json_data['avatarUrl']
+        self.save()
 
     def __str__(self):
         return self.openid
@@ -83,6 +104,8 @@ class settings(MyModel):
     subcribtion = models.ForeignKey(to=subcribtions, on_delete=models.PROTECT, null=True)
     enableVIP_mode = models.BooleanField(verbose_name="是否启动VIP模式")
     VIPprice = models.FloatField(verbose_name="一个月会员价", null=True)
+    dialogBackground = models.CharField(max_length=500, null=True)
+    banner = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return self.app_name

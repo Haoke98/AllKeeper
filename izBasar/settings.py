@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'miniProgram',
+    'WEB3DA'
 ]
 
 MIDDLEWARE = [

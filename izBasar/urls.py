@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.static import serve
 
+import WEB3DA.urls
 import miniProgram.urls
 from izBasar import settings
 
@@ -25,4 +26,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('miniProgram/', include(miniProgram.urls)),
     url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
+    path('W3DA/', include(WEB3DA.urls)),
 ]
