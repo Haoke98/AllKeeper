@@ -14,13 +14,16 @@ class MyModel(models.Model):
     #     # self.last_changed_time =
     #     super().save(*args, **kwargs)
 
+
 class RedirectUrlRelation(MyModel):
     name = models.CharField(max_length=50, null=True)
     id = models.IntegerField(primary_key=True)
     redirectUrl = models.CharField(max_length=500)
+    returnValue = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return "%s(URL重定向关系)" % (self.name)
+
 
 class User(MyModel):
     openid = models.CharField(max_length=44)

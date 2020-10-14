@@ -35,9 +35,29 @@ def getContent(data, str):
     return data[head_index:end_index]
 
 
+def updatePhoneNumber(request):
+    data = json.loads(request.body)
+    _openid = data['openid']
+    curr_user = User.objects.get(openid=_openid)
+    print(data['errMsg'])
+    print(data['encryptedData'])
+    print(data['iv'])
+    return HttpResponse("this is updatePhoneNumber API")
+
+
+@csrf_exempt
 def UrlRedirector(request, id):
-    url = RedirectUrlRelation.objects.get(id=id).redirectUrl
-    return redirect(to=url)
+    redirector = RedirectUrlRelation.objects.get(id=id)
+    url = redirector.redirectUrl
+    returnValue = redirector.returnValue
+    print(request.body)
+    if url == "#":
+        if returnValue == "#":
+            return HttpResponse(request, content_type='application/json,charset=utf-8')
+        else:
+            return HttpResponse(returnValue)
+    else:
+        return redirect(to=url)
 
 
 @csrf_exempt

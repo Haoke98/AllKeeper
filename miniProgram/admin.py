@@ -12,16 +12,14 @@ class MyModelAdmin(admin.ModelAdmin):
 
 @admin.register(RedirectUrlRelation)
 class UrlRedirectorAdmin(MyModelAdmin):
-    list_display = MyModelAdmin.list_display + ['id', '_url', '_redirectUrl']
+    list_display = MyModelAdmin.list_display + ['id', '_url', 'returnValue', '_redirectUrl']
 
     def _redirectUrl(self, obj):
         x = mark_safe('<a href="%s">%s</a>' % (obj.redirectUrl, obj.redirectUrl))
-        print(x)
         return x
 
     def _url(self, obj):
         x = mark_safe('<a href="/miniProgram/UrlRedirector%d">/miniProgram/UrlRedirector%d</a>' % (obj.id, obj.id))
-        print(x)
         return x
 
     _redirectUrl.allow_tags = True
