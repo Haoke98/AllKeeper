@@ -29,7 +29,7 @@ class Article(MyModel):
             'title': self.title,
             'description': self.description,
             'cover_url': self.cover_url,
-            'url': self.cover_url,
+            'url': self.url,
         }
 
 
