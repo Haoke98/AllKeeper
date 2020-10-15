@@ -12,4 +12,5 @@ urlpatterns = [
     path('updateUserInfo', updateUserInfo),
     path('UrlRedirector<int:id>', UrlRedirector),
     path('getArticleInfo', getArticleInfo),
+    path('getAllArticles', getAllArticles),
 ]

@@ -15,6 +15,24 @@ class MyModel(models.Model):
     #     super().save(*args, **kwargs)
 
 
+class Article(MyModel):
+    title = models.CharField(max_length=64)
+    description = models.CharField(max_length=120)
+    cover_url = models.URLField()
+    url = models.URLField()
+
+    def __str__(self):
+        return self.title
+
+    def json(self):
+        return {
+            'title': self.title,
+            'description': self.description,
+            'cover_url': self.cover_url,
+            'url': self.cover_url,
+        }
+
+
 class RedirectUrlRelation(MyModel):
     name = models.CharField(max_length=50, null=True)
     id = models.IntegerField(primary_key=True)

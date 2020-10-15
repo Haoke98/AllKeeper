@@ -10,6 +10,17 @@ from .models import *
 
 
 # Create your views here.
+def getAllArticles(request):
+    result = {'err_msg': "OK", 'objects': []}
+    articles = Article.objects.all()
+    dict_object = []
+    for per in articles:
+        dict_object.append(per.json())
+    result['objects'] = dict_object
+    result = json.dumps(result, ensure_ascii=False)
+    return HttpResponse(result, content_type='application/json,charset=utf-8')
+
+
 @csrf_exempt
 def getArticleInfo(request):
     data_dic = json.loads(request.body)

@@ -9,6 +9,9 @@ from .models import *
 class MyModelAdmin(admin.ModelAdmin):
     list_display = list(admin.ModelAdmin.list_display) + ['last_changed_time']
 
+@admin.register(Article)
+class ArticleAdmin(MyModelAdmin):
+    list_display = MyModelAdmin.list_display + ['description', 'cover_url', 'url']
 
 @admin.register(RedirectUrlRelation)
 class UrlRedirectorAdmin(MyModelAdmin):
