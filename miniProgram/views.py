@@ -7,9 +7,19 @@ from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import *
-
-
 # Create your views here.
+from .utils import getOriginalUrl
+
+
+def videoUrlMaker(request, vid):
+    video = Video.objects.get(id=vid)
+    articleUrl = video.url
+    print(articleUrl)
+    url = "http://video.dispatch.tc.qq.com//uwMROfz2r57EIaQXGdGn1GddPkb8ztlhqxNOtSjZYCSOV_DK//svp_50001//szg_27609369_50001_f6fae475390644c28610d9add161c4ba.f622.mp4?vkey=4F34353354D6497CAC27CCC0E87593E6805D0E343B107A3892C91FB7A3ED95F8F74054A2DF627DADDECBFEC0C25F67E9D73645FF1CEB1FFA5116B591C36D8512C99F16FEAD1A9F4039B1EBCA34EB1D2453771EA20AAC6D942F271DD6D85B1D4799553A70A95C9C847000D09D8EE3F2BC"
+    url = getOriginalUrl(articleUrl)
+    return redirect(to=url)
+
+
 def getAllArticles(request):
     result = {'err_msg': "OK", 'objects': []}
     articles = Article.objects.all()
@@ -105,9 +115,7 @@ def getSlider(request):
     sliders = app.sliders.order_by('-last_changed_time')
     dicts = []
     for per in sliders:
-        video_dic = {'name': per.name,
-                     'cover': per.cover, 'url': per.url, 'id': per.id, 'film_id': per.belongTo.id}
-        dicts.append(video_dic)
+        dicts.append(per.json())
     result['objects'] = dicts
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')
@@ -168,21 +176,12 @@ def getFilm(request, id):
     result = {'err_msg': "OK", 'objects': []}
     dicts = []
     if id == 0:
-        films = film.objects.order_by('-last_changed_time')
+        films = Film.objects.order_by('-last_changed_time')
         for per in films:
-            video_dic = {'name': per.name,
-                         'cover': per.cover, 'id': per.id}
-            dicts.append(video_dic)
+            dicts.append(per.json(withEpisodes=False))
         result['objects'] = dicts
     else:
-        films = film.objects.get(id=id)
-        per = films
-        dict_episodes = []
-        episodes = video.objects.filter(belongTo=per).order_by('-episode_num', '-last_changed_time')
-        for per_eposide in episodes:
-            dict_episodes.append({'name': per_eposide.name, 'url': per_eposide.url})
-        video_dic = {'name': per.name,
-                     'cover': per.cover, 'id': per.id, 'eposides': dict_episodes}
-        result['objects'] = video_dic
+        film = Film.objects.get(id=id)
+        result['objects'] = film.json(withEpisodes=True)
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')

@@ -66,12 +66,12 @@ class settingsAdmin(admin.ModelAdmin):
     list_display_links = ['__str__', 'subcribtion']
 
 
-@admin.register(film)
+@admin.register(Film)
 class kinoAdmin(admin.ModelAdmin):
     list_display = MyModelAdmin.list_display + ['id', 'cover', ]
 
 
-@admin.register(video)
+@admin.register(Video)
 class videoAdmin(admin.ModelAdmin):
     list_display = MyModelAdmin.list_display + ['episode_num', 'belongTo', 'id', 'cover', 'url', ]
     list_display_links = list(admin.ModelAdmin.list_display_links) + ['belongTo', '__str__']

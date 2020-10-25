@@ -165,14 +165,19 @@
     <input id='article_url' type="text" value="" onchange="getInfoFromUrl(value)">
     <div id="ArticleInfo" style="display: flex;flex-direction: column">
         <label>title:</label>
-        <text id="articleTitle"></text>
+        <input id="articleTitle"/>
         <input type="button" onClick="copy('articleTitle')" value="点击复制代码"/>
-        <label>description:</label>
-        <text id="description"></text>
+        <input>description:</input>
+        <input id="description"/>
         <input type="button" onClick="copy('description')" value="点击复制代码"/>
         <label>cover:</label>
         <img id="cover">
     </div>
+    <style>
+        .has_filled_automatically {
+            color: orange;
+        }
+    </style>
     <script>
         function copy(id) {
             let text = document.getElementById(id).innerText;
@@ -203,40 +208,25 @@
                     console.log(xhr.responseText);
                     json_res = JSON.parse(xhr.responseText);
                     console.log(json_res);
-                    try {
-                        document.getElementById("articleTitle").innerHTML = json_res.title;
-                    } catch (e) {
+                    let relation = [{id: "articleTitle", json_key: 'title'},
+                        {id: "description", json_key: 'description'},
+                        {id: 'cover', json_key: 'cover_url'},
+                        {id: 'id_title', json_key: 'title'},
+                        {id: 'id_name', json_key: 'title'},
+                        {id: 'id_description', json_key: 'description'},
+                        {id: 'id_cover_url', json_key: 'cover_url'},
+                        {id: 'cover', json_key: 'cover_url'}
 
-                    }
-                    try {
-
-                        document.getElementById('description').innerText = json_res.description;
-                    } catch (e) {
-
-                    }
-                    try {
-
-                        document.getElementById('cover').setAttribute('src', json_res.cover_url);
-                    } catch (e) {
-
-                    }
-                    try {
-                        document.getElementById('id_title').setAttribute('value', json_res.title);
-
-                    } catch (e) {
-
-                    }
-                    try {
-
-                        document.getElementById('id_description').setAttribute('value', json_res.description);
-                    } catch (e) {
-
-                    }
-                    try {
-
-                        document.getElementById('id_cover_url').setAttribute('value', json_res.cover_url);
-                    } catch (e) {
-
+                    ];
+                    for (var i = 0; i < relation.length; i++) {
+                        let id = relation[i].id;
+                        try {
+                            let element = document.getElementById(id);
+                            element.setAttribute('value', json_res[relation[i].json_key]);
+                            element.setAttribute('class', 'has_filled_automatically');
+                        } catch (e) {
+                            console.log("fill it failed id:", id, 'error:', e)
+                        }
                     }
 
 
