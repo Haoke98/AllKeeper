@@ -1,98 +1,100 @@
-import sys
-
-import bs4 as bs
+# import sys
+#
+# import bs4 as bs
 import requests
-from PyQt5.QtCore import QUrl
-from PyQt5.QtWebEngineWidgets import QWebEnginePage
-from PyQt5.QtWidgets import QApplication
 
 
-class MyWebBrowser(QWebEnginePage):
-    app = None
-
-    # 类变量 QApplication
-    # 实际测试时，若调用了多个MyWebBrowser对象（有先后顺序的调用）
-    # 比如现在某些页面上，获取了所有包含图片的页面链接，再去打开这些链接上抓取图片
-    # 容易在这一步 super().__init__() 异常崩溃
-    # 可能是在 QApplication.quit()调用时，出现了资源释放异常
-    # 改成类变量控制后，没有出现崩溃现象，这个还需要再测试测试
-
-    def __init__(self):
-        if MyWebBrowser.app is None:
-            MyWebBrowser.app = QApplication(sys.argv)
-        # self.app = QApplication(sys.argv)
-        # print("DownloadDynamicPage")
-        super().__init__()
-        self.html = ''
-        # 将加载完成信号与槽连接
-        self.loadFinished.connect(self._on_load_finished)
-        # print("DownloadDynamicPage Init")
-
-    def downloadHtml(self, url):
-        """
-            将url传入，下载此url的完整HTML内容（包含js执行之后的内容）
-            貌似5.10.1自带一个download函数
-            这个在5.8.2上也是测试通过的
-        :param url:
-        :return: html
-        """
-        self.load(QUrl(url))
-        print("\nDownloadDynamicPage", url)
-        # self.app.exec_()
-        # 函数会阻塞在这，直到网络加载完成，调用了quit()方法，然后就返回html
-        # MyWebBrowser.app.exec_()
-        return self.html
-
-    def _on_load_finished(self):
-        """
-            加载完成信号的槽
-        :return:
-        """
-        self.html = self.toHtml(self.Callable)
-
-    def Callable(self, html_str):
-        """
-            回调函数
-        :param html_str:
-        :return:
-        """
-        self.html = html_str
-        MyWebBrowser.app.quit()
-        # self.app.quit()
-
-
-def useWebEngineMethod(url):
-    """
-        使用PyQt5的网页组件下载完整的动态网页
-    """
-
-    webBrowser = MyWebBrowser()
-    html = webBrowser.downloadHtml(url)
-
-    # with open("f://download_by_web_engine.html", "w+", encoding="utf-8") as f:
-    #     f.write(html)
-    return html
-
-
-def getImgUrlList(html: str):
-    """
-        从网页中解析所需要的图片的url，存储进list中
-    """
-    # 使用html.parser解析
-    soup = bs.BeautifulSoup(html, 'html.parser')
-    # 按条件查找img标签
-    pageOptionList = soup.find_all('img', class_='test')
-    print(pageOptionList)
-    imgUrlList = list()
-    for pageOptionEle in pageOptionList:
-        # 获取img标签的src中的url
-        imgUrl = pageOptionEle.get("src", None)
-        if imgUrl is None:
-            continue
-        imgUrlList.append(imgUrl)
-    return imgUrlList
-
-
+# from PyQt5.QtCore import QUrl
+# from PyQt5.QtWebEngineWidgets import QWebEnginePage
+# from PyQt5.QtWidgets import QApplication
+#
+#
+# class MyWebBrowser(QWebEnginePage):
+#     app = None
+#
+#     # 类变量 QApplication
+#     # 实际测试时，若调用了多个MyWebBrowser对象（有先后顺序的调用）
+#     # 比如现在某些页面上，获取了所有包含图片的页面链接，再去打开这些链接上抓取图片
+#     # 容易在这一步 super().__init__() 异常崩溃
+#     # 可能是在 QApplication.quit()调用时，出现了资源释放异常
+#     # 改成类变量控制后，没有出现崩溃现象，这个还需要再测试测试
+#
+#     def __init__(self):
+#         if MyWebBrowser.app is None:
+#             MyWebBrowser.app = QApplication(sys.argv)
+#         # self.app = QApplication(sys.argv)
+#         # print("DownloadDynamicPage")
+#         super().__init__()
+#         self.html = ''
+#         # 将加载完成信号与槽连接
+#         self.loadFinished.connect(self._on_load_finished)
+#         # print("DownloadDynamicPage Init")
+#
+#     def downloadHtml(self, url):
+#         """
+#             将url传入，下载此url的完整HTML内容（包含js执行之后的内容）
+#             貌似5.10.1自带一个download函数
+#             这个在5.8.2上也是测试通过的
+#         :param url:
+#         :return: html
+#         """
+#         self.load(QUrl(url))
+#         print("\nDownloadDynamicPage", url)
+#         # self.app.exec_()
+#         # 函数会阻塞在这，直到网络加载完成，调用了quit()方法，然后就返回html
+#         # MyWebBrowser.app.exec_()
+#         return self.html
+#
+#     def _on_load_finished(self):
+#         """
+#             加载完成信号的槽
+#         :return:
+#         """
+#         self.html = self.toHtml(self.Callable)
+#
+#     def Callable(self, html_str):
+#         """
+#             回调函数
+#         :param html_str:
+#         :return:
+#         """
+#         self.html = html_str
+#         MyWebBrowser.app.quit()
+#         # self.app.quit()
+#
+#
+# def useWebEngineMethod(url):
+#     """
+#         使用PyQt5的网页组件下载完整的动态网页
+#     """
+#
+#     webBrowser = MyWebBrowser()
+#     html = webBrowser.downloadHtml(url)
+#
+#     # with open("f://download_by_web_engine.html", "w+", encoding="utf-8") as f:
+#     #     f.write(html)
+#     return html
+#
+#
+# def getImgUrlList(html: str):
+#     """
+#         从网页中解析所需要的图片的url，存储进list中
+#     """
+#     # 使用html.parser解析
+#     soup = bs.BeautifulSoup(html, 'html.parser')
+#     # 按条件查找img标签
+#     pageOptionList = soup.find_all('img', class_='test')
+#     print(pageOptionList)
+#     imgUrlList = list()
+#     for pageOptionEle in pageOptionList:
+#         # 获取img标签的src中的url
+#         imgUrl = pageOptionEle.get("src", None)
+#         if imgUrl is None:
+#             continue
+#         imgUrlList.append(imgUrl)
+#     return imgUrlList
+#
+#
 def getSubscripVideoUrl(url):
     res = requests.get(url)
     html = res.text
@@ -189,18 +191,18 @@ def getMedia(mid, access_token):
     res = requests.post(url=url, data=json.dumps(body))
     print(res.text)
 
-
-if __name__ == '__main__':
-    # url = "https://mp.weixin.qq.com/s/9NGra4ZlVeFwnnYtqwhxqA"
-    url = "https://mp.weixin.qq.com/s?__biz=MzA4MTE2NTAxOA==&mid=100004279&idx=1&sn=0ae91db507d65690894323dd06b470ac&chksm=1f987e0228eff71499aae4d8032de56344c1d08e884f99b630d45ef44639eb244df4d611176a#rd"
-    getOriginalUrl(url)
-    url = "https://mp.weixin.qq.com/s/AOy6Mh2d9B_N8FI2TFdnAg"
-    getOriginalUrl(url)
-    # from ghost import Ghost
-    # gst = Ghost()
-    # page,resources = gst.open(url)
-    # print(page,resources)
-    # result,resources2 = gst.evaluate("document.getElementByClassName('video_fill').getAttribute('origin_src');")
-    # print(result,resources2)
-    # access_token = getAccessToken()
-    # getMedia('100004279',access_token)
+#
+# if __name__ == '__main__':
+#     # url = "https://mp.weixin.qq.com/s/9NGra4ZlVeFwnnYtqwhxqA"
+#     url = "https://mp.weixin.qq.com/s?__biz=MzA4MTE2NTAxOA==&mid=100004279&idx=1&sn=0ae91db507d65690894323dd06b470ac&chksm=1f987e0228eff71499aae4d8032de56344c1d08e884f99b630d45ef44639eb244df4d611176a#rd"
+#     getOriginalUrl(url)
+#     url = "https://mp.weixin.qq.com/s/AOy6Mh2d9B_N8FI2TFdnAg"
+#     getOriginalUrl(url)
+#     # from ghost import Ghost
+#     # gst = Ghost()
+#     # page,resources = gst.open(url)
+#     # print(page,resources)
+#     # result,resources2 = gst.evaluate("document.getElementByClassName('video_fill').getAttribute('origin_src');")
+#     # print(result,resources2)
+#     # access_token = getAccessToken()
+#     # getMedia('100004279',access_token)
