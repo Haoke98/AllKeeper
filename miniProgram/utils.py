@@ -132,8 +132,11 @@ def getOriginalUrl(url):
         # 构造 腾讯视频地址：
         tx_url = "https://v.qq.com/x/cover/vmp7n9h5n5535c6/%s.html" % (value)
         analyse_url = "https://data.zhai78.com/openTxVideo.php?url=" + tx_url
+        print("this is analyse_url:", analyse_url)
         res = requests.get(analyse_url)
+        print("this is res", res)
         res_json = res.json()
+        print("this is res_json", res_json)
         jx_url = res_json['jx_url']
         print("腾讯视频的原始地址：", jx_url)
         return jx_url
