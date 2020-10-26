@@ -113,7 +113,7 @@ def getSubscripVideoUrl(url):
         dis_t = re.search("dis_t=[0-9]{10}", html).group()
         format_id = re.search("\.f[0-9]{5}\.mp4\?", html).group()[2:7]
         _id = re.search(base_href + "[A-Za-z0-9]{36}", html).group()
-        # print(vid, dis_k, dis_t, format_id, _id)
+
         # # 流畅链接
         url1 = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10004.mp4?dis_k=0763c0930dfdb48ce5e80eede8b8885c\x26amp;dis_t=1603624409"
         # # 高清链接
@@ -123,6 +123,10 @@ def getSubscripVideoUrl(url):
         url = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10002.mp4?dis_k=f91c013ec5cdc13426643ff992c4a756&dis_t=1603624409&vid=wxv_1499315801156354051&format_id=10002"
         url = _id + ".f" + format_id + ".mp4?" + dis_k + "&" + dis_t + "&vid=" + vid + "&format_id=" + format_id
         return False, url
+
+
+# back_url = https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603698121873&di=c05ae03a74ea71d30e28a663304dc8e8&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180419%2Fc344e9c165944e90b664ce7beb493c2a.jpeg
+# back_url = https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602625836807&di=21e96230fe8d6aed9427a6518316e9e1&imgtype=0&src=http%3A%2F%2Fhbimg.huabanimg.com%2F04d7b2420494807ec063c077bc06c5d3908cb7b330c78-rOfl2J_fw658
 
 
 def getOriginalUrl(url):
