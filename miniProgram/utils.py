@@ -1,9 +1,6 @@
 # import sys
 #
 # import bs4 as bs
-import requests
-
-
 # from PyQt5.QtCore import QUrl
 # from PyQt5.QtWebEngineWidgets import QWebEnginePage
 # from PyQt5.QtWidgets import QApplication
@@ -95,22 +92,22 @@ import requests
 #     return imgUrlList
 #
 #
+import re
+
+import requests
+
+
 def getSubscripVideoUrl(url):
     res = requests.get(url)
     html = res.text
     base_href = 'http://mpvideo.qpic.cn/'
     start = html.find(base_href)
+    print("start is this time:", start)
     if start == -1:
-        head = '''vid:'''
-        start = html.find(head)
-        print("this is ", start)
-        start = html.find("'", start) + 1
-        end = html.find("'", start)
-        vid = html[start:end]
-        print("this is ", start, end, vid)
-        return True, vid
+        txvid = re.search("'[A-Za-z0-9]{11}'", html).group()[1:-1]
+        print("this is txVid:", txvid)
+        return True, txvid
     else:
-        import re
         vid = re.search("wxv_[0-9]{19}", html).group()
         dis_k = re.search("dis_k=[A-Za-z0-9]{32}", html).group()  # 三种流畅度有三个
         dis_t = re.search("dis_t=[0-9]{10}", html).group()
