@@ -1,7 +1,10 @@
-from django.db import models
+import os
 
+import requests
+from django.db import models
 # Create your models here.
 from django.utils import timezone
+from django.utils.html import format_html
 
 
 class MyModel(models.Model):
@@ -9,6 +12,7 @@ class MyModel(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ['-last_changed_time']
 
     # def save(self, *args, **kwargs):
     #     # self.last_changed_time =
@@ -90,18 +94,60 @@ class User(MyModel):
         return userJson
 
 
+class Image(MyModel):
+    id = models.AutoField(primary_key=True)
+    media_id = models.CharField(max_length=43, blank=True)
+    url = models.URLField(blank=True)
+    content = models.ImageField(upload_to='img', blank=True)
+
+    def save(self, *args, **kwargs):
+        print("self.content==None:", self.content == None, self.content == "", "xxx")
+        if self.content == "":
+            print("this content is null.")
+        else:
+            print("this is content is full.")
+            print(self.content)
+            print(self.content.name)
+            print(self.content.url)
+            print(self.content.file)
+            print(self.content.path)
+            filepath = './%d' % (timezone.now().time().microsecond) + self.content.name
+            with open(filepath, 'wb') as f:
+                f.write(self.content.read())
+            from .utils import upLoadImg
+            url = "http://localhost:7000/miniProgram/getSubcribtionAccessToken"
+            access_token = requests.get(url).text
+            print("this is access_token by request the local server on the server:%s" % access_token)
+            # virtualRequest.method = "GET"
+            absoulutelyFilePath = os.path.abspath(filepath)
+            print(absoulutelyFilePath)
+            self.media_id, self.url = upLoadImg(absoulutelyFilePath, access_token, "image")
+            if os.path.exists(filepath):
+                os.remove(filepath)
+            self.content = None
+        return super(Image, self).save(*args, **kwargs)
+
+    def __str__(self):
+        # return mark_safe('<img src="%s" width="50px" />' % (self.url))
+        return format_html(
+            '<img src="{}" width="50px" height="50px"/>',
+            self.url,
+        )
+
+
 class Film(MyModel):
     id = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name='电影标题', max_length=100)
     cover = models.URLField(verbose_name='电影封面',
                             default='https://mmbiz.qpic.cn/mmbiz_png/lBSHibv6GicCZ6TSPK91xVfqr0cGAiany3uOqL6lz3QvMMmGRdib5QaDxF6kN1JKIQRl4xVWH7yW2GIqn4J4ZdkE9A/0?wx_fmt=png',
                             blank=True)
+    cover1 = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
         return self.name
 
     def json(self, withEpisodes):
-        json_object = {'film_id': self.id, 'name': self.name, 'cover': self.cover}
+        json_object = {'film_id': self.id, 'name': self.name, 'cover': self.cover1.url}
         if withEpisodes:
             episodes = Video.objects.filter(belongTo=self).order_by('-episode_num', '-last_changed_time')
             episodes_list = []
@@ -123,6 +169,7 @@ class Video(MyModel):
     cover = models.URLField(verbose_name='视频封面',
                             default='https://mmbiz.qpic.cn/mmbiz_png/lBSHibv6GicCZ6TSPK91xVfqr0cGAiany3u55miazzYxVibcryAlMdVrDyyoaJ7Qp7XmS7K5kIwTdtla9piaFInusjJA/0?wx_fmt=png',
                             blank=True)
+    cover1 = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True)
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
     video_url = models.URLField(verbose_name='纯视频链接',
                                 default="https://x.izbasarweb.xyz/miniProgram/UrlRedirector8")

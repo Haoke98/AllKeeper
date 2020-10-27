@@ -161,17 +161,25 @@
     <input type="file" id="file" name="myfile"/>
     <input type="button" οnclick="UpladFile()" value="上传"/>
     <input type="button" οnclick="cancleUploadFile()" value="取消"/>
-    公众号文章URL:
-    <input id='article_url' type="text" value="" onchange="getInfoFromUrl(value)">
+    <div>
+        <label>公众号文章URL:</label>
+        <input id='article_url' type="text" value="" onchange="getInfoFromUrl(value)">
+    </div>
     <div id="ArticleInfo" style="display: flex;flex-direction: column">
-        <label>title:</label>
-        <input id="articleTitle"/>
-        <input type="button" onClick="copy('articleTitle')" value="点击复制代码"/>
-        <input>description:</input>
-        <input id="description"/>
-        <input type="button" onClick="copy('description')" value="点击复制代码"/>
-        <label>cover:</label>
-        <img id="cover">
+        <div>
+            <label>title:</label>
+            <input id="articleTitle"/>
+            <input type="button" onClick="copy('articleTitle')" value="点击复制代码"/>
+        </div>
+        <div>
+            <label>description:</label>
+            <input id="description"/>
+            <input type="button" onClick="copy('description')" value="点击复制代码"/>
+        </div>
+        <div>
+            <label>cover:</label>
+            <img id="cover">
+        </div>
     </div>
     <style>
         .has_filled_automatically {
@@ -208,21 +216,22 @@
                     console.log(xhr.responseText);
                     json_res = JSON.parse(xhr.responseText);
                     console.log(json_res);
-                    let relation = [{id: "articleTitle", json_key: 'title'},
-                        {id: "description", json_key: 'description'},
-                        {id: 'cover', json_key: 'cover_url'},
-                        {id: 'id_title', json_key: 'title'},
-                        {id: 'id_name', json_key: 'title'},
-                        {id: 'id_description', json_key: 'description'},
-                        {id: 'id_cover_url', json_key: 'cover_url'},
-                        {id: 'cover', json_key: 'cover_url'}
+                    let relation =
+                        [{id: "articleTitle", attr: "value", json_key: 'title'},
+                            {id: "description", attr: "value", json_key: 'description'},
+                            {id: 'cover', attr: "src", json_key: 'cover_url'},
+                            {id: 'id_title', attr: "value", json_key: 'title'},
+                            {id: 'id_name', attr: "value", json_key: 'title'},
+                            {id: 'id_description', attr: "value", json_key: 'description'},
+                            {id: 'id_cover_url', attr: "value", json_key: 'cover_url'},
+                            {id: 'cover', attr: "value", json_key: 'cover_url'}
 
-                    ];
+                        ];
                     for (var i = 0; i < relation.length; i++) {
                         let id = relation[i].id;
                         try {
                             let element = document.getElementById(id);
-                            element.setAttribute('value', json_res[relation[i].json_key]);
+                            element.setAttribute(relation[i].attr, json_res[relation[i].json_key]);
                             element.setAttribute('class', 'has_filled_automatically');
                         } catch (e) {
                             console.log("fill it failed id:", id, 'error:', e)

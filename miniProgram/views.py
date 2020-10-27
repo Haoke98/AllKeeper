@@ -1,21 +1,22 @@
 import datetime
 import json
 
-import requests
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
+from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import *
-# Create your views here.
 from .utils import getOriginalUrl
 
 
+# Create your views here.
+
+@cache_page(1 * 60 * 60)
 def videoUrlMaker(request, vid):
     video = Video.objects.get(id=vid)
     articleUrl = video.url
-    print(articleUrl)
-    url = "http://video.dispatch.tc.qq.com//uwMROfz2r57EIaQXGdGn1GddPkb8ztlhqxNOtSjZYCSOV_DK//svp_50001//szg_27609369_50001_f6fae475390644c28610d9add161c4ba.f622.mp4?vkey=4F34353354D6497CAC27CCC0E87593E6805D0E343B107A3892C91FB7A3ED95F8F74054A2DF627DADDECBFEC0C25F67E9D73645FF1CEB1FFA5116B591C36D8512C99F16FEAD1A9F4039B1EBCA34EB1D2453771EA20AAC6D942F271DD6D85B1D4799553A70A95C9C847000D09D8EE3F2BC"
+    print(("analaysing the video url from this article:%s") % articleUrl)
     url = getOriginalUrl(articleUrl)
     return redirect(to=url)
 
@@ -121,21 +122,25 @@ def getSlider(request):
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
 
-def getAccessToken(request):
+@cache_page(2 * 60 * 60)
+def getMiniProgramAccessToken(request):
     app = settings.objects.first()
     url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + app.app_id + '&secret=' + app.app_secret
     res = requests.get(url)
-    print(res.text)
-    return HttpResponse(res.text, content_type='application/json,charset=utf-8')
+    access_token = res.text
+    print('gettingMiniProgramAccessToken:(appid:%s,appSecret:%s) %s' % (app.app_id, app.app_secret, access_token))
+    return HttpResponse(access_token, content_type='application/json,charset=utf-8')
 
 
+@cache_page(2 * 60 * 60)
 def getSubcribtionsAccessToken(request):
     app = settings.objects.first()
     subcribtion = app.subcribtion
-    print(subcribtion.app_id, subcribtion.app_secret)
     url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + subcribtion.app_id + "&secret=" + subcribtion.app_secret
     res = requests.get(url)
-    return HttpResponse(res.text, content_type='application/json,charset=utf-8')
+    access_token = res.text
+    print('gettingSubcribtionAccessToken:(appid:%s,appSecret:%s) %s' % (app.app_id, app.app_secret, access_token))
+    return HttpResponse(res.json()['access_token'])
 
 
 def getUserOpenid(request, js_code):

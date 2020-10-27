@@ -92,6 +92,8 @@
 #     return imgUrlList
 #
 #
+import json
+import os
 import re
 
 import requests
@@ -138,7 +140,7 @@ def getOriginalUrl(url):
         analyse_url = "https://data.zhai78.com/openTxVideo.php?url=" + tx_url
         print("this is analyse_url:", analyse_url)
         res = requests.get(analyse_url)
-        print("this is res", res)
+        print("this is res", res.text)
         res_json = res.json()
         print("this is res_json", res_json)
         jx_url = res_json['jx_url']
@@ -176,14 +178,12 @@ def getOriginalUrl(url):
 # if __name__ == '__main__':
 
 #     main(url)
-def getAccessToken():
-    APP_ID = "wx0c9b8affd6ba6746"
-    APP_SECRET = "a255f41f908275a055c8eabb11f41628"
+def getAccessToken(appid, appSecret):
     url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s" % (
-        APP_ID, APP_SECRET)
+        appid, appSecret)
     res = requests.get(url)
     print(res.json())
-    return res.json()['access_token']
+    return
 
 
 def getMedia(mid, access_token):
@@ -195,18 +195,33 @@ def getMedia(mid, access_token):
     res = requests.post(url=url, data=json.dumps(body))
     print(res.text)
 
+
+def upLoadImg(path, access_token, type):
+    # https: // api.weixin.qq.com / cgi - bin / material / add_material?access_token = ACCESS_TOKEN & type = TYPE
+    cmd = 'curl -F media=@%s "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=%s&type=%s"' % (
+        path, access_token, type)
+    print("this is curlCmd:%s" % cmd)
+    res = os.popen(cmd).readlines()[0]
+    print(res, "\n>>>>>>>>>>>>>>>\n")
+    res_json = json.loads(res)
+    print(res_json)
+    return res_json['media_id'], res_json['url']
+
+
 #
-# if __name__ == '__main__':
-#     # url = "https://mp.weixin.qq.com/s/9NGra4ZlVeFwnnYtqwhxqA"
-#     url = "https://mp.weixin.qq.com/s?__biz=MzA4MTE2NTAxOA==&mid=100004279&idx=1&sn=0ae91db507d65690894323dd06b470ac&chksm=1f987e0228eff71499aae4d8032de56344c1d08e884f99b630d45ef44639eb244df4d611176a#rd"
-#     getOriginalUrl(url)
-#     url = "https://mp.weixin.qq.com/s/AOy6Mh2d9B_N8FI2TFdnAg"
-#     getOriginalUrl(url)
-#     # from ghost import Ghost
-#     # gst = Ghost()
-#     # page,resources = gst.open(url)
-#     # print(page,resources)
-#     # result,resources2 = gst.evaluate("document.getElementByClassName('video_fill').getAttribute('origin_src');")
-#     # print(result,resources2)
-#     # access_token = getAccessToken()
+if __name__ == '__main__':
+    #     # url = "https://mp.weixin.qq.com/s/9NGra4ZlVeFwnnYtqwhxqA"
+    #     url = "https://mp.weixin.qq.com/s?__biz=MzA4MTE2NTAxOA==&mid=100004279&idx=1&sn=0ae91db507d65690894323dd06b470ac&chksm=1f987e0228eff71499aae4d8032de56344c1d08e884f99b630d45ef44639eb244df4d611176a#rd"
+    #     getOriginalUrl(url)
+    #     url = "https://mp.weixin.qq.com/s/AOy6Mh2d9B_N8FI2TFdnAg"
+    #     getOriginalUrl(url)
+    #     # from ghost import Ghost
+    #     # gst = Ghost()
+    #     # page,resources = gst.open(url)
+    #     # print(page,resources)
+    #     # result,resources2 = gst.evaluate("document.getElementByClassName('video_fill').getAttribute('origin_src');")
+    #     # print(result,resources2)
+    access_token = getAccessToken()
+    path = r"C:\Users\19032\Pictures\cloud.jpg"
+    upLoadImg(path, access_token, "image")
 #     # getMedia('100004279',access_token)

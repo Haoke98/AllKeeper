@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.utils.safestring import mark_safe
 
 from .models import *
 
@@ -9,9 +8,11 @@ from .models import *
 class MyModelAdmin(admin.ModelAdmin):
     list_display = list(admin.ModelAdmin.list_display) + ['last_changed_time']
 
+
 @admin.register(Article)
 class ArticleAdmin(MyModelAdmin):
     list_display = MyModelAdmin.list_display + ['description', 'cover_url', 'url']
+
 
 @admin.register(RedirectUrlRelation)
 class UrlRedirectorAdmin(MyModelAdmin):
@@ -67,11 +68,42 @@ class settingsAdmin(admin.ModelAdmin):
 
 
 @admin.register(Film)
-class kinoAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['id', 'cover', ]
+class FilmAdmin(admin.ModelAdmin):
+    list_display = MyModelAdmin.list_display + ['id', '_cover', '_cover1']
+
+    def _cover(self, obj):
+        try:
+            if obj.cover == None:
+                img = ''
+            else:
+                img = mark_safe('<img src="%s" width="50px" height="50px"/>' % (obj.cover,))
+        except Exception as e:
+            img = ''
+        return img
+
+    def _cover1(self, obj):
+        return obj.cover1
 
 
 @admin.register(Video)
 class videoAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['episode_num', 'belongTo', 'id', 'cover', 'url', ]
+    list_display = MyModelAdmin.list_display + ['episode_num', 'belongTo', 'id', '_cover', '_cover1', 'url', ]
     list_display_links = list(admin.ModelAdmin.list_display_links) + ['belongTo', '__str__']
+
+    def _cover(self, obj):
+        try:
+            if obj.cover == None:
+                img = ''
+            else:
+                img = mark_safe('<img src="%s" width="50px" height="50px"/>' % (obj.cover,))
+        except Exception as e:
+            img = ''
+        return img
+
+    def _cover1(self, obj):
+        return obj.cover1
+
+
+@admin.register(Image)
+class ImageAdmin(MyModelAdmin):
+    list_display = MyModelAdmin.list_display + ['id', 'media_id', 'url', 'content']
