@@ -14,6 +14,9 @@ class MyModel(models.Model):
         abstract = True
         ordering = ['-last_changed_time']
 
+    # def save(self, *args,**kwargs):
+    #     self.last_changed_time =
+    #     return super(MyModel,self).save(*args,**kwargs)
     # def save(self, *args, **kwargs):
     #     # self.last_changed_time =
     #     super().save(*args, **kwargs)
@@ -25,6 +28,9 @@ class Article(MyModel):
     cover_url = models.URLField()
     url = models.URLField()
 
+    # def save(self, force_insert=False, force_update=False, using=None,
+    #          update_fields=None):
+    #     return super(Article,self).save(force_insert=force_insert,force_update=force_update,)
     def __str__(self):
         return self.title
 
@@ -59,6 +65,9 @@ class User(MyModel):
     province = models.CharField(max_length=50, null=True)
     country = models.CharField(max_length=50, null=True)
     avatarUrl = models.URLField(null=True)
+
+    class Meta:
+        ordering = ['-last_login_time']
 
     def updateUserInfo(self, json_data):
         self.nickName = json_data['nickName']
@@ -127,12 +136,14 @@ class Image(MyModel):
             self.content = None
         return super(Image, self).save(*args, **kwargs)
 
-    def __str__(self):
-        # return mark_safe('<img src="%s" width="50px" />' % (self.url))
+    def show(self):
         return format_html(
             '<img src="{}" width="50px" height="50px"/>',
             self.url,
         )
+    # def __str__(self):
+    #     # return mark_safe('<img src="%s" width="50px" />' % (self.url))
+    #     return
 
 
 class Film(MyModel):
@@ -161,6 +172,13 @@ class Film(MyModel):
             pass
         return json_object
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        print("this Film :%s has been updated now. force_insert:%s force_update:%s," % (
+        self.name, force_insert, force_update), using, update_fields)
+        return super(Film, self).save(force_update=force_update, force_insert=force_insert, using=using,
+                                      update_fields=update_fields)
+
 
 class Video(MyModel):
     id = models.AutoField(primary_key=True)
@@ -169,7 +187,7 @@ class Video(MyModel):
     cover = models.URLField(verbose_name='视频封面',
                             default='https://mmbiz.qpic.cn/mmbiz_png/lBSHibv6GicCZ6TSPK91xVfqr0cGAiany3u55miazzYxVibcryAlMdVrDyyoaJ7Qp7XmS7K5kIwTdtla9piaFInusjJA/0?wx_fmt=png',
                             blank=True)
-    cover1 = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True)
+    cover1 = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True,blank=True)
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
     video_url = models.URLField(verbose_name='纯视频链接',
                                 default="https://x.izbasarweb.xyz/miniProgram/UrlRedirector8")
@@ -179,9 +197,17 @@ class Video(MyModel):
         return self.name
 
     def json(self):
-        return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.name, 'cover': self.cover, 'url': self.url,
+        return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.name, 'cover': self.cover1.url, 'url': self.url,
                 'video_url': self.video_url}
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        print("this Video :%s has been updated now. force_insert:%s force_update:%s," % (
+            self.name, force_insert, force_update), using, update_fields)
+        # if update_fields != None:
+        self.belongTo.save(force_update=True)
+        return super(Video, self).save(force_update=force_update, force_insert=force_insert, using=using,
+                                      update_fields=update_fields)
 
 class subcribtions(MyModel):
     name = models.CharField(max_length=50)

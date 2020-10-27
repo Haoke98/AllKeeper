@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
 from .models import *
 
@@ -82,7 +83,7 @@ class FilmAdmin(admin.ModelAdmin):
         return img
 
     def _cover1(self, obj):
-        return obj.cover1
+        return obj.cover1.show()
 
 
 @admin.register(Video)
@@ -101,9 +102,20 @@ class videoAdmin(admin.ModelAdmin):
         return img
 
     def _cover1(self, obj):
-        return obj.cover1
+        if obj.cover1 == None:
+            return ''
+        else:
+            return obj.cover1.show()
+
+    def save_model(self, request, obj, form, change):
+        print("user clicked the save button just now for this video:%s change:%s" % (obj.name, change))
+        if change:
+            obj.save()
 
 
 @admin.register(Image)
 class ImageAdmin(MyModelAdmin):
-    list_display = MyModelAdmin.list_display + ['id', 'media_id', 'url', 'content']
+    list_display = MyModelAdmin.list_display + ['show', 'id', 'media_id', 'content']
+
+    def show(self, obj):
+        return obj.show()
