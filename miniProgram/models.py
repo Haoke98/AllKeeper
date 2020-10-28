@@ -175,10 +175,15 @@ class Film(MyModel):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         print("this Film :%s has been updated now. force_insert:%s force_update:%s," % (
-        self.name, force_insert, force_update), using, update_fields)
+            self.name, force_insert, force_update), using, update_fields)
         return super(Film, self).save(force_update=force_update, force_insert=force_insert, using=using,
                                       update_fields=update_fields)
 
+    showTimes = models.IntegerField(verbose_name="被观看次数", default=0, )
+
+    def show(self):
+        self.showTimes += 1
+        self.save()
 
 class Video(MyModel):
     id = models.AutoField(primary_key=True)
@@ -187,17 +192,24 @@ class Video(MyModel):
     cover = models.URLField(verbose_name='视频封面',
                             default='https://mmbiz.qpic.cn/mmbiz_png/lBSHibv6GicCZ6TSPK91xVfqr0cGAiany3u55miazzYxVibcryAlMdVrDyyoaJ7Qp7XmS7K5kIwTdtla9piaFInusjJA/0?wx_fmt=png',
                             blank=True)
-    cover1 = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True,blank=True)
+    cover1 = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True, blank=True)
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
     video_url = models.URLField(verbose_name='纯视频链接',
                                 default="https://x.izbasarweb.xyz/miniProgram/UrlRedirector8")
     belongTo = models.ForeignKey(verbose_name="所属电视剧", to=Film, on_delete=models.PROTECT, null=True)
+    showTimes = models.IntegerField(verbose_name="被观看次数", default=0, )
+
+    def show(self):
+        self.showTimes += 1
+        self.belongTo.show()
+        self.save()
 
     def __str__(self):
         return self.name
 
     def json(self):
-        return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.name, 'cover': self.cover1.url, 'url': self.url,
+        return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.name, 'cover': self.cover1.url,
+                'url': self.url,
                 'video_url': self.video_url}
 
     def save(self, force_insert=False, force_update=False, using=None,
@@ -207,7 +219,8 @@ class Video(MyModel):
         # if update_fields != None:
         self.belongTo.save(force_update=True)
         return super(Video, self).save(force_update=force_update, force_insert=force_insert, using=using,
-                                      update_fields=update_fields)
+                                       update_fields=update_fields)
+
 
 class subcribtions(MyModel):
     name = models.CharField(max_length=50)

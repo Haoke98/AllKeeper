@@ -15,6 +15,7 @@ from .utils import getOriginalUrl
 @cache_page(1 * 60 * 60)
 def videoUrlMaker(request, vid):
     video = Video.objects.get(id=vid)
+    video.show()
     articleUrl = video.url
     print(("analaysing the video url from this article:%s") % articleUrl)
     url = getOriginalUrl(articleUrl)
