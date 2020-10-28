@@ -70,7 +70,7 @@ class settingsAdmin(admin.ModelAdmin):
 
 @admin.register(Film)
 class FilmAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['id', '_cover', '_cover1']
+    list_display = MyModelAdmin.list_display + ['showTimes', 'id', '_cover', '_cover1']
 
     def _cover(self, obj):
         try:
@@ -88,7 +88,8 @@ class FilmAdmin(admin.ModelAdmin):
 
 @admin.register(Video)
 class videoAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['episode_num', 'belongTo', 'id', '_cover', '_cover1', 'url', ]
+    list_display = MyModelAdmin.list_display + ['episode_num', 'belongTo', 'showTimes', 'id', '_cover', '_cover1',
+                                                'url', ]
     list_display_links = list(admin.ModelAdmin.list_display_links) + ['belongTo', '__str__']
 
     def _cover(self, obj):

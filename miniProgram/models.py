@@ -183,7 +183,7 @@ class Film(MyModel):
 
     def show(self):
         self.showTimes += 1
-        self.save()
+        # self.save()
 
 class Video(MyModel):
     id = models.AutoField(primary_key=True)
