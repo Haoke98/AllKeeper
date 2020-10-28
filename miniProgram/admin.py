@@ -109,8 +109,8 @@ class videoAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         print("user clicked the save button just now for this video:%s change:%s" % (obj.name, change))
-        if change:
-            obj.save()
+        # if change:
+        obj.save()
 
 
 @admin.register(Image)
