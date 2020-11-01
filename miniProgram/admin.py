@@ -86,27 +86,55 @@ class FilmAdmin(admin.ModelAdmin):
         return obj.cover1.show()
 
 
+def makeHasNotFirstAnalysed(modeladmin, request, queryset):  # 新建一个批量操作的函数，其中有三个参数：
+    # 第一个参数是模型管理类，第二个request是请求，第三个queryset表示你选中的所有记录，这个函数里面会处理所有选中的queryset，所以要在操作之前用搜索或者过滤来选出需要修改的记录
+    queryset.update(hasFirstAnalysed=False)  # 改变数据库表中，选中的记录的状态
+
+
+makeHasNotFirstAnalysed.short_description = '让所有的Video改为没进行首次解析'  # 这个是在界面显示的描述信息
+
+
+def makeHasNotAnalysed(modeladmin, request, queryset):  # 新建一个批量操作的函数，其中有三个参数：
+    # 第一个参数是模型管理类，第二个request是请求，第三个queryset表示你选中的所有记录，这个函数里面会处理所有选中的queryset，所以要在操作之前用搜索或者过滤来选出需要修改的记录
+    queryset.update(hasAnalysed=False)  # 改变数据库表中，选中的记录的状态
+
+
+makeHasNotAnalysed.short_description = 'make all video has not been analysed.'  # 这个是在界面显示的描述信息
+
+
 @admin.register(Video)
 class videoAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['episode_num', 'belongTo', 'showTimes', 'id', '_cover', '_cover1',
+    list_display = MyModelAdmin.list_display + ['episodeNum', 'belongTo', 'showTimes', 'id', '_cover', 'videoShow',
+                                                'isFromSubscription', "hasFirstAnalysed", 'hasAnalysed', 'isTXV',
+                                                'TXVid', 'WXVid',
+                                                'formatID', 'destinationID',
+                                                'analysedUrl',
+                                                'analysedUrl_ExpiredTime',
                                                 'url', ]
     list_display_links = list(admin.ModelAdmin.list_display_links) + ['belongTo', '__str__']
+    search_fields = ('name', 'episodeNum', 'id',
+                     'TXVid', 'WXVid',
+                     'formatID', 'destinationID',)
+    list_filter = ['belongTo']
+    actions_on_bottom = [makeHasNotFirstAnalysed, ]
+    actions_on_top = [makeHasNotAnalysed, ]
+    actions = [makeHasNotAnalysed, makeHasNotFirstAnalysed]
 
-    def _cover(self, obj):
+    def videoShow(self, obj):
         try:
             if obj.cover == None:
                 img = ''
             else:
-                img = mark_safe('<img src="%s" width="50px" height="50px"/>' % (obj.cover,))
+                img = mark_safe('<video src="%s" width="200px" height="100px"/>' % (obj.analysedUrl,))
         except Exception as e:
             img = ''
         return img
 
-    def _cover1(self, obj):
-        if obj.cover1 == None:
+    def _cover(self, obj):
+        if obj.cover == None:
             return ''
         else:
-            return obj.cover1.show()
+            return obj.cover.show()
 
     def save_model(self, request, obj, form, change):
         print("user clicked the save button just now for this video:%s change:%s" % (obj.name, change))

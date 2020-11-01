@@ -95,60 +95,161 @@
 import json
 import os
 import re
+import time
 
 import requests
 
 
-def getSubscripVideoUrl(url):
+def analyseArticleUrl(url: str):
+    r"""解析公众号文章，获取文章中的视频链接信息.
+
+    :param url: 微信公众号文章链接.
+    :returns: isTXV:视频是否来自腾讯视频
+            TXVid_or_WXVid:视频ID，腾讯视频ID或者是
+            , _id, format_id,original_url
+    :rtype: Boolean, str,str , str     , str
+    :流畅链接
+        url1 = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10004.mp4?dis_k=0763c0930dfdb48ce5e80eede8b8885c\x26amp;dis_t=1603624409"
+    :高清链接
+        url2 = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10003.mp4?dis_k=5ddd3b16a7ee22131a714e4114a8ad75\x26amp;dis_t=1603624409"
+    :超清链接
+        url3 = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10002.mp4?dis_k=f91c013ec5cdc13426643ff992c4a756\x26amp;dis_t=1603624409"
+    """
+    isTXV = False
+    Vid = ""
+    _id = None
+    format_id = None
+    tempt_url = None
+    print("正在发送HTTP请求。。。。。")
+    time_start = time.time()
+    res = requests.get(url)
+    print("已经接受请求结果，所用时间：%d , 正在进行解析。。。。。。。" % (time.time() - time_start))
+    time_start = time.time()
+    html = res.text
+    Vid = re.search("wxv_[0-9]{19}", html)
+    if Vid is None:
+        Vid = re.search("'[A-Za-z0-9]{11}'", html)
+        if Vid is None:
+            isTXV = False
+            print("this is articles is not good for analyse.")
+        else:
+            Vid = Vid.group()[1:-1]
+            isTXV = True
+    else:
+        isTXV = False
+        Vid = Vid.group()
+        print(Vid)
+        try:
+            dis_k = re.search("dis_k=[A-Za-z0-9]{32}", html).group()  # 三种流畅度有三个
+            dis_t = re.search("dis_t=[0-9]{10}", html).group()
+            format_id = re.search("\.f[0-9]{5}\.mp4\?", html).group()[2:7]
+            _id = re.search("0b[A-Za-z0-9]{33}a", html).group()
+            tempt_url = "http://mpvideo.qpic.cn/%s.f%s.mp4?%s&%s&vid=%s&format_id=%s" % (
+            _id, format_id, dis_k, dis_t, Vid, format_id)
+            print("解析获得static信息用于加快Dynamic解析URL:%s , 所用解析时间：%d" % (tempt_url, time.time() - time_start))
+        except:
+            print("没有成功解析")
+            dis_k = ""
+            dis_t = ""
+            format_id = ""
+            _id = ""
+            tempt_url = ""
+    return isTXV, Vid, _id, format_id, tempt_url
+
+
+def analyseArticleUrl2(url: str, vid: str, format_id: str, _id: str):
+    r"""解析公众号文章，获取文章中的视频链接信息.
+
+    :param vid: 视频对应的微信id(WXV_开头）
+    :param format_id: 临时链接中的编码ID(决定视频流的清晰度）
+    :param _id: 临时链接中的头部id
+    :param url: 微信公众号文章链接.
+    :return: video_original_url:视频临时链接
+    :rtype:  str
+    :流畅链接
+        url1 = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10004.mp4?dis_k=0763c0930dfdb48ce5e80eede8b8885c\x26amp;dis_t=1603624409"
+    :高清链接
+        url2 = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10003.mp4?dis_k=5ddd3b16a7ee22131a714e4114a8ad75\x26amp;dis_t=1603624409"
+    :超清链接
+        url3 = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10002.mp4?dis_k=f91c013ec5cdc13426643ff992c4a756\x26amp;dis_t=1603624409"
+    """
     res = requests.get(url)
     html = res.text
-    base_href = 'http://mpvideo.qpic.cn/'
-    start = html.find(base_href)
-    print("start is this time:", start)
-    if start == -1:
-        txvid = re.search("'[A-Za-z0-9]{11}'", html).group()[1:-1]
-        print("this is txVid:", txvid)
-        return True, txvid
-    else:
-        vid = re.search("wxv_[0-9]{19}", html).group()
-        dis_k = re.search("dis_k=[A-Za-z0-9]{32}", html).group()  # 三种流畅度有三个
+    try:
+        dis_k = re.search("dis_k=[A-Za-z0-9]{32}", html).group()
         dis_t = re.search("dis_t=[0-9]{10}", html).group()
-        format_id = re.search("\.f[0-9]{5}\.mp4\?", html).group()[2:7]
-        _id = re.search(base_href + "[A-Za-z0-9]{36}", html).group()
-
-        # # 流畅链接
-        url1 = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10004.mp4?dis_k=0763c0930dfdb48ce5e80eede8b8885c\x26amp;dis_t=1603624409"
-        # # 高清链接
-        url2 = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10003.mp4?dis_k=5ddd3b16a7ee22131a714e4114a8ad75\x26amp;dis_t=1603624409"
-        # # 超清链接
-        url3 = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10002.mp4?dis_k=f91c013ec5cdc13426643ff992c4a756\x26amp;dis_t=1603624409"
-        url = "http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10002.mp4?dis_k=f91c013ec5cdc13426643ff992c4a756&dis_t=1603624409&vid=wxv_1499315801156354051&format_id=10002"
-        url = _id + ".f" + format_id + ".mp4?" + dis_k + "&" + dis_t + "&vid=" + vid + "&format_id=" + format_id
-        return False, url
+    except:
+        dis_k = ""
+        dis_t = ""
+    # url = _id + ".f" + format_id + ".mp4?" + dis_k + "&" + dis_t + "&vid=" + vid + "&format_id=" + format_id
+    temp_url = "http://mpvideo.qpic.cn/%s.f%s.mp4?%s&%s&vid=%s&format_id=%s" % (
+        _id, format_id, dis_k, dis_t, vid, format_id)
+    print("用已经存储过的static信息加快了解析URL:%s" % temp_url)
+    return temp_url
 
 
 # back_url = https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603698121873&di=c05ae03a74ea71d30e28a663304dc8e8&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180419%2Fc344e9c165944e90b664ce7beb493c2a.jpeg
 # back_url = https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1602625836807&di=21e96230fe8d6aed9427a6518316e9e1&imgtype=0&src=http%3A%2F%2Fhbimg.huabanimg.com%2F04d7b2420494807ec063c077bc06c5d3908cb7b330c78-rOfl2J_fw658
 
 
+#  http://mpvideo.qpic.cn/0b78imaa4aaa2iaej24sifpvaq6dbzbqadqa.f10002.mp4?dis_k=c87dc66e0ef41438b527def8417d64cc&dis_t=1604063708&vid=wxv_1574216153231638528&format_id=10002
+
+# 2: http://mpvideo.qpic.cn/0bf22aakeaaavaaitisoqnpvbugduliabiqa.f10002.mp4?dis_k=80e910e21280af6cc751fa9f185f26e6&dis_t=1604113658&vid=wxv_1499315801156354051&format_id=10002  11：38之前访问时产生的  13:08还是有效   16:46还是有效
+# 5: http://mpvideo.qpic.cn/0bf2ymafgaaavaaakp2lo5pvbq6dkpbqauya.f10002.mp4?dis_k=3ea7ba6b120a2c3601ca459ce6909053&dis_t=1604113785&vid=wxv_1496201730202664961&format_id=10002
+# 6: http://mpvideo.qpic.cn/0bf2nyam4aaaqqaojc2l5vpva3wdzzxabtqa.f10002.mp4?dis_k=784f796b0cd1b710a34b5383d8d20fbc&dis_t=1604113859&vid=wxv_1496014887364460546&format_id=10002
+# 7: http://mpvideo.qpic.cn/0bf2dmajyaaa54anhgckx5pvag6dtqnqbhaa.f10002.mp4?dis_k=f73b803f3e3f4a434bd4f315957059ec&dis_t=1604114379&vid=wxv_1495074457818890244&format_id=10002
+# 8: http://mpvideo.qpic.cn/0bf2ri7f4ab6saah7u3vjnpw5cwdl2fd4xqa.f10002.mp4?dis_k=c4733c6b5b2483c925ff393d47357dc4&dis_t=1604114908&vid=wxv_1495972735867551746&format_id=10002
+# 9: http://mpvideo.qpic.cn/0bf2smariaabhaaachskbbpvde6dcsjqcfaa.f10002.mp4?dis_k=a6ed83fb0207f3e65e116ab324acf015&dis_t=1604115065&vid=wxv_1495923623554056194&format_id=10002
+# 10: http://mpvideo.qpic.cn/0b78euaaiaaa5mab32sldrpvajodaqsqabaa.f10002.mp4?dis_k=d6094e523b0df814f3053896540caff7&dis_t=1604115129&vid=wxv_1495941388461539334&format_id=10002
+# 11: http://mpvideo.qpic.cn/0bf2zyd54aahuiaojbsny5pvptwd33hapxqa.f10002.mp4?dis_k=fe67f052890112df12db1579f41360cc&dis_t=1604115164&vid=wxv_1494981972392280065&format_id=10002
+# 12: http://mpvideo.qpic.cn/0bf2cqamqaaawmaoa2ck5npvafgdzakabsaa.f10002.mp4?dis_k=6050002db71237b7c31f9e4689bddb2c&dis_t=1604115219&vid=wxv_1494905649917460481&format_id=10002
+# 13: http://mpvideo.qpic.cn/0bf2iyoowaa4mqapav2w7vpuyrwd5ndbz2ya.f10002.mp4?dis_k=257dfb407cc3ad955665a6fc63cc400e&dis_t=1604115250&vid=wxv_1494847592562819074&format_id=10002
+# 14: http://mpvideo.qpic.cn/0bf2ciaamaaaymaa63kkfvpvaewdayjaabqa.f10002.mp4?dis_k=38a9959278ab0504420e0414121f3602&dis_t=1604115716&vid=wxv_1494773214181457920&format_id=10002
+# 18: http://mpvideo.qpic.cn/0bf2duaaeaaatmamqalvnfpvahodaioqaaqa.f10002.mp4?dis_k=e441d764bea92b3f99910f430a001471&dis_t=1604121100&vid=wxv_1542879888767057923&format_id=10002 13:12生成
+# 19: http://mpvideo.qpic.cn/0b782iaagaaanqallntwmrpvbuwdapjaaaya.f10002.mp4?dis_k=33dcb470120faa2c9b16839525dfdfeb&dis_t=1604121197&vid=wxv_1543894429550379012&format_id=10002 13:13生成
+# 20: http://mpvideo.qpic.cn/0b783maaiaaafyaonnlwjjpvbw6datnqabaa.f10002.mp4?dis_k=b8f63b22f420d8022365b3d49055fbff&dis_t=1604121236&vid=wxv_1544084339632766977&format_id=10002 13:14生成
+# 21: http://mpvideo.qpic.cn/0bf23iaamaaaxuao4flwjnpvbwwda3naabqa.f10002.mp4?dis_k=fcd5987628e245c59c11e62e95014f29&dis_t=1604121269&vid=wxv_1544107727189311489&format_id=10002 13:15
+# 22: http://mpvideo.qpic.cn/0b78uyaamaaagqah3et6jbpvbjwda2taabqa.f10002.mp4?dis_k=bb1c951d58c19237c37b533a0020f332&dis_t=1604121304&vid=wxv_1552436384492257281&format_id=10002 13:15
+# 25: http://mpvideo.qpic.cn/0b78taaagaaa5aad7tdchbpvbggdaomaaaya.f10002.mp4?dis_k=a10d40b4590f4ecad57d3db800dbadf7&dis_t=1604121384&vid=wxv_1521378910347804673&format_id=10002 13:16
+# 26: http://mpvideo.qpic.cn/0b78jeaakaaax4aphjthhvpvasodaveqabia.f10003.mp4?dis_k=dd3d4cbdbbbd3b4dac8330db156f63e7&dis_t=1604121417&vid=wxv_1527677572380164099&format_id=10003 13:17
+# 27: http://mpvideo.qpic.cn/0bf2biaasaaaouaomcmhrjpfacwdbefaacia.f10002.mp4?dis_k=a70c63719328fef9028d1b26f6716179&dis_t=1604121454&vid=wxv_1281354912068222977&format_id=10002 13:17
+# 28: http://mpvideo.qpic.cn/0bf2uiaaaaaajaabcnv6bbpfbiwdacraaaaa.f10004.mp4?dis_k=eeefb9e50855d34abda69a629b461ca6&dis_t=1604121480&vid=wxv_1340876362021912577&format_id=10004 13:18
+# 33: http://mpvideo.qpic.cn/0bf2vmecyaairmaggoejonpvrk6dfsvqqlaa.f10002.mp4?dis_k=b7fa7f8e2894479c14d858f7b1932c19&dis_t=1604134598&vid=wxv_1555544037439438849&format_id=10002 13:19
+# 34: http://mpvideo.qpic.cn/0b78euaamaaaniaf2omamfpvajodaysqabqa.f10002.mp4?dis_k=8479993c0233dc4c4da47691664c336d&dis_t=1604134947&vid=wxv_1554496853897986049&format_id=10002 17:03
+# 35: http://mpvideo.qpic.cn/0bf2cmaasaaa2macbes3hvpvae6dbejqacia.f10002.mp4?dis_k=d669b2d63da6db41b6d17b13398667bc&dis_t=1604134990&vid=wxv_1513602069553872901&format_id=10002 17:03
+# 36: http://mpvideo.qpic.cn/0b78ciaakaaavmahondykrpvaewdaujaabia.f10003.mp4?dis_k=cd4a3938cdd9d89c6710ef6f00419d5e&dis_t=1604135126&vid=wxv_1545801317988827137&format_id=10003 17:05
+# 37: http://mpvideo.qpic.cn/0b78vqaaoaaauqahaembjrpvblgda6waabya.f10002.mp4?dis_k=61375388fdad26966c774d4147340ac8&dis_t=1604135162&vid=wxv_1555715432270118916&format_id=10002 17:06
+# 38: http://mpvideo.qpic.cn/0b78guaamaaa5aaickebmfpvanoday2qabqa.f10002.mp4?dis_k=ee6cb035b2ea980e3c2db53e3cec95ac&dis_t=1604135188&vid=wxv_1555787714959114244&format_id=10002 17:06
+# 39: http://mpvideo.qpic.cn/0bf2tmgdaaameiad6gejpjpvzg6dgcnqymaa.f10003.mp4?dis_k=0274d58d16c6b00fbc69dd545293561b&dis_t=1604135218&vid=wxv_1559669766565527559&format_id=10003 17:07
+# 下面这两个都来自同一个公众号：subat ，而且是同一个卷集
+# 41: http://mpvideo.qpic.cn/0b78jaaawaaafeakox4lizpvasgdbneaacya.f10002.mp4?dis_k=35220cd54b8526c35647c432ad920f2d&dis_t=1604135239&vid=wxv_1566939676798664707&format_id=10002 17:07
+# 42: http://mpvideo.qpic.cn/0bf2teijaaaqvaaglm4e3zpubgodscmrbeaa.f10002.mp4?dis_k=86a1c666c438b0504609f654129ea10b&dis_t=1604135263&vid=wxv_1577148004644470789&format_id=10002 17:08
+# 47: http://mpvideo.qpic.cn/0b78imaa4aaa2iaej24sifpvaq6dbzbqadqa.f10002.mp4?dis_k=7499c186f7b006c8822cf4df7d5d2ca2&dis_t=1604135707&vid=wxv_1574216153231638528&format_id=10002 17:15
+#    http://mpvideo.qpic.cn/0b78imaa4aaa2iaej24sifpvaq6dbzbqadqa.f10002.mp4?dis_k=c87dc66e0ef41438b527def8417d64cc&dis_t=1604063708&vid=wxv_1574216153231638528&format_id=10002
+#                             id 永远不变(0b开头，a结尾）         fromat_id按清晰度不一样（10002超清，10003高清，10004表情）  dis_t dynamic    vid static(wxv_开头）
+#                                    static                                        dis_k 每次都不一样dynamic
 def getOriginalUrl(url):
-    isTXV, value = getSubscripVideoUrl(url)
+    isTXV, value = analyseArticleUrl(url)
     if (isTXV):
-        print("腾讯视频ID：", value)
-        # 构造 腾讯视频地址：
-        tx_url = "https://v.qq.com/x/cover/vmp7n9h5n5535c6/%s.html" % (value)
-        analyse_url = "https://data.zhai78.com/openTxVideo.php?url=" + tx_url
-        print("this is analyse_url:", analyse_url)
-        res = requests.get(analyse_url)
-        print("this is res", res.text)
-        res_json = res.json()
-        print("this is res_json", res_json)
-        jx_url = res_json['jx_url']
-        print("腾讯视频的原始地址：", jx_url)
-        return jx_url
+        return None
     else:
         print("微信公众号视频原始链接", value)
         return value
+
+
+def getTXVOriginalUrl(txvid):
+    print("腾讯视频ID：", txvid)
+    # 构造 腾讯视频地址：
+    tx_url = "https://v.qq.com/x/cover/vmp7n9h5n5535c6/%s.html" % (txvid)
+    analyse_url = "https://data.zhai78.com/openTxVideo.php?url=" + tx_url
+    print("this is analyse_url:", analyse_url)
+    res = requests.get(analyse_url)
+    print("this is res", res.text)
+    res_json = res.json()
+    print("this is res_json", res_json)
+    jx_url = res_json['jx_url']
+    print("腾讯视频的原始地址：", jx_url)
+    return jx_url
 
 
 # if __name__ == '__main__':

@@ -28,13 +28,16 @@ LINUX = 'Linux'
 SADAM_SET = {
     "MYSQL_SERVER_HOST": "undefined by sadam",
     "DEBUG": False,
+    "BASE_HREF": "BASE_HREF_TWO_PLATFORMS",
 }
 if platform.system() == WINDOWS:
     SADAM_SET['MYSQL_SERVER_HOST'] = '62.234.6.136'
     SADAM_SET["DEBUG"] = True
+    SADAM_SET["BASE_HREF"] = "http://10.128.202.191:7000"
 else:
     SADAM_SET["MYSQL_SERVER_HOST"] = 'localhost'
     SADAM_SET["DEBUG"] = False
+    SADAM_SET["BASE_HREF"] = "https://x.izbasarweb.xyz"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = SADAM_SET.get("DEBUG")

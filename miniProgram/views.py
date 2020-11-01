@@ -7,7 +7,6 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import *
-from .utils import getOriginalUrl
 
 
 # Create your views here.
@@ -16,10 +15,8 @@ from .utils import getOriginalUrl
 def videoUrlMaker(request, vid):
     video = Video.objects.get(id=vid)
     video.show()
-    articleUrl = video.url
-    print(("analaysing the video url from this article:%s") % articleUrl)
-    url = getOriginalUrl(articleUrl)
-    return redirect(to=url)
+    original_url = video.getAnalysedURL()
+    return redirect(to=original_url)
 
 
 def getAllArticles(request):
@@ -178,7 +175,6 @@ def getUserOpenid(request, js_code):
 
 
 def getFilm(request, id):
-    print(request, id)
     result = {'err_msg': "OK", 'objects': []}
     dicts = []
     if id == 0:
