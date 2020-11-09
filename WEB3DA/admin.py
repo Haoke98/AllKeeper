@@ -10,4 +10,4 @@ class MapAdmin(MyModelAdmin):
     list_display = MyModelAdmin.list_display + ['_map']
 
     def _map(self, obj):
-        return obj.map
+        return obj.map.show()

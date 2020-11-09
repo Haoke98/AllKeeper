@@ -141,8 +141,8 @@ class Image(MyModel):
 
     def show(self):
         return format_html(
-            '<img src="{}" width="200px" height="100px"/>',
-            self.url,
+            '''<a href="%s"><img src="{}" width="200px" height="100px" onClick="copy(this,'src')"/></a>''',
+            self.url, self.url
         )
     # def __str__(self):
     #     # return mark_safe('<img src="%s" width="50px" />' % (self.url))
@@ -204,9 +204,9 @@ class Video(MyModel):
     hasAnalysed = models.BooleanField(verbose_name="已经解析过", default=False)
     isTXV = models.BooleanField(verbose_name="是腾讯视频", default=False)
     TXVid = models.CharField(verbose_name="腾讯视频ID", max_length=11, default=None, blank=True)
-    WXVid = models.CharField(verbose_name="公众号视频ID", max_length=23, default=None, blank=True,null=True)
-    formatID = models.CharField(verbose_name="视频编码ID(决定视频流清晰度)", max_length=5, default="10002", blank=True,null=True)
-    destinationID = models.CharField(verbose_name="视频临时连接中的不变头部", max_length=36, default=None, blank=True,null=True)
+    WXVid = models.CharField(verbose_name="公众号视频ID", max_length=23, default=None, blank=True, null=True)
+    formatID = models.CharField(verbose_name="视频编码ID(决定视频流清晰度)", max_length=5, default="10002", blank=True, null=True)
+    destinationID = models.CharField(verbose_name="视频临时连接中的不变头部", max_length=36, default=None, blank=True, null=True)
 
     analysedUrl = models.CharField(verbose_name="解析后的临时URL(有有效期)", max_length=400, default="#", blank=True, null=True)
     analysedUrl_ExpiredTime = models.DateTimeField(verbose_name="解析后URL的过期DDL", auto_now_add=True)

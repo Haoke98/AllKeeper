@@ -125,7 +125,9 @@ class videoAdmin(admin.ModelAdmin):
             if obj.cover == None:
                 img = ''
             else:
-                img = mark_safe('<video src="%s" width="200px" height="100px"/>' % (obj.analysedUrl,))
+                img = format_html(
+                    '''<a href="{}"><video src={}  width="200px" height="100px" onClick="copy(this,'src')" controls autoplay name = "media" >< source  src = "{}" type = "video/mp4" ></video></a>''',
+                    obj.analysedUrl, obj.analysedUrl, obj.analysedUrl)
         except Exception as e:
             img = ''
         return img

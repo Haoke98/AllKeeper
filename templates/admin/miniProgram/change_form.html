@@ -172,17 +172,17 @@
         <div class="my_dev">
             <label class="my_label">title:</label>
             <input class="my_input" id="articleTitle"/>
-            <input class="my_button" type="button" onClick="copy('articleTitle','value')" value="点击复制标题"/>
+            <input class="my_button" type="button" onClick="copy1('articleTitle','value')" value="点击复制标题"/>
         </div>
         <div class="my_dev">
             <label class="my_label">description:</label>
             <input class="my_input" id="description"/>
-            <input class="my_button" type="button" onClick="copy('description','value')" value="点击复制描述"/>
+            <input class="my_button" type="button" onClick="copy1('description','value')" value="点击复制描述"/>
         </div>
         <div class="my_dev">
             <label class="my_label">cover:</label>
             <img class="my_input" id="cover">
-            <input class="my_button" type="button" onClick="copy('cover','src')" value="点击复制图片链接"/>
+            <input class="my_button" type="button" onClick="copy1('cover','src')" value="点击复制图片链接"/>
         </div>
     </div>
     <style>
@@ -215,20 +215,13 @@
     <script>
         function Article_url(value) {
             let element = document.getElementById('article_url');
-            element.setAttribute('value',value);
-            console.log(value,element);
+            element.setAttribute('value', value);
+            console.log(value, element);
         }
-        function copy(id, attr) {
+
+        function copy1(id, attr) {
             let element = document.getElementById(id);
-
-            var oInput = document.createElement('input');
-            oInput.value = element.getAttribute(attr);
-            document.body.appendChild(oInput);
-            oInput.select(); // 选择对象
-            document.execCommand("Copy"); // 执行浏览器复制命令
-            oInput.className = 'oInput';
-            oInput.style.display = 'none';
-
+            copy(element, attr)
         }
 
         function getInfoFromUrl(id) {
