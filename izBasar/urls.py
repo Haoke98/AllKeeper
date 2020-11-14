@@ -27,4 +27,5 @@ urlpatterns = [
     path('miniProgram/', include(miniProgram.urls)),
     url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
     path('W3DA/', include(WEB3DA.urls)),
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
 ]

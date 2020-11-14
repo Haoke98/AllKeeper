@@ -32,7 +32,7 @@ SADAM_SET = {
 }
 if platform.system() == WINDOWS:
     SADAM_SET['MYSQL_SERVER_HOST'] = '62.234.6.136'
-    SADAM_SET["DEBUG"] = True
+    SADAM_SET["DEBUG"] = False
     SADAM_SET["BASE_HREF"] = "http://10.128.202.191:7000"
 else:
     SADAM_SET["MYSQL_SERVER_HOST"] = 'localhost'
@@ -44,6 +44,76 @@ DEBUG = SADAM_SET.get("DEBUG")
 
 ALLOWED_HOSTS = ['*']
 
+APPEND_SLASH = True
+
+ADMINS = (('Sadam·Sadik', '1903249375@qq.com'), ('Haoke98', 'kws11@qq.com'),)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.qq.com'  # 如果是 163 改成 smtp.163.com
+EMAIL_PORT = 465
+SERVER_EMAIL = '1903249375@qq.com'
+EMAIL_HOST_USER = '1903249375@qq.com'  # 帐号
+EMAIL_HOST_PASSWORD = 'bhluzghpuqyfdach'  # 密码(用第三方平台登陆授权码）
+DEFAULT_FROM_EMAIL = 'SadamSadik <1903249375@qq.com>'
+
+#########################
+## Django Logging  BEGIN
+#########################
+
+# LOGGING_DIR 日志文件存放目录
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '%(levelname)s [%(asctime)s] [%(request_id)s] %(filename)s-%(funcName)s-%(lineno)s: %(message)s'
+            # 这里使用filter request_id里的request_id字段
+        },
+        'default': {
+            'format': '%(levelname)s [%(asctime)s] %(name)s: %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',  # 这里使用上面的formatter: standard
+        },
+        'file': {  # 记录到日志文件(需要创建对应的目录，否则会出错)
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'debug.log'),  # 日志输出文件
+            'maxBytes': 1024 * 1024 * 5,  # 文件大小
+            'backupCount': 5,  # 备份份数
+            'formatter': 'default',  # 使用哪种formatters日志格式
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,  # True 是 收不到任何 错误报告
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],  # 这里使用上面的handler: console
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': False
+        },
+        'project.app': {
+            'handlers': ['file', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': True
+        }
+    }
+}
+#########################
+## Django Logging  END
+#########################
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -54,6 +124,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'miniProgram',
     'WEB3DA',
+    'django.contrib.admindocs',
 ]
 CACHES = {
     'default': {
