@@ -10,7 +10,7 @@ class Map(MyModel):
     map = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True)
 
     def json(self):
-        return {'name': self.name, 'src': self.map.url}
+        return {'name': self.name, 'src': self.map.getFromOriginHost()}
 
     def __str__(self):
         return self.name

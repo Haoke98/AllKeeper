@@ -34,7 +34,7 @@ class UrlRedirectorAdmin(MyModelAdmin):
 class userAdmin(MyModelAdmin):
     list_display = MyModelAdmin.list_display + ['last_login_time', 'vip_expiredTime', 'avatar', 'nickName', '_gender',
                                                 'language', 'city', 'province', 'country', 'firstTimeLogin']
-
+    date_hierarchy = 'last_login_time'
     def avatar(self, obj):
         try:
             if obj.avatarUrl == None:
