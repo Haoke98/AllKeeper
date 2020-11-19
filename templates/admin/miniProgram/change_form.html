@@ -184,11 +184,87 @@
             <img class="my_input" id="cover">
             <input class="my_button" type="button" onClick="copy1('cover','src')" value="点击复制图片链接"/>
         </div>
+
+        <div class="my_dev">
+            <section>
+                <ul id="videoBlock">
+                    {#                    <li>#}
+                    {##}
+                    {#                        <video width="100%" height="100%" controls>#}
+                    {#                            <source src="http://mpvideo.qpic.cn/0bf26iaacaaa6uaos6jhyzpfb4wdahzaaaia.f10002.mp4?dis_k=42437265eb23aa3b30823f206ebb3460&dis_t=1605636334"#}
+                    {#                                    type="video/mp4">#}
+                    {#                        </video>#}
+                    {#                        视频1#}
+                    {#                    </li>#}
+                    {#                    <li>#}
+                    {#                        <video width="100%" height="100%" controls>#}
+                    {#                            <source src="http://mpvideo.qpic.cn/0bf26iaacaaa6uaos6jhyzpfb4wdahzaaaia.f10002.mp4?dis_k=42437265eb23aa3b30823f206ebb3460&dis_t=1605636334"#}
+                    {#                                    type="video/mp4">#}
+                    {#                        </video>#}
+                    {#                    </li>#}
+                    {#                    <li>#}
+                    {#                        <video width="100%" height="100%" controls>#}
+                    {#                            <source src="http://mpvideo.qpic.cn/0bf26iaacaaa6uaos6jhyzpfb4wdahzaaaia.f10002.mp4?dis_k=42437265eb23aa3b30823f206ebb3460&dis_t=1605636334"#}
+                    {#                                    type="video/mp4">#}
+                    {#                        </video>#}
+                    {#                    </li>#}
+
+
+                </ul>
+            </section>
+            <style>
+                html, body, section {
+                    width: 100%;
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                video {
+                    width: 100%;
+                    height: 90%;
+
+                }
+
+                ul, li {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                }
+
+                #videoBlock {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    background: #c2c2c2;
+                    border-radius: 2%;
+                    border: gray solid 2px;
+                    overflow: hidden;
+                }
+
+                #videoBlock li {
+                    width: calc(25% - 5px);
+                    height: 240px;
+                    background: black;
+                    color: white;
+                    margin: 5px 0;
+                    justify-content: center;
+                }
+
+                #vid {
+                    margin-bottom: 4px;
+                    margin-left: 4px;
+                }
+            </style>
+        </div>
     </div>
     <style>
         .has_filled_automatically {
             color: orange;
         }
+
 
         .my_dev {
             display: flex;
@@ -196,10 +272,7 @@
 
         .my_input {
             width: 60%;
-            {#height: 10px;#}
-            {#max-height: 20px;#}
-            {#height: 20%;#}
-            margin-right: 1%;
+        {#height: 10px;#}{#max-height: 20px;#}{#height: 20%;#} margin-right: 1%;
         }
 
         .my_label {
@@ -213,10 +286,14 @@
         }
     </style>
     <script>
+
+        var article_url = null;
+
         function Article_url(value) {
             let element = document.getElementById('article_url');
             element.setAttribute('value', value);
-            console.log(value, element);
+            article_url = value;
+            console.log(value, element, article_url);
         }
 
         function copy1(id, attr) {
@@ -224,29 +301,43 @@
             copy(element, attr)
         }
 
+        function initVideoBlock(videosInfoList) {
+            var videoBlock = document.getElementById('videoBlock');
+            videoBlock.innerHTML = "";
+            for (var i = 0; i < videosInfoList.length; i++) {
+                var video = videosInfoList[i];
+                var src = video.url_info[0].url;
+                var title = video.vid;
+                var videoLi = document.createElement('li');
+                videoLi.innerHTML = '<video controls ><source src="' + src + '" type="video/mp4"></video><view id="vid">' + title + '</view>';
+                videoLi.ondblclick = function (e) {
+                    console.log(e)
+                };
+                videoBlock.appendChild(videoLi);
+            }
+        }
+
         function getInfoFromUrl(id) {
-            let element = document.getElementById(id);
-            console.log(element);
-            let value = element.getAttribute('value');
-            console.log(value);
+
+
+            console.log(article_url);
             try {
-                document.getElementById('id_url').setAttribute('value', value);
+                document.getElementById('id_url').setAttribute('value', article_url);
             } catch (e) {
 
             }
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/miniProgram/getArticleInfo", true);
             xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(JSON.stringify({url: value}));
+            xhr.send(JSON.stringify({url: article_url}));
             xhr.onreadystatechange = (e) => {
                 if (xhr.status === 200) {
-                    console.log(xhr.responseText);
                     json_res = JSON.parse(xhr.responseText);
-                    console.log(json_res);
+                    console.log("这是从后端解析后得到的：s", json_res);
                     let relation =
                         [{id: "articleTitle", attr: "value", json_key: 'title'},
                             {id: "description", attr: "value", json_key: 'description'},
-                            {id: 'cover', attr: "src", json_key: 'cover_url'},
+                            {id: 'cover', attr: "src", json_key: 'cover'},
                             {id: 'id_title', attr: "value", json_key: 'title'},
                             {id: 'id_name', attr: "value", json_key: 'title'},
                             {id: 'id_description', attr: "value", json_key: 'description'},
@@ -259,11 +350,12 @@
                         try {
                             let element = document.getElementById(id);
                             element.setAttribute(relation[i].attr, json_res[relation[i].json_key]);
-                            element.setAttribute('class', 'has_filled_automatically '+element.getAttribute('class'));
+                            element.setAttribute('class', 'has_filled_automatically ' + element.getAttribute('class'));
                         } catch (e) {
                             console.log("fill it failed id:", id, 'error:', e)
                         }
                     }
+                    initVideoBlock(json_res.videos);
 
 
                     {#var jsonContent = JSON.parse(xhr.responseText);#}

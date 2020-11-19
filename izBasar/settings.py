@@ -32,7 +32,7 @@ SADAM_SET = {
 }
 if platform.system() == WINDOWS:
     SADAM_SET['MYSQL_SERVER_HOST'] = '62.234.6.136'
-    SADAM_SET["DEBUG"] = False
+    SADAM_SET["DEBUG"] = True
     SADAM_SET["BASE_HREF"] = "http://10.128.202.191:7000"
 else:
     SADAM_SET["MYSQL_SERVER_HOST"] = 'localhost'

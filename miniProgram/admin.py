@@ -35,6 +35,7 @@ class userAdmin(MyModelAdmin):
     list_display = MyModelAdmin.list_display + ['last_login_time', 'vip_expiredTime', 'avatar', 'nickName', '_gender',
                                                 'language', 'city', 'province', 'country', 'firstTimeLogin']
     date_hierarchy = 'last_login_time'
+
     def avatar(self, obj):
         try:
             if obj.avatarUrl == None:
@@ -105,20 +106,22 @@ makeHasNotAnalysed.short_description = 'make all video has not been analysed.'  
 @admin.register(Video)
 class videoAdmin(admin.ModelAdmin):
     list_display = MyModelAdmin.list_display + ['episodeNum', 'belongTo', 'showTimes', 'id', '_cover', 'videoShow',
-                                                'isFromSubscription', "hasFirstAnalysed", 'hasAnalysed', 'isTXV',
-                                                'TXVid', 'WXVid',
-                                                'formatID', 'destinationID',
-                                                'analysedUrl',
-                                                'analysedUrl_ExpiredTime',
-                                                'url', ]
+                                                # 'isFromSubscription', "hasFirstAnalysed", 'hasAnalysed', 'isTXV',
+                                                # 'formatID', 'destinationID',
+                                                # 'analysedUrl',
+                                                # 'analysedUrl_ExpiredTime',
+                                                # 'TXVid', 'WXVid',
+                                                'vid', 'url', ]
     list_display_links = list(admin.ModelAdmin.list_display_links) + ['belongTo', '__str__']
-    search_fields = ('name', 'episodeNum', 'id',
-                     'TXVid', 'WXVid',
-                     'formatID', 'destinationID',)
+    search_fields = ('name', 'episodeNum', 'id', 'vid'
+                     # 'TXVid', 'WXVid',
+                     # 'formatID', 'destinationID',
+                     )
     list_filter = ['belongTo']
-    actions_on_bottom = [makeHasNotFirstAnalysed, ]
-    actions_on_top = [makeHasNotAnalysed, ]
-    actions = [makeHasNotAnalysed, makeHasNotFirstAnalysed]
+
+    # actions_on_bottom = [makeHasNotFirstAnalysed, ]
+    # actions_on_top = [makeHasNotAnalysed, ]
+    # actions = [makeHasNotAnalysed, makeHasNotFirstAnalysed]
 
     def videoShow(self, obj):
         try:
@@ -126,7 +129,7 @@ class videoAdmin(admin.ModelAdmin):
                 img = ''
             else:
                 img = format_html(
-                    '''<a href="{}"><video src={}  width="200px" height="100px" onClick="copy(this,'src')" controls autoplay name = "media" >< source  src = "{}" type = "video/mp4" ></video></a>''',
+                    '''<a href="{}"><video  width="200px" height="100px" onClick="copy(this,'src')" controls  name = "media" >< source  src = "{}" type = "video/mp4" ></video></a>''',
                     obj.analysedUrl, obj.analysedUrl, obj.analysedUrl)
         except Exception as e:
             img = ''

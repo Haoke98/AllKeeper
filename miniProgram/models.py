@@ -1,6 +1,5 @@
 import os
 import urllib
-from datetime import datetime
 
 import requests
 from django.core.files import File
@@ -9,7 +8,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.html import format_html
 
-from .utils import analyseArticleUrl, analyseArticleUrl2
+from izBasar.settings import MEDIA_ROOT
+from .utils import getMpVideoInfo
 
 
 class MyModel(models.Model):
@@ -164,18 +164,26 @@ class Image(MyModel):
         return self.content.url
 
     def downloadPictureToServer(self):
+        '''
+        this is a function use to download the picture on the server disk as cache in order to resolve the Cross origin host.
+        :return:Nothing
+        '''
         print("该图片%s 在服务器上没有缓存，得重新下载：%s" % (self, self.url))
-        filename = timezone.now().time().microsecond
-        if 'jpeg' in self.url:
-            filename = "%d.jpg" % filename
-        if 'png' in self.url:
-            filename = "%d.png" % filename
-        print("this is the base name on the url:%s" % filename)
-        result = urllib.request.urlretrieve(self.url, filename)
+        CACHE_DIR_NAME = "ImgChageDIR"
+        IMAGE_CHACHE_DIR = os.path.join(MEDIA_ROOT, CACHE_DIR_NAME)
+        if not os.path.exists(IMAGE_CHACHE_DIR):
+            os.makedirs(IMAGE_CHACHE_DIR)
+        EXTENTION = ".png"
+        if 'jpeg' in self.url or 'jpg' in self.url:
+            EXTENTION = ".jpg"
+        filename = "%s%s" % (self, EXTENTION)
+        filePath = os.path.join(IMAGE_CHACHE_DIR, filename)
+        print("this is the base name on the url:%s" % filePath)
+        result = urllib.request.urlretrieve(self.url, filePath)
         print("下载好了：", result)
         self.content.save(
-            filename,
-            File(open(filename, mode='rb'))
+            os.path.join(CACHE_DIR_NAME, filename),  # 如果直接赋值 filename 则变成 img/filename.extention
+            File(open(filePath, mode='rb'))
         )
         self.save()
     # def __str__(self):
@@ -220,7 +228,7 @@ class Film(MyModel):
 
     def show(self):
         self.showTimes += 1
-        # self.save()
+        self.save()
 
 
 class Video(MyModel):
@@ -229,37 +237,36 @@ class Video(MyModel):
     episodeNum = models.IntegerField(verbose_name='集次', null=True)
     cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, blank=True, default=32)
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
-    video_url = models.URLField(verbose_name='纯视频链接',
-                                default="https://x.izbasarweb.xyz/miniProgram/UrlRedirector8")
     belongTo = models.ForeignKey(verbose_name="所属电视剧", to=Film, on_delete=models.PROTECT, null=True)
     showTimes = models.IntegerField(verbose_name="被观看次数", default=0, )
-    isFromSubscription = models.BooleanField(verbose_name="来自公众号文章（需要解析）", default=True)
-    hasFirstAnalysed = models.BooleanField(verbose_name="已经进行过首次解析", default=False)
-    hasAnalysed = models.BooleanField(verbose_name="已经解析过", default=False)
-    isTXV = models.BooleanField(verbose_name="是腾讯视频", default=False)
-    TXVid = models.CharField(verbose_name="腾讯视频ID", max_length=11, default=None, blank=True)
-    WXVid = models.CharField(verbose_name="公众号视频ID", max_length=23, default=None, blank=True, null=True)
-    formatID = models.CharField(verbose_name="视频编码ID(决定视频流清晰度)", max_length=5, default="10002", blank=True, null=True)
-    destinationID = models.CharField(verbose_name="视频临时连接中的不变头部", max_length=36, default=None, blank=True, null=True)
+    vid = models.CharField(verbose_name="vid", max_length=23, default=None, blank=True, null=True)
 
-    analysedUrl = models.CharField(verbose_name="解析后的临时URL(有有效期)", max_length=400, default="#", blank=True, null=True)
-    analysedUrl_ExpiredTime = models.DateTimeField(verbose_name="解析后URL的过期DDL", auto_now_add=True)
+    # hasAnalysed = models.BooleanField(verbose_name="已经解析过", default=False)
+    # TXVid = models.CharField(verbose_name="腾讯视频ID", max_length=11, default=None, blank=True)
+    # isFromSubscription = models.BooleanField(verbose_name="来自公众号文章（需要解析）", default=True)
+    # hasFirstAnalysed = models.BooleanField(verbose_name="已经进行过首次解析", default=False)
+    # isTXV = models.BooleanField(verbose_name="是腾讯视频", default=False)
 
-    def getAnalysedURL(self):
-        if self.isTXV:
-            return ""
-        else:
-            if not self.hasFirstAnalysed:
-                self.analyse()
-            if self.analysedUrl_ExpiredTime > timezone.now():
-                print("this video:%s analysedURL has not been expired now." % self.name)
-                return self.analysedUrl
-            else:
-                print("this video:%s analysedURL has been expired." % self.name)
-                self.analysedUrl = analyseArticleUrl2(self.url, self.WXVid, self.formatID, self.destinationID)
-                self.setExpiredTime()
-                self.save()
-                return self.analysedUrl
+    # formatID = models.CharField(verbose_name="视频编码ID(决定视频流清晰度)", max_length=5, default="10002", blank=True, null=True)
+    # destinationID = models.CharField(verbose_name="视频临时连接中的不变头部", max_length=36, default=None, blank=True, null=True)
+    # analysedUrl = models.CharField(verbose_name="解析后的临时URL(有有效期)", max_length=400, default="#", blank=True, null=True)
+    # analysedUrl_ExpiredTime = models.DateTimeField(verbose_name="解析后URL的过期DDL", auto_now_add=True)
+
+    # def getAnalysedURL(self):
+    #     if self.isTXV:
+    #         return ""
+    #     else:
+    #         if not self.hasFirstAnalysed:
+    #             self.analyse()
+    #         if self.analysedUrl_ExpiredTime > timezone.now():
+    #             print("this video:%s analysedURL has not been expired now." % self.name)
+    #             return self.analysedUrl
+    #         else:
+    #             print("this video:%s analysedURL has been expired." % self.name)
+    #             self.analysedUrl = analyseArticleUrl2(self.url, self.WXVid, self.formatID, self.destinationID)
+    #             self.setExpiredTime()
+    #             self.save()
+    #             return self.analysedUrl
 
     # def getAnalysedURL(self):
     #     if self.analysedUrl_ExpiredTime > timezone.now():
@@ -284,45 +291,50 @@ class Video(MyModel):
     #         self.save()
     #         return self.analysedUrl
 
-    def setExpiredTime(self):
-        now = timezone.now()
-        newHour = now.hour
-        newDay = now.day
-        newMonth = now.month
-        newYear = now.year
-        if newHour > 23:
-            newDay += 1
-            newHour -= 23
-            if newMonth in [1, 3, 5, 7, 8, 10, 11]:
-                if newDay > 31:
-                    newMonth += 1
-                    newDay -= 31
-            else:
-                if newDay > 30:
-                    newMonth += 1
-                    newDay -= 30
-            if newMonth > 12:
-                newYear += 1
-                newMonth -= 12
-        newDatetime = datetime(year=newYear, month=newMonth, day=newDay, hour=newHour,
-                               minute=now.minute,
-                               second=now.second, tzinfo=now.tzinfo)
-        self.analysedUrl_ExpiredTime = newDatetime
+    # def setExpiredTime(self):
+    #     now = timezone.now()
+    #     newHour = now.hour
+    #     newDay = now.day
+    #     newMonth = now.month
+    #     newYear = now.year
+    #     if newHour > 23:
+    #         newDay += 1
+    #         newHour -= 23
+    #         if newMonth in [1, 3, 5, 7, 8, 10, 11]:
+    #             if newDay > 31:
+    #                 newMonth += 1
+    #                 newDay -= 31
+    #         else:
+    #             if newDay > 30:
+    #                 newMonth += 1
+    #                 newDay -= 30
+    #         if newMonth > 12:
+    #             newYear += 1
+    #             newMonth -= 12
+    #     newDatetime = datetime(year=newYear, month=newMonth, day=newDay, hour=newHour,
+    #                            minute=now.minute,
+    #                            second=now.second, tzinfo=now.tzinfo)
+    #     self.analysedUrl_ExpiredTime = newDatetime
 
-    def analyse(self):
-        print("正在对视频进行提前解析：%s" % self.name)
-        self.isTXV, Vid, _id, formatID, tempURl = analyseArticleUrl(self.url)
-        if self.isTXV:
-            self.TXVid = Vid
-        else:
-            self.WXVid = Vid
-            self.destinationID = _id
-            self.formatID = formatID
-            self.analysedUrl = tempURl
-            self.setExpiredTime()
-        self.hasAnalysed = True
-        self.hasFirstAnalysed = True
-        self.save()
+    # def analyse(self):
+    #     print("正在对视频进行提前解析：%s" % self.name)
+    #     self.isTXV, Vid, _id, formatID, tempURl = analyseArticleUrl(self.url)
+    #     if self.isTXV:
+    #         self.TXVid = Vid
+    #     else:
+    #         self.WXVid = Vid
+    #         self.destinationID = _id
+    #         self.formatID = formatID
+    #         self.analysedUrl = tempURl
+    #         self.setExpiredTime()
+    #     self.hasAnalysed = True
+    #     self.hasFirstAnalysed = True
+    #     self.save()
+    def getPureVideoUrl(self):
+        videoInfo = getMpVideoInfo(self.vid)
+        print("this is videoUrlMaker:", self, videoInfo)
+        original_url = videoInfo['url_info'][0]['url']
+        return original_url
 
     def show(self):
         self.showTimes += 1
@@ -333,24 +345,29 @@ class Video(MyModel):
         return self.name
 
     def json(self):
-        if not self.hasFirstAnalysed:
-            self.analyse()
+        # if not self.hasFirstAnalysed:
+        #     self.analyse()
+        if "wxv_" in self.vid:
+            self.isTXV = False
+        else:
+            self.isTXV = True
+
         return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.name, 'cover': self.cover.url,
-                'isTXV': self.isTXV, 'TXVid': self.TXVid, 'url': self.url,
-                'video_url': self.video_url}
+                'isTXV': self.isTXV, 'TXVid': self.vid, 'url': self.url,
+                'video_url': "https://x.izbasarweb.xyz/miniProgram/videoUrlVid=%d" % self.id}
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         print("this Video :%s has been saved now. force_insert:%s force_update:%s," % (
             self.name, force_insert, force_update), using, update_fields)
-        if self.isFromSubscription:
-            if not self.hasFirstAnalysed:
-                self.analyse()
-            if not self.hasAnalysed:
-                self.getAnalysedURL()
-        else:
-            pass
-        self.belongTo.save(force_update=True)
+        # if self.isFromSubscription:
+        #     if not self.hasFirstAnalysed:
+        #         self.analyse()
+        #     if not self.hasAnalysed:
+        #         self.getAnalysedURL()
+        # else:
+        #     pass
+        # self.belongTo.save(force_update=True)
         return super(Video, self).save(force_update=force_update, force_insert=force_insert, using=using,
                                        update_fields=update_fields)
 

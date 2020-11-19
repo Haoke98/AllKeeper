@@ -100,6 +100,58 @@ import time
 import requests
 
 
+def analyseGetVideoInfo(url):
+    res = {}
+    allVid, title, image_url, description = analyseGetVid(url)
+    videoList = []
+    for vid in allVid:
+        if "wxv_" in vid:
+            print("这视频来自公众号空间：", vid)
+            videoList.append(getMpVideoInfo(vid))
+        else:
+            print("这视频来自腾讯视频：", vid)
+            videoList.append({"isTXV": True, "vid": vid})
+    res = {'title': title, "cover": image_url, "description": description, "videos": videoList}
+    return res
+
+
+def getMpVideoInfo(Vid):
+    url = "https://mp.weixin.qq.com/mp/videoplayer?action=get_mp_video_play_url&__biz=&mid=&idx=&vid=%s&token=&lang=zh_CN&f=json&ajax=1" % (
+        Vid)
+    res = requests.get(url)
+    json_obj = res.json()
+    url_info = json_obj['url_info']
+    # print("VideoInfo:", url_info)
+    return {"isTXV": False, "vid": Vid, "url_info": url_info}
+
+
+def analyseGetVid(url):
+    res = requests.get(url).text
+    title = getContent(res, 'title')
+    image = getContent(res, 'image')
+    description = getContent(res, 'description')
+    allVid = getVidByRe("wxv_[0-9]{19}", res) + getVidByRe("'[A-Za-z0-9]{11}'", res)
+    return allVid, title, image, description
+
+
+def getContent(data, str):
+    sss = '<meta property="og:%s" content="' % (str)
+    head_index = data.find(sss) + sss.__len__()
+    # print(head_index)
+    end_index = head_index + data[head_index:-1].find('" />')
+    # print(end_index)
+    return data[head_index:end_index]
+
+
+def getVidByRe(patt, text):
+    all = re.findall(patt, text)
+    res = []
+    for per in all:
+        if per not in res:
+            res.append(per)
+    return res
+
+
 def analyseArticleUrl(url: str):
     r"""解析公众号文章，获取文章中的视频链接信息.
 
@@ -122,6 +174,7 @@ def analyseArticleUrl(url: str):
     tempt_url = None
     print("正在发送HTTP请求。。。。。")
     time_start = time.time()
+    print("开始时间为：", time_start)
     res = requests.get(url)
     print("已经接受请求结果，所用时间：%d , 正在进行解析。。。。。。。" % (time.time() - time_start))
     time_start = time.time()
@@ -145,7 +198,7 @@ def analyseArticleUrl(url: str):
             format_id = re.search("\.f[0-9]{5}\.mp4\?", html).group()[2:7]
             _id = re.search("0b[A-Za-z0-9]{33}a", html).group()
             tempt_url = "http://mpvideo.qpic.cn/%s.f%s.mp4?%s&%s&vid=%s&format_id=%s" % (
-            _id, format_id, dis_k, dis_t, Vid, format_id)
+                _id, format_id, dis_k, dis_t, Vid, format_id)
             print("解析获得static信息用于加快Dynamic解析URL:%s , 所用解析时间：%d" % (tempt_url, time.time() - time_start))
         except:
             print("没有成功解析")
@@ -227,7 +280,11 @@ def analyseArticleUrl2(url: str, vid: str, format_id: str, _id: str):
 # 47: http://mpvideo.qpic.cn/0b78imaa4aaa2iaej24sifpvaq6dbzbqadqa.f10002.mp4?dis_k=7499c186f7b006c8822cf4df7d5d2ca2&dis_t=1604135707&vid=wxv_1574216153231638528&format_id=10002 17:15
 #    http://mpvideo.qpic.cn/0b78imaa4aaa2iaej24sifpvaq6dbzbqadqa.f10002.mp4?dis_k=c87dc66e0ef41438b527def8417d64cc&dis_t=1604063708&vid=wxv_1574216153231638528&format_id=10002
 #                             id 永远不变(0b开头，a结尾）         fromat_id按清晰度不一样（10002超清，10003高清，10004表情）  dis_t dynamic    vid static(wxv_开头）
+#
+#
 #                                    static                                        dis_k 每次都不一样dynamic
+
+
 def getOriginalUrl(url):
     isTXV, value = analyseArticleUrl(url)
     if (isTXV):
@@ -311,18 +368,25 @@ def upLoadImg(path, access_token, type):
 
 #
 if __name__ == '__main__':
-    #     # url = "https://mp.weixin.qq.com/s/9NGra4ZlVeFwnnYtqwhxqA"
-    #     url = "https://mp.weixin.qq.com/s?__biz=MzA4MTE2NTAxOA==&mid=100004279&idx=1&sn=0ae91db507d65690894323dd06b470ac&chksm=1f987e0228eff71499aae4d8032de56344c1d08e884f99b630d45ef44639eb244df4d611176a#rd"
-    #     getOriginalUrl(url)
-    #     url = "https://mp.weixin.qq.com/s/AOy6Mh2d9B_N8FI2TFdnAg"
-    #     getOriginalUrl(url)
-    #     # from ghost import Ghost
-    #     # gst = Ghost()
-    #     # page,resources = gst.open(url)
-    #     # print(page,resources)
-    #     # result,resources2 = gst.evaluate("document.getElementByClassName('video_fill').getAttribute('origin_src');")
-    #     # print(result,resources2)
-    access_token = getAccessToken()
-    path = r"C:\Users\19032\Pictures\cloud.jpg"
-    upLoadImg(path, access_token, "image")
+    # vid = "wxv_1566939676798664707"
+    # getMpVideoInfo(vid)
+    url = "https://mp.weixin.qq.com/s/9NGra4ZlVeFwnnYtqwhxqA"
+    url = "https://mp.weixin.qq.com/s/OUy7-jMvTl1ppVPwQrE2aA"
+    url = "https://mp.weixin.qq.com/s/5Y2oOyvrmx-6fDk2U6TPHQ"
+    url = "https://mp.weixin.qq.com/s/OUy7-jMvTl1ppVPwQrE2aA"
+    res = analyseGetVideoInfo(url)
+    print(res)
+#     url = "https://mp.weixin.qq.com/s?__biz=MzA4MTE2NTAxOA==&mid=100004279&idx=1&sn=0ae91db507d65690894323dd06b470ac&chksm=1f987e0228eff71499aae4d8032de56344c1d08e884f99b630d45ef44639eb244df4d611176a#rd"
+#     getOriginalUrl(url)
+#     url = "https://mp.weixin.qq.com/s/AOy6Mh2d9B_N8FI2TFdnAg"
+#     getOriginalUrl(url)
+#     # from ghost import Ghost
+#     # gst = Ghost()
+#     # page,resources = gst.open(url)
+#     # print(page,resources)
+#     # result,resources2 = gst.evaluate("document.getElementByClassName('video_fill').getAttribute('origin_src');")
+#     # print(result,resources2)
+# access_token = getAccessToken()
+# path = r"C:\Users\19032\Pictures\cloud.jpg"
+# upLoadImg(path, access_token, "image")
 #     # getMedia('100004279',access_token)
