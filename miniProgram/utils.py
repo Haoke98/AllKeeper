@@ -116,6 +116,21 @@ def analyseGetVideoInfo(url):
     return res
 
 
+def getVideoInfo(vid):
+    if "wxv_" in vid:
+        print("这视频来自公众号空间：", vid)
+        return getMpVideoInfo(vid)
+    else:
+        print("这视频来自腾讯视频：", vid)
+        if "'" in vid:
+            str(vid).replace("'", "")
+        try:
+            tx_original_url = getTXVOriginalUrl(vid)
+        except:
+            tx_original_url = "#"
+        return {"isTXV": True, "vid": vid, "url_info": [{'url': tx_original_url}]}
+
+
 def getMpVideoInfo(Vid):
     url = "https://mp.weixin.qq.com/mp/videoplayer?action=get_mp_video_play_url&__biz=&mid=&idx=&vid=%s&token=&lang=zh_CN&f=json&ajax=1" % (
         Vid)
@@ -372,18 +387,19 @@ try:
 except:
     pass
 
-
 #
 if __name__ == '__main__':
+    vid = "z0974bpqehi"
+    print(getTXVOriginalUrl(vid))
     # vid = "wxv_1566939676798664707"
     # getMpVideoInfo(vid)
-    url = "https://mp.weixin.qq.com/s/9NGra4ZlVeFwnnYtqwhxqA"
-    url = "https://mp.weixin.qq.com/s/OUy7-jMvTl1ppVPwQrE2aA"
-    url = "https://mp.weixin.qq.com/s/5Y2oOyvrmx-6fDk2U6TPHQ"
-    url = "https://mp.weixin.qq.com/s/OUy7-jMvTl1ppVPwQrE2aA"
-    res = analyseGetVideoInfo(url)
-    print(res)
-    url = "https://mp.weixin.qq.com/s?__biz=MzA4MTE2NTAxOA==&mid=100004279&idx=1&sn=0ae91db507d65690894323dd06b470ac&chksm=1f987e0228eff71499aae4d8032de56344c1d08e884f99b630d45ef44639eb244df4d611176a#rd"
+    # url = "https://mp.weixin.qq.com/s/9NGra4ZlVeFwnnYtqwhxqA"
+    # url = "https://mp.weixin.qq.com/s/OUy7-jMvTl1ppVPwQrE2aA"
+    # url = "https://mp.weixin.qq.com/s/5Y2oOyvrmx-6fDk2U6TPHQ"
+    # url = "https://mp.weixin.qq.com/s/OUy7-jMvTl1ppVPwQrE2aA"
+    # res = analyseGetVideoInfo(url)
+    # print(res)
+    # url = "https://mp.weixin.qq.com/s?__biz=MzA4MTE2NTAxOA==&mid=100004279&idx=1&sn=0ae91db507d65690894323dd06b470ac&chksm=1f987e0228eff71499aae4d8032de56344c1d08e884f99b630d45ef44639eb244df4d611176a#rd"
 #     getOriginalUrl(url)
 #     url = "https://mp.weixin.qq.com/s/AOy6Mh2d9B_N8FI2TFdnAg"
 #     getOriginalUrl(url)

@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.utils.html import format_html
 
 from izBasar.settings import MEDIA_ROOT
-from .utils import getMpVideoInfo
+from .utils import getVideoInfo
 
 
 class MyModel(models.Model):
@@ -331,7 +331,7 @@ class Video(MyModel):
     #     self.hasFirstAnalysed = True
     #     self.save()
     def getPureVideoUrl(self):
-        videoInfo = getMpVideoInfo(self.vid)
+        videoInfo = getVideoInfo(self.vid)
         print("this is getPureVideoUrl:", self, videoInfo)
         original_url = videoInfo['url_info'][0]['url']
         return original_url
