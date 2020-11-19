@@ -16,6 +16,7 @@ from .utils import analyseGetVideoInfo
 def videoUrlMaker(request, vid):
     video = Video.objects.get(id=vid)
     video.show()
+    print("thi is videoUrlMaker:", video)
     return redirect(to=video.getPureVideoUrl())
 
 

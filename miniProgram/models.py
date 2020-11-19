@@ -332,7 +332,7 @@ class Video(MyModel):
     #     self.save()
     def getPureVideoUrl(self):
         videoInfo = getMpVideoInfo(self.vid)
-        print("this is videoUrlMaker:", self, videoInfo)
+        print("this is getPureVideoUrl:", self, videoInfo)
         original_url = videoInfo['url_info'][0]['url']
         return original_url
 
@@ -340,6 +340,9 @@ class Video(MyModel):
         self.showTimes += 1
         self.belongTo.show()
         self.save()
+
+    def isTXV(self):
+        return "wxv_" not in self.vid
 
     def __str__(self):
         return self.name

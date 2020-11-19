@@ -109,8 +109,9 @@ def analyseGetVideoInfo(url):
             print("这视频来自公众号空间：", vid)
             videoList.append(getMpVideoInfo(vid))
         else:
+            vid = vid[1:-1]
             print("这视频来自腾讯视频：", vid)
-            videoList.append({"isTXV": True, "vid": vid})
+            videoList.append({"isTXV": True, "vid": vid, "url_info": [{'url': getTXVOriginalUrl(vid)}]})
     res = {'title': title, "cover": image_url, "description": description, "videos": videoList}
     return res
 
@@ -366,6 +367,12 @@ def upLoadImg(path, access_token, type):
     return res_json['media_id'], res_json['url']
 
 
+try:
+    pass
+except:
+    pass
+
+
 #
 if __name__ == '__main__':
     # vid = "wxv_1566939676798664707"
@@ -376,7 +383,7 @@ if __name__ == '__main__':
     url = "https://mp.weixin.qq.com/s/OUy7-jMvTl1ppVPwQrE2aA"
     res = analyseGetVideoInfo(url)
     print(res)
-#     url = "https://mp.weixin.qq.com/s?__biz=MzA4MTE2NTAxOA==&mid=100004279&idx=1&sn=0ae91db507d65690894323dd06b470ac&chksm=1f987e0228eff71499aae4d8032de56344c1d08e884f99b630d45ef44639eb244df4d611176a#rd"
+    url = "https://mp.weixin.qq.com/s?__biz=MzA4MTE2NTAxOA==&mid=100004279&idx=1&sn=0ae91db507d65690894323dd06b470ac&chksm=1f987e0228eff71499aae4d8032de56344c1d08e884f99b630d45ef44639eb244df4d611176a#rd"
 #     getOriginalUrl(url)
 #     url = "https://mp.weixin.qq.com/s/AOy6Mh2d9B_N8FI2TFdnAg"
 #     getOriginalUrl(url)
