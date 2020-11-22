@@ -389,8 +389,13 @@ except:
 
 #
 if __name__ == '__main__':
-    vid = "z0974bpqehi"
-    print(getTXVOriginalUrl(vid))
+    url = "https://v.douyin.com/J9pNmSD/"
+    url = " https://v.douyin.com/Jxem568/"
+    url = "https://data.zhai78.com/openDyJx.php?url=%s" % url
+    res = requests.get(url)
+    print(res.json())
+    # vid = "z0974bpqehi"
+    # print(getTXVOriginalUrl(vid))
     # vid = "wxv_1566939676798664707"
     # getMpVideoInfo(vid)
     # url = "https://mp.weixin.qq.com/s/9NGra4ZlVeFwnnYtqwhxqA"

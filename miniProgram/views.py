@@ -20,9 +20,10 @@ def videoUrlMaker(request, vid):
     return redirect(to=video.getPureVideoUrl())
 
 
+
 def getAllArticles(request):
     result = {'err_msg': "OK", 'objects': []}
-    articles = Article.objects.all()
+    articles = Article.objects.order_by('-last_changed_time')
     dict_object = []
     for per in articles:
         dict_object.append(per.json())

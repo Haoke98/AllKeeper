@@ -27,27 +27,6 @@ class MyModel(models.Model):
     #     super().save(*args, **kwargs)
 
 
-class Article(MyModel):
-    title = models.CharField(max_length=64)
-    description = models.CharField(max_length=120)
-    cover_url = models.URLField()
-    url = models.URLField()
-
-    # def save(self, force_insert=False, force_update=False, using=None,
-    #          update_fields=None):
-    #     return super(Article,self).save(force_insert=force_insert,force_update=force_update,)
-    def __str__(self):
-        return self.title
-
-    def json(self):
-        return {
-            'title': self.title,
-            'description': self.description,
-            'cover_url': self.cover_url,
-            'url': self.url,
-        }
-
-
 class RedirectUrlRelation(MyModel):
     name = models.CharField(max_length=50, null=True)
     id = models.IntegerField(primary_key=True)
@@ -140,8 +119,8 @@ class Image(MyModel):
             absoulutelyFilePath = os.path.abspath(filepath)
             print(absoulutelyFilePath)
             self.media_id, self.url = upLoadImg(absoulutelyFilePath, access_token, "image")
-            if os.path.exists(filepath):
-                os.remove(filepath)
+            if os.path.exists(absoulutelyFilePath):
+                os.remove(absoulutelyFilePath)
             # self.content = None
         else:
             pass
@@ -191,7 +170,39 @@ class Image(MyModel):
     #     return
 
 
-class Film(MyModel):
+class ModelWithShowRate(MyModel):
+    showTimes = models.IntegerField(verbose_name="被观看次数", default=0, )
+
+    def show(self):
+        self.showTimes += 1
+        self.save()
+
+    class Meta:
+        abstract = True
+
+
+class Article(ModelWithShowRate):
+    title = models.CharField(max_length=64)
+    description = models.CharField(max_length=120)
+    cover_url = models.URLField()
+    url = models.URLField()
+
+    # def save(self, force_insert=False, force_update=False, using=None,
+    #          update_fields=None):
+    #     return super(Article,self).save(force_insert=force_insert,force_update=force_update,)
+    def __str__(self):
+        return self.title
+
+    def json(self):
+        return {
+            'title': self.title,
+            'description': self.description,
+            'cover_url': self.cover_url,
+            'url': self.url,
+        }
+
+
+class Film(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name='电影标题', max_length=100)
     cover = models.URLField(verbose_name='电影封面',
@@ -226,20 +237,19 @@ class Film(MyModel):
 
     showTimes = models.IntegerField(verbose_name="被观看次数", default=0, )
 
-    def show(self):
-        self.showTimes += 1
-        self.save()
 
-
-class Video(MyModel):
+class Video(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name='每一集的名字', max_length=50)
     episodeNum = models.IntegerField(verbose_name='集次', null=True)
     cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, blank=True, default=32)
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
     belongTo = models.ForeignKey(verbose_name="所属电视剧", to=Film, on_delete=models.PROTECT, null=True)
-    showTimes = models.IntegerField(verbose_name="被观看次数", default=0, )
     vid = models.CharField(verbose_name="vid", max_length=23, default=None, blank=True, null=True)
+
+    def show(self):
+        self.belongTo.show()
+        super(Video, self).show()
 
     # hasAnalysed = models.BooleanField(verbose_name="已经解析过", default=False)
     # TXVid = models.CharField(verbose_name="腾讯视频ID", max_length=11, default=None, blank=True)
@@ -336,11 +346,6 @@ class Video(MyModel):
         original_url = videoInfo['url_info'][0]['url']
         return original_url
 
-    def show(self):
-        self.showTimes += 1
-        self.belongTo.show()
-        self.save()
-
     def isTXV(self):
         return "wxv_" not in self.vid
 
@@ -392,6 +397,7 @@ class settings(MyModel):
     subcribtion = models.ForeignKey(to=subcribtions, on_delete=models.PROTECT, null=True)
     enableVIP_mode = models.BooleanField(verbose_name="是否启动VIP模式")
     VIPprice = models.FloatField(verbose_name="一个月会员价", null=True)
+    trialTime = models.IntegerField(verbose_name="试看时间（秒）", default=5 * 60)
 
     def __str__(self):
         return self.app_name
@@ -400,4 +406,5 @@ class settings(MyModel):
         return {
             "enableVIP_mode": self.enableVIP_mode,
             "VIPprice": self.VIPprice,
+            "trialTime": self.trialTime,
         }

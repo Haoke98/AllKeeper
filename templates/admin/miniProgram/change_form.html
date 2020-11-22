@@ -322,7 +322,9 @@
 
             console.log(article_url);
             try {
-                document.getElementById('id_url').setAttribute('value', article_url);
+                var element = document.getElementById('id_url');
+                element.setAttribute('value', article_url);
+                element.setAttribute('class', 'has_filled_automatically ' + element.getAttribute('class'));
             } catch (e) {
 
             }
@@ -341,8 +343,8 @@
                             {id: 'id_title', attr: "value", json_key: 'title'},
                             {id: 'id_name', attr: "value", json_key: 'title'},
                             {id: 'id_description', attr: "value", json_key: 'description'},
-                            {id: 'id_cover_url', attr: "value", json_key: 'cover_url'},
-                            {id: 'cover', attr: "value", json_key: 'cover_url'}
+                            {id: 'id_cover_url', attr: "value", json_key: 'cover'},
+                            {id: 'cover', attr: "value", json_key: 'cover'}
 
                         ];
                     for (var i = 0; i < relation.length; i++) {
