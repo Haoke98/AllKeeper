@@ -372,7 +372,7 @@ def getMedia(mid, access_token):
 
 def upLoadImg(path, access_token, type):
     # https: // api.weixin.qq.com / cgi - bin / material / add_material?access_token = ACCESS_TOKEN & type = TYPE
-    cmd = 'curl -F media=@%s "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=%s&type=%s"' % (
+    cmd = 'curl -F media=@"%s" "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=%s&type=%s"' % (
         path, access_token, type)
     print("this is curlCmd:%s" % cmd)
     res = os.popen(cmd).readlines()[0]

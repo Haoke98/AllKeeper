@@ -108,7 +108,7 @@ class Image(MyModel):
             print(self.content.url)
             print(self.content.file)
             print(self.content.path)
-            filepath = './%d' % (timezone.now().time().microsecond) + self.content.name
+            filepath = self.content.path
             with open(filepath, 'wb') as f:
                 f.write(self.content.read())
             from .utils import upLoadImg
