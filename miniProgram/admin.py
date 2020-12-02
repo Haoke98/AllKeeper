@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.utils.safestring import mark_safe
 
 from .models import *
 
@@ -153,3 +152,45 @@ class ImageAdmin(MyModelAdmin):
 
     def show(self, obj):
         return obj.show()
+
+
+@admin.register(HouseType)
+class HouseTypeAdmin(MyModelAdmin):
+    exclude = ('',)
+
+
+@admin.register(House)
+class HouseAdmin(MyModelAdmin):
+    list_display = MyModelAdmin.list_display + ['houseType', 'houseLayout', 'size', 'price', 'phoneNum', 'address',
+                                                'descriptions']
+    list_select_related = ['houseType', 'houseLayout']
+
+
+@admin.register(HouseLayout)
+class HouseLayoutAdmin(MyModelAdmin):
+    exclude = ('',)
+
+
+@admin.register(PhoneNumber)
+class PhoneNumberAdmin(MyModelAdmin):
+    exclude = ('',)
+
+
+@admin.register(HousePriceType)
+class HousePriceTypeAdmin(MyModelAdmin):
+    exclude = ('',)
+
+
+@admin.register(HousePrice)
+class HousePriceAdmin(MyModelAdmin):
+    exclude = ('',)
+
+
+@admin.register(HouseSizeUnit)
+class HouseSizeUnitAdmin(MyModelAdmin):
+    exclude = ('',)
+
+
+@admin.register(HouseSize)
+class HouseSizeAdmin(MyModelAdmin):
+    exclude = ('',)

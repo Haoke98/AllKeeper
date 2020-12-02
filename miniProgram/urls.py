@@ -14,4 +14,5 @@ urlpatterns = [
     path('getArticleInfo', getArticleInfo),
     path('getAllArticles', getAllArticles),
     path('videoUrlVid=<int:vid>', videoUrlMaker),
+    path('getAllHousesInfo', getAllHousesInfo),
 ]

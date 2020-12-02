@@ -11,6 +11,16 @@ from .utils import analyseGetVideoInfo
 
 
 # Create your views here.
+def getAllHousesInfo(request):
+    result = {'err_msg': "OK", 'objects': []}
+    houses = House.objects.order_by('-last_changed_time')
+    dict_object = []
+    for per in houses:
+        dict_object.append(per.json())
+    result['objects'] = dict_object
+    result = json.dumps(result, ensure_ascii=False)
+    return HttpResponse(result, content_type='application/json,charset=utf-8')
+
 
 # @cache_page(1 * 60 * 60)
 def videoUrlMaker(request, vid):
@@ -18,7 +28,6 @@ def videoUrlMaker(request, vid):
     video.show()
     print("thi is videoUrlMaker:", video)
     return redirect(to=video.getPureVideoUrl())
-
 
 
 def getAllArticles(request):

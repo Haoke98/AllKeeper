@@ -126,6 +126,7 @@ INSTALLED_APPS = [
     'miniProgram',
     'WEB3DA',
     'django.contrib.admindocs',
+    'django.contrib.sitemaps',
 ]
 CACHES = {
     'default': {

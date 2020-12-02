@@ -5,11 +5,23 @@ import requests
 from django.core.files import File
 from django.db import models
 # Create your models here.
+from django.forms import ClearableFileInput
+from django.template import loader
 from django.utils import timezone
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 
 from izBasar.settings import MEDIA_ROOT
 from .utils import getVideoInfo
+
+
+class ImageInput(ClearableFileInput):
+    template_name = "upload_multi_img/image_multi_upload.html"
+
+    def render(self, name, value, attrs=None, renderer=None):
+        context = self.get_context(name, value, attrs)
+        template = loader.get_template(self.template_name).render(context)
+        return mark_safe(template)
 
 
 class MyModel(models.Model):
@@ -378,6 +390,90 @@ class Video(ModelWithShowRate):
         # self.belongTo.save(force_update=True)
         return super(Video, self).save(force_update=force_update, force_insert=force_insert, using=using,
                                        update_fields=update_fields)
+
+
+class HouseType(MyModel):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
+
+class HouseLayout(MyModel):
+    bedRoomCount = models.IntegerField(verbose_name="卧室（个数）")
+    livingRoomCount = models.IntegerField(verbose_name="客厅（个数）")
+    toiletCount = models.IntegerField(verbose_name="卫生间(个数)", default=1)
+    courtyardCount = models.IntegerField(verbose_name="院子（个数）", default=0)
+
+    def __str__(self):
+        res = "户型："
+        res += "%d室%d厅%d卫%d院" % (self.bedRoomCount, self.livingRoomCount, self.toiletCount, self.courtyardCount)
+        return res
+
+
+class PhoneNumber(MyModel):
+    owner = models.CharField(max_length=100, verbose_name="电话号拥有者姓名", blank=True)
+    number = models.BigIntegerField(verbose_name="联系电话", )
+
+    def __str__(self):
+        return "%d<%s>" % (self.number, self.owner)
+
+    def json(self):
+        return "TEL:%s" % (self.__str__())
+
+
+class HousePriceType(MyModel):
+    name = models.CharField(max_length=100, verbose_name="类型名")
+    unit = models.CharField(max_length=50, verbose_name="单位")
+
+    def __str__(self):
+        return "<%s,%s>" % (self.name, self.unit)
+
+
+class HousePrice(MyModel):
+    priceType = models.ForeignKey(to=HousePriceType, on_delete=models.CASCADE, null=True)
+    price = models.IntegerField(verbose_name="价格（万）")
+
+    def __str__(self):
+        return "%s:%s%s" % (self.priceType.name, self.price, self.priceType.unit)
+
+
+class HouseSizeUnit(MyModel):
+    name = models.CharField(max_length=50, verbose_name="单位称呼")
+    unit = models.CharField(max_length=50, verbose_name="单位符号")
+
+    def __str__(self):
+        return "<%s,%s>" % (self.name, self.unit)
+
+
+class HouseSize(MyModel):
+    size = models.FloatField(verbose_name="数字大小")
+    unit = models.ForeignKey(to=HouseSizeUnit, on_delete=models.CASCADE, verbose_name="单位")
+
+    def __str__(self):
+        return "%f%s" % (self.size, self.unit.__str__())
+
+
+class House(ModelWithShowRate):
+    houseType = models.ForeignKey(to=HouseType, on_delete=models.CASCADE)
+    houseLayout = models.ForeignKey(to=HouseLayout, on_delete=models.CASCADE, null=True)
+    # size = models.FloatField(verbose_name="占地面积(m2)", default=103)
+    size = models.ForeignKey(to=HouseSize, on_delete=models.CASCADE, verbose_name="占地面积", null=True)
+    price = models.ForeignKey(to=HousePrice, on_delete=models.CASCADE, null=True)
+    phoneNum = models.ForeignKey(to=PhoneNumber, on_delete=models.CASCADE, null=True)
+    address = models.TextField()
+    descriptions = models.TextField()
+    images = models.ManyToManyField(to=Image)
+
+    def json(self):
+        images_list = []
+        for per in self.images.all():
+            images_list.append(per.url)
+        return {'houseType': self.houseType.__str__(), 'houseLayout': self.houseLayout.__str__(),
+                'address': "地址：%s" % self.address,
+                'descriptions': self.descriptions,
+                'phoneNum': self.phoneNum.json(), 'size': self.size.__str__(),
+                'price': self.price.__str__(), 'images': images_list}
 
 
 class subcribtions(MyModel):
