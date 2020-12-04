@@ -1,0 +1,294 @@
+{% load static %}
+{#<div id="">#}
+
+<div class="file-button" id="upload_image"
+     style="background-image:  url('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1049033917,3033202092&fm=26&gp=0.jpg');background-repeat: no-repeat;background-size: 64px;background-position: center">
+    <input type="file" name="{{ widget.name }}" onchange="uploadImage(this)"
+           id="id_imageUpload" accept="image/jpeg,image/jpg,image/png,image/gif" multiple>
+</div>
+<textarea id="upload_image_list_text" name="{{ widget.name }}">{% if widget.value %}
+    {{ widget.value }}{% endif %}</textarea>
+{#引入jQuery的CDN#}
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+    //必须加这个请求头，否则ajax请求被django屏蔽，这行代码不能放进function中声明，否则获取不到请求头
+    {#var csrftoken = $.cookie('csrftoken');#}
+    var images = [];
+    var separator_media_id_src = "{{widget.separator_media_id_src}}";
+    var separator_images_info = "{{widget.separator_images_info}}";
+
+    function uploadImage(obj) {
+        var maxCount = 9;
+        var files = $("#id_imageUpload")[0].files;//获取模板定义的图片上传按钮的文件
+        console.log("this is files:", files);
+        //如果图片数目大于4，弹出警告
+        if (files.length > maxCount) {
+            alert("最多选择" + maxCount + "张图片！");
+            return;
+        }
+        //检查图片数目和图片类型，只允许上传jpg,png,gif格式
+        if (0 < files.length && files.length <= maxCount) {
+            for (var i = 0; i < files.length; i++) {
+                var ext = files[i].name.slice(files[i].name.lastIndexOf(".") + 1).toLowerCase();
+                if ("png" == ext || "jpg" == ext || "jpeg" == ext || "gif" == ext) {
+                    file = files[i];
+                    $("#upload_image").before("<div class=\"selected-img\">\n" +
+                        "    <i class=\"iconfont icon-delete\" style=\"z-index: 999;background-color:rgba(255,255,255,.8);position: absolute;right: 3px;top: 3px;\" title=\"删除图片\" data-media_id=\"" + "image.media_id" + "\" onclick=\"delete_img(this)\" ></i>\n" +
+                        "    <img id=\"" + file.size + "\" src=\"" + "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2373493931,1781804936&fm=26&gp=0.jpg" + "\" alt=\"待选图片\" style=\"width: 160px;height: 100px;border-radius: 10px;\" onclick=\"show_big_img(this)\" ></div>");
+                    var formData = new FormData();
+                    formData.append(file.name, file);
+                    {#console.log("this is formdata:",formData);#}
+                    if (formData) {
+                        //必须加上csrftoken ，否则验证不通过，ajax请求无效
+                        $.ajax({
+                            url: '{% url 'upload_img' %}',
+                            dataType: 'json',// 返回值类型 一般设置为json
+                            type: 'POST',
+                            headers: {"X-CSRFToken": "this is just a joke!"},//django默认拒绝post请求，必须加 csrftoken，否则请求被屏蔽
+                            processData: false,    // 告诉jQuery不要去处理发送的数据
+                            contentType: false, //告诉jQuery不检查类型
+                            data: formData,
+                            async: true,//必须设置为同步模式，否则success方法没有返回值
+                            success: function (data) {
+
+                                //console.log(data["image_list"])
+                                //动态添加HTML元素，显示上传的图片
+                                for (var x = 0; x < data["image_list"].length; x++) {
+                                    var image = data["image_list"][x];
+                                    console.log(image);
+                                    var imgtag = $("#" + image.size);
+                                    console.log("thi is imgTag:", imgtag);
+                                    imgtag.attr('src', image.url);
+                                    console.log(1, imgtag.closest("i"));
+                                    console.log(2, imgtag.closest(".iconfont icon-delete"));
+                                    console.log(3, imgtag.closest(".iconfont"));
+                                    console.log(4, imgtag.closest(".icon-delete"));
+                                    console.log(5, imgtag.prev());
+                                    imgtag.prev().attr("data-media_id", image.media_id);
+                                    images.push(make_image_info_text(image.media_id, image.url));
+                                    fill_img_list_text();
+                                    {#imgtag.closest("i").attr("data-media_id", image.media_id)#}
+                                }
+                                {#$.parser.parse("#"+image.media_id);#}
+                                {#alert("上传成功", data["msg"]);#}
+                            },
+                            error: function (error) {
+                                alert("服务器异常");
+                            }
+                        })
+                    }
+                    {#formData.delete(files[i].name);#}
+                }
+            }
+        }
+        {#return true;#}
+    }
+
+    //删除选中的图片,不能使用click，因为动态添加的不能绑定click
+    function delete_img(e) {
+        var media_id = e.dataset.media_id;
+        var formData = new FormData();
+        formData.append("media_id", media_id);
+        $.ajax({
+            url: '{% url 'delete_img_from_subs' %}',
+            dataType: 'json',// 返回值类型 一般设置为json
+            type: 'POST',
+            headers: {"X-CSRFToken": "this is just a joke for delete_img!"},//django默认拒绝post请求，必须加 csrftoken，否则请求被屏蔽
+            processData: false,    // 告诉jQuery不要去处理发送的数据
+            contentType: false, //告诉jQuery不检查类型
+            data: formData,
+            async: true,//必须设置为同步模式，否则success方法没有返回值
+            success: function (data) {
+                var tag_img = $(e).next();
+                var media_id = e.dataset.media_id;
+                var divElement = $(e).parent();
+                var src = tag_img.attr('src');
+                var img_info = make_image_info_text(media_id, src);
+                console.log("response from server after delete img:", data, img_info, divElement);
+                if (data["errcode"] == 0) {
+                    var index = images.indexOf(img_info);
+                    console.log("this is deleted item index:", index);
+                    images.splice(index, 1);
+                    divElement.remove();
+                    fill_img_list_text();
+                } else {
+                    alert("删除图片失败！", data['errmsg']);
+                }
+            },
+            error: function (res) {
+                var str = "发起删除图片请求失败！";
+                console.log(str, res);
+                alert(str);
+            },
+        })
+    }
+
+    function make_image_info_text(media_id, src) {
+        return media_id + separator_media_id_src + src;
+    }
+
+    function fill_img_list_text() {
+        $("#upload_image_list_text").val(images.join(separator_images_info));
+    }
+</script>
+{#显示模型中保存的图片#}
+<script type="text/javascript">
+    function show_saved_img() {
+        var images_list_text = $("#upload_image_list_text").val();
+        images_list_text = images_list_text.replace(" ", "");
+        $("#upload_image_list_text").val(images_list_text);
+        var list_splited = images_list_text.split(separator_images_info);
+        images = [];
+        for (var i = 0; i < list_splited.length; i++) {
+            var item = list_splited[i];
+            if (item == "") {
+
+            } else {
+                images.push(item)
+            }
+        }
+        var divs_to_del = $(".selected-img");
+        console.log("this is divs_to_del:", divs_to_del);
+        for (var i = 0; i < images.length; i++) {
+            var info_list = images[i].split(separator_media_id_src);
+            var media_id = info_list[0];
+            var src = info_list[1];
+            var div_element = document.createElement('div');
+            div_element.className = "selected-img";
+            var element =
+                "    <i class=\"iconfont icon-delete\" style=\"z-index: 999;background-color:rgba(255,255,255,.8);position: absolute;right: 3px;top: 3px;\" title=\"删除图片\" data-media_id=\"" + media_id + "\" onclick=\"delete_img(this)\" ></i>\n" +
+                "    <img src=\"" + src + "\" alt=\"待选图片\" style=\"width: 160px;height: 100px;border-radius: 10px;\" onclick=\"show_big_img(this)\">";
+            div_element.innerHTML = element;
+            {#upload_image_element.insertBefore(div_element,lastNode);#}
+            $('#upload_image').before(div_element);
+        }
+
+    }
+
+
+    show_saved_img();
+    $("#upload_image_list_text").change(function () {
+        show_saved_img();
+    });
+</script>
+{#显示大图#}
+<div id="outerdiv"
+     style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:10000;width:100%;height:100%;display:none;">
+    <div id="innerdiv" style="position:absolute;">
+        <img id="bigimg" style="border:5px solid #fff;" src="" alt="大图"/>
+    </div>
+</div>
+{#显示大图#}
+<script type="text/javascript">
+    //因为图片是动态添加的，所以不能使用选择器选择。
+    function show_big_img(obj) {
+        imgShow("#outerdiv", "#innerdiv", "#bigimg", obj);
+    }
+
+    function imgShow(outerdiv, innerdiv, bigimg, obj) {
+        var src = obj.src;//获取当前点击的pimg元素中的src属性
+        $(bigimg).attr("src", src);//设置#bigimg元素的src属性
+        console.log("￥￥￥￥", obj.height, obj.width);
+        var windowW = $(window).width();//获取当前窗口宽度
+        var windowH = $(window).height();//获取当前窗口高度
+        var realWidth = obj.naturalWidth;//获取图片真实宽度
+        var realHeight = obj.naturalHeight;//获取图片真实高度
+        var imgWidth, imgHeight;
+        var scale = 0.8;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放
+
+        if (realHeight > windowH * scale) {//判断图片高度
+            imgHeight = windowH * scale;//如大于窗口高度，图片高度进行缩放
+            imgWidth = imgHeight / realHeight * realWidth;//等比例缩放宽度
+            if (imgWidth > windowW * scale) {//如宽度扔大于窗口宽度
+                imgWidth = windowW * scale;//再对宽度进行缩放
+            }
+        } else if (realWidth > windowW * scale) {//如图片高度合适，判断图片宽度
+            imgWidth = windowW * scale;//如大于窗口宽度，图片宽度进行缩放
+            imgHeight = imgWidth / realWidth * realHeight;//等比例缩放高度
+        } else {//如果图片真实高度和宽度都符合要求，高宽不变
+            imgWidth = realWidth;
+            imgHeight = realHeight;
+        }
+        $(bigimg).css("width", imgWidth);//以最终的宽度对图片缩放
+        var w = (windowW - imgWidth) / 2;//计算图片与窗口左边距
+        var h = (windowH - imgHeight) / 2;//计算图片与窗口上边距
+        $(innerdiv).css({"top": h, "left": w});//设置#innerdiv的top和left属性
+        $(outerdiv).fadeIn("fast");//淡入显示#outerdiv及.pimg
+
+        $(outerdiv).click(function () {//再次点击淡出消失弹出层
+            $(this).fadeOut("fast");
+        });
+    }
+
+
+</script>
+<style type="text/css">
+    /*缩略图片样式*/
+    .selected-img {
+        width: 160px;
+        height: 100px;
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        border: solid #b1c6c1 1px;
+        border-radius: 10px;
+        margin-right: 10px;
+    }
+
+    /*缩略图片聚焦样式*/
+    .selected-img:hover {
+        border: solid #25adc6 2px;
+    }
+
+    /*上传图片按钮样式*/
+    .file-button {
+        width: 160px;
+        height: 100px;
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        border: solid #b1c6c1 1px;
+        border-radius: 10px;
+        margin-right: 10px;
+    }
+
+    /*上传图片按钮聚焦样式*/
+    .file-button:hover {
+        border: solid #25adc6 2px;
+    }
+
+    .file-button input {
+        position: absolute;
+        top: 0;
+        height: 100px;
+        opacity: 0;
+    }
+
+    /*删除缩略图片icon聚焦样式*/
+    i:hover {
+        color: #0081C6;
+    }
+
+    /*阿里云字体图标*/
+    @font-face {
+        font-family: 'iconfont';  /* project id 1361777 */
+        src: url('//at.alicdn.com/t/font_1361777_ufufbwqmfpa.eot');
+        src: url('//at.alicdn.com/t/font_1361777_ufufbwqmfpa.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_1361777_ufufbwqmfpa.woff2') format('woff2'),
+        url('//at.alicdn.com/t/font_1361777_ufufbwqmfpa.woff') format('woff'),
+        url('//at.alicdn.com/t/font_1361777_ufufbwqmfpa.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_1361777_ufufbwqmfpa.svg#iconfont') format('svg');
+    }
+
+    .iconfont {
+        font-family: "iconfont" !important;
+        font-size: 20px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-delete:before {
+        content: "\e63c";
+    }
+</style>

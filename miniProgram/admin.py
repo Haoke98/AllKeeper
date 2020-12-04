@@ -148,6 +148,7 @@ class videoAdmin(admin.ModelAdmin):
 
 @admin.register(Image)
 class ImageAdmin(MyModelAdmin):
+    form = UploadForm
     list_display = MyModelAdmin.list_display + ['show', 'id', 'media_id', 'content']
 
     def show(self, obj):
@@ -161,6 +162,7 @@ class HouseTypeAdmin(MyModelAdmin):
 
 @admin.register(House)
 class HouseAdmin(MyModelAdmin):
+    form = HouseForm
     list_display = MyModelAdmin.list_display + ['houseType', 'houseLayout', 'size', 'price', 'phoneNum', 'address',
                                                 'descriptions']
     list_select_related = ['houseType', 'houseLayout']

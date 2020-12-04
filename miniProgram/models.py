@@ -5,7 +5,7 @@ import requests
 from django.core.files import File
 from django.db import models
 # Create your models here.
-from django.forms import ClearableFileInput
+from django.forms import TextInput
 from django.template import loader
 from django.utils import timezone
 from django.utils.html import format_html
@@ -15,11 +15,18 @@ from izBasar.settings import MEDIA_ROOT
 from .utils import getVideoInfo
 
 
-class ImageInput(ClearableFileInput):
+class ImageInput(TextInput):
+    separator_media_id_src = "----"
+    separator_images_info = "|||||"
     template_name = "upload_multi_img/image_multi_upload.html"
 
     def render(self, name, value, attrs=None, renderer=None):
+        print("this is render:", self, name, value, attrs, renderer)
         context = self.get_context(name, value, attrs)
+        context['widget']['value'] = value
+        context['widget']['separator_media_id_src'] = self.separator_media_id_src
+        context['widget']['separator_images_info'] = self.separator_images_info
+        print("this is context on it :", context)
         template = loader.get_template(self.template_name).render(context)
         return mark_safe(template)
 
@@ -180,6 +187,17 @@ class Image(MyModel):
     # def __str__(self):
     #     # return mark_safe('<img src="%s" width="50px" />' % (self.url))
     #     return
+
+
+from django.forms import ModelForm, forms
+
+
+class UploadForm(ModelForm):
+    url = forms.FileField(label="@Sadam图片", widget=ImageInput, help_text="按住ctrl进行多选,最多9张", required=False)
+
+    class Meta:
+        model = Image
+        fields = ['content', 'media_id', 'url']
 
 
 class ModelWithShowRate(MyModel):
@@ -451,7 +469,7 @@ class HouseSize(MyModel):
     unit = models.ForeignKey(to=HouseSizeUnit, on_delete=models.CASCADE, verbose_name="单位")
 
     def __str__(self):
-        return "%f%s" % (self.size, self.unit.__str__())
+        return "%0.2f%s" % (self.size, self.unit.__str__())
 
 
 class House(ModelWithShowRate):
@@ -463,17 +481,40 @@ class House(ModelWithShowRate):
     phoneNum = models.ForeignKey(to=PhoneNumber, on_delete=models.CASCADE, null=True)
     address = models.TextField()
     descriptions = models.TextField()
-    images = models.ManyToManyField(to=Image)
+    images = models.TextField(verbose_name="所有图片的url和media_id", null=True)
 
     def json(self):
-        images_list = []
-        for per in self.images.all():
-            images_list.append(per.url)
+        images_list = self.get_images_list()
         return {'houseType': self.houseType.__str__(), 'houseLayout': self.houseLayout.__str__(),
                 'address': "地址：%s" % self.address,
                 'descriptions': self.descriptions,
-                'phoneNum': self.phoneNum.json(), 'size': self.size.__str__(),
+                'phoneNum': self.phoneNum.json(), 'size': "面积：%s" % self.size.__str__(),
                 'price': self.price.__str__(), 'images': images_list}
+
+    def get_images_list(self):
+
+        text = self.images
+        if text is None:
+            list = []
+        else:
+            list = text.split(ImageInput.separator_images_info)
+            res = []
+            for i in list:
+                res.append(i.split(ImageInput.separator_media_id_src)[1])
+            list = res
+        print(self, list)
+        return list
+
+
+from django import forms
+
+
+class HouseForm(ModelForm):
+    images = forms.CharField(label="@Sadam图片", widget=ImageInput, help_text="按住ctrl进行多选,最多9张", required=False)
+
+    class Meta:
+        model = House
+        fields = ['houseType', 'houseLayout', 'size', 'price', 'phoneNum', 'address', 'descriptions', 'images']
 
 
 class subcribtions(MyModel):
