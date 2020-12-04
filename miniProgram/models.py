@@ -189,11 +189,11 @@ class Image(MyModel):
     #     return
 
 
-from django.forms import ModelForm, forms
+from django.forms import ModelForm
 
 
 class UploadForm(ModelForm):
-    url = forms.FileField(label="@Sadam图片", widget=ImageInput, help_text="按住ctrl进行多选,最多9张", required=False)
+    # url = forms.FileField(label="@Sadam图片", widget=ImageInput, help_text="按住ctrl进行多选,最多9张", required=False)
 
     class Meta:
         model = Image
@@ -545,3 +545,8 @@ class settings(MyModel):
             "VIPprice": self.VIPprice,
             "trialTime": self.trialTime,
         }
+
+
+class StaticFiles(MyModel):
+    label = models.CharField(verbose_name="文件标签", max_length=50, null=False)
+    file = models.FileField(upload_to="static", null=False)

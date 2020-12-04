@@ -168,7 +168,7 @@ def buyVIP(request, openid):
         new_year += 1
         new_month = 1
     newDatetime = datetime.datetime(year=new_year, month=new_month, day=now.day, hour=now.hour, minute=now.minute,
-                                    second=now.second, tzinfo=now.tzinfo)
+                                    second=now.second, microsecond=now.microsecond, tzinfo=now.tzinfo)
     print(newDatetime)
     curr_user.vip_expiredTime = newDatetime
     curr_user.save()
@@ -231,6 +231,8 @@ def getUserOpenid(request, js_code):
         print("数据库里找不到关于该用户的任何信息，创建了新的空间给该用户", curr_user)
     else:
         print("数据库里找到了了该用户", curr_user)
+    from django.utils.timezone import utc
+    utcnow = datetime.datetime.utcnow().replace(tzinfo=utc)
     curr_user.last_login_time = timezone.now()
     curr_user.save()
     curr_user_json = curr_user.json()

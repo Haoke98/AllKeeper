@@ -196,3 +196,8 @@ class HouseSizeUnitAdmin(MyModelAdmin):
 @admin.register(HouseSize)
 class HouseSizeAdmin(MyModelAdmin):
     exclude = ('',)
+
+
+@admin.register(StaticFiles)
+class StaticFilesAdmin(MyModelAdmin):
+    list_display = MyModelAdmin.list_display + ['label', 'file']

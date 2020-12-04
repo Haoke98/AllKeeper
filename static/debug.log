@@ -1,0 +1,100 @@
+INFO [2020-12-04 17:04:51,875] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-04 17:07:28,009] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\views.py changed, reloading.
+INFO [2020-12-04 17:07:30,924] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-04 17:09:32,226] django.server: "GET /miniProgram/getAllHousesInfo HTTP/1.1" 200 10585
+INFO [2020-12-04 17:09:49,480] django.server: "GET /miniProgram/getAllHousesInfo HTTP/1.1" 200 10585
+INFO [2020-12-04 19:10:10,332] django.server: "GET /admin/miniProgram/user/ HTTP/1.1" 200 85051
+INFO [2020-12-04 19:11:05,170] django.server: "GET /admin/miniProgram/user/ HTTP/1.1" 200 85051
+INFO [2020-12-04 19:11:05,309] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:11:13,817] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 10480
+INFO [2020-12-04 19:11:18,001] django.server: "GET /admin/miniProgram/redirecturlrelation/ HTTP/1.1" 200 20324
+INFO [2020-12-04 19:11:18,109] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:11:23,174] django.server: "GET /admin/miniProgram/redirecturlrelation/7/change/ HTTP/1.1" 200 20406
+INFO [2020-12-04 19:11:23,860] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:11:31,725] django.server: "POST /admin/miniProgram/redirecturlrelation/7/change/ HTTP/1.1" 302 0
+INFO [2020-12-04 19:11:31,920] django.server: "GET /admin/miniProgram/redirecturlrelation/ HTTP/1.1" 200 20605
+INFO [2020-12-04 19:11:32,005] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:16:50,537] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 10480
+INFO [2020-12-04 19:16:57,434] django.server: "GET /admin/miniProgram/film/ HTTP/1.1" 200 26513
+INFO [2020-12-04 19:16:57,520] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:20:02,395] django.server: "GET /admin/miniProgram/film/add/ HTTP/1.1" 200 25274
+INFO [2020-12-04 19:20:02,489] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:20:09,297] django.server: "POST /miniProgram/getArticleInfo HTTP/1.1" 200 8904
+INFO [2020-12-04 19:21:03,269] django.server: "GET /admin/miniProgram/image/add/?_to_field=id&_popup=1 HTTP/1.1" 200 31034
+INFO [2020-12-04 19:21:03,408] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:21:27,398] django.server: "POST /admin/miniProgram/film/add/ HTTP/1.1" 302 0
+INFO [2020-12-04 19:21:27,786] django.server: "GET /admin/miniProgram/film/ HTTP/1.1" 200 27611
+INFO [2020-12-04 19:21:27,881] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:24:46,446] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-04 19:24:51,897] django.server: "GET /admin/miniProgram/film/25/change/ HTTP/1.1" 200 25641
+INFO [2020-12-04 19:24:51,980] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:24:57,193] django.server: "GET /admin/miniProgram/image/add/?_to_field=id&_popup=1 HTTP/1.1" 200 17926
+INFO [2020-12-04 19:24:57,301] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:25:01,529] django.server: "POST /admin/miniProgram/image/add/?_to_field=id&_popup=1 HTTP/1.1" 200 373
+INFO [2020-12-04 19:25:06,937] django.server: "POST /admin/miniProgram/film/25/change/ HTTP/1.1" 302 0
+INFO [2020-12-04 19:25:07,337] django.server: "GET /admin/miniProgram/film/ HTTP/1.1" 200 27611
+INFO [2020-12-04 19:25:07,421] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:25:15,521] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 10480
+INFO [2020-12-04 19:25:18,907] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 66755
+INFO [2020-12-04 19:25:18,991] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:25:19,095] django.server: "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO [2020-12-04 19:25:24,625] django.server: "GET /admin/miniProgram/video/add/ HTTP/1.1" 200 29077
+INFO [2020-12-04 19:25:24,706] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:25:35,964] django.server: "POST /miniProgram/getArticleInfo HTTP/1.1" 200 8904
+INFO [2020-12-04 19:26:37,624] django.server: "POST /admin/miniProgram/video/add/ HTTP/1.1" 302 0
+INFO [2020-12-04 19:26:38,554] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 67912
+INFO [2020-12-04 19:26:38,677] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:29:14,442] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 10480
+INFO [2020-12-04 19:29:16,836] django.server: "GET /admin/miniProgram/settings/ HTTP/1.1" 200 7452
+INFO [2020-12-04 19:29:16,924] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:29:22,244] django.server: "GET /admin/miniProgram/settings/1/change/ HTTP/1.1" 200 27157
+INFO [2020-12-04 19:29:22,331] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:29:28,878] django.server: "POST /admin/miniProgram/settings/1/change/ HTTP/1.1" 302 0
+INFO [2020-12-04 19:29:29,019] django.server: "GET /admin/miniProgram/settings/ HTTP/1.1" 200 7675
+INFO [2020-12-04 19:29:29,101] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:30:09,259] django.server: "GET /admin/ HTTP/1.1" 200 15792
+INFO [2020-12-04 19:30:10,767] django.server: "GET /admin/ HTTP/1.1" 200 15792
+INFO [2020-12-04 19:30:17,815] django.server: "GET /admin/miniProgram/film/ HTTP/1.1" 200 27371
+INFO [2020-12-04 19:30:17,905] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:31:37,380] django.server: "GET /admin/miniProgram/film/add/ HTTP/1.1" 200 25323
+INFO [2020-12-04 19:31:37,466] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:31:42,345] django.server: "GET /admin/ HTTP/1.1" 200 15792
+INFO [2020-12-04 19:31:47,827] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 67708
+INFO [2020-12-04 19:31:47,922] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:31:49,902] django.server: "GET /admin/miniProgram/video/add/ HTTP/1.1" 200 29077
+INFO [2020-12-04 19:31:49,980] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 19:31:57,321] django.server: "POST /miniProgram/getArticleInfo HTTP/1.1" 200 8904
+INFO [2020-12-04 19:32:27,521] django.server: "POST /admin/miniProgram/video/add/ HTTP/1.1" 302 0
+INFO [2020-12-04 19:32:28,300] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 68865
+INFO [2020-12-04 19:32:28,415] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 20:49:27,414] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\models.py changed, reloading.
+INFO [2020-12-04 20:49:30,831] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-04 20:56:51,469] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\admin.py changed, reloading.
+INFO [2020-12-04 20:56:55,049] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-04 20:58:28,253] django.server: "GET /admin/ HTTP/1.1" 200 16259
+INFO [2020-12-04 20:58:31,965] django.server: "GET /admin/miniProgram/staticfiles/ HTTP/1.1" 200 4625
+INFO [2020-12-04 20:58:32,061] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 20:58:33,950] django.server: "GET /admin/miniProgram/staticfiles/add/ HTTP/1.1" 200 18900
+INFO [2020-12-04 20:58:34,028] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 21:50:51,755] django.server: "POST /admin/miniProgram/staticfiles/add/ HTTP/1.1" 200 19043
+INFO [2020-12-04 21:50:51,882] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 21:50:58,764] django.server: "POST /admin/miniProgram/staticfiles/add/ HTTP/1.1" 200 19059
+INFO [2020-12-04 21:50:58,858] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 21:51:01,565] django.server: "POST /admin/miniProgram/staticfiles/add/ HTTP/1.1" 200 19059
+INFO [2020-12-04 21:51:01,657] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+ERROR [2020-12-04 21:51:08,907] django.security.SuspiciousFileOperation: The joined path (F:\website\djangoWebProjects\izBasar\static\static_files\ALKATIP_Talik.TTF) is located outside of the base path component (F:\website\djangoWebProjects\izBasar\media)
+WARNING [2020-12-04 21:51:09,110] django.server: "POST /admin/miniProgram/staticfiles/add/ HTTP/1.1" 400 209040
+INFO [2020-12-04 21:52:50,536] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\models.py changed, reloading.
+INFO [2020-12-04 21:52:53,971] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-04 21:53:30,293] django.server: "GET /admin/miniProgram/staticfiles/add/ HTTP/1.1" 200 18900
+INFO [2020-12-04 21:53:30,424] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+ERROR [2020-12-04 21:53:47,435] django.security.SuspiciousFileOperation: The joined path (F:\website\djangoWebProjects\izBasar\static\ALKATIP_Talik.TTF) is located outside of the base path component (F:\website\djangoWebProjects\izBasar\media)
+WARNING [2020-12-04 21:53:47,527] django.server: "POST /admin/miniProgram/staticfiles/add/ HTTP/1.1" 400 208875
+INFO [2020-12-04 21:54:36,017] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\models.py changed, reloading.
+INFO [2020-12-04 21:54:38,990] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-04 21:54:55,892] django.server: "GET /admin/miniProgram/staticfiles/add/ HTTP/1.1" 200 18900
+INFO [2020-12-04 21:54:56,096] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 21:55:04,412] django.server: "POST /admin/miniProgram/staticfiles/add/ HTTP/1.1" 302 0
+INFO [2020-12-04 21:55:04,561] django.server: "GET /admin/miniProgram/staticfiles/ HTTP/1.1" 200 6978
+INFO [2020-12-04 21:55:04,654] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 21:55:15,194] django.server: "GET /media/static/ALKATIP_Talik.TTF HTTP/1.1" 200 62128
