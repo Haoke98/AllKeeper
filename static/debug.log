@@ -259,3 +259,269 @@ INFO [2020-12-05 12:57:18,725] django.utils.autoreload: F:\website\djangoWebProj
 INFO [2020-12-05 12:57:21,574] django.utils.autoreload: Watching for file changes with StatReloader
 INFO [2020-12-05 12:57:29,046] django.server: "GET /miniProgram/UrlRedirector17 HTTP/1.1" 200 0
 INFO [2020-12-05 13:00:15,453] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\views.py changed, reloading.
+INFO [2020-12-05 13:00:19,519] django.utils.autoreload: Watching for file changes with StatReloader
+ERROR [2020-12-05 14:57:11,382] django.request: Internal Server Error: /miniProgram/UrlRedirector17
+Traceback (most recent call last):
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "F:\website\djangoWebProjects\izBasar\miniProgram\views.py", line 148, in UrlRedirector
+    ['1903249375@qq.com'], fail_silently=False)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\__init__.py", line 60, in send_mail
+    return mail.send()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\message.py", line 291, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\backends\smtp.py", line 103, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\backends\smtp.py", line 63, in open
+    self.connection = self.connection_class(self.host, self.port, **connection_params)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\smtplib.py", line 1031, in __init__
+    source_address)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\smtplib.py", line 336, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\smtplib.py", line 1037, in _get_socket
+    self.source_address)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\socket.py", line 724, in create_connection
+    raise err
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+ERROR [2020-12-05 14:57:13,083] django.server: "POST /miniProgram/UrlRedirector17?name=sadam&password=this%20is%20password&jjsfjksjdklfj=sjdfljalksjdflj HTTP/1.1" 500 129789
+INFO [2020-12-05 14:57:27,831] django.server: "POST /miniProgram/UrlRedirector17?name=sadam&password=this%20is%20password&jjsfjksjdklfj=sjdfljalksjdflj HTTP/1.1" 200 0
+INFO [2020-12-05 14:59:19,250] django.server: "POST /miniProgram/UrlRedirector17?name=sadam&password=this%20is%20password&jjsfjksjdklfj=sjdfljalksjdflj HTTP/1.1" 200 308
+INFO [2020-12-05 15:21:02,096] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 15:21:52,264] django.server: "GET /miniProgram/UrlRedirector17 HTTP/1.1" 200 0
+INFO [2020-12-05 15:25:16,782] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 10953
+INFO [2020-12-05 15:25:19,796] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 68669
+INFO [2020-12-05 15:25:19,878] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:25:19,953] django.server: "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO [2020-12-05 15:25:22,206] django.server: "GET /admin/miniProgram/video/add/ HTTP/1.1" 200 29077
+INFO [2020-12-05 15:25:22,275] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:25:22,340] django.server: "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+INFO [2020-12-05 15:25:28,199] django.server: "POST /miniProgram/getArticleInfo HTTP/1.1" 200 8145
+INFO [2020-12-05 15:25:37,358] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 68669
+INFO [2020-12-05 15:25:37,432] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:25:46,327] django.server: "GET /admin/miniProgram/video/?belongTo__id__exact=17 HTTP/1.1" 200 13774
+INFO [2020-12-05 15:25:46,401] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+WARNING [2020-12-05 15:26:30,076] django.server: "GET /favicon.ico HTTP/1.1" 404 2597
+INFO [2020-12-05 15:27:55,598] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 10953
+INFO [2020-12-05 15:28:14,974] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 68669
+INFO [2020-12-05 15:28:15,049] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:29:44,266] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\models.py changed, reloading.
+INFO [2020-12-05 15:29:47,104] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 15:29:51,971] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\models.py changed, reloading.
+INFO [2020-12-05 15:29:54,854] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 15:29:57,542] django.server: "GET /admin/miniProgram/video/?belongTo__id__exact=17 HTTP/1.1" 200 14064
+INFO [2020-12-05 15:29:57,614] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:30:51,439] django.server: "GET /admin/miniProgram/video/%s HTTP/1.1" 301 0
+INFO [2020-12-05 15:30:51,570] django.server: "GET /admin/miniProgram/video/%25s/ HTTP/1.1" 302 0
+INFO [2020-12-05 15:30:51,653] django.server: "GET /admin/miniProgram/video/%25s/change/ HTTP/1.1" 302 0
+INFO [2020-12-05 15:30:51,746] django.server: "GET /admin/ HTTP/1.1" 200 16218
+INFO [2020-12-05 15:30:52,196] django.server: "GET /static/admin/img/icon-alert.svg HTTP/1.1" 200 504
+INFO [2020-12-05 15:31:16,324] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 15:32:04,811] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 76939
+INFO [2020-12-05 15:32:04,896] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:32:10,873] django.server: "GET /admin/miniProgram/video/?belongTo__id__exact=17 HTTP/1.1" 200 14094
+INFO [2020-12-05 15:32:10,940] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:36:04,896] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 13475
+INFO [2020-12-05 15:36:08,632] django.server: "GET /admin/miniProgram/house/ HTTP/1.1" 200 15389
+INFO [2020-12-05 15:36:08,697] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:36:15,732] django.server: "GET /admin/miniProgram/house/6/change/ HTTP/1.1" 200 40970
+INFO [2020-12-05 15:36:15,810] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:36:28,223] django.server: "GET /admin/miniProgram/house/6/change/ HTTP/1.1" 200 40970
+INFO [2020-12-05 15:39:05,103] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 15:39:19,738] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 13475
+INFO [2020-12-05 15:39:27,329] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 80231
+INFO [2020-12-05 15:39:27,414] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:42:52,313] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\models.py changed, reloading.
+INFO [2020-12-05 15:42:55,507] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 15:47:57,212] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\models.py changed, reloading.
+INFO [2020-12-05 15:48:00,065] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 15:48:10,516] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 78801
+INFO [2020-12-05 15:48:10,629] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:49:06,850] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 78876
+INFO [2020-12-05 15:49:06,894] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16378
+INFO [2020-12-05 15:49:06,895] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6170
+INFO [2020-12-05 15:49:06,903] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 17944
+INFO [2020-12-05 15:49:06,908] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 271751
+INFO [2020-12-05 15:49:06,915] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 363
+INFO [2020-12-05 15:49:06,919] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 7135
+INFO [2020-12-05 15:49:06,926] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6918
+INFO [2020-12-05 15:49:06,929] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 200 6538
+INFO [2020-12-05 15:49:06,936] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8972
+INFO [2020-12-05 15:49:06,939] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1530
+INFO [2020-12-05 15:49:06,945] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 128820
+INFO [2020-12-05 15:49:06,967] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:49:07,281] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2020-12-05 15:49:07,306] django.server: "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO [2020-12-05 15:49:07,328] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2020-12-05 15:49:07,427] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2020-12-05 15:49:07,428] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2020-12-05 15:49:07,432] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+INFO [2020-12-05 15:51:56,023] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 78876
+INFO [2020-12-05 15:51:56,060] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16378
+INFO [2020-12-05 15:51:56,061] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6170
+INFO [2020-12-05 15:51:56,067] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 17944
+INFO [2020-12-05 15:51:56,070] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 271751
+INFO [2020-12-05 15:51:56,074] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 363
+INFO [2020-12-05 15:51:56,077] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 7135
+INFO [2020-12-05 15:51:56,081] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6918
+INFO [2020-12-05 15:51:56,085] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 200 6538
+INFO [2020-12-05 15:51:56,092] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8972
+INFO [2020-12-05 15:51:56,095] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1530
+INFO [2020-12-05 15:51:56,100] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 128820
+INFO [2020-12-05 15:51:56,104] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:51:56,415] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2020-12-05 15:51:56,434] django.server: "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO [2020-12-05 15:51:56,458] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2020-12-05 15:51:56,530] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2020-12-05 15:51:56,531] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2020-12-05 15:51:56,535] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+WARNING [2020-12-05 15:51:57,325] django.server: "GET /favicon.ico HTTP/1.1" 404 2597
+INFO [2020-12-05 15:52:17,945] django.server: "GET /admin/miniProgram/video/?belongTo__id__exact=17 HTTP/1.1" 200 16667
+INFO [2020-12-05 15:52:18,039] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:54:18,277] django.server: "POST /admin/miniProgram/video/add/ HTTP/1.1" 302 0
+INFO [2020-12-05 15:54:18,966] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 80166
+INFO [2020-12-05 15:54:19,041] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 15:54:19,486] django.server: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO [2020-12-05 16:38:53,220] django.server: "GET /admin/miniProgram/video/?belongTo__id__exact=17 HTTP/1.1" 200 17841
+INFO [2020-12-05 16:38:53,299] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 16:38:59,938] django.server: "GET /admin/miniProgram/video/add/?_changelist_filters=belongTo__id__exact%3D17 HTTP/1.1" 200 31719
+INFO [2020-12-05 16:39:00,008] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 16:39:00,077] django.server: "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+INFO [2020-12-05 16:39:05,771] django.server: "POST /miniProgram/getArticleInfo HTTP/1.1" 200 8145
+INFO [2020-12-05 16:40:48,125] django.server: "POST /admin/miniProgram/video/add/?_changelist_filters=belongTo__id__exact%3D17 HTTP/1.1" 302 0
+INFO [2020-12-05 16:40:48,275] django.server: "GET /admin/miniProgram/video/add/?_changelist_filters=belongTo__id__exact%3D17 HTTP/1.1" 200 31958
+INFO [2020-12-05 16:40:48,349] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 16:41:46,413] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 81044
+INFO [2020-12-05 16:41:46,507] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 16:42:26,543] django.server: "GET /miniProgram/getAccessToken HTTP/1.1" 200 194
+INFO [2020-12-05 16:42:26,601] django.server: "GET /miniProgram/getAllArticles HTTP/1.1" 200 7440
+INFO [2020-12-05 16:42:26,688] django.server: "GET /miniProgram/getSlider HTTP/1.1" 200 2737
+INFO [2020-12-05 16:42:26,783] django.server: "GET /miniProgram/getFilm0 HTTP/1.1" 200 5311
+INFO [2020-12-05 16:42:26,929] django.server: "GET /miniProgram/getAllHousesInfo HTTP/1.1" 200 10585
+INFO [2020-12-05 16:42:27,025] django.server: "GET /miniProgram/getOpenid091xhzGa15Op7A0ISaJa1nLvlo1xhzG2 HTTP/1.1" 200 257
+INFO [2020-12-05 16:42:27,031] django.server: "POST /miniProgram/updateUserInfo?openid=o66WY5OjafkcLC4dnlGiA0gNuRVs HTTP/1.1" 200 13
+INFO [2020-12-05 16:43:50,107] django.server: "GET /miniProgram/getAllArticles HTTP/1.1" 200 7440
+INFO [2020-12-05 16:43:50,187] django.server: "GET /miniProgram/getSlider HTTP/1.1" 200 2737
+INFO [2020-12-05 16:43:50,280] django.server: "GET /miniProgram/getFilm0 HTTP/1.1" 200 5311
+INFO [2020-12-05 16:43:50,385] django.server: "GET /miniProgram/UrlRedirector0 HTTP/1.1" 302 0
+INFO [2020-12-05 16:43:50,492] django.server: "GET /miniProgram/getAllHousesInfo HTTP/1.1" 200 10585
+INFO [2020-12-05 16:43:50,639] django.server: "GET /miniProgram/getOpenid031dYH000DW4LK1JOU100x37eJ2dYH0r HTTP/1.1" 200 257
+INFO [2020-12-05 16:43:50,911] django.server: "POST /miniProgram/updateUserInfo?openid=o66WY5OjafkcLC4dnlGiA0gNuRVs HTTP/1.1" 200 13
+INFO [2020-12-05 16:51:35,309] django.server: "GET /admin/miniProgram/video/?belongTo__id__exact=17 HTTP/1.1" 200 19015
+INFO [2020-12-05 16:51:35,387] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 16:51:45,138] django.server: "GET /admin/miniProgram/video/53/change/?_changelist_filters=belongTo__id__exact%3D17 HTTP/1.1" 200 32609
+INFO [2020-12-05 16:51:45,209] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 16:52:44,752] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\models.py changed, reloading.
+INFO [2020-12-05 16:52:48,601] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 16:56:36,792] django.utils.autoreload: Watching for file changes with StatReloader
+ERROR [2020-12-05 16:56:57,708] django.server: "GET /admin/miniProgram/video/53/change/?_changelist_filters=belongTo__id__exact%3D17 HTTP/1.1" 500 235533
+INFO [2020-12-05 16:57:25,379] django.server: "GET /admin/miniProgram/video HTTP/1.1" 301 0
+ERROR [2020-12-05 16:57:27,649] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 500 385213
+INFO [2020-12-05 16:58:07,079] django.utils.autoreload: Watching for file changes with StatReloader
+ERROR [2020-12-05 16:59:06,269] django.request: Internal Server Error: /admin/miniProgram/video/
+Traceback (most recent call last):
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\sessions\backends\base.py", line 189, in _get_session
+    return self._session_cache
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\backends\base\base.py", line 217, in ensure_connection
+    self.connect()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\backends\base\base.py", line 195, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\backends\mysql\base.py", line 227, in get_new_connection
+    return Database.connect(**conn_params)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\MySQLdb\__init__.py", line 84, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\MySQLdb\connections.py", line 179, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+MySQLdb._exceptions.OperationalError: (2002, "Can't connect to MySQL server on '62.234.6.136' (10060)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\admin\options.py", line 606, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\utils\decorators.py", line 142, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\views\decorators\cache.py", line 44, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\admin\sites.py", line 212, in inner
+    if not self.has_permission(request):
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\admin\sites.py", line 186, in has_permission
+    return request.user.is_active and request.user.is_staff
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\utils\functional.py", line 256, in inner
+    self._setup()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\utils\functional.py", line 392, in _setup
+    self._wrapped = self._setupfunc()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\auth\middleware.py", line 24, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\auth\middleware.py", line 12, in get_user
+    request._cached_user = auth.get_user(request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\auth\__init__.py", line 182, in get_user
+    user_id = _get_user_session_key(request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\auth\__init__.py", line 59, in _get_user_session_key
+    return get_user_model()._meta.pk.to_python(request.session[SESSION_KEY])
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\sessions\backends\base.py", line 54, in __getitem__
+    return self._session[key]
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\sessions\backends\base.py", line 194, in _get_session
+    self._session_cache = self.load()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\sessions\backends\db.py", line 43, in load
+    s = self._get_session_from_db()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\contrib\sessions\backends\db.py", line 34, in _get_session_from_db
+    expire_date__gt=timezone.now()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\query.py", line 402, in get
+    num = len(clone)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\query.py", line 256, in __len__
+    self._fetch_all()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\query.py", line 1242, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\query.py", line 55, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\models\sql\compiler.py", line 1095, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\backends\base\base.py", line 256, in cursor
+    return self._cursor()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\backends\base\base.py", line 233, in _cursor
+    self.ensure_connection()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\backends\base\base.py", line 217, in ensure_connection
+    self.connect()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\backends\base\base.py", line 217, in ensure_connection
+    self.connect()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\backends\base\base.py", line 195, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\db\backends\mysql\base.py", line 227, in get_new_connection
+    return Database.connect(**conn_params)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\MySQLdb\__init__.py", line 84, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\MySQLdb\connections.py", line 179, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2002, "Can't connect to MySQL server on '62.234.6.136' (10060)")
+ERROR [2020-12-05 16:59:08,867] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 500 262765
+ERROR [2020-12-05 16:59:24,079] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 500 385348
+INFO [2020-12-05 17:00:58,575] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 17:01:39,124] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 80055
+INFO [2020-12-05 17:01:39,227] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 17:01:53,160] django.server: "GET /admin/miniProgram/video/65/change/ HTTP/1.1" 200 31485
+INFO [2020-12-05 17:01:53,227] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223

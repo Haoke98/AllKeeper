@@ -147,8 +147,8 @@ class Image(MyModel):
 
     def show(self):
         return format_html(
-            '''<a href="%s"><img src="{}" width="200px" height="100px" onClick="copy(this,'src')"/></a>''',
-            self.url, self.url
+            '''<img src="{}" width="200px" height="100px"  title="{}" onClick="show_big_img(this)"/>''',
+            self.url, self.__str__() + self.url,
         )
 
     def getFromOriginHost(self):
@@ -270,7 +270,7 @@ class Film(ModelWithShowRate):
 
 class Video(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(verbose_name='每一集的名字', max_length=50)
+    # name = models.CharField(verbose_name='每一集的名字', max_length=50,)
     episodeNum = models.IntegerField(verbose_name='集次', null=True)
     cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, blank=True, default=32)
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
@@ -380,7 +380,7 @@ class Video(ModelWithShowRate):
         return "wxv_" not in self.vid
 
     def __str__(self):
-        return self.name
+        return format_html("؛{}-قىسىم", self.episodeNum)
 
     def json(self):
         # if not self.hasFirstAnalysed:
@@ -390,7 +390,7 @@ class Video(ModelWithShowRate):
         else:
             self.isTXV = True
 
-        return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.name, 'cover': self.cover.url,
+        return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.__str__(), 'cover': self.cover.url,
                 'isTXV': self.isTXV, 'TXVid': self.vid, 'url': self.url,
                 'video_url': "https://x.izbasarweb.xyz/miniProgram/videoUrlVid=%d" % self.id}
 
