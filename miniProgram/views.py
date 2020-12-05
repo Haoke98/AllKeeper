@@ -3,6 +3,7 @@ import datetime
 import json
 
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.http import JsonResponse
@@ -82,7 +83,7 @@ def upload_temp_image(request):
 #             destination.write(chunk)
 #     # 返回图片的URL
 #     return os.path.join(WEB_HOST_MEDIA_URL, file_name)
-
+@cache_page(timeout=2 * 60 * 60)
 def getAllHousesInfo(request):
     result = {'err_msg': "OK", 'objects': []}
     houses = House.objects.order_by('-last_changed_time')
@@ -94,12 +95,19 @@ def getAllHousesInfo(request):
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
 
-# @cache_page(1 * 60 * 60)
+
 def videoUrlMaker(request, vid):
+    pureUrl = cache.get(vid)
     video = Video.objects.get(id=vid)
+    print("thi is videoUrlMaker:", video.belongTo, video)
     video.show()
-    print("thi is videoUrlMaker:", video)
-    return redirect(to=video.getPureVideoUrl())
+    if pureUrl is None:
+        print("this video has not been saved in cache yet, getting it url now......")
+        pureUrl = video.getPureVideoUrl()
+        cache.set(vid, pureUrl, 8 * 60 * 60)
+    else:
+        print("this video has been saved in cache. has got it's pure url.")
+    return redirect(to=pureUrl)
 
 
 def getAllArticles(request):
@@ -114,13 +122,18 @@ def getAllArticles(request):
 
 
 @csrf_exempt
-@cache_page(2 * 60 * 60)
 def getArticleInfo(request):
     data_dic = json.loads(request.body)
     url = data_dic['url']
     print(url)
-    res = analyseGetVideoInfo(url)
-    result = json.dumps(res, ensure_ascii=False)
+    result = cache.get(url)
+    if result is None:
+        print("没有缓存，正在进行实时解析。。。。。。")
+        res = analyseGetVideoInfo(url)
+        result = json.dumps(res, ensure_ascii=False)
+        cache.set(url, result, 8 * 60 * 60)
+    else:
+        print("已有缓存，正在返回缓存数据。。。。。。。。")
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
 
