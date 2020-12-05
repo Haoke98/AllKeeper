@@ -3,6 +3,7 @@ import datetime
 import json
 
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import redirect
@@ -140,6 +141,11 @@ def UrlRedirector(request, id):
     print(request.body)
     if url == "#":
         if returnValue == "#":
+            text = "request:" + str(request) + "\n\n\n" + "requset.POST:" + str(
+                request.POST) + "\n\n\n" + "request.GET:" + str(request.GET) + "\n\n\n" + "request.Body:" + str(
+                request.body)
+            send_mail('@Sadam WebSite UrlRedirection', text, '1903249375@qq.com',
+                      ['1903249375@qq.com'], fail_silently=False)
             return HttpResponse(request, content_type='application/json,charset=utf-8')
         else:
             return HttpResponse(returnValue)

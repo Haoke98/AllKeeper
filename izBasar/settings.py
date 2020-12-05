@@ -57,7 +57,7 @@ EMAIL_HOST = 'smtp.qq.com'  # 如果是 163 改成 smtp.163.com
 EMAIL_PORT = 465
 SERVER_EMAIL = '1903249375@qq.com'  # 必须要设置 不然logger中得handler：admin_Email 无法发送错误报告邮件
 EMAIL_HOST_USER = '1903249375@qq.com'  # 帐号
-EMAIL_HOST_PASSWORD = 'bhluzghpuqyfdach'  # 密码(用第三方平台登陆授权码）
+EMAIL_HOST_PASSWORD = 'tywrfdbyrbbwcbif'  # 密码(用第三方平台登陆授权码）
 DEFAULT_FROM_EMAIL = 'SadamSadik <1903249375@qq.com>'
 
 #########################

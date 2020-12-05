@@ -98,3 +98,164 @@ INFO [2020-12-04 21:55:04,412] django.server: "POST /admin/miniProgram/staticfil
 INFO [2020-12-04 21:55:04,561] django.server: "GET /admin/miniProgram/staticfiles/ HTTP/1.1" 200 6978
 INFO [2020-12-04 21:55:04,654] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
 INFO [2020-12-04 21:55:15,194] django.server: "GET /media/static/ALKATIP_Talik.TTF HTTP/1.1" 200 62128
+INFO [2020-12-04 22:27:42,883] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 10953
+INFO [2020-12-04 22:27:46,450] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 68662
+INFO [2020-12-04 22:27:46,565] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 22:27:48,556] django.server: "GET /admin/miniProgram/video/63/change/ HTTP/1.1" 200 29393
+INFO [2020-12-04 22:27:48,735] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 22:31:55,783] django.server: "POST /admin/miniProgram/video/63/change/ HTTP/1.1" 302 0
+INFO [2020-12-04 22:31:56,918] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 68872
+INFO [2020-12-04 22:31:57,047] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 22:32:00,506] django.server: "GET /admin/miniProgram/video/62/change/ HTTP/1.1" 200 29393
+INFO [2020-12-04 22:32:00,688] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 22:32:10,368] django.server: "POST /admin/miniProgram/video/62/change/ HTTP/1.1" 302 0
+INFO [2020-12-04 22:32:11,537] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 68875
+INFO [2020-12-04 22:32:11,689] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 22:32:48,844] django.server: "GET /admin/miniProgram/video/61/change/ HTTP/1.1" 200 29394
+INFO [2020-12-04 22:32:48,967] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 22:33:22,313] django.server: "POST /admin/miniProgram/video/61/change/ HTTP/1.1" 302 0
+INFO [2020-12-04 22:33:23,905] django.server: "GET /admin/miniProgram/video/ HTTP/1.1" 200 68876
+INFO [2020-12-04 22:33:24,076] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 23:43:57,968] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 10953
+INFO [2020-12-04 23:44:04,904] django.server: "GET /admin/miniProgram/settings/ HTTP/1.1" 200 7451
+INFO [2020-12-04 23:44:05,025] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 23:44:07,034] django.server: "GET /admin/miniProgram/settings/1/change/ HTTP/1.1" 200 27216
+INFO [2020-12-04 23:44:07,121] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-04 23:44:15,602] django.server: "POST /admin/miniProgram/settings/1/change/ HTTP/1.1" 302 0
+INFO [2020-12-04 23:44:15,751] django.server: "GET /admin/miniProgram/settings/ HTTP/1.1" 200 7675
+INFO [2020-12-04 23:44:15,841] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 01:23:25,055] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 10953
+INFO [2020-12-05 01:23:28,132] django.server: "GET /admin/miniProgram/redirecturlrelation/ HTTP/1.1" 200 20323
+INFO [2020-12-05 01:23:28,296] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 01:23:29,917] django.server: "GET /admin/miniProgram/redirecturlrelation/7/change/ HTTP/1.1" 200 20405
+INFO [2020-12-05 01:23:30,024] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 01:23:40,706] django.server: "POST /admin/miniProgram/redirecturlrelation/7/change/ HTTP/1.1" 302 0
+INFO [2020-12-05 01:23:40,885] django.server: "GET /admin/miniProgram/redirecturlrelation/ HTTP/1.1" 200 20606
+INFO [2020-12-05 01:23:40,978] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 12:41:29,029] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 12:41:53,790] django.server: "GET /admin HTTP/1.1" 301 0
+INFO [2020-12-05 12:41:57,320] django.server: "GET /admin/ HTTP/1.1" 200 16041
+INFO [2020-12-05 12:41:57,365] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 412
+INFO [2020-12-05 12:41:57,365] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16378
+INFO [2020-12-05 12:41:57,385] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 17944
+INFO [2020-12-05 12:41:57,411] django.server: "GET /admin/ HTTP/1.1" 200 16041
+INFO [2020-12-05 12:41:57,882] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2020-12-05 12:41:57,967] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2020-12-05 12:41:57,967] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2020-12-05 12:41:58,109] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+INFO [2020-12-05 12:41:58,112] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2020-12-05 12:41:58,113] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+WARNING [2020-12-05 12:41:58,282] django.server: "GET /favicon.ico HTTP/1.1" 404 2597
+INFO [2020-12-05 12:42:01,767] django.server: "GET /admin/miniProgram/redirecturlrelation/ HTTP/1.1" 200 20324
+INFO [2020-12-05 12:42:01,808] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 363
+INFO [2020-12-05 12:42:01,809] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6170
+INFO [2020-12-05 12:42:01,829] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 7135
+INFO [2020-12-05 12:42:01,833] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6918
+INFO [2020-12-05 12:42:01,852] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 12:42:01,853] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 200 6538
+INFO [2020-12-05 12:42:01,857] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8972
+INFO [2020-12-05 12:42:01,862] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 271751
+INFO [2020-12-05 12:42:01,868] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1530
+INFO [2020-12-05 12:42:01,885] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 128820
+INFO [2020-12-05 12:42:01,958] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2020-12-05 12:42:01,959] django.server: "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO [2020-12-05 12:42:03,838] django.server: "GET /admin/ HTTP/1.1" 200 16041
+INFO [2020-12-05 12:42:08,173] django.server: "GET /admin/miniProgram/redirecturlrelation/ HTTP/1.1" 200 20324
+INFO [2020-12-05 12:42:08,272] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 12:42:32,765] django.server: "GET /admin/miniProgram/redirecturlrelation/17/change/ HTTP/1.1" 200 20305
+INFO [2020-12-05 12:42:32,826] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 712
+INFO [2020-12-05 12:42:32,827] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 495
+INFO [2020-12-05 12:42:32,827] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8518
+INFO [2020-12-05 12:42:32,867] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+INFO [2020-12-05 12:42:33,203] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10340
+INFO [2020-12-05 12:42:37,623] django.server: "GET /admin/miniProgram/redirecturlrelation/ HTTP/1.1" 200 20324
+ERROR [2020-12-05 12:42:47,076] django.request: Internal Server Error: /miniProgram/UrlRedirector17
+Traceback (most recent call last):
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "F:\website\djangoWebProjects\izBasar\miniProgram\views.py", line 144, in UrlRedirector
+    text = "request:" + request + "\n\n\n" + "requset.POST:" + request.POST + "\n\n\n" + "request.GET:" + request.GET + "\n\n\n" + "request.Body:" + request.body
+TypeError: must be str, not WSGIRequest
+ERROR [2020-12-05 12:42:48,713] django.server: "GET /miniProgram/UrlRedirector17 HTTP/1.1" 500 81808
+INFO [2020-12-05 12:43:34,869] django.utils.autoreload: Watching for file changes with StatReloader
+ERROR [2020-12-05 12:43:38,436] django.request: Internal Server Error: /miniProgram/UrlRedirector17
+Traceback (most recent call last):
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "F:\website\djangoWebProjects\izBasar\miniProgram\views.py", line 144, in UrlRedirector
+    text = "request:" + request.__str__() + "\n\n\n" + "requset.POST:" + request.POST + "\n\n\n" + "request.GET:" + request.GET + "\n\n\n" + "request.Body:" + request.body
+TypeError: must be str, not QueryDict
+ERROR [2020-12-05 12:43:39,835] django.server: "GET /miniProgram/UrlRedirector17 HTTP/1.1" 500 82084
+INFO [2020-12-05 12:44:51,875] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\views.py changed, reloading.
+INFO [2020-12-05 12:44:54,993] django.utils.autoreload: Watching for file changes with StatReloader
+ERROR [2020-12-05 12:45:03,164] django.request: Internal Server Error: /miniProgram/UrlRedirector17
+Traceback (most recent call last):
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "F:\website\djangoWebProjects\izBasar\miniProgram\views.py", line 146, in UrlRedirector
+    ['1903249375@qq.com'], fail_silently=False)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\__init__.py", line 60, in send_mail
+    return mail.send()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\message.py", line 291, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\backends\smtp.py", line 103, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\backends\smtp.py", line 70, in open
+    self.connection.login(self.username, self.password)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\smtplib.py", line 730, in login
+    raise last_exception
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\smtplib.py", line 721, in login
+    initial_response_ok=initial_response_ok)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\smtplib.py", line 642, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'Login fail. Authorization code is expired')
+ERROR [2020-12-05 12:45:03,751] django.server: "GET /miniProgram/UrlRedirector17 HTTP/1.1" 500 116391
+INFO [2020-12-05 12:56:16,735] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\izBasar\settings.py changed, reloading.
+INFO [2020-12-05 12:56:20,019] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 12:56:27,439] django.utils.autoreload: Watching for file changes with StatReloader
+ERROR [2020-12-05 12:56:35,775] django.request: Internal Server Error: /miniProgram/UrlRedirector17
+Traceback (most recent call last):
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "F:\website\djangoWebProjects\izBasar\miniProgram\views.py", line 146, in UrlRedirector
+    ['1903249375@qq.com'], fail_silently=False)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\__init__.py", line 60, in send_mail
+    return mail.send()
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\message.py", line 291, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\backends\smtp.py", line 110, in send_messages
+    sent = self._send(message)
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\site-packages\django\core\mail\backends\smtp.py", line 126, in _send
+    self.connection.sendmail(from_email, recipients, message.as_bytes(linesep='\r\n'))
+  File "C:\Users\19032\AppData\Local\Programs\Python\Python36\lib\smtplib.py", line 867, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (501, b'Mail from address must be same as authorization user.', 'sadam@example.com')
+ERROR [2020-12-05 12:56:37,223] django.server: "GET /miniProgram/UrlRedirector17 HTTP/1.1" 500 107145
+INFO [2020-12-05 12:57:18,725] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\views.py changed, reloading.
+INFO [2020-12-05 12:57:21,574] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2020-12-05 12:57:29,046] django.server: "GET /miniProgram/UrlRedirector17 HTTP/1.1" 200 0
+INFO [2020-12-05 13:00:15,453] django.utils.autoreload: F:\website\djangoWebProjects\izBasar\miniProgram\views.py changed, reloading.
