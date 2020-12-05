@@ -114,6 +114,7 @@ def getAllArticles(request):
 
 
 @csrf_exempt
+@cache_page(2 * 60 * 60)
 def getArticleInfo(request):
     data_dic = json.loads(request.body)
     url = data_dic['url']

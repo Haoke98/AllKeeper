@@ -2,6 +2,7 @@ import os
 import urllib
 
 import requests
+from django import forms
 from django.core.files import File
 from django.db import models
 # Create your models here.
@@ -26,6 +27,18 @@ class ImageInput(TextInput):
         context['widget']['value'] = value
         context['widget']['separator_media_id_src'] = self.separator_media_id_src
         context['widget']['separator_images_info'] = self.separator_images_info
+        print("this is context on it :", context)
+        template = loader.get_template(self.template_name).render(context)
+        return mark_safe(template)
+
+
+class ArticleAnalyseInput(TextInput):
+    template_name = "ananlyse/article_analyse.html"
+
+    def render(self, name, value, attrs=None, renderer=None):
+        print("this is render:", self, name, value, attrs, renderer)
+        context = self.get_context(name, value, attrs)
+        context['widget']['value'] = value
         print("this is context on it :", context)
         template = loader.get_template(self.template_name).render(context)
         return mark_safe(template)
@@ -148,7 +161,8 @@ class Image(MyModel):
     def show(self):
         return format_html(
             '''<img src="{}" width="200px" height="100px"  title="{}" onClick="show_big_img(this)"/>''',
-            self.url, self.__str__() + self.url,
+            self.url, "%s\n%s" % (self.__str__(), self.url)
+
         )
 
     def getFromOriginHost(self):
@@ -201,7 +215,7 @@ class UploadForm(ModelForm):
 
 
 class ModelWithShowRate(MyModel):
-    showTimes = models.IntegerField(verbose_name="被观看次数", default=0, )
+    showTimes = models.IntegerField(verbose_name="被观看次数", default=0, editable=False)
 
     def show(self):
         self.showTimes += 1
@@ -268,9 +282,17 @@ class Film(ModelWithShowRate):
     showTimes = models.IntegerField(verbose_name="被观看次数", default=0, )
 
 
+class FilmForm(ModelForm):
+    article_analyse = forms.CharField(label="公众号文章解析：", widget=ArticleAnalyseInput, help_text="请在这里输入，公众号文章链接",
+                                      required=False)
+
+    class Meta:
+        model = Film
+        fields = ['name', 'cover1']
+
+
 class Video(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
-    # name = models.CharField(verbose_name='每一集的名字', max_length=50,)
     episodeNum = models.IntegerField(verbose_name='集次', null=True)
     cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, blank=True, default=32)
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
@@ -410,6 +432,15 @@ class Video(ModelWithShowRate):
                                        update_fields=update_fields)
 
 
+class VideoForm(ModelForm):
+    article_analyse = forms.CharField(label="公众号文章解析：", widget=ArticleAnalyseInput, help_text="请在这里输入，公众号文章链接",
+                                      required=False)
+
+    class Meta:
+        model = Video
+        fields = ['episodeNum', 'cover', 'url', 'belongTo', 'vid']
+
+
 class HouseType(MyModel):
     name = models.CharField(max_length=20)
 
@@ -504,9 +535,6 @@ class House(ModelWithShowRate):
             list = res
         print(self, list)
         return list
-
-
-from django import forms
 
 
 class HouseForm(ModelForm):

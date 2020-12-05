@@ -25,18 +25,20 @@
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
       data-admin-utc-offset="{% now "Z" %}">
 <script>
-    function copy(item, attr) {
+    function copyFromElementAttr(item, attr) {
         {#let element = document.getElementById(id);#}
         console.log('this is clicked item:', item);
+        copyStr(item.getAttribute(attr))
+    }
 
+    function copyStr(str) {
         var oInput = document.createElement('input');
-        oInput.value = item.getAttribute(attr);
+        oInput.value = str;
         document.body.appendChild(oInput);
         oInput.select(); // 选择对象
         document.execCommand("Copy"); // 执行浏览器复制命令
         oInput.className = 'oInput';
         oInput.style.display = 'none';
-
     }
 </script>
 {#显示大图#}

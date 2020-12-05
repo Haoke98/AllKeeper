@@ -68,24 +68,6 @@ class settingsAdmin(admin.ModelAdmin):
     list_display_links = ['__str__', 'subcribtion']
 
 
-@admin.register(Film)
-class FilmAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['showTimes', 'id', '_cover', '_cover1']
-
-    def _cover(self, obj):
-        try:
-            if obj.cover == None:
-                img = ''
-            else:
-                img = mark_safe('<img src="%s" width="50px" height="50px"/>' % (obj.cover,))
-        except Exception as e:
-            img = ''
-        return img
-
-    def _cover1(self, obj):
-        return obj.cover1.show()
-
-
 def makeHasNotFirstAnalysed(modeladmin, request, queryset):  # 新建一个批量操作的函数，其中有三个参数：
     # 第一个参数是模型管理类，第二个request是请求，第三个queryset表示你选中的所有记录，这个函数里面会处理所有选中的queryset，所以要在操作之前用搜索或者过滤来选出需要修改的记录
     queryset.update(hasFirstAnalysed=False)  # 改变数据库表中，选中的记录的状态
@@ -103,7 +85,8 @@ makeHasNotAnalysed.short_description = 'make all video has not been analysed.'  
 
 
 @admin.register(Video)
-class videoAdmin(admin.ModelAdmin):
+class VideoAdmin(admin.ModelAdmin):
+    form = VideoForm
     list_display = MyModelAdmin.list_display + ['episodeNum', 'belongTo', 'showTimes', 'id', '_cover', 'videoShow',
                                                 # 'isFromSubscription', "hasFirstAnalysed", 'hasAnalysed', 'isTXV',
                                                 # 'formatID', 'destinationID',
@@ -141,9 +124,34 @@ class videoAdmin(admin.ModelAdmin):
             return obj.cover.show()
 
     def save_model(self, request, obj, form, change):
-        print("user clicked the save button just now for this video:%s change:%s" % (obj.name, change))
+        print("user clicked the save button just now for this video:%s change:%s" % (obj, change))
         # if change:
         obj.save()
+
+
+class VideoInlineAdmin(admin.StackedInline):
+    model = Video
+    extra = 0
+
+
+@admin.register(Film)
+class FilmAdmin(admin.ModelAdmin):
+    form = FilmForm
+    list_display = MyModelAdmin.list_display + ['showTimes', 'id', '_cover', '_cover1']
+    inlines = [VideoInlineAdmin]
+
+    def _cover(self, obj):
+        try:
+            if obj.cover == None:
+                img = ''
+            else:
+                img = mark_safe('<img src="%s" width="50px" height="50px"/>' % (obj.cover,))
+        except Exception as e:
+            img = ''
+        return img
+
+    def _cover1(self, obj):
+        return obj.cover1.show()
 
 
 @admin.register(Image)

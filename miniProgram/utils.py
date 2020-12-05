@@ -96,6 +96,7 @@ import json
 import os
 import re
 import time
+import traceback
 
 import requests
 
@@ -111,7 +112,10 @@ def analyseGetVideoInfo(url):
         else:
             vid = vid[1:-1]
             print("这视频来自腾讯视频：", vid)
-            videoList.append({"isTXV": True, "vid": vid, "url_info": [{'url': getTXVOriginalUrl(vid)}]})
+            try:
+                videoList.append({"isTXV": True, "vid": vid, "url_info": [{'url': getTXVOriginalUrl(vid)}]})
+            except Exception:
+                traceback.print_exc()
     res = {'title': title, "cover": image_url, "description": description, "videos": videoList}
     return res
 
