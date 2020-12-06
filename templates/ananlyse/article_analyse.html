@@ -184,10 +184,6 @@
         insertFillUrlButton();
     };
 
-    {#$(document).mousedown(function () {#}
-    {#alert("鼠标点击了某处！");#}
-    {#})
-    #}
 
 
     var ARTICLE_URL = " You didn't input and have not analyse yet!";
@@ -257,7 +253,7 @@
                     [{id: "articleTitle", attr: "value", json_key: 'title'},
                         {id: "description", attr: "value", json_key: 'description'},
                         {id: 'id_title', attr: "value", json_key: 'title'},
-                        {id: 'id_name', attr: "value", json_key: 'title'},
+                        {#{id: 'id_name', attr: "value", json_key: 'title'},#}
                         {id: 'id_description', attr: "value", json_key: 'description'},
                         {id: 'id_cover_url', attr: "value", json_key: 'cover'},
                         {id: 'cover', attr: "src", json_key: 'cover'},
