@@ -110,7 +110,7 @@ def analyseGetVideoInfo(url):
             print("这视频来自公众号空间：", vid)
             videoList.append(getMpVideoInfo(vid))
         else:
-            vid = vid[1:-1]
+            # vid = vid[1:-1]
             print("这视频来自腾讯视频：", vid)
             try:
                 videoList.append({"isTXV": True, "vid": vid, "url_info": [{'url': getTXVOriginalUrl(vid)}]})
@@ -150,7 +150,8 @@ def analyseGetVid(url):
     title = getContent(res, 'title')
     image = getContent(res, 'image')
     description = getContent(res, 'description')
-    allVid = getVidByRe("wxv_[0-9]{19}", res) + getVidByRe("'[A-Za-z0-9]{11}'", res)
+    allVid = getVidByRe(None, "wxv_[0-9]{19}", res, None) + getVidByRe("wxv_[0-9]{19}", "vid=[A-Za-z0-9]{11}\"", res,
+                                                                       ["vid=", "\""])
     return allVid, title, image, description
 
 
@@ -163,10 +164,16 @@ def getContent(data, str):
     return data[head_index:end_index]
 
 
-def getVidByRe(patt, text):
+def getVidByRe(avoid_pattern, patt, text, need_to_remove_inVid):
+    " :param avoid_pattern 是要避免的pattern，所以先用re.sub替换其他东西来排除它的干扰。"
+    if avoid_pattern is not None:
+        text = re.sub(avoid_pattern, "*S*A*D*A*M*", text)
     all = re.findall(patt, text)
     res = []
     for per in all:
+        if need_to_remove_inVid is not None:
+            for rmo in need_to_remove_inVid:
+                per = str(per).replace(rmo, "")
         if per not in res:
             res.append(per)
     return res
