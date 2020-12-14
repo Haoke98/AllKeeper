@@ -35,7 +35,7 @@
 
         position: absolute;
         z-index: 9999;
-        top: 200px;
+    {#float: right;#} top: 200px;
         right: 0;
     {#right: 0;#}{#top:expression(// document.body.scrollTop + document.body.clientHeight - this.clientHeight);#}{#left:expression(document.body.scrollLeft + document.body.clientWidth - this.clientWidth);#} display: flex;
         flex-direction: column;
@@ -43,7 +43,7 @@
         border: solid 1px;
         color: orange;
         width: 50%;
-        height: max-content;
+        height: 20%;
         overflow: scroll;
 
     }
@@ -112,7 +112,7 @@
 </style>
 <div id="ArticleInfo">
     <div id="infoBanner">
-        <div style="width: 60%;border: solid green 1px;">
+        <div style="width: 60%;height:100%;border: solid green 1px;">
             <div class="my_dev">
                 <input class="my_input" id='article_url' type="text" onchange="Article_url(value)"
                        placeholder="请在这里输入公众号文章的URL">

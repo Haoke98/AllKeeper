@@ -283,7 +283,7 @@ class Film(ModelWithShowRate):
 
 
 class FilmForm(ModelForm):
-    article_analyse = forms.CharField(label="公众号文章解析：", widget=ArticleAnalyseInput, help_text="请在这里输入，公众号文章链接",
+    article_analyse = forms.CharField(label="公众号文章解析：", widget=ArticleAnalyseInput, help_text="这是一个悬浮窗口",
                                       required=False)
 
     class Meta:
@@ -294,7 +294,7 @@ class FilmForm(ModelForm):
 class Video(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
     episodeNum = models.IntegerField(verbose_name='集次', null=True)
-    cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, blank=True, default=32)
+    cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, blank=True, default=32, )
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
     belongTo = models.ForeignKey(verbose_name="所属电视剧", to=Film, on_delete=models.PROTECT, null=True)
     vid = models.CharField(verbose_name="vid", max_length=23, default=None, blank=True, null=True)
@@ -402,7 +402,13 @@ class Video(ModelWithShowRate):
         return "wxv_" not in self.vid
 
     def __str__(self):
-        return format_html("؛{}-قىسىم", self.episodeNum)
+        return format_html("{}:{}-قىسىم", self.episodeNum, self.belongTo.name)
+
+    def episode_name(self):
+        if self.episodeNum == 0:
+            return ""
+        else:
+            return format_html("؛{}-قىسىم", self.episodeNum)
 
     def json(self):
         # if not self.hasFirstAnalysed:
@@ -412,7 +418,7 @@ class Video(ModelWithShowRate):
         else:
             self.isTXV = True
 
-        return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.__str__(), 'cover': self.cover.url,
+        return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.__str__(), 'cover': self.belongTo.cover1.url,
                 'isTXV': self.isTXV, 'TXVid': self.vid, 'url': self.url,
                 'video_url': "https://x.izbasarweb.xyz/miniProgram/videoUrlVid=%d" % self.id}
 
@@ -433,12 +439,12 @@ class Video(ModelWithShowRate):
 
 
 class VideoForm(ModelForm):
-    article_analyse = forms.CharField(label="公众号文章解析：", widget=ArticleAnalyseInput, help_text="请在这里输入，公众号文章链接",
-                                      required=False)
+    # article_analyse = forms.CharField(label="公众号文章解析：", widget=ArticleAnalyseInput, help_text="请在这里输入，公众号文章链接",
+    #                                   required=False)
 
     class Meta:
         model = Video
-        fields = ['episodeNum', 'cover', 'url', 'belongTo', 'vid']
+        fields = ['episodeNum', 'url', 'belongTo', 'vid']
 
 
 class HouseType(MyModel):

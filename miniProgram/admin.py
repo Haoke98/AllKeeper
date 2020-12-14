@@ -134,6 +134,12 @@ class VideoAdmin(admin.ModelAdmin):
 class VideoInlineAdmin(admin.StackedInline):
     model = Video
     extra = 0
+    form = VideoForm
+
+
+class ImageInlineAdmin(admin.StackedInline):
+    model = Image
+    extra = 0
 
 
 @admin.register(Film)
