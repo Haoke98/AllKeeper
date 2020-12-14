@@ -418,7 +418,8 @@ class Video(ModelWithShowRate):
         else:
             self.isTXV = True
 
-        return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.__str__(), 'cover': self.belongTo.cover1.url,
+        return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.episode_name(),
+                'cover': self.belongTo.cover1.url,
                 'isTXV': self.isTXV, 'TXVid': self.vid, 'url': self.url,
                 'video_url': "https://x.izbasarweb.xyz/miniProgram/videoUrlVid=%d" % self.id}
 
