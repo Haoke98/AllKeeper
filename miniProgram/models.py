@@ -246,25 +246,32 @@ class Article(ModelWithShowRate):
         }
 
 
+class FilmType(ModelWithShowRate):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(verbose_name="标签名", max_length=50)
+    unit = models.CharField(verbose_name="单位", max_length=50)
+
+    def __str__(self):
+        return "<%s,%s>" % (self.name, self.unit)
+
+
 class Film(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name='电影标题', max_length=100)
-    cover = models.URLField(verbose_name='电影封面',
-                            default='https://mmbiz.qpic.cn/mmbiz_png/lBSHibv6GicCZ6TSPK91xVfqr0cGAiany3uOqL6lz3QvMMmGRdib5QaDxF6kN1JKIQRl4xVWH7yW2GIqn4J4ZdkE9A/0?wx_fmt=png',
-                            blank=True)
-    cover1 = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True)
+    cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True)
+    type = models.ForeignKey(to=FilmType, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.name
 
     def json(self, withEpisodes):
-        json_object = {'film_id': self.id, 'name': self.name, 'cover': self.cover1.url}
+        json_object = {'film_id': self.id, 'name': self.name, 'cover': self.cover.url}
         if withEpisodes:
             episodes = Video.objects.filter(belongTo=self).order_by('-episodeNum', '-last_changed_time')
             episodes_list = []
             # episodes_dic = {}
             for per_episode in episodes:
-                episodes_list.append(per_episode.json())
+                episodes_list.append(per_episode.json(False))
                 # episodes_dic.setdefault(per_episode.id, per_episode.json())
             json_object["episodes"] = episodes_list
             # json_object["latest_episode_id"] = episodes[0].id
@@ -279,6 +286,10 @@ class Film(ModelWithShowRate):
         return super(Film, self).save(force_update=force_update, force_insert=force_insert, using=using,
                                       update_fields=update_fields)
 
+    def show(self):
+        self.type.show()
+        super(Film, self).show()
+
     showTimes = models.IntegerField(verbose_name="被观看次数", default=0, )
 
 
@@ -288,7 +299,7 @@ class FilmForm(ModelForm):
 
     class Meta:
         model = Film
-        fields = ['name', 'cover1']
+        fields = ['name', 'cover', 'type']
 
 
 class Video(ModelWithShowRate):
@@ -402,24 +413,27 @@ class Video(ModelWithShowRate):
         return "wxv_" not in self.vid
 
     def __str__(self):
-        return format_html("{}:{}-قىسىم", self.episodeNum, self.belongTo.name)
+        return format_html("{}{}", self.belongTo, self.episode_name())
 
     def episode_name(self):
         if self.episodeNum == 0:
             return ""
         else:
-            return format_html("؛{}-قىسىم", self.episodeNum)
+            a = format_html("؛{}-{}", self.episodeNum, self.belongTo.type.unit)
+            return a
 
-    def json(self):
-        # if not self.hasFirstAnalysed:
-        #     self.analyse()
+    def json(self, isForSlider):
         if "wxv_" in self.vid:
             self.isTXV = False
         else:
             self.isTXV = True
+        if isForSlider:
+            cover = self.cover.url
+        else:
+            cover = self.belongTo.cover.url
 
         return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.episode_name(),
-                'cover': self.belongTo.cover1.url,
+                'cover': cover,
                 'isTXV': self.isTXV, 'TXVid': self.vid, 'url': self.url,
                 'video_url': "https://x.izbasarweb.xyz/miniProgram/videoUrlVid=%d" % self.id}
 

@@ -142,24 +142,19 @@ class ImageInlineAdmin(admin.StackedInline):
     extra = 0
 
 
+@admin.register(FilmType)
+class FilmTypeAdmin(admin.ModelAdmin):
+    list_display = MyModelAdmin.list_display + ['showTimes', 'id', 'name', 'unit']
+
+
 @admin.register(Film)
 class FilmAdmin(admin.ModelAdmin):
     form = FilmForm
-    list_display = MyModelAdmin.list_display + ['showTimes', 'id', '_cover', '_cover1']
+    list_display = MyModelAdmin.list_display + ['showTimes', 'id', '_cover', ]
     inlines = [VideoInlineAdmin]
 
     def _cover(self, obj):
-        try:
-            if obj.cover == None:
-                img = ''
-            else:
-                img = mark_safe('<img src="%s" width="50px" height="50px"/>' % (obj.cover,))
-        except Exception as e:
-            img = ''
-        return img
-
-    def _cover1(self, obj):
-        return obj.cover1.show()
+        return obj.cover.show()
 
 
 @admin.register(Image)

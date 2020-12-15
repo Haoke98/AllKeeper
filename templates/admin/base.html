@@ -26,7 +26,6 @@
       data-admin-utc-offset="{% now "Z" %}">
 <script>
     function copyFromElementAttr(item, attr) {
-        {#let element = document.getElementById(id);#}
         console.log('this is clicked item:', item);
         copyStr(item.getAttribute(attr))
     }

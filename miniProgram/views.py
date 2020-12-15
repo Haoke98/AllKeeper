@@ -201,7 +201,7 @@ def getSlider(request):
     sliders = app.sliders.order_by('-last_changed_time')
     dicts = []
     for per in sliders:
-        dicts.append(per.json())
+        dicts.append(per.json(True))
     result['objects'] = dicts
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')

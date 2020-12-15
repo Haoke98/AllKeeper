@@ -30,26 +30,31 @@
         margin-left: 4px;
     }
 
-    #ArticleInfo {
+    #AnalyseBanner {
 
 
         position: absolute;
         z-index: 9999;
-    {#float: right;#} top: 200px;
-        right: 0;
-    {#right: 0;#}{#top:expression(// document.body.scrollTop + document.body.clientHeight - this.clientHeight);#}{#left:expression(document.body.scrollLeft + document.body.clientWidth - this.clientWidth);#} display: flex;
-        flex-direction: column;
+        top: 200px;
+        right: 1px;
+        display: flex;
+        flex-direction: row;
         background-color: rgba(0, 0, 0, 0.5);
         border: solid 1px;
         color: orange;
-        width: 50%;
-        height: 20%;
-        overflow: scroll;
+        width: max-content;
+        max-width: 60%;
+        height: max-content;
+        min-height: 5%;
+        max-height: 30%;
+        overflow: hidden;
 
     }
 
     .my_dev {
         display: flex;
+        width: 100%;
+        height: 50px;
     }
 
     .my_input {
@@ -64,9 +69,17 @@
 
     #infoBanner {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         border: solid purple 1px;
-        height: 30%
+        width: 100%;
+        height: max-content;
+
+    }
+
+    #title_descriptions_cover {
+        display: flex;
+        flex-direction: column;
+        height: 150px;
     }
 
     #videoBlock {
@@ -74,28 +87,43 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
-        overflow: scroll;
+
+
         width: 100%;
         height: max-content;
-        margin-left: 0;
-        border: green solid 1px
+        max-width: 100%;
+
+        border: green solid 1px;
+
     }
 
     #videoBlock li {
-        width: calc(25% - 5px);
+        /*width: calc(50% - 5px);*/
+        width: 100%;
         height: 240px;
         background: black;
         color: white;
-        margin: 0;
+        margin-bottom: 10px;
         justify-content: center;
+    }
+
+    .btnCopyWXV {
+        width: 50px;
+        height: 50px;
     }
 
     .btnCopyWXV:hover {
         border: #0081C6 solid 1px;
+        width: 100px;
+        height: 100px;
     }
 
     .btnCopyWXV:active {
-    {#border: #0081C6 solid 1px;#} background-color: rgba(255, 0, 0, 0.5);
+        /*
+
+    {#border: #0081C6 solid 1px;#}   */
+        background-color: rgba(255, 0, 0, 0.5);
+        transform: translateY(4px);
     }
 
     #cover {
@@ -107,86 +135,141 @@
     }
 
     #cover:active {
-    {#border: #0081C6 solid 1px;#} background-color: rgba(255, 0, 0, 0.5);
+        /*
+
+    {#border: #0081C6 solid 1px;#}   */
+        background-color: rgba(255, 0, 0, 0.5);
+    }
+
+    #ArticleInfo {
+        overflow-y: scroll;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 </style>
-<div id="ArticleInfo">
-    <div id="infoBanner">
-        <div style="width: 60%;height:100%;border: solid green 1px;">
-            <div class="my_dev">
-                <input class="my_input" id='article_url' type="text" onchange="Article_url(value)"
-                       placeholder="请在这里输入公众号文章的URL">
-                <input class="my_button" type="button" onClick="getInfoFromUrl('ARTICLE_URL')" value="解析文章链接"/>
-            </div>
-            <div class="my_dev">
-                <input class="my_input" id="articleTitle" type="text" placeholder="this is title of the articles."/>
-                <input class="my_button" type="button" onClick="copy1('articleTitle','value')" value="点击复制标题"/>
-            </div>
-            <div class="my_dev">
-                <input class="my_input" id="description" type="text" placeholder="this is descriptions."/>
-                <input class="my_button" type="button" onClick="copy1('description','value')" value="点击复制描述"/>
-            </div>
+<div id="AnalyseBanner">
+    <input id="btnShowAnalyseBanner" class="my_button" style="width: 10%;" type="button"
+           onClick="showOrHideAnalyseBanner()"
+           value="展开"/>
+    <div id="ArticleInfo" style="width: 90%">
+        <div class="my_dev">
+            <input class="my_input" id='article_url' type="text" onchange="Article_url(value)"
+                   placeholder="请在这里输入公众号文章的URL">
+            <input class="my_button" type="button" onClick="getInfoFromUrl('ARTICLE_URL')" value="解析文章链接"/>
         </div>
-        <div class="my_dev" style="border: white solid 1px;width: 40%;">
-            <img class="my_input" style="width: 80%;" id="cover" alt="公众号文章封面" title="公众号文章封面"
-                 onclick="show_big_img(this)">
-            <input class="my_button" style="margin-right: 0;width: 20%" type="button" onClick="copy1('cover','src')"
-                   value="点击复制图片链接"/>
+        <div id="infoBanner">
+            <div id="title_descriptions_cover">
+                <div class="my_dev">
+                    <input class="my_input" id="articleTitle" type="text" placeholder="this is title of the articles."/>
+                    <input class="my_button" type="button" onClick="copy1('articleTitle','value')" value="点击复制标题"/>
+                </div>
+                <div class="my_dev">
+                    <input class="my_input" id="description" type="text" placeholder="this is descriptions."/>
+                    <input class="my_button" type="button" onClick="copy1('description','value')" value="点击复制描述"/>
+                </div>
+                <div class="my_dev" style="border: white solid 1px;">
+                    <img class="my_input" id="cover" alt="公众号文章封面" title="公众号文章封面"
+                         onclick="show_big_img(this)">
+                </div>
+            </div>
+            <div class="my_dev">
+                <input id="btnShow_title_descriptions_cover" class="my_button" type="button" onClick="showOrHideInfo()"
+                       value="展开"/>
+                <input class="my_button" type="button" onClick="copy1('cover','src')"
+                       value="点击复制图片链接"/>
+            </div>
+            <ul id="videoBlock" style="margin-left: 0;">
+            </ul>
         </div>
     </div>
-    <ul id="videoBlock" style="margin-left: 0;">
-        {#                    <li>#}
-        {##}
-        {#                        <video width="100%" height="100%" controls>#}
-        {#                            <source src="http://mpvideo.qpic.cn/0bf26iaacaaa6uaos6jhyzpfb4wdahzaaaia.f10002.mp4?dis_k=42437265eb23aa3b30823f206ebb3460&dis_t=1605636334"#}
-        {#                                    type="video/mp4">#}
-        {#                        </video>#}
-        {#                        视频1#}
-        {#                    </li>#}
-        {#                    <li>#}
-        {#                        <video width="100%" height="100%" controls>#}
-        {#                            <source src="http://mpvideo.qpic.cn/0bf26iaacaaa6uaos6jhyzpfb4wdahzaaaia.f10002.mp4?dis_k=42437265eb23aa3b30823f206ebb3460&dis_t=1605636334"#}
-        {#                                    type="video/mp4">#}
-        {#                        </video>#}
-        {#                    </li>#}
-        {#                    <li>#}
-        {#                        <video width="100%" height="100%" controls>#}
-        {#                            <source src="http://mpvideo.qpic.cn/0bf26iaacaaa6uaos6jhyzpfb4wdahzaaaia.f10002.mp4?dis_k=42437265eb23aa3b30823f206ebb3460&dis_t=1605636334"#}
-        {#                                    type="video/mp4">#}
-        {#                        </video>#}
-        {#                    </li>#}
 
-
-    </ul>
 </div>
-
+<template id="templatePerVideoWindow">
+    <li style="display: flex;flex-direction: row">
+        <video style="width: 80%" controls>
+            <source id="videoSource" type="video/mp4">
+        </video>
+        <input id="btnCopyVid" class="my_button" style="width: 20%;height: 100%" type="button"
+               onClick="copyVid(this.value)" value="复制Vid"/>
+    </li>
+</template>
 <script>
+    function copyVid(vid) {
+        console.log("this is copied Vid:", vid);
+        copyStr(vid)
+    }
+
     window.onscroll = function () {
         var t = document.documentElement.scrollTop || document.body.scrollTop; //变量t就是滚动条滚动时，到顶部的距离
 
-        var analysePanel = document.getElementById("ArticleInfo");
+        var analysePanel = document.getElementById("AnalyseBanner");
         if (t >= 100) {     //当拖动到距离顶部100px处时，左边导航固定，不随滚动条滚动
 
-            {#left.style.position = "fixed";#}
-            {#left.style.top = "0";#}
+            // {
+            //     #left.style.position = "fixed";
+            //     #
+            // }
+            // {
+            //     #left.style.top = "0";
+            //     #
+            // }
 
 
         } else {
 
-            {#left.style.position = "absolute";       //恢复正常        #}
-            {##}
-            {#left.style.top = "100px";#}
+            // {
+            //     #left.style.position = "absolute";       //恢复正常        #}
+            //     {
+            //         #
+            //         #
+            //     }
+            //     {
+            //         #left.style.top = "100px";
+            //         #
+            //     }
 
         }
-        var distance = (100 + t + "px");
+        var distance = (120 + t + "px");
         console.log("this is t to top:", distance);
         analysePanel.style.top = distance;
         insertFillUrlButton();
-    };
-
+    }
+    ;
 
 
     var ARTICLE_URL = " You didn't input and have not analyse yet!";
+    window.onload = function () {
+        $("#infoBanner").hide();
+        showOrHideInfo();
+        showOrHideAnalyseBanner();
+    };
+    var title_descriptions_cover_isShow = true;
+
+    function showOrHideInfo() {
+        if (title_descriptions_cover_isShow) {
+            $("#title_descriptions_cover").hide();
+            $("#btnShow_title_descriptions_cover").val("展开");
+        } else {
+            $("#title_descriptions_cover").show();
+            $("#btnShow_title_descriptions_cover").val("收起");
+        }
+        title_descriptions_cover_isShow = !title_descriptions_cover_isShow;
+    }
+
+    var analyseBannerIsShow = true;
+
+    function showOrHideAnalyseBanner() {
+        if (analyseBannerIsShow) {
+            $("#ArticleInfo").hide();
+            $("#btnShowAnalyseBanner").val("展开");
+        } else {
+            $("#ArticleInfo").show();
+            $("#btnShowAnalyseBanner").val("收起");
+        }
+        analyseBannerIsShow = !analyseBannerIsShow;
+    }
 
     function Article_url(value) {
         let element = document.getElementById('article_url');
@@ -206,15 +289,15 @@
         for (var i = 0; i < videosInfoList.length; i++) {
             var video = videosInfoList[i];
             var src = video.url_info[0].url;
-            var title = video.vid;
-            var videoLi = document.createElement('li');
-            videoLi.innerHTML = "<video controls ><source src=\"" + src + "\" type=\"video/mp4\"></video><view id=\"vid\" style=\"display: flex;flex-direction: row\"><img  class='btnCopyWXV' src=\"/static/admin/img/icon-changelink.svg\" onClick=\"copyStr('" + title + "')\" >" + title + "</view>";
-            videoLi.ondblclick = function (e) {
-                console.log(e)
-            };
-            videoBlock.appendChild(videoLi);
+            var vid = video.vid;
+            var templateElem = document.getElementById('templatePerVideoWindow');
+            console.log(templateElem);
+            var content = document.importNode(templateElem.content, true);
+            content.querySelector("#videoSource").setAttribute('src', src);
+            content.querySelector("#btnCopyVid").setAttribute('value', vid);
+            videoBlock.appendChild(content);
         }
-        var analysePanel = document.getElementById("ArticleInfo");
+        var analysePanel = document.getElementById("AnalyseBanner");
         analysePanel.style.height = "400px";
     }
 
@@ -253,13 +336,26 @@
                     [{id: "articleTitle", attr: "value", json_key: 'title'},
                         {id: "description", attr: "value", json_key: 'description'},
                         {id: 'id_title', attr: "value", json_key: 'title'},
-                        {#{id: 'id_name', attr: "value", json_key: 'title'},#}
                         {id: 'id_description', attr: "value", json_key: 'description'},
-                        {id: 'id_cover_url', attr: "value", json_key: 'cover'},
-                        {id: 'cover', attr: "src", json_key: 'cover'},
-                        {id: 'cover', attr: "value", json_key: 'cover'}
+                        {
+                            id: 'id_cover_url', attr: "value", json_key:
+                                'cover'
+                        }
+                        ,
+                        {
+                            id: 'cover', attr:
+                                "src", json_key:
+                                'cover'
+                        }
+                        ,
+                        {
+                            id: 'cover', attr:
+                                "value", json_key:
+                                'cover'
+                        }
 
-                    ];
+                    ]
+                ;
                 for (var i = 0; i < relation.length; i++) {
                     let id = relation[i].id;
                     try {
@@ -270,12 +366,23 @@
                         console.log("fill it failed id:", id, 'error:', e)
                     }
                 }
+                $("#infoBanner").show();
                 initVideoBlock(json_res.videos);
 
 
-                {#var jsonContent = JSON.parse(xhr.responseText);#}
-                {#access_token = jsonContent.access_token;#}
-                {#h2_accessToken.innerHTML = access_token;#}
+                // {
+                //     #var
+                //     jsonContent = JSON.parse(xhr.responseText);
+                //     #
+                // }
+                // {
+                //     #access_token = jsonContent.access_token;
+                //     #
+                // }
+                // {
+                //     #h2_accessToken.innerHTML = access_token;
+                //     #
+                // }
             }
         }
     }
