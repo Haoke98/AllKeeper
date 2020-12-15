@@ -32,7 +32,7 @@ class UrlRedirectorAdmin(MyModelAdmin):
 @admin.register(User)
 class userAdmin(MyModelAdmin):
     list_display = MyModelAdmin.list_display + ['last_login_time',
-                                                # 'vip_expiredTime',
+                                                'vip_expiredTime',
                                                 'avatar', 'nickName', '_gender',
                                                 'language', 'city', 'province', 'country', 'firstTimeLogin']
     date_hierarchy = 'last_login_time'
