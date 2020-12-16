@@ -403,8 +403,10 @@ if __name__ == '__main__':
     url = "https://v.douyin.com/J9pNmSD/"
     # url = " https://v.douyin.com/Jxem568/"
     url = "https://data.zhai78.com/openDyJx.php?url=%s" % url
-    res = requests.get(url)
-    print(res.json())
+    # res = requests.get(url)
+    # print(res.json())
+
+    print(res)
     # vid = "z0974bpqehi"
     # print(getTXVOriginalUrl(vid))
     # vid = "wxv_1566939676798664707"
