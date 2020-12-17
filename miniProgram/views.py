@@ -24,13 +24,19 @@ SESSION_KEY_CURR_USER = "curr_user"
 
 def updateSystemInfo(request):
     systemInfo = request.GET.get('systemInfo')
-    curr_user = request.session.get(SESSION_KEY_CURR_USER)
-    curr_user.systemInfo = systemInfo
-    curr_user.save()
-    text = "user:\n" + beautyDictPrint(curr_user.json()) + "\n" + beautyDictPrint(json.loads(systemInfo))
+    openid = request.session.get(SESSION_KEY_CURR_USER)
+    user_json = ""
+    if openid is not None:
+        curr_user = User.objects.get(openid=openid)
+        curr_user.systemInfo = systemInfo
+        curr_user.save()
+        user_json = curr_user.json()
+    else:
+        user_json = {"err_msg": "无效的openid"}
+    text = "user:\n" + beautyDictPrint(user_json) + "\n" + beautyDictPrint(json.loads(systemInfo))
     send_mail('@Sadam WebSite LoginAndUpdateSystemInfo', text, EMAIL_HOST_USER,
               [ADMINS[1][1], ], fail_silently=False)
-    return HttpResponse(request, "hello world by @Sadam!" + beautyDictPrint(curr_user.json()))
+    return HttpResponse(request, "hello world by @Sadam!" + beautyDictPrint(user_json))
 
 
 @login_required
@@ -266,7 +272,6 @@ def getUserOpenid(request, js_code):
     res = requests.post(url, data, headers=header)
     res_json = res.json()
     openid = res_json['openid']
-    request.session.setdefault(SESSION_KEY_CURR_USER_OPENID, openid)
     print(res_json)
     curr_user, isCreated = User.objects.get_or_create(openid=openid,
                                                       defaults={'vip_expiredTime': timezone.now(),
@@ -279,7 +284,7 @@ def getUserOpenid(request, js_code):
     utcnow = datetime.datetime.utcnow().replace(tzinfo=utc)
     curr_user.last_login_time = timezone.now()
     curr_user.save()
-    request.session.setdefault(SESSION_KEY_CURR_USER, curr_user)
+    request.session.setdefault(SESSION_KEY_CURR_USER_OPENID, openid)
     curr_user_json = curr_user.json()
     print(curr_user_json)
     result = {'err_msg': "OK", 'objects': [], "curr_user": curr_user_json,
