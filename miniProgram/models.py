@@ -114,7 +114,17 @@ class User(MyModel):
         userJson = {
             "openid": self.openid,
             "isVIP": isVIP,
-            "vipAlert": vipAlert
+            "vipAlert": vipAlert,
+            "firstTimeLogin": self.firstTimeLogin.ctime(),
+            "last_login_time": self.last_login_time.ctime(),
+            "vip_expired_time": self.vip_expiredTime.ctime(),
+            "nikName": self.nickName,
+            "gender": self.gender,
+            "language": self.language,
+            "city": self.city,
+            "province": self.province,
+            "country": self.country,
+            "avatarUrl": self.avatarUrl,
         }
         return userJson
 
@@ -575,7 +585,7 @@ class subcribtions(MyModel):
         return self.name
 
 
-class settings(MyModel):
+class Settings(MyModel):
     app_name = models.CharField(max_length=50)
     app_id = models.CharField(max_length=18)
     app_secret = models.CharField(max_length=32)
@@ -584,6 +594,7 @@ class settings(MyModel):
     enableVIP_mode = models.BooleanField(verbose_name="是否启动VIP模式")
     VIPprice = models.FloatField(verbose_name="一个月会员价", null=True)
     trialTime = models.IntegerField(verbose_name="试看时间（秒）", default=5 * 60)
+    total_transaction_volume = models.FloatField(verbose_name="本平台总交易额", default=0)
 
     def __str__(self):
         return self.app_name

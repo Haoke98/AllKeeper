@@ -11,8 +11,9 @@ from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 
+from izBasar.settings import ADMINS, EMAIL_HOST_USER
 from .models import *
-from .utils import analyseGetVideoInfo
+from .utils import analyseGetVideoInfo, beautyDictPrint
 
 
 # Create your views here.
@@ -95,7 +96,6 @@ def getAllHousesInfo(request):
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
 
-
 def videoUrlMaker(request, vid):
     pureUrl = cache.get(vid)
     video = Video.objects.get(id=vid)
@@ -158,8 +158,8 @@ def UrlRedirector(request, id):
             text = "request:" + str(request) + "\n\n\n" + "requset.POST:" + str(
                 request.POST) + "\n\n\n" + "request.GET:" + str(request.GET) + "\n\n\n" + "request.Body:" + str(
                 request.body)
-            send_mail('@Sadam WebSite UrlRedirection', text, '1903249375@qq.com',
-                      ['1903249375@qq.com'], fail_silently=False)
+            send_mail('@Sadam WebSite UrlRedirection', text, EMAIL_HOST_USER,
+                      [ADMINS[1][1], ], fail_silently=False)
             return HttpResponse(request, content_type='application/json,charset=utf-8')
         else:
             return HttpResponse(returnValue)
@@ -192,12 +192,21 @@ def buyVIP(request, openid):
     print(newDatetime)
     curr_user.vip_expiredTime = newDatetime
     curr_user.save()
+    _settings = Settings.objects.first()
+    _settings.total_transaction_volume += _settings.VIPprice * 1
+    _settings.save()
+    text = "the user:\n" + beautyDictPrint(curr_user.json()) + "\n has bought VIP membership.\nPrice:" + str(
+        _settings.VIPprice) + "RMB\nTotal transaction volume:" + str(_settings.total_transaction_volume) + " RMB"
+    html = loader.render_to_string("email_templates/buy_vip.html", {"user": curr_user, "vip_price": _settings.VIPprice,
+                                                                    "total_transaction_volume": _settings.total_transaction_volume})
+    send_mail('@SadamWebSite BuyVIP', "Hello World !", EMAIL_HOST_USER,
+              [ADMINS[0][1], ], fail_silently=False, html_message=html)
     return JsonResponse(curr_user.json())
 
 
 def getSlider(request):
     result = {'err_msg': "OK", 'objects': []}
-    app = settings.objects.first()
+    app = Settings.objects.first()
     sliders = app.sliders.order_by('-last_changed_time')
     dicts = []
     for per in sliders:
@@ -209,7 +218,7 @@ def getSlider(request):
 
 @cache_page(2 * 60 * 60)
 def getMiniProgramAccessToken(request):
-    app = settings.objects.first()
+    app = Settings.objects.first()
     url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + app.app_id + '&secret=' + app.app_secret
     res = requests.get(url)
     access_token = res.text
@@ -219,7 +228,7 @@ def getMiniProgramAccessToken(request):
 
 @cache_page(2 * 60 * 60)
 def getSubcribtionsAccessToken(request):
-    app = settings.objects.first()
+    app = Settings.objects.first()
     subcribtion = app.subcribtion
     url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + subcribtion.app_id + "&secret=" + subcribtion.app_secret
     res = requests.get(url)
@@ -229,7 +238,7 @@ def getSubcribtionsAccessToken(request):
 
 
 def getUserOpenid(request, js_code):
-    app = settings.objects.first()
+    app = Settings.objects.first()
     url = 'https://api.weixin.qq.com/sns/jscode2session'
     header = {
         'content-type': 'application/x-www-form-urlencoded',

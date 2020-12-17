@@ -188,9 +188,11 @@
 </div>
 <template id="templatePerVideoWindow">
     <li style="display: flex;flex-direction: row">
-        <video style="width: 80%" controls>
-            <source id="videoSource" type="video/mp4">
-        </video>
+        <iframe id="videoSource" frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=w3128cb1wio"
+                allowFullScreen="true"></iframe>
+        <!--        <video style="width: 80%" controls>-->
+        <!--            <source  type="video/mp4">-->
+        <!--        </video>-->
         <input id="btnCopyVid" class="my_button" style="width: 20%;height: 100%" type="button"
                onClick="copyVid(this.value)" value="复制Vid"/>
     </li>

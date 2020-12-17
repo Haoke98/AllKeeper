@@ -63,9 +63,10 @@ class subcribtionsAdmin(admin.ModelAdmin):
     list_display = MyModelAdmin.list_display + ['app_id', 'app_secret']
 
 
-@admin.register(settings)
-class settingsAdmin(admin.ModelAdmin):
+@admin.register(Settings)
+class SettingsAdmin(admin.ModelAdmin):
     list_display = MyModelAdmin.list_display + ['enableVIP_mode', 'VIPprice', 'app_id', 'app_secret', 'subcribtion',
+                                                'total_transaction_volume',
                                                 ]
     list_display_links = ['__str__', 'subcribtion']
 
@@ -151,6 +152,7 @@ class FilmTypeAdmin(admin.ModelAdmin):
 class FilmAdmin(admin.ModelAdmin):
     form = FilmForm
     list_display = MyModelAdmin.list_display + ['showTimes', 'id', '_cover', ]
+    list_filter = ['type']
     inlines = [VideoInlineAdmin]
 
     def _cover(self, obj):

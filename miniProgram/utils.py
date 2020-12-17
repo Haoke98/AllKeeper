@@ -151,7 +151,12 @@ def analyseGetVid(url):
     image = getContent(res, 'image')
     description = getContent(res, 'description')
     allVid = getVidByRe(None, "wxv_[0-9]{19}", res, None) + getVidByRe("wxv_[0-9]{19}", "vid=[A-Za-z0-9]{11}\"", res,
-                                                                       ["vid=", "\""])
+                                                                       ["vid=", "\""]) + getVidByRe("wxv_[0-9]{19}",
+                                                                                                    "http://v.qq.com/x/page/[A-Za-z0-9]{11}.html",
+                                                                                                    res,
+                                                                                                    [
+                                                                                                        "http://v.qq.com/x/page/",
+                                                                                                        ".html"])
     return allVid, title, image, description
 
 
@@ -322,6 +327,23 @@ def getOriginalUrl(url):
 
 
 def getTXVOriginalUrl(txvid):
+    # print("腾讯视频ID：", txvid)
+    # # 构造 腾讯视频地址：
+    # tx_url = "https://v.qq.com/x/cover/vmp7n9h5n5535c6/%s.html" % (txvid)
+    # analyse_url = "https://data.zhai78.com/openTxVideo.php?url=" + tx_url
+    # print("this is analyse_url:", analyse_url)
+    # res = requests.get(analyse_url)
+    # print("this is res", res.text)
+    # res_json = res.json()
+    # print("this is res_json", res_json)
+    # jx_url = res_json['jx_url']
+    # print("腾讯视频的原始地址：", jx_url)
+    # return jx_url
+    url_iframe = "https://v.qq.com/txp/iframe/player.html?vid=%s" % (txvid)
+    return url_iframe
+
+
+def getTXOriginalVipByAPI(txvid):
     print("腾讯视频ID：", txvid)
     # 构造 腾讯视频地址：
     tx_url = "https://v.qq.com/x/cover/vmp7n9h5n5535c6/%s.html" % (txvid)
@@ -398,15 +420,39 @@ try:
 except:
     pass
 
-#
+
+def beautyDictPrint(dic):
+    max_len_of_keys = 0
+    for key in dic:
+        l = len(key)
+        if l > max_len_of_keys:
+            max_len_of_keys = l
+        else:
+            pass
+
+    text = ""
+    for key in dic:
+        text += key.rjust(max_len_of_keys, " ") + " : " + str(dic[key]) + "\n"
+    return text
+    # headers = ['keys', 'values']
+    # s = tabulate.tabulate({"keys":dic.keys(),"values":dic.values()}, headers="keys")
+    # return str(s)
+
+
 if __name__ == '__main__':
     url = "https://v.douyin.com/J9pNmSD/"
     # url = " https://v.douyin.com/Jxem568/"
     url = "https://data.zhai78.com/openDyJx.php?url=%s" % url
     # res = requests.get(url)
     # print(res.json())
-
+    # txvid = "s00356nr21q"
+    # txvid = "p0035ghl1ph"
+    # res = getTXOriginalVipByAPI(txvid)
+    dic = {"asdfasddsafasf": "xxxwsdjfljas df", "bxdfsdf": "yyy", "c": "zzzasdjfjasdjlfjljlsd ", "D": "s"}
+    res = beautyDictPrint(dic)
     print(res)
+    # print(pprint.pformat("a:xxxwsdjfljas df"))
+
     # vid = "z0974bpqehi"
     # print(getTXVOriginalUrl(vid))
     # vid = "wxv_1566939676798664707"

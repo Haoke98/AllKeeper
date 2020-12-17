@@ -20,7 +20,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 res = os.path.join(BASE_DIR, os.path.pardir)
 outerFolder = os.path.abspath(res)
-MEDIA_ROOT = os.path.join(outerFolder, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -52,14 +52,14 @@ ALLOWED_HOSTS = ['*']
 
 APPEND_SLASH = True
 
-ADMINS = (('Sadam·Sadik', '1903249375@qq.com'), ('Haoke98', 'kws11@qq.com'),)
+ADMINS = (('Sadam·Sadik', '1903249375@qq.com'), ('Haoke98', 'kws11@qq.com'), ('!', 'callme_0920@qq.com'))  # 接受报错的账号
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.qq.com'  # 如果是 163 改成 smtp.163.com
 EMAIL_PORT = 465
-SERVER_EMAIL = '1903249375@qq.com'  # 必须要设置 不然logger中得handler：admin_Email 无法发送错误报告邮件
-EMAIL_HOST_USER = '1903249375@qq.com'  # 帐号
-EMAIL_HOST_PASSWORD = 'tywrfdbyrbbwcbif'  # 密码(用第三方平台登陆授权码）
+EMAIL_HOST_USER = ADMINS[2][1]  # 帐号
+EMAIL_HOST_PASSWORD = 'lawzhxgpbcdndiaj'  # 密码(用第三方平台登陆授权码）
+SERVER_EMAIL = EMAIL_HOST_USER  # 必须要设置 不然logger中得handler：admin_Email 无法发送错误报告邮件，  SERVER_EMAIL必须和 EMAIL_HOST_USER一样才能成功发送
 DEFAULT_FROM_EMAIL = 'SadamSadik <1903249375@qq.com>'
 
 #########################
@@ -218,7 +218,6 @@ TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 
 USE_L10N = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

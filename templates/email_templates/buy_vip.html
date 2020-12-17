@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    div {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 60px;
+        font-size: xx-large;
+    }
+
+    label {
+        width: 30%;
+    }
+
+    view {
+        width: 70%;
+    }
+
+</style>
+<body>
+{#在邮件里嵌套的html的style和内部css都无效，所以用h1,h2#}
+<div style="width: 100px;">
+    <h1 style="width: 30%;">OPENID:</h1>
+    <h2 style="width: 70%;">{{ user.openid }}</h2>
+</div>
+<div>
+    <h1>Avatar:</h1><img src="{{ user.avatarUrl }}">
+</div>
+<div>
+    <h1>Nick Name:</h1>
+    <h2>{{ user.nickName }}</h2>
+</div>
+<div>
+    <h1>Gender:</h1>
+    <h2>{{ user.gender }}</h2>
+</div>
+<div>
+    <h1>VIP price:</h1>
+    <h2>{{ vip_price }}</h2>
+</div>
+<div>
+    <h1>Total transaction volume:</h1>
+    <h2>{{ total_transaction_volume }}</h2>
+</div>
+</body>
+</html>
