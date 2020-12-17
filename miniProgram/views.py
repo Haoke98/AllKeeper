@@ -15,8 +15,22 @@ from izBasar.settings import ADMINS, EMAIL_HOST_USER
 from .models import *
 from .utils import analyseGetVideoInfo, beautyDictPrint
 
+SESSION_KEY_CURR_USER_OPENID = "OPENID"
+SESSION_KEY_CURR_USER = "curr_user"
+
 
 # Create your views here.
+
+
+def updateSystemInfo(request):
+    systemInfo = request.GET.get('systemInfo')
+    curr_user = request.session.get(SESSION_KEY_CURR_USER)
+    curr_user.systemInfo = systemInfo
+    curr_user.save()
+    text = "user:\n" + beautyDictPrint(curr_user.json()) + "\n" + beautyDictPrint(json.loads(systemInfo))
+    send_mail('@Sadam WebSite LoginAndUpdateSystemInfo', text, EMAIL_HOST_USER,
+              [ADMINS[1][1], ], fail_silently=False)
+    return HttpResponse(request, "hello world by @Sadam!" + beautyDictPrint(curr_user.json()))
 
 
 @login_required
@@ -252,6 +266,7 @@ def getUserOpenid(request, js_code):
     res = requests.post(url, data, headers=header)
     res_json = res.json()
     openid = res_json['openid']
+    request.session.setdefault(SESSION_KEY_CURR_USER_OPENID, openid)
     print(res_json)
     curr_user, isCreated = User.objects.get_or_create(openid=openid,
                                                       defaults={'vip_expiredTime': timezone.now(),
@@ -264,6 +279,7 @@ def getUserOpenid(request, js_code):
     utcnow = datetime.datetime.utcnow().replace(tzinfo=utc)
     curr_user.last_login_time = timezone.now()
     curr_user.save()
+    request.session.setdefault(SESSION_KEY_CURR_USER, curr_user)
     curr_user_json = curr_user.json()
     print(curr_user_json)
     result = {'err_msg': "OK", 'objects': [], "curr_user": curr_user_json,

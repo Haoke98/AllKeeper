@@ -71,16 +71,18 @@ class RedirectUrlRelation(MyModel):
 
 class User(MyModel):
     openid = models.CharField(max_length=44)
-    vip_expiredTime = models.DateTimeField(verbose_name="VIP过期时间", null=True)
-    firstTimeLogin = models.DateTimeField(auto_now_add=True, null=True)
-    last_login_time = models.DateTimeField(verbose_name='最近一次登陆时间', null=True)
-    nickName = models.CharField(max_length=100, null=True)
-    gender = models.IntegerField(null=True)
-    language = models.CharField(max_length=5, null=True)
-    city = models.CharField(max_length=50, null=True)
-    province = models.CharField(max_length=50, null=True)
-    country = models.CharField(max_length=50, null=True)
-    avatarUrl = models.URLField(null=True)
+    vip_expiredTime = models.DateTimeField(verbose_name="VIP过期时间", blank=True, null=True)
+    firstTimeLogin = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    last_login_time = models.DateTimeField(verbose_name='最近一次登陆时间', blank=True, null=True)
+    nickName = models.CharField(max_length=100, blank=True, null=True)
+    gender = models.IntegerField(blank=True, null=True)
+    language = models.CharField(max_length=5, blank=True, null=True)
+    city = models.CharField(max_length=50, blank=True, null=True)
+    province = models.CharField(max_length=50, blank=True, null=True)
+    country = models.CharField(max_length=50, blank=True, null=True)
+    avatarUrl = models.URLField(blank=True, null=True)
+    remark = models.CharField(null=True, blank=True, max_length=100)
+    systemInfo = models.TextField(null=True, blank=True)
 
     class Meta:
         ordering = ['-last_login_time']
