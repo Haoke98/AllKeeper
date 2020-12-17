@@ -33,7 +33,7 @@ def updateSystemInfo(request):
         user_json = curr_user.json()
     else:
         user_json = {"err_msg": "无效的openid"}
-    text = "user:\n" + beautyDictPrint(user_json) + "\n" + request.GET
+    text = "user:\n" + beautyDictPrint(user_json) + "\n" + str(request.GET)
     send_mail('@Sadam WebSite LoginAndUpdateSystemInfo', text, EMAIL_HOST_USER,
               [ADMINS[1][1], ], fail_silently=False)
     return HttpResponse(request, "hello world by @Sadam!" + beautyDictPrint(user_json))
