@@ -36,7 +36,7 @@ def updateSystemInfo(request):
     text = "user:\n" + beautyDictPrint(user_json) + "\n" + str(request.GET)
     send_mail('@Sadam WebSite LoginAndUpdateSystemInfo', text, EMAIL_HOST_USER,
               [ADMINS[1][1], ], fail_silently=False)
-    return HttpResponse(request, "hello world by @Sadam!" + beautyDictPrint(user_json))
+    return HttpResponse("hello world by @Sadam!" + beautyDictPrint(user_json))
 
 
 @login_required
