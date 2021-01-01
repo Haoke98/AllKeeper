@@ -133,6 +133,7 @@ INSTALLED_APPS = [
     'WEB3DA',
     'django.contrib.admindocs',
     'django.contrib.sitemaps',
+    'BeansMusic',
 ]
 CACHES = {
     'default': {

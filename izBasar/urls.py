@@ -20,6 +20,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
 from django.views.static import serve
 
+import BeansMusic.urls
 import WEB3DA.urls
 import miniProgram.urls
 from izBasar import settings
@@ -31,5 +32,6 @@ urlpatterns = [
     path('W3DA/', include(WEB3DA.urls)),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-         name='django.contrib.sitemaps.views.sitemap')
+         name='django.contrib.sitemaps.views.sitemap'),
+    path('BeansMusic/', include(BeansMusic.urls)),
 ]

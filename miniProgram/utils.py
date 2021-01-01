@@ -343,11 +343,8 @@ def getTXVOriginalUrl(txvid):
     return url_iframe
 
 
-def getTXOriginalVipByAPI(txvid):
-    print("腾讯视频ID：", txvid)
-    # 构造 腾讯视频地址：
-    tx_url = "https://v.qq.com/x/cover/vmp7n9h5n5535c6/%s.html" % (txvid)
-    analyse_url = "https://data.zhai78.com/openTxVideo.php?url=" + tx_url
+def getTXOriginalVipByTxURL(txURL):
+    analyse_url = "https://data.zhai78.com/openTxVideo.php?url=" + txURL
     print("this is analyse_url:", analyse_url)
     res = requests.get(analyse_url)
     print("this is res", res.text)
@@ -358,6 +355,11 @@ def getTXOriginalVipByAPI(txvid):
     return jx_url
 
 
+def getTXOriginalVipByAPI(txvid):
+    print("腾讯视频ID：", txvid)
+    # 构造 腾讯视频地址：
+    tx_url = "https://v.qq.com/x/cover/vmp7n9h5n5535c6/%s.html" % (txvid)
+    return getTXOriginalVipByTxURL(tx_url)
 # if __name__ == '__main__':
 #     url = "https://mp.weixin.qq.com/mp/readtemplate?t=pages/video_player_tmpl&auto=0&vid=wxv_1566939676798664707"
 #     # useRequestMethod(url)
@@ -440,19 +442,24 @@ def beautyDictPrint(dic):
 
 
 if __name__ == '__main__':
-    url = "https://v.douyin.com/J9pNmSD/"
+    # url = "https://v.douyin.com/J9pNmSD/"
     # url = " https://v.douyin.com/Jxem568/"
-    url = "https://data.zhai78.com/openDyJx.php?url=%s" % url
+    # url = "https://data.zhai78.com/openDyJx.php?url=%s" % url
     # res = requests.get(url)
     # print(res.json())
     # txvid = "s00356nr21q"
     # txvid = "p0035ghl1ph"
     # res = getTXOriginalVipByAPI(txvid)
-    dic = {"asdfasddsafasf": "xxxwsdjfljas df", "bxdfsdf": "yyy", "c": "zzzasdjfjasdjlfjljlsd ", "D": "s"}
-    res = beautyDictPrint(dic)
-    print(res)
+    # dic = {"asdfasddsafasf": "xxxwsdjfljas df", "bxdfsdf": "yyy", "c": "zzzasdjfjasdjlfjljlsd ", "D": "s"}
+    # res = beautyDictPrint(dic)
+    # print(res)
     # print(pprint.pformat("a:xxxwsdjfljas df"))
-
+    url = "https://v.qq.com/x/page/n3151iqymjq.html?ptag=qqbrowser"
+    url = "https://v.qq.com/x/page/v0939knrvw4.html?ptag=qqbrowser"
+    url = "https://v.qq.com/x/page/o0833kn5f6b.html?ptag=qqbrowser"
+    url = "https://v.qq.com/x/page/x0913mlebtf.html?ptag=qqbrowser"
+    res = getTXOriginalVipByTxURL(url)
+    print(res)
     # vid = "z0974bpqehi"
     # print(getTXVOriginalUrl(vid))
     # vid = "wxv_1566939676798664707"

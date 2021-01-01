@@ -104,7 +104,7 @@ class VideoAdmin(admin.ModelAdmin):
                      # 'formatID', 'destinationID',
                      )
     list_filter = ['belongTo']
-
+    list_per_page = 20
     # actions_on_bottom = [makeHasNotFirstAnalysed, ]
     # actions_on_top = [makeHasNotAnalysed, ]
     # actions = [makeHasNotAnalysed, makeHasNotFirstAnalysed]
@@ -155,7 +155,7 @@ class FilmAdmin(admin.ModelAdmin):
     list_display = MyModelAdmin.list_display + ['showTimes', 'id', '_cover', ]
     list_filter = ['type']
     inlines = [VideoInlineAdmin]
-
+    list_per_page = 10
     def _cover(self, obj):
         return obj.cover.show()
 
