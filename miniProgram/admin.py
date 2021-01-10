@@ -105,6 +105,7 @@ class VideoAdmin(admin.ModelAdmin):
                      )
     list_filter = ['belongTo']
     list_per_page = 20
+
     # actions_on_bottom = [makeHasNotFirstAnalysed, ]
     # actions_on_top = [makeHasNotAnalysed, ]
     # actions = [makeHasNotAnalysed, makeHasNotFirstAnalysed]
@@ -149,13 +150,24 @@ class FilmTypeAdmin(admin.ModelAdmin):
     list_display = MyModelAdmin.list_display + ['showTimes', 'id', 'name', 'unit']
 
 
+@admin.register(Language)
+class LanguageAdmin(admin.ModelAdmin):
+    list_display = MyModelAdmin.list_display + ['id', 'symbol']
+
+
+@admin.register(Country)
+class CountryAdmin(admin.ModelAdmin):
+    list_display = MyModelAdmin.list_display + ['id', 'symbol']
+
+
 @admin.register(Film)
 class FilmAdmin(admin.ModelAdmin):
     form = FilmForm
-    list_display = MyModelAdmin.list_display + ['showTimes', 'id', '_cover', ]
-    list_filter = ['type']
+    list_display = MyModelAdmin.list_display + ['showTimes', 'id', '_cover', 'language', 'country']
+    list_filter = ['type', 'language', 'country']
     inlines = [VideoInlineAdmin]
     list_per_page = 10
+
     def _cover(self, obj):
         return obj.cover.show()
 

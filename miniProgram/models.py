@@ -267,11 +267,41 @@ class FilmType(ModelWithShowRate):
         return "<%s,%s>" % (self.name, self.unit)
 
 
+class Text(MyModel):
+    id = models.AutoField(primary_key=True)
+    english_text = models.CharField(max_length=100, verbose_name="英语_值", blank=True)
+    uyghur_text = models.CharField(max_length=100, verbose_name="维吾尔语_值", blank=True)
+    chinese_text = models.CharField(max_length=100, verbose_name="汉语_值", blank=True)
+
+    def __str__(self):
+        return "<%s,%s,%s>" % (self.english_text, self.uyghur_text, self.chinese_text)
+
+
+class Language(MyModel):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, verbose_name="语言")
+    symbol = models.CharField(max_length=100, verbose_name="符号")
+
+    def __str__(self):
+        return "<%s,%s>" % (self.name, self.symbol)
+
+
+class Country(MyModel):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, verbose_name="国家")
+    symbol = models.CharField(max_length=100, verbose_name="符号")
+
+    def __str__(self):
+        return "<%s,%s>" % (self.name, self.symbol)
+
+
 class Film(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name='电影标题', max_length=100)
     cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True)
     type = models.ForeignKey(to=FilmType, on_delete=models.CASCADE, default=1)
+    language = models.ForeignKey(to=Language, on_delete=models.CASCADE, default=1)
+    country = models.ForeignKey(to=Country, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.name
@@ -311,7 +341,7 @@ class FilmForm(ModelForm):
 
     class Meta:
         model = Film
-        fields = ['name', 'cover', 'type']
+        fields = ['name', 'cover', 'type', 'language', 'country']
 
 
 class Video(ModelWithShowRate):
