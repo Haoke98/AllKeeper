@@ -178,7 +178,7 @@ def UrlRedirector(request, id):
             text = "request:" + str(request) + "\n\n\n" + "requset.POST:" + str(
                 request.POST) + "\n\n\n" + "request.GET:" + str(request.GET) + "\n\n\n" + "request.Body:" + str(
                 request.body)
-            send_mail('@Sadam WebSite UrlRedirection', text, EMAIL_HOST_USER,
+            send_mail('IzBasar媒体工作室：有人登陆提醒', text, EMAIL_HOST_USER,
                       [ADMINS[1][1], ], fail_silently=False)
             return HttpResponse(request, content_type='application/json,charset=utf-8')
         else:
@@ -219,7 +219,7 @@ def buyVIP(request, openid):
         _settings.VIPprice) + "RMB\nTotal transaction volume:" + str(_settings.total_transaction_volume) + " RMB"
     html = loader.render_to_string("email_templates/buy_vip.html", {"user": curr_user, "vip_price": _settings.VIPprice,
                                                                     "total_transaction_volume": _settings.total_transaction_volume})
-    send_mail('@SadamWebSite BuyVIP', "Hello World !", EMAIL_HOST_USER,
+    send_mail('IzBasar工作室：有人购买会员提醒', "有人购买会员了BuyVIP", EMAIL_HOST_USER,
               [ADMINS[0][1], ], fail_silently=False, html_message=html)
     return JsonResponse(curr_user.json())
 

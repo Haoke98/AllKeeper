@@ -17,9 +17,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/media/'
 res = os.path.join(BASE_DIR, os.path.pardir)
 outerFolder = os.path.abspath(res)
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -58,7 +58,7 @@ EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.qq.com'  # 如果是 163 改成 smtp.163.com
 EMAIL_PORT = 465
 EMAIL_HOST_USER = ADMINS[2][1]  # 帐号
-EMAIL_HOST_PASSWORD = 'lawzhxgpbcdndiaj'  # 密码(用第三方平台登陆授权码）
+EMAIL_HOST_PASSWORD = "bhwuenurolvldjga"  # 密码(用第三方平台登陆授权码）
 SERVER_EMAIL = EMAIL_HOST_USER  # 必须要设置 不然logger中得handler：admin_Email 无法发送错误报告邮件，  SERVER_EMAIL必须和 EMAIL_HOST_USER一样才能成功发送
 DEFAULT_FROM_EMAIL = 'SadamSadik <1903249375@qq.com>'
 
