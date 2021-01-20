@@ -164,8 +164,10 @@ class CountryAdmin(admin.ModelAdmin):
 @admin.register(Film)
 class FilmAdmin(admin.ModelAdmin):
     form = FilmForm
-    list_display = MyModelAdmin.list_display + ['showTimes', 'id', '_cover', 'type', 'language', 'country']
+    list_display = MyModelAdmin.list_display + ['nameChinese', 'showTimes', 'id', '_cover', 'type', 'language',
+                                                'country']
     list_filter = ['type', 'language', 'country']
+    search_fields = list_display
     inlines = [VideoInlineAdmin]
     list_per_page = 10
 

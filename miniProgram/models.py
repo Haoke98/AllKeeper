@@ -298,6 +298,7 @@ class Country(MyModel):
 class Film(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name='电影标题', max_length=100)
+    nameChinese = models.CharField(verbose_name="电影标题（中文）", max_length=100, blank=True, null=True)
     cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True)
     type = models.ForeignKey(to=FilmType, on_delete=models.CASCADE, default=1)
     language = models.ForeignKey(to=Language, on_delete=models.CASCADE, default=1)
@@ -341,7 +342,7 @@ class FilmForm(ModelForm):
 
     class Meta:
         model = Film
-        fields = ['name', 'cover', 'type', 'language', 'country']
+        fields = ['name', 'nameChinese', 'cover', 'type', 'language', 'country']
 
 
 class Video(ModelWithShowRate):
