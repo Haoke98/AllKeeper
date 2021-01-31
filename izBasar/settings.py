@@ -134,6 +134,7 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'django.contrib.sitemaps',
     'BeansMusic',
+    'accountSystem'
 ]
 CACHES = {
     'default': {
