@@ -37,7 +37,7 @@ SADAM_SET = {
     "BASE_HREF": "BASE_HREF_TWO_PLATFORMS",
 }
 if platform.system() == WINDOWS:
-    SADAM_SET['MYSQL_SERVER_HOST'] = '62.234.6.136'
+    SADAM_SET['MYSQL_SERVER_HOST'] = '139.155.30.83'
     SADAM_SET["DEBUG"] = True
     SADAM_SET["BASE_HREF"] = "http://10.128.202.191:7000"
 else:
@@ -184,7 +184,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'izbasar',
         'USER': 'root',
-        'PASSWORD': '1a2b3c4d5',
+        'PASSWORD': 'qwer1234',
         'PORT': '3306',
         'HOST': SADAM_SET["MYSQL_SERVER_HOST"],
     }
