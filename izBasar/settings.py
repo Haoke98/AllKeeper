@@ -45,6 +45,7 @@ else:
     SADAM_SET["DEBUG"] = False
     SADAM_SET["BASE_HREF"] = "https://x.izbasarweb.xyz"
 
+SADAM_SET['MYSQL_SERVER_HOST'] = '139.155.30.83'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = SADAM_SET.get("DEBUG")
 
