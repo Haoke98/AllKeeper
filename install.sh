@@ -28,6 +28,6 @@ podman run -d -p 80:80 -p 443:443 --name ${WEB_NGINX} -v ${NGINX_OUTER_WWW_DIR}:
 podman start ${WEB_NGINX}
 
 INDEX_FILE=${NGINX_OUTER_WWW_DIR}/index.html
-cp nginx-index.html ${INDEX_FILE}
-
+#cp nginx-index.html ${INDEX_FILE}
+cp home_page/* ${NGINX_OUTER_WWW_DIR}
 cp nginx/conf.d/* ${NGINX_OUTER_CONF_D_DIR}
