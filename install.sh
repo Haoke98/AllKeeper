@@ -22,6 +22,7 @@ mkdir -p ${NGINX_OUTER_WWW_DIR}
 mkdir -p ${NGINX_OUTER_LOGS_DIR}
 mkdir -p ${NGINX_OUTER_CONF_DIR}
 mkdir -p ${NGINX_OUTER_CONF_D_DIR}
+mkdir -p ${NGINX_OUTER_MEDIA_DIR}
 
 podman cp ${TEST_NGINX}:/etc/nginx/nginx.conf ${NGINX_OUTER_CONF_DIR}
 podman rm -f ${TEST_NGINX}
