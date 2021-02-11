@@ -21,7 +21,6 @@ mkdir -p ${NGINX_OUTER_CONF_DIR}
 mkdir -p ${NGINX_OUTER_CONF_D_DIR}
 
 podman cp ${TEST_NGINX}:/etc/nginx/nginx.conf ${NGINX_OUTER_CONF_DIR}
-podman cp ${TEST_NGINX}:/etc/nginx/conf.d/default.conf ${NGINX_OUTER_CONF_D_DIR}/default.conf
 podman rm -f ${TEST_NGINX}
 podman rm -f ${WEB_NGINX}
 podman run -d -p 80:80 -p 443:443 --name ${WEB_NGINX} -v ${NGINX_OUTER_WWW_DIR}:/usr/share/nginx/html -v ${NGINX_OUTER_CONF_FILE}:/etc/nginx/nginx.conf -v ${NGINX_OUTER_CONF_D_DIR}:/etc/nginx/conf.d -v ${NGINX_OUTER_LOGS_DIR}:/var/log/nginx ${IMAGE}
