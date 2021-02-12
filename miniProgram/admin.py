@@ -90,7 +90,7 @@ makeHasNotAnalysed.short_description = 'make all video has not been analysed.'  
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
-    form = VideoForm
+    # form = VideoForm
     list_display = MyModelAdmin.list_display + ['episodeNum', 'belongTo', 'showTimes', 'id', '_cover', 'videoShow',
                                                 # 'isFromSubscription', "hasFirstAnalysed", 'hasAnalysed', 'isTXV',
                                                 # 'formatID', 'destinationID',
@@ -134,11 +134,11 @@ class VideoAdmin(admin.ModelAdmin):
         obj.save()
 
 
-class VideoInlineAdmin(admin.StackedInline):
+class VideoInlineAdmin(admin.TabularInline):
     model = Video
-    min_num = 1
+    min_num = 0
     extra = 0
-    form = VideoForm
+    # form = VideoForm
 
 
 class ImageInlineAdmin(admin.StackedInline):
