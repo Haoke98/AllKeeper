@@ -1,6 +1,3 @@
-import sys
-reload(sys)
-sys.setdefaultencoding( "utf-8" )
 import datetime
 # Create your views here.
 import json
@@ -122,7 +119,7 @@ def getAllHousesInfo(request):
 def videoUrlMaker(request, vid):
     pureUrl = cache.get(vid)
     video = Video.objects.get(id=vid)
-    print("thi is videoUrlMaker:", video.belongTo, video)
+    # print("thi is videoUrlMaker:", video.belongTo, video)
     video.show()
     if pureUrl is None:
         print("this video has not been saved in cache yet, getting it url now......")
