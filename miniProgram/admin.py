@@ -67,7 +67,7 @@ class subcribtionsAdmin(admin.ModelAdmin):
 @admin.register(Settings)
 class SettingsAdmin(admin.ModelAdmin):
     list_display = MyModelAdmin.list_display + ['enableVIP_mode', 'VIPprice', 'app_id', 'app_secret', 'subcribtion',
-                                                'total_transaction_volume',
+                                                'total_transaction_volume','host',
                                                 ]
     list_display_links = ['__str__', 'subcribtion']
 

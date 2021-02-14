@@ -440,17 +440,24 @@
             element.after("<img id='" + _id_insert + "' src='https://i.52112.com/icon/jpg/256/20200728/85132/3586519.jpg' style='width: 50px;height: 50px' onClick=\"fill_article_url('" + _id + "')\"></img>")
         }
     }
-
+    function formatParams( params ){
+        return "?" + Object
+        .keys(params)
+        .map(function(key){
+          return key+"="+encodeURIComponent(params[key])
+        })
+        .join("&")
+}
     function getInfoFromUrl(id) {
 
 
         console.log(ARTICLE_URL);
         insertFillUrlButton();
-
+        var params = {url: ARTICLE_URL}
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/miniProgram/getArticleInfo", true);
+        xhr.open("GET", "/miniProgram/getArticleInfo"+formatParams(params), true);
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify({url: ARTICLE_URL}));
+        xhr.send();
         xhr.onreadystatechange = (e) => {
             if (xhr.status === 200) {
                 json_res = JSON.parse(xhr.responseText);

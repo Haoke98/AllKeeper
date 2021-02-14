@@ -141,27 +141,28 @@ class Image(MyModel):
 
     def save(self, *args, **kwargs):
         if self.url == "#":
-            print(
-                "this is upload mode: this picture that user has upload needs to be upload to the subcribtions material space.")
+            # print(
+            #     "this is upload mode: this picture that user has upload needs to be upload to the subcribtions material space.")
             # print("self.content==None:", self.content == None, self.content == "", "xxx")
             # if self.content == "":
             #     print("this content is null:this picture is saved by URL from the Subcriptions.")
             # else:
-            print(self.content)
-            print(self.content.name)
-            print(self.content.url)
-            print(self.content.file)
-            print(self.content.path)
+            # print(self.content)
+            # print(self.content.name)
+            # print(self.content.url)
+            # print(self.content.file)
+            # print(self.content.path)
             filepath = self.content.path
             with open(filepath, 'wb') as f:
                 f.write(self.content.read())
             from .utils import upLoadImg
-            url = "http://localhost:7000/miniProgram/getSubcribtionAccessToken"
+            setting = Settings.objects.get_or_create(id=1)[0]
+            url = "%s/miniProgram/getSubcribtionAccessToken" % setting.host
             access_token = requests.get(url).text
             print("this is access_token by request the local server on the server:%s" % access_token)
             # virtualRequest.method = "GET"
             absoulutelyFilePath = os.path.abspath(filepath)
-            print(absoulutelyFilePath)
+            # print(absoulutelyFilePath)
             self.media_id, self.url = upLoadImg(absoulutelyFilePath, access_token, "image")
             if os.path.exists(absoulutelyFilePath):
                 os.remove(absoulutelyFilePath)
@@ -624,10 +625,11 @@ class Settings(MyModel):
     app_secret = models.CharField(max_length=32)
     sliders = models.ManyToManyField(to=Video)
     subcribtion = models.ForeignKey(to=subcribtions, on_delete=models.PROTECT, null=True)
-    enableVIP_mode = models.BooleanField(verbose_name="是否启动VIP模式")
+    enableVIP_mode = models.BooleanField(verbose_name="是否启动VIP模式", default=False)
     VIPprice = models.FloatField(verbose_name="一个月会员价", null=True)
     trialTime = models.IntegerField(verbose_name="试看时间（秒）", default=5 * 60)
     total_transaction_volume = models.FloatField(verbose_name="本平台总交易额", default=0)
+    host = models.URLField(verbose_name="服务器运行的地址",null=True,blank=True)
 
     def __str__(self):
         return self.app_name

@@ -20,8 +20,24 @@ SESSION_KEY_CURR_USER = "curr_user"
 
 
 # Create your views here.
+def checkLogin(func):
+    def wrapper(request, *args, **kwargs):
+        # is_login = request.session.get(IS_LOGIN_KEY, False)
+        # print(request, is_login)
+        # if is_login:
+        #     res = func(request, *args, **kwargs)
+        #     res["is_login"] = True
+        #     return HttpResponse(json.dumps(res, ensure_ascii=False),
+        #                         content_type="application/json,charset=utf-8")  # 返回json
+        # else:
+        #     res = {"code": 205, "msg": "你还没有登录，请登录！", "is_login": False}
+        #     return HttpResponse(json.dumps(res, ensure_ascii=False),
+        #                         content_type="application/json,charset=utf-8")  # 返回json
 
+        return func(request,*args,**kwargs)
+    return wrapper
 
+@checkLogin
 def updateSystemInfo(request):
     systemInfo = request.GET.get('systemInfo')
     openid = request.session.get(SESSION_KEY_CURR_USER)
@@ -38,7 +54,7 @@ def updateSystemInfo(request):
               [ADMINS[1][1], ], fail_silently=False)
     return HttpResponse("hello world by @Sadam!" + beautyDictPrint(user_json))
 
-
+@checkLogin
 @login_required
 @csrf_exempt
 def delete_img_from_subscriptions(request):
@@ -53,14 +69,16 @@ def delete_img_from_subscriptions(request):
     # return HttpResponse(res_json, content_type="application/json,charset=utf-8")  # 返回json
     return HttpResponse(res)
 
-
+@checkLogin
 def getAccessToken():
-    url = "http://localhost:7000/miniProgram/getSubcribtionAccessToken"
+    setting = Settings.objects.get_or_create(id=1)[0]
+    url = "%s/miniProgram/getSubcribtionAccessToken" % setting.host
     access_token = requests.get(url).text
     print("this is access_token by request the local server on the server:%s" % access_token)
     return access_token
 
 
+@checkLogin
 @login_required
 @csrf_exempt
 def upload_temp_image(request):
@@ -104,6 +122,8 @@ def upload_temp_image(request):
 #             destination.write(chunk)
 #     # 返回图片的URL
 #     return os.path.join(WEB_HOST_MEDIA_URL, file_name)
+
+@checkLogin
 @cache_page(timeout=2 * 60 * 60)
 def getAllHousesInfo(request):
     result = {'err_msg': "OK", 'objects': []}
@@ -115,7 +135,7 @@ def getAllHousesInfo(request):
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
-
+@checkLogin
 def videoUrlMaker(request, vid):
     pureUrl = cache.get(vid)
     video = Video.objects.get(id=vid)
@@ -128,7 +148,7 @@ def videoUrlMaker(request, vid):
         print("this video has been saved in cache. has got it's pure url.")
     return redirect(to=pureUrl)
 
-
+@checkLogin
 def getAllArticles(request):
     result = {'err_msg': "OK", 'objects': []}
     articles = Article.objects.order_by('-last_changed_time')
@@ -139,11 +159,9 @@ def getAllArticles(request):
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
-
-@csrf_exempt
+@checkLogin
 def getArticleInfo(request):
-    data_dic = json.loads(request.body)
-    url = data_dic['url']
+    url = request.GET.get('url', None)
     print(url)
     result = cache.get(url)
     if result is None:
@@ -155,7 +173,7 @@ def getArticleInfo(request):
         print("已有缓存，正在返回缓存数据。。。。。。。。")
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
-
+@checkLogin
 def updatePhoneNumber(request):
     data = json.loads(request.body)
     _openid = data['openid']
@@ -165,7 +183,7 @@ def updatePhoneNumber(request):
     print(data['iv'])
     return HttpResponse("this is updatePhoneNumber API")
 
-
+@checkLogin
 @csrf_exempt
 def UrlRedirector(request, id):
     redirector = RedirectUrlRelation.objects.get(id=id)
@@ -185,7 +203,7 @@ def UrlRedirector(request, id):
     else:
         return redirect(to=url)
 
-
+@checkLogin
 @csrf_exempt
 def updateUserInfo(request):
     openid = request.GET.get('openid')
@@ -195,7 +213,7 @@ def updateUserInfo(request):
     print(openid, data_dic)
     return HttpResponse("update is ok.")
 
-
+@checkLogin
 def buyVIP(request, openid):
     curr_user = User.objects.filter(openid=openid).first()
     print(curr_user)
@@ -222,7 +240,7 @@ def buyVIP(request, openid):
               [ADMINS[0][1], ], fail_silently=False, html_message=html)
     return JsonResponse(curr_user.json())
 
-
+@checkLogin
 def getSlider(request):
     result = {'err_msg': "OK", 'objects': []}
     app = Settings.objects.first()
@@ -234,7 +252,7 @@ def getSlider(request):
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
-
+@checkLogin
 @cache_page(2 * 60 * 60)
 def getMiniProgramAccessToken(request):
     app = Settings.objects.first()
@@ -244,10 +262,10 @@ def getMiniProgramAccessToken(request):
     print('gettingMiniProgramAccessToken:(appid:%s,appSecret:%s) %s' % (app.app_id, app.app_secret, access_token))
     return HttpResponse(access_token, content_type='application/json,charset=utf-8')
 
-
+@checkLogin
 @cache_page(2 * 60 * 60)
 def getSubcribtionsAccessToken(request):
-    app = Settings.objects.first()
+    app = Settings.objects.get_or_create(id=1)[0]
     subcribtion = app.subcribtion
     url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + subcribtion.app_id + "&secret=" + subcribtion.app_secret
     res = requests.get(url)
@@ -255,7 +273,7 @@ def getSubcribtionsAccessToken(request):
     print('gettingSubcribtionAccessToken:(appid:%s,appSecret:%s) %s' % (app.app_id, app.app_secret, access_token))
     return HttpResponse(res.json()['access_token'])
 
-
+@checkLogin
 def getUserOpenid(request, js_code):
     app = Settings.objects.first()
     url = 'https://api.weixin.qq.com/sns/jscode2session'
@@ -291,7 +309,7 @@ def getUserOpenid(request, js_code):
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
-
+@checkLogin
 def getFilm(request, id):
     result = {'err_msg': "OK", 'objects': []}
     dicts = []
