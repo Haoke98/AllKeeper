@@ -483,8 +483,8 @@ class Video(ModelWithShowRate):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        print("this Video :%s has been saved now. force_insert:%s force_update:%s," % (
-            self.__str__(), force_insert, force_update), using, update_fields)
+        # print("this Video :%s has been saved now. force_insert:%s force_update:%s," % (
+        #     self.__str__(), force_insert, force_update), using, update_fields)
         # if self.isFromSubscription:
         #     if not self.hasFirstAnalysed:
         #         self.analyse()
