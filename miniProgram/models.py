@@ -325,8 +325,8 @@ class Film(ModelWithShowRate):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        print("this Film :%s has been updated now. force_insert:%s force_update:%s," % (
-            self.name, force_insert, force_update), using, update_fields)
+        # print("this Film :%s has been updated now. force_insert:%s force_update:%s," % (
+        #     self.name, force_insert, force_update), using, update_fields)
         return super(Film, self).save(force_update=force_update, force_insert=force_insert, using=using,
                                       update_fields=update_fields)
 
