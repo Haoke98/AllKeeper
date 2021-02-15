@@ -162,15 +162,15 @@ def getAllArticles(request):
 @checkLogin
 def getArticleInfo(request):
     url = request.GET.get('url', None)
-    print(url)
     result = cache.get(url)
     if result is None:
-        print("没有缓存，正在进行实时解析。。。。。。")
+        print("there is no cache for this url , will get the cache now ..... ")
         res = analyseGetVideoInfo(url)
         result = json.dumps(res, ensure_ascii=False)
         cache.set(url, result, 8 * 60 * 60)
     else:
-        print("已有缓存，正在返回缓存数据。。。。。。。。")
+        print("has cache on this time, will use it .....")
+
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
 @checkLogin

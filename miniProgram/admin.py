@@ -69,7 +69,7 @@ class SettingsAdmin(admin.ModelAdmin):
     list_display = MyModelAdmin.list_display + ['enableVIP_mode', 'VIPprice', 'app_id', 'app_secret', 'subcribtion',
                                                 'total_transaction_volume','host',
                                                 ]
-    list_display_links = ['__str__', 'subcribtion']
+    list_display_links = ['__str__', 'subcribtion', 'last_changed_time']
 
 
 def makeHasNotFirstAnalysed(modeladmin, request, queryset):  # 新建一个批量操作的函数，其中有三个参数：
