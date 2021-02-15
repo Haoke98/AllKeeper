@@ -16,7 +16,10 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+LOG_FILE_DIR = os.path.join(STATIC_ROOT, 'log')
+if not os.path.exists(LOG_FILE_DIR):
+    os.mkdir(LOG_FILE_DIR)
+CACHE_DIR = os.path.join(STATIC_ROOT, 'cache')
 res = os.path.join(BASE_DIR, os.path.pardir)
 outerFolder = os.path.abspath(res)
 MEDIA_URL = '/media/'
@@ -89,7 +92,7 @@ LOGGING = {
         'file': {  # 记录到日志文件(需要创建对应的目录，否则会出错)
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, os.path.join(STATIC_ROOT, 'debug.log')),  # 日志输出文件
+            'filename': os.path.join(LOG_FILE_DIR,  'debug.log'),  # 日志输出文件
             'maxBytes': 1024 * 1024 * 5,  # 文件大小
             'backupCount': 5,  # 备份份数
             'formatter': 'default',  # 使用哪种formatters日志格式
@@ -140,7 +143,7 @@ INSTALLED_APPS = [
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': './var/tmp/django_cache',
+        'LOCATION': CACHE_DIR,
         'TIMEOUT': 600,
         'OPTIONS': {
             'MAX_ENTRIES': 1000
