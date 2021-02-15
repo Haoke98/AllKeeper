@@ -107,11 +107,11 @@ def analyseGetVideoInfo(url):
     videoList = []
     for vid in allVid:
         if "wxv_" in vid:
-            print("这视频来自公众号空间：", vid)
+            print("from official account space:", vid)
             videoList.append(getMpVideoInfo(vid))
         else:
             # vid = vid[1:-1]
-            print("这视频来自腾讯视频：", vid)
+            print("from TXTV space:", vid)
             try:
                 videoList.append({"isTXV": True, "vid": vid, "url_info": [{'url': getTXVOriginalUrl(vid)}]})
             except Exception:
