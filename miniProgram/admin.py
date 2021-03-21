@@ -59,7 +59,7 @@ class UserAdmin(MyModelAdmin):
     avatar.allow_tags = True
 
 
-@admin.register(subcribtions)
+@admin.register(Subcribtions)
 class subcribtionsAdmin(admin.ModelAdmin):
     list_display = MyModelAdmin.list_display + ['app_id', 'app_secret']
 

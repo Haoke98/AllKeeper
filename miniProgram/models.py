@@ -610,7 +610,7 @@ class HouseForm(ModelForm):
         fields = ['houseType', 'houseLayout', 'size', 'price', 'phoneNum', 'address', 'descriptions', 'images']
 
 
-class subcribtions(MyModel):
+class Subcribtions(MyModel):
     name = models.CharField(max_length=50)
     app_id = models.CharField(max_length=18)
     app_secret = models.CharField(max_length=32)
@@ -624,7 +624,7 @@ class Settings(MyModel):
     app_id = models.CharField(max_length=18)
     app_secret = models.CharField(max_length=32)
     sliders = models.ManyToManyField(to=Video)
-    subcribtion = models.ForeignKey(to=subcribtions, on_delete=models.PROTECT, null=True)
+    subcribtion = models.ForeignKey(to=Subcribtions, on_delete=models.PROTECT, null=True)
     enableVIP_mode = models.BooleanField(verbose_name="是否启动VIP模式", default=False)
     VIPprice = models.FloatField(verbose_name="一个月会员价", null=True)
     trialTime = models.IntegerField(verbose_name="试看时间（秒）", default=5 * 60)
