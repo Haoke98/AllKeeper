@@ -122,10 +122,10 @@ def analyseGetVideoInfo(url):
 
 def getVideoInfo(vid):
     if "wxv_" in vid:
-        print("这视频来自公众号空间：", vid)
+        print("this video is comes from official account space：", vid)
         return getMpVideoInfo(vid)
     else:
-        print("这视频来自腾讯视频：", vid)
+        print("this video is comes from the Tencet Video Space：", vid)
         if "'" in vid:
             str(vid).replace("'", "")
         try:

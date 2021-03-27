@@ -449,7 +449,7 @@ class Video(ModelWithShowRate):
     #     self.save()
     def getPureVideoUrl(self):
         videoInfo = getVideoInfo(self.vid)
-        print("this is getPureVideoUrl:", self, videoInfo)
+        # print("this is getPureVideoUrl:", videoInfo)
         original_url = videoInfo['url_info'][0]['url']
         return original_url
 
