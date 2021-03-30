@@ -29,7 +29,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 's3va_7)!ovu!=3j55p2m9@yk0h4-w!l9&v&m#9-(9xduye*@p='
-
+os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 import platform
 
 WINDOWS = 'Windows'

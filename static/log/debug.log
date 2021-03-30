@@ -620,3 +620,62 @@ INFO [2021-03-28 04:38:02,979] django.utils.autoreload: E:\myProjects\izbasarBac
 INFO [2021-03-28 04:38:07,049] django.utils.autoreload: Watching for file changes with StatReloader
 INFO [2021-03-28 04:44:17,689] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models.py changed, reloading.
 INFO [2021-03-28 04:44:21,377] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-03-28 04:57:39,074] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\izBasar\settings.py changed, reloading.
+INFO [2021-03-28 04:57:47,265] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-03-29 04:11:25,668] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-03-29 04:11:52,492] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-03-29 04:12:48,739] django.server: "GET /admin HTTP/1.1" 301 0
+INFO [2021-03-29 04:13:04,746] django.server: "GET /admin/ HTTP/1.1" 200 21996
+INFO [2021-03-29 04:13:05,438] django.server: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:05,526] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:05,565] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:07,880] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-03-29 04:13:08,467] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:08,479] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:08,535] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2021-03-29 04:13:08,593] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+INFO [2021-03-29 04:13:08,609] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+WARNING [2021-03-29 04:13:09,803] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-03-29 04:13:26,397] django.server: "GET /admin/miniProgram/redirecturlrelation/ HTTP/1.1" 200 11248
+INFO [2021-03-29 04:13:26,975] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:27,031] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:27,033] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:27,037] django.server: "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:27,121] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:27,202] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:27,203] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:27,204] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:27,205] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:27,237] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-03-29 04:13:28,151] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO [2021-03-29 04:13:28,179] django.server: "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO [2021-03-29 04:13:39,637] django.server: "GET /admin/miniProgram/redirecturlrelation/7/change/ HTTP/1.1" 200 17996
+INFO [2021-03-29 04:13:40,244] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-03-29 04:13:40,264] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+INFO [2021-03-29 04:13:40,272] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-03-29 04:13:40,313] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-03-29 04:13:40,927] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+INFO [2021-03-29 04:13:51,374] django.server: "POST /admin/miniProgram/redirecturlrelation/7/change/ HTTP/1.1" 302 0
+INFO [2021-03-29 04:13:52,278] django.server: "GET /admin/miniProgram/redirecturlrelation/ HTTP/1.1" 200 11516
+INFO [2021-03-29 04:13:52,996] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-03-29 04:13:53,959] django.server: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO [2021-03-29 04:14:49,026] django.server: "GET /miniProgram/UrlRedirector7 HTTP/1.1" 200 59
+INFO [2021-03-31 03:21:57,967] django.utils.autoreload: Watching for file changes with StatReloader
+ERROR [2021-03-31 03:22:08,403] django.request: Internal Server Error: /miniProgram/getOpenid031FzkFa1eAZLA0PN8Ja1UxXYS1FzkFr
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 37, in wrapper
+    return func(request,*args,**kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 291, in getUserOpenid
+    openid = res_json['openid']
+KeyError: 'openid'
+ERROR [2021-03-31 03:22:12,540] django.server: "GET /miniProgram/getOpenid031FzkFa1eAZLA0PN8Ja1UxXYS1FzkFr HTTP/1.1" 500 145
+INFO [2021-03-31 05:06:40,986] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models.py changed, reloading.
+INFO [2021-03-31 05:06:42,477] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-03-31 05:11:44,022] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models.py changed, reloading.
+INFO [2021-03-31 05:11:44,871] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-03-31 05:12:38,587] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models.py changed, reloading.
+INFO [2021-03-31 05:12:39,318] django.utils.autoreload: Watching for file changes with StatReloader

@@ -1,5 +1,6 @@
 import os
 import urllib
+from datetime import datetime
 
 import requests
 from django import forms
@@ -14,6 +15,7 @@ from django.utils.safestring import mark_safe
 
 from izBasar.settings import MEDIA_ROOT
 from .utils import getVideoInfo
+from izBasar.settings import MEDIA_ROOT
 
 
 class ImageInput(TextInput):
@@ -152,8 +154,10 @@ class Image(MyModel):
             # print(self.content.url)
             # print(self.content.file)
             # print(self.content.path)
-            filepath = self.content.path
-            with open(filepath, 'wb') as f:
+            fileExtension = os.path.splitext(self.content.path)[-1]
+            tempFileName = "%s%s" % (str(datetime.now().microsecond), fileExtension)
+            tempFilePath = os.path.join(MEDIA_ROOT, tempFileName)
+            with open(tempFilePath, 'wb') as f:
                 f.write(self.content.read())
             from .utils import upLoadImg
             setting = Settings.objects.get_or_create(id=1)[0]
@@ -161,7 +165,7 @@ class Image(MyModel):
             access_token = requests.get(url).text
             print("this is access_token by request the local server on the server:%s" % access_token)
             # virtualRequest.method = "GET"
-            absoulutelyFilePath = os.path.abspath(filepath)
+            absoulutelyFilePath = os.path.abspath(tempFilePath)
             # print(absoulutelyFilePath)
             self.media_id, self.url = upLoadImg(absoulutelyFilePath, access_token, "image")
             if os.path.exists(absoulutelyFilePath):
@@ -629,7 +633,7 @@ class Settings(MyModel):
     VIPprice = models.FloatField(verbose_name="一个月会员价", null=True)
     trialTime = models.IntegerField(verbose_name="试看时间（秒）", default=5 * 60)
     total_transaction_volume = models.FloatField(verbose_name="本平台总交易额", default=0)
-    host = models.URLField(verbose_name="服务器运行的地址",null=True,blank=True)
+    host = models.URLField(verbose_name="服务器运行的地址", null=True, blank=True)
 
     def __str__(self):
         return self.app_name
