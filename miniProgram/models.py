@@ -359,7 +359,6 @@ class Video(ModelWithShowRate):
     vid = models.CharField(verbose_name="vid", max_length=23, default=None, blank=True, null=True)
 
     def show(self):
-        self.belongTo.show()
         super(Video, self).show()
 
     # hasAnalysed = models.BooleanField(verbose_name="已经解析过", default=False)

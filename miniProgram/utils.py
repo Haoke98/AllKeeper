@@ -444,6 +444,7 @@ def beautyDictPrint(dic):
 
 
 if __name__ == '__main__':
+    print(getMpVideoInfo("wxv_1216585399632609283"))
     # url = "https://v.douyin.com/J9pNmSD/"
     # url = " https://v.douyin.com/Jxem568/"
     # url = "https://data.zhai78.com/openDyJx.php?url=%s" % url
@@ -460,8 +461,8 @@ if __name__ == '__main__':
     url = "https://v.qq.com/x/page/v0939knrvw4.html?ptag=qqbrowser"
     url = "https://v.qq.com/x/page/o0833kn5f6b.html?ptag=qqbrowser"
     url = "https://v.qq.com/x/page/x0913mlebtf.html?ptag=qqbrowser"
-    res = getTXOriginalVipByTxURL(url)
-    print(res)
+    # res = getTXOriginalVipByTxURL(url)
+    # print(res)
     # vid = "z0974bpqehi"
     # print(getTXVOriginalUrl(vid))
     # vid = "wxv_1566939676798664707"
