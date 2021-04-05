@@ -353,7 +353,7 @@ class FilmForm(ModelForm):
 class Video(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
     episodeNum = models.IntegerField(verbose_name='集次', null=True, default=0)
-    cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, blank=True, null=True)
+    cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, blank=True, null=False, default=4)
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
     belongTo = models.ForeignKey(verbose_name="所属电视剧", to=Film, on_delete=models.PROTECT, null=True)
     vid = models.CharField(verbose_name="vid", max_length=23, default=None, blank=True, null=True)

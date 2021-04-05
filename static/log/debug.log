@@ -1068,3 +1068,50 @@ INFO [2021-03-31 06:30:34,771] django.utils.autoreload: Watching for file change
 INFO [2021-03-31 06:31:33,224] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
 INFO [2021-03-31 06:31:34,313] django.utils.autoreload: Watching for file changes with StatReloader
 INFO [2021-03-31 06:31:47,101] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-03-31 06:32:19,317] django.server: "GET /admin/miniProgram/image/add/ HTTP/1.1" 200 16924
+INFO [2021-03-31 06:32:19,941] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-03-31 06:32:29,674] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-03-31 06:32:33,746] django.server: "POST /admin/miniProgram/image/add/ HTTP/1.1" 302 0
+INFO [2021-03-31 06:32:34,577] django.server: "GET /admin/miniProgram/image/ HTTP/1.1" 200 15944
+INFO [2021-03-31 06:32:35,197] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-03-31 06:33:39,567] django.server: "GET /admin/miniProgram/image/add/ HTTP/1.1" 200 16924
+INFO [2021-03-31 06:33:40,204] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-03-31 06:33:53,045] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-03-31 06:33:54,987] django.server: "POST /admin/miniProgram/image/add/ HTTP/1.1" 302 0
+INFO [2021-03-31 06:33:55,850] django.server: "GET /admin/miniProgram/image/ HTTP/1.1" 200 16896
+INFO [2021-03-31 06:33:56,475] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-03-31 06:45:57,566] django.server: "GET /admin/miniProgram/image/add/ HTTP/1.1" 200 16924
+INFO [2021-03-31 06:45:58,199] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-03-31 06:46:10,032] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+ERROR [2021-03-31 06:46:15,924] django.request: Internal Server Error: /admin/miniProgram/image/add/
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\admin\options.py", line 614, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "D:\python39\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\cache.py", line 44, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\admin\sites.py", line 233, in inner
+    return view(request, *args, **kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\admin\options.py", line 1653, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+  File "D:\python39\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "D:\python39\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\admin\options.py", line 1534, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+  File "D:\python39\lib\site-packages\django\contrib\admin\options.py", line 1580, in _changeform_view
+    self.save_model(request, new_object, form, not add)
+  File "D:\python39\lib\site-packages\django\contrib\admin\options.py", line 1093, in save_model
+    obj.save()
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\models.py", line 170, in save
+    self.media_id, self.url = upLoadImg(absoulutelyFilePath, access_token, "image")
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\utils.py", line 419, in upLoadImg
+    return res_json['media_id'], res_json['url']
+KeyError: 'media_id'
+ERROR [2021-03-31 06:46:17,871] django.server: "POST /admin/miniProgram/image/add/ HTTP/1.1" 500 145
