@@ -34,8 +34,10 @@ def checkLogin(func):
         #     return HttpResponse(json.dumps(res, ensure_ascii=False),
         #                         content_type="application/json,charset=utf-8")  # 返回json
 
-        return func(request,*args,**kwargs)
+        return func(request, *args, **kwargs)
+
     return wrapper
+
 
 @checkLogin
 def updateSystemInfo(request):
@@ -54,6 +56,7 @@ def updateSystemInfo(request):
               [ADMINS[1][1], ], fail_silently=False)
     return HttpResponse("hello world by @Sadam!" + beautyDictPrint(user_json))
 
+
 @checkLogin
 @login_required
 @csrf_exempt
@@ -69,18 +72,22 @@ def delete_img_from_subscriptions(request):
     # return HttpResponse(res_json, content_type="application/json,charset=utf-8")  # 返回json
     return HttpResponse(res)
 
-@checkLogin
+
 def getAccessToken():
+    """
+    这个不是一个视图方法
+    :return:返回的是一个公众号的AccessToken
+    """
     setting = Settings.objects.get_or_create(id=1)[0]
     url = "%s/miniProgram/getSubcribtionAccessToken" % setting.host
+    print(url)
     access_token = requests.get(url).text
     print("this is access_token by request the local server on the server:%s" % access_token)
     return access_token
 
 
-@checkLogin
-@login_required
 @csrf_exempt
+@login_required
 def upload_temp_image(request):
     result = {}
     if request.method == 'POST':
@@ -135,6 +142,7 @@ def getAllHousesInfo(request):
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
+
 @checkLogin
 def videoUrlMaker(request, vid):
     pureUrl = cache.get(vid)
@@ -148,6 +156,7 @@ def videoUrlMaker(request, vid):
         print("this video has been saved in cache. has got it's pure url.")
     return redirect(to=pureUrl)
 
+
 @checkLogin
 def getAllArticles(request):
     result = {'err_msg': "OK", 'objects': []}
@@ -158,6 +167,7 @@ def getAllArticles(request):
     result['objects'] = dict_object
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')
+
 
 @checkLogin
 def getArticleInfo(request):
@@ -173,6 +183,7 @@ def getArticleInfo(request):
 
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
+
 @checkLogin
 def updatePhoneNumber(request):
     data = json.loads(request.body)
@@ -182,6 +193,7 @@ def updatePhoneNumber(request):
     print(data['encryptedData'])
     print(data['iv'])
     return HttpResponse("this is updatePhoneNumber API")
+
 
 @checkLogin
 @csrf_exempt
@@ -203,6 +215,7 @@ def UrlRedirector(request, id):
     else:
         return redirect(to=url)
 
+
 @checkLogin
 @csrf_exempt
 def updateUserInfo(request):
@@ -212,6 +225,7 @@ def updateUserInfo(request):
     curr_user.updateUserInfo(data_dic)
     print(openid, data_dic)
     return HttpResponse("update is ok.")
+
 
 @checkLogin
 def buyVIP(request, openid):
@@ -240,6 +254,7 @@ def buyVIP(request, openid):
               [ADMINS[0][1], ], fail_silently=False, html_message=html)
     return JsonResponse(curr_user.json())
 
+
 @checkLogin
 def getSlider(request):
     result = {'err_msg': "OK", 'objects': []}
@@ -252,6 +267,7 @@ def getSlider(request):
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
+
 @checkLogin
 @cache_page(2 * 60 * 60)
 def getMiniProgramAccessToken(request):
@@ -262,6 +278,7 @@ def getMiniProgramAccessToken(request):
     print('gettingMiniProgramAccessToken:(appid:%s,appSecret:%s) %s' % (app.app_id, app.app_secret, access_token))
     return HttpResponse(access_token, content_type='application/json,charset=utf-8')
 
+
 @checkLogin
 @cache_page(2 * 60 * 60)
 def getSubcribtionsAccessToken(request):
@@ -271,7 +288,7 @@ def getSubcribtionsAccessToken(request):
     res = requests.get(url)
     res_json = res.json()
     res_json_dic = dict(res_json)
-    errCode = res_json_dic.get("errcode",200)
+    errCode = res_json_dic.get("errcode", 200)
     if errCode == 200:
         return HttpResponse(res.json()['access_token'])
     else:
@@ -279,6 +296,7 @@ def getSubcribtionsAccessToken(request):
                   [ADMINS[0][1], ], fail_silently=False)
         raise Http404
         return HttpResponse(res)
+
 
 @checkLogin
 def getUserOpenid(request, js_code):
@@ -315,6 +333,7 @@ def getUserOpenid(request, js_code):
               "settings": app.json()}
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')
+
 
 @checkLogin
 def getFilm(request, id):
