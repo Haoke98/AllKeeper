@@ -1,1 +1,0 @@
-nohup python3 manage.py runserver 0.0.0.0:7000 > nohup.log  2>&1 & echo $! > python.pid
