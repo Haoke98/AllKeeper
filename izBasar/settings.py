@@ -181,7 +181,9 @@ WSGI_APPLICATION = 'izBasar.wsgi.application'
 import configparser
 
 cf = configparser.ConfigParser()
-cf.read(os.path.join(BASE_DIR, os.path.join('izbasar', 'secret.conf')))
+DB_CONFIG_FILE = os.path.join(BASE_DIR, os.path.join('izbasar', 'secret.conf'))
+print(DB_CONFIG_FILE)
+cf.read(DB_CONFIG_FILE)
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
