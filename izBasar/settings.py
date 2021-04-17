@@ -178,23 +178,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'izBasar.wsgi.application'
 
-import configparser
-
-cf = configparser.ConfigParser()
-DB_CONFIG_FILE = os.path.join(BASE_DIR, os.path.join('izbasar', 'secret.conf'))
-print(DB_CONFIG_FILE)
-cf.read(DB_CONFIG_FILE)
+from .secret import DB
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': cf.get('db', "MYSQL_DATABASE"),
-        'USER': cf.get('db', "MYSQL_USER_NAME"),
-        'PASSWORD': cf.get('db', "MYSQL_PASSWORD"),
-        'PORT': cf.get('db', "MYSQL_PORT"),
-        'HOST': cf.get('db', "MYSQL_HOST"),
+        'NAME': DB.MYSQL_DATABASE,
+        'USER': DB.MYSQL_USER_NAME,
+        'PASSWORD': DB.MYSQL_PASSWORD,
+        'PORT': DB.MYSQL_PORT,
+        'HOST': DB.MYSQL_HOST,
     }
 }
 
