@@ -130,7 +130,6 @@ def upload_temp_image(request):
 #     # 返回图片的URL
 #     return os.path.join(WEB_HOST_MEDIA_URL, file_name)
 
-@checkLogin
 @cache_page(timeout=2 * 60 * 60)
 def getAllHousesInfo(request):
     result = {'err_msg': "OK", 'objects': []}

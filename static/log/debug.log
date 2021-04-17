@@ -1115,3 +1115,509 @@ Traceback (most recent call last):
     return res_json['media_id'], res_json['url']
 KeyError: 'media_id'
 ERROR [2021-03-31 06:46:17,871] django.server: "POST /admin/miniProgram/image/add/ HTTP/1.1" 500 145
+INFO [2021-04-07 14:52:31,525] django.utils.autoreload: Watching for file changes with StatReloader
+WARNING [2021-04-07 14:53:15,795] django.server: "GET / HTTP/1.1" 404 179
+WARNING [2021-04-07 14:53:16,570] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-04-07 14:53:21,165] django.server: "GET /admin HTTP/1.1" 301 0
+INFO [2021-04-07 14:53:21,766] django.server: "GET /admin/ HTTP/1.1" 302 0
+INFO [2021-04-07 14:53:25,051] django.server: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 5206
+INFO [2021-04-07 14:53:26,387] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-04-07 14:53:26,437] django.server: "GET /static/admin/css/login.css HTTP/1.1" 200 1185
+INFO [2021-04-07 14:53:26,440] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-04-07 14:53:26,905] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-04-07 14:53:27,442] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2021-04-07 14:53:27,448] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+INFO [2021-04-07 14:53:27,453] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-04-07 14:53:36,006] django.server: "POST /admin/login/?next=/admin/ HTTP/1.1" 200 5369
+INFO [2021-04-07 14:53:44,293] django.server: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO [2021-04-07 14:53:44,968] django.server: "GET /admin/ HTTP/1.1" 200 21824
+INFO [2021-04-07 14:53:45,467] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 380
+INFO [2021-04-07 14:53:45,964] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-04-07 14:53:45,964] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-04-07 14:53:54,283] django.server: "GET /admin/miniProgram/image/ HTTP/1.1" 200 16685
+INFO [2021-04-07 14:53:54,826] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6302
+INFO [2021-04-07 14:53:54,839] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-04-07 14:53:54,843] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-04-07 14:53:54,845] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-04-07 14:53:54,850] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-04-07 14:53:54,860] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-04-07 14:53:54,861] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-04-07 14:53:54,872] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-04-07 14:53:54,904] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-04-07 14:53:54,930] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 14:53:55,520] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2021-04-07 14:53:55,528] django.server: "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO [2021-04-07 14:53:58,407] django.server: "GET /admin/miniProgram/image/add/ HTTP/1.1" 200 16924
+INFO [2021-04-07 14:53:58,880] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-04-07 14:53:58,909] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+INFO [2021-04-07 14:53:58,915] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-04-07 14:53:59,023] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 14:53:59,411] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+INFO [2021-04-07 14:54:09,772] django.server: "GET /admin/ HTTP/1.1" 200 21824
+INFO [2021-04-07 14:54:25,362] django.server: "GET /admin/miniProgram/film/ HTTP/1.1" 200 15656
+INFO [2021-04-07 14:54:25,900] django.server: "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO [2021-04-07 14:54:26,028] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 14:54:28,977] django.server: "GET /admin/miniProgram/film/add/ HTTP/1.1" 200 43020
+INFO [2021-04-07 14:54:29,481] django.server: "GET /static/admin/js/inlines.min.js HTTP/1.1" 200 5301
+INFO [2021-04-07 14:54:29,558] django.server: "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+INFO [2021-04-07 14:54:29,580] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 14:54:39,136] django.server: "GET /miniProgram/getArticleInfo?url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FDmOLVd8hR7pKs3zkei7a8Q HTTP/1.1" 200 5077
+INFO [2021-04-07 14:55:02,002] django.server: "GET /admin/miniProgram/image/add/?_to_field=id&_popup=1 HTTP/1.1" 200 15551
+INFO [2021-04-07 14:55:02,627] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 14:55:09,345] django.server: "POST /admin/miniProgram/image/add/?_to_field=id&_popup=1 HTTP/1.1" 200 338
+INFO [2021-04-07 14:55:09,837] django.server: "GET /static/admin/js/popup_response.js HTTP/1.1" 200 551
+INFO [2021-04-07 14:56:11,544] django.server: "GET /admin/miniProgram/country/add/?_to_field=id&_popup=1 HTTP/1.1" 200 15117
+INFO [2021-04-07 14:56:12,132] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 14:56:26,353] django.server: "POST /admin/miniProgram/country/add/?_to_field=id&_popup=1 HTTP/1.1" 200 348
+INFO [2021-04-07 14:58:07,151] django.server: "GET /static/admin/img/inline-delete.svg HTTP/1.1" 200 560
+INFO [2021-04-07 14:59:41,983] django.server: "POST /admin/miniProgram/film/add/ HTTP/1.1" 302 0
+INFO [2021-04-07 14:59:43,339] django.server: "GET /admin/miniProgram/film/ HTTP/1.1" 200 16970
+INFO [2021-04-07 14:59:43,955] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 14:59:44,780] django.server: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO [2021-04-07 15:03:08,100] django.server: "GET /admin/miniProgram/film/add/ HTTP/1.1" 200 43171
+INFO [2021-04-07 15:03:08,720] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 16:00:55,496] django.server: "GET /admin/miniProgram/film/add/ HTTP/1.1" 200 43321
+INFO [2021-04-07 16:00:56,104] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+WARNING [2021-04-07 16:00:56,940] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-04-07 16:02:46,962] django.server: "GET /admin/miniProgram/film/add/ HTTP/1.1" 200 43321
+INFO [2021-04-07 16:02:47,459] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-04-07 16:02:47,500] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-04-07 16:02:47,534] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-04-07 16:02:47,536] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-04-07 16:02:47,541] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-04-07 16:02:47,549] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+INFO [2021-04-07 16:02:47,571] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-04-07 16:02:47,576] django.server: "GET /static/admin/js/inlines.min.js HTTP/1.1" 200 5301
+INFO [2021-04-07 16:02:47,581] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-04-07 16:02:47,589] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-04-07 16:02:47,591] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-04-07 16:02:47,596] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-04-07 16:02:47,647] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 16:02:47,964] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-04-07 16:02:48,051] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+INFO [2021-04-07 16:02:48,055] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-04-07 16:02:48,066] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-04-07 16:02:48,545] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2021-04-07 16:02:48,549] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+INFO [2021-04-07 16:02:48,556] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-04-07 16:02:48,581] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-04-07 16:02:48,587] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-04-07 16:02:48,588] django.server: "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+WARNING [2021-04-07 16:02:49,298] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-04-07 16:03:02,968] django.server: "GET /miniProgram/getArticleInfo?url=https%3A%2F%2Fmp.weixin.qq.com%2Fs%2FeyxxFSs4qnpjKNs6YsDe5A HTTP/1.1" 200 1368
+INFO [2021-04-07 16:06:49,047] django.server: "GET /admin/miniProgram/film/add/ HTTP/1.1" 200 43321
+INFO [2021-04-07 16:06:49,538] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-04-07 16:06:49,550] django.server: "GET /static/admin/js/inlines.min.js HTTP/1.1" 200 5301
+INFO [2021-04-07 16:06:49,555] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-04-07 16:06:49,555] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-04-07 16:06:49,558] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-04-07 16:06:49,580] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-04-07 16:06:49,587] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-04-07 16:06:49,587] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-04-07 16:06:49,588] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+INFO [2021-04-07 16:06:49,591] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-04-07 16:06:49,592] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-04-07 16:06:49,592] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-04-07 16:06:49,708] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 16:06:49,992] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-04-07 16:06:50,083] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-04-07 16:06:50,146] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-04-07 16:06:50,146] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+INFO [2021-04-07 16:06:50,540] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-04-07 16:06:50,596] django.server: "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+INFO [2021-04-07 16:06:50,626] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2021-04-07 16:06:50,630] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-04-07 16:07:19,887] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-04-07 16:07:19,889] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+WARNING [2021-04-07 16:07:20,989] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-04-07 17:02:12,120] django.server: "GET /admin/miniProgram/ HTTP/1.1" 200 14737
+INFO [2021-04-07 17:04:34,169] django.server: "GET /admin/miniProgram/house/add/ HTTP/1.1" 200 33371
+INFO [2021-04-07 17:04:34,773] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+WARNING [2021-04-07 17:04:44,176] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:04:44,177] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:04:44,179] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:04:44,180] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:04:44,180] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:04:44,182] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:04:44,183] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:04:44,183] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:04:44,204] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:04:44,204] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:04:44,218] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:04:44,218] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:04:44,225] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:04:44,226] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:04:44,230] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:04:44,230] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:04:44,233] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:04:44,234] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:20:17,519] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/deleteImg
+WARNING [2021-04-07 17:20:17,519] django.server: "POST /miniProgram/deleteImg HTTP/1.1" 403 1019
+INFO [2021-04-07 17:24:35,596] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
+INFO [2021-04-07 17:24:36,638] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-07 17:24:54,920] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-07 17:25:01,712] django.server: "GET /admin/miniProgram/house/add/ HTTP/1.1" 200 34176
+INFO [2021-04-07 17:25:02,352] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+ERROR [2021-04-07 17:25:09,897] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 37, in wrapper
+    return func(request,*args,**kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 98, in upload_temp_image
+    access_token = getAccessToken()
+TypeError: wrapper() missing 1 required positional argument: 'request'
+ERROR [2021-04-07 17:25:09,907] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 37, in wrapper
+    return func(request,*args,**kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 98, in upload_temp_image
+    access_token = getAccessToken()
+TypeError: wrapper() missing 1 required positional argument: 'request'
+ERROR [2021-04-07 17:25:09,908] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 37, in wrapper
+    return func(request,*args,**kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 98, in upload_temp_image
+    access_token = getAccessToken()
+TypeError: wrapper() missing 1 required positional argument: 'request'
+ERROR [2021-04-07 17:25:09,914] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 37, in wrapper
+    return func(request,*args,**kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 98, in upload_temp_image
+    access_token = getAccessToken()
+TypeError: wrapper() missing 1 required positional argument: 'request'
+ERROR [2021-04-07 17:25:09,916] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 37, in wrapper
+    return func(request,*args,**kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 98, in upload_temp_image
+    access_token = getAccessToken()
+TypeError: wrapper() missing 1 required positional argument: 'request'
+ERROR [2021-04-07 17:25:09,921] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 37, in wrapper
+    return func(request,*args,**kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 98, in upload_temp_image
+    access_token = getAccessToken()
+TypeError: wrapper() missing 1 required positional argument: 'request'
+ERROR [2021-04-07 17:25:09,922] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 37, in wrapper
+    return func(request,*args,**kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 98, in upload_temp_image
+    access_token = getAccessToken()
+TypeError: wrapper() missing 1 required positional argument: 'request'
+ERROR [2021-04-07 17:25:09,933] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 37, in wrapper
+    return func(request,*args,**kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 98, in upload_temp_image
+    access_token = getAccessToken()
+TypeError: wrapper() missing 1 required positional argument: 'request'
+ERROR [2021-04-07 17:25:09,953] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 37, in wrapper
+    return func(request,*args,**kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 98, in upload_temp_image
+    access_token = getAccessToken()
+TypeError: wrapper() missing 1 required positional argument: 'request'
+ERROR [2021-04-07 17:25:12,643] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+ERROR [2021-04-07 17:25:14,382] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+ERROR [2021-04-07 17:25:16,347] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+ERROR [2021-04-07 17:25:18,225] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+ERROR [2021-04-07 17:25:20,114] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+ERROR [2021-04-07 17:25:23,097] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+ERROR [2021-04-07 17:25:25,168] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+ERROR [2021-04-07 17:25:26,827] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+ERROR [2021-04-07 17:25:28,548] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+INFO [2021-04-07 17:41:50,048] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
+INFO [2021-04-07 17:41:51,154] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-07 17:43:13,982] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-07 17:43:27,795] django.server: "GET /admin/miniProgram/house/add/ HTTP/1.1" 200 34176
+INFO [2021-04-07 17:43:28,400] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+WARNING [2021-04-07 17:43:33,469] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:43:33,469] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:43:33,551] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:43:33,551] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:43:33,569] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:43:33,569] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:43:33,575] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:43:33,575] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:43:33,581] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:43:33,582] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:43:33,586] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:43:33,587] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:43:33,612] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:43:33,616] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:43:33,617] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:43:33,620] django.security.csrf: Forbidden (CSRF token missing or incorrect.): /miniProgram/uploadImg
+WARNING [2021-04-07 17:43:33,621] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+WARNING [2021-04-07 17:43:33,622] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 403 1019
+INFO [2021-04-07 17:44:15,033] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
+INFO [2021-04-07 17:44:16,093] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-07 17:44:32,416] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-07 17:44:38,976] django.server: "GET /admin/miniProgram/house/add/ HTTP/1.1" 200 34176
+INFO [2021-04-07 17:44:39,650] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 17:44:42,371] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-04-07 17:44:42,409] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-04-07 17:44:42,436] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-04-07 17:44:42,452] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-04-07 17:44:42,454] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-04-07 17:44:42,458] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-04-07 17:44:42,462] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+INFO [2021-04-07 17:44:42,472] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-04-07 17:44:42,476] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-04-07 17:44:42,477] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-04-07 17:44:42,480] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-04-07 17:44:42,849] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-04-07 17:44:42,905] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+INFO [2021-04-07 17:44:42,935] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-04-07 17:44:42,990] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-04-07 17:44:43,448] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-04-07 17:44:43,449] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-04-07 17:44:56,391] django.server: "GET /admin/miniProgram/house/add/ HTTP/1.1" 200 34176
+INFO [2021-04-07 17:44:56,897] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-04-07 17:44:56,898] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-04-07 17:44:56,901] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+INFO [2021-04-07 17:44:56,906] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-04-07 17:44:56,924] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-04-07 17:44:56,932] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-04-07 17:44:56,936] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-04-07 17:44:56,995] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-04-07 17:44:57,015] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-04-07 17:44:57,015] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-04-07 17:44:57,039] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-04-07 17:44:57,044] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-07 17:44:57,413] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-04-07 17:44:57,429] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+INFO [2021-04-07 17:44:57,514] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-04-07 17:44:57,521] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-04-07 17:44:57,969] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-04-07 17:44:57,974] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+WARNING [2021-04-07 17:45:27,310] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-04-11 16:06:49,083] django.utils.autoreload: Watching for file changes with StatReloader
+WARNING [2021-04-11 16:06:55,205] django.server: "GET / HTTP/1.1" 404 179
+WARNING [2021-04-11 16:06:55,941] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-04-11 16:07:03,953] django.server: "GET /admin HTTP/1.1" 301 0
+INFO [2021-04-11 16:07:04,500] django.server: "GET /admin/ HTTP/1.1" 302 0
+INFO [2021-04-11 16:07:07,370] django.server: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 6011
+INFO [2021-04-11 16:07:08,893] django.server: "GET /static/admin/css/login.css HTTP/1.1" 200 1185
+INFO [2021-04-11 16:07:08,895] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-04-11 16:07:08,913] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-04-11 16:07:09,361] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-04-11 16:07:26,747] django.server: "POST /admin/login/?next=/admin/ HTTP/1.1" 200 6174
+INFO [2021-04-11 16:07:27,365] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2021-04-11 16:07:41,426] django.server: "POST /admin/login/?next=/admin/ HTTP/1.1" 200 6174
+INFO [2021-04-11 16:07:56,112] django.server: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO [2021-04-11 16:07:56,825] django.server: "GET /admin/ HTTP/1.1" 200 22560
+INFO [2021-04-11 16:07:57,330] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 380
+INFO [2021-04-11 16:07:57,843] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-04-11 16:07:57,844] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-04-11 16:07:57,846] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-04-11 16:09:21,737] django.server: "GET /admin/miniProgram/house/ HTTP/1.1" 200 7880
+INFO [2021-04-11 16:09:22,231] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6302
+INFO [2021-04-11 16:09:22,297] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-04-11 16:09:22,298] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-04-11 16:09:22,309] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-04-11 16:09:22,327] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-04-11 16:09:22,335] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-04-11 16:09:22,337] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-04-11 16:09:22,350] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-04-11 16:09:22,366] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-11 16:09:22,381] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-04-11 16:09:22,935] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2021-04-11 16:09:26,366] django.server: "GET /admin/miniProgram/house/add/ HTTP/1.1" 200 34176
+INFO [2021-04-11 16:09:26,903] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+INFO [2021-04-11 16:09:26,945] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-04-11 16:09:26,952] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-04-11 16:09:27,006] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-11 16:09:27,367] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+ERROR [2021-04-11 16:09:34,999] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 97, in upload_temp_image
+    access_token = getAccessToken()
+TypeError: wrapper() missing 1 required positional argument: 'request'
+ERROR [2021-04-11 16:09:37,928] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+INFO [2021-04-11 16:34:35,388] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
+INFO [2021-04-11 16:34:36,544] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-11 16:35:30,495] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
+INFO [2021-04-11 16:35:31,387] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-11 16:35:38,023] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
+INFO [2021-04-11 16:35:38,964] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-11 16:35:46,299] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-11 16:36:39,379] django.server: "GET /admin/miniProgram/house/add/ HTTP/1.1" 200 34176
+INFO [2021-04-11 16:36:39,969] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+WARNING [2021-04-11 16:36:48,220] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 404 179
+ERROR [2021-04-11 16:36:48,738] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 106, in upload_temp_image
+    media_id, url = upLoadImg(file_abs_path, access_token, "image")
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\utils.py", line 419, in upLoadImg
+    return res_json['media_id'], res_json['url']
+KeyError: 'media_id'
+ERROR [2021-04-11 16:36:50,838] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+INFO [2021-04-11 16:37:40,426] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
+INFO [2021-04-11 16:37:41,281] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-11 16:42:09,312] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-11 16:42:26,024] django.server: "GET /admin/miniProgram/house/add/ HTTP/1.1" 200 34176
+INFO [2021-04-11 16:42:26,663] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+WARNING [2021-04-11 16:42:37,245] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 404 179
+ERROR [2021-04-11 16:42:37,672] django.request: Internal Server Error: /miniProgram/uploadImg
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\views.py", line 106, in upload_temp_image
+    media_id, url = upLoadImg(file_abs_path, access_token, "image")
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\utils.py", line 419, in upLoadImg
+    return res_json['media_id'], res_json['url']
+KeyError: 'media_id'
+ERROR [2021-04-11 16:42:39,691] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 500 145
+WARNING [2021-04-11 16:43:18,939] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 404 179
+INFO [2021-04-11 16:44:38,176] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\izBasar\settings.py changed, reloading.
+INFO [2021-04-11 16:44:39,047] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-11 16:44:41,924] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-11 16:46:34,730] django.utils.autoreload: Watching for file changes with StatReloader
+WARNING [2021-04-11 16:47:20,102] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 404 1756
+INFO [2021-04-11 16:50:18,879] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
+INFO [2021-04-11 16:50:19,707] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-11 16:50:26,435] django.utils.autoreload: Watching for file changes with StatReloader
+WARNING [2021-04-11 16:50:57,534] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 404 1775
+INFO [2021-04-11 16:51:54,148] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
+INFO [2021-04-11 16:51:55,105] django.utils.autoreload: Watching for file changes with StatReloader
+WARNING [2021-04-11 16:52:04,985] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 404 1756
+WARNING [2021-04-11 16:56:40,535] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 404 1756
+WARNING [2021-04-11 16:56:41,240] django.server: "GET /favicon.ico HTTP/1.1" 404 2850
+INFO [2021-04-11 16:57:32,686] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-04-11 16:57:54,384] django.server: "GET /admin/miniProgram/house/add/ HTTP/1.1" 200 34160
+INFO [2021-04-11 16:57:55,009] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-11 16:57:55,573] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 200 6783
+INFO [2021-04-11 16:57:55,574] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO [2021-04-11 16:57:55,615] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 287630
+INFO [2021-04-11 16:57:55,615] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+INFO [2021-04-11 16:58:03,563] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-04-11 16:58:04,610] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 200 256
+INFO [2021-04-11 17:01:32,098] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-04-11 17:01:32,210] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-04-11 17:01:32,217] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-04-11 17:01:32,219] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-04-11 17:01:32,223] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-04-11 17:01:32,240] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-04-11 17:01:32,271] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-04-11 17:01:32,272] django.server: "GET /miniProgram/getSubcribtionAccessToken HTTP/1.1" 200 157
+INFO [2021-04-11 17:01:33,076] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 200 258
+INFO [2021-04-11 17:01:33,098] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 200 262
+INFO [2021-04-11 17:01:33,193] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 200 256
+INFO [2021-04-11 17:01:33,206] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 200 256
+INFO [2021-04-11 17:01:33,239] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 200 257
+INFO [2021-04-11 17:01:33,322] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 200 258
+INFO [2021-04-11 17:01:33,354] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 200 256
+INFO [2021-04-11 17:01:33,472] django.server: "POST /miniProgram/uploadImg HTTP/1.1" 200 258
+INFO [2021-04-11 17:01:47,027] django.server: "POST /admin/miniProgram/house/add/ HTTP/1.1" 302 0
+INFO [2021-04-11 17:01:48,202] django.server: "GET /admin/miniProgram/house/ HTTP/1.1" 200 11199
+INFO [2021-04-11 17:01:48,791] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-11 17:01:48,871] django.server: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO [2021-04-11 17:01:58,804] django.server: "GET /admin/miniProgram/house/1/change/ HTTP/1.1" 200 36393
+INFO [2021-04-11 17:01:59,423] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-11 17:02:09,014] django.server: "GET /admin/miniProgram/house/ HTTP/1.1" 200 10988
+INFO [2021-04-11 17:02:09,609] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-11 17:06:31,910] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\izBasar\settings.py changed, reloading.
+INFO [2021-04-11 17:06:33,118] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-11 17:39:09,333] django.server: "GET /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO [2021-04-11 17:39:10,105] django.server: "GET /admin/ HTTP/1.1" 200 22527
+WARNING [2021-04-11 17:39:11,033] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-04-11 17:39:19,630] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 80650
+INFO [2021-04-11 17:39:20,267] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
