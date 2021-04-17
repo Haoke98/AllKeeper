@@ -35,20 +35,16 @@ import platform
 WINDOWS = 'Windows'
 LINUX = 'Linux'
 SADAM_SET = {
-    "MYSQL_SERVER_HOST": "undefined by sadam",
     "DEBUG": False,
     "BASE_HREF": "BASE_HREF_TWO_PLATFORMS",
 }
 if platform.system() == WINDOWS:
-    SADAM_SET['MYSQL_SERVER_HOST'] = '139.155.30.83'
     SADAM_SET["DEBUG"] = False
     SADAM_SET["BASE_HREF"] = "http://10.128.202.191:7000"
 else:
-    SADAM_SET["MYSQL_SERVER_HOST"] = 'localhost'
     SADAM_SET["DEBUG"] = False
     SADAM_SET["BASE_HREF"] = "https://x.izbasarweb.xyz"
 
-SADAM_SET['MYSQL_SERVER_HOST'] = '139.155.30.83'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = SADAM_SET.get("DEBUG")
 
@@ -92,7 +88,7 @@ LOGGING = {
         'file': {  # 记录到日志文件(需要创建对应的目录，否则会出错)
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOG_FILE_DIR,  'debug.log'),  # 日志输出文件
+            'filename': os.path.join(LOG_FILE_DIR, 'debug.log'),  # 日志输出文件
             'maxBytes': 1024 * 1024 * 5,  # 文件大小
             'backupCount': 5,  # 备份份数
             'formatter': 'default',  # 使用哪种formatters日志格式
@@ -182,16 +178,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'izBasar.wsgi.application'
 
+import configparser
+
+cf = configparser.ConfigParser()
+cf.read(os.path.join(BASE_DIR, os.path.join('izbasar', 'secret.conf')))
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'izbasar',
-        'USER': 'root',
-        'PASSWORD': 'qwer1234',
-        'PORT': '3306',
-        'HOST': SADAM_SET["MYSQL_SERVER_HOST"],
+        'NAME': cf.get('db', "MYSQL_DATABASE"),
+        'USER': cf.get('db', "MYSQL_USER_NAME"),
+        'PASSWORD': cf.get('db', "MYSQL_PASSWORD"),
+        'PORT': cf.get('db', "MYSQL_PORT"),
+        'HOST': cf.get('db', "MYSQL_HOST"),
     }
 }
 

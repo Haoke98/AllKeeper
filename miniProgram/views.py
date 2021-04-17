@@ -267,7 +267,6 @@ def getSlider(request):
     return HttpResponse(result, content_type='application/json,charset=utf-8')
 
 
-@checkLogin
 @cache_page(2 * 60 * 60)
 def getMiniProgramAccessToken(request):
     app = Settings.objects.first()
