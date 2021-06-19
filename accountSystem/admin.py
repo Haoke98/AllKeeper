@@ -18,7 +18,7 @@ class PasswordAdmin(admin.ModelAdmin):
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ['__str__', '_username', '_password', '_url', 'email', 'tel', '_info', 'group']
+    list_display = ['__str__', '_username', '_password', '_url', 'email', 'tel', '_info']
     list_filter = ['group']
 
     def _url(self, obj):
