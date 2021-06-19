@@ -106,7 +106,7 @@ Traceback (most recent call last):
     self._execute_child(args, executable, preexec_fn, close_fds,
   File "D:\python39\lib\subprocess.py", line 1416, in _execute_child
     hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
-FileNotFoundError: [WinError 206] ÎÄ¼þÃû»òÀ©Õ¹ÃûÌ«³¤¡£
+FileNotFoundError: [WinError 206] ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½Ì«ï¿½ï¿½ï¿½ï¿½
 ERROR [2021-02-15 10:47:53,264] django.server: "POST /admin/miniProgram/image/add/ HTTP/1.1" 500 176986
 INFO [2021-02-15 10:50:33,509] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
 INFO [2021-02-15 10:50:36,893] django.utils.autoreload: Watching for file changes with StatReloader
@@ -162,7 +162,7 @@ Traceback (most recent call last):
     self._execute_child(args, executable, preexec_fn, close_fds,
   File "D:\python39\lib\subprocess.py", line 1416, in _execute_child
     hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
-FileNotFoundError: [WinError 206] ÎÄ¼þÃû»òÀ©Õ¹ÃûÌ«³¤¡£
+FileNotFoundError: [WinError 206] ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½Ì«ï¿½ï¿½ï¿½ï¿½
 ERROR [2021-02-15 10:51:25,448] django.server: "POST /admin/miniProgram/image/add/ HTTP/1.1" 500 176986
 INFO [2021-02-15 10:52:11,884] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\views.py changed, reloading.
 INFO [2021-02-15 10:52:15,176] django.utils.autoreload: Watching for file changes with StatReloader
@@ -1683,3 +1683,244 @@ INFO [2021-04-17 15:17:11,271] django.server: "POST /admin/miniProgram/film/14/c
 INFO [2021-04-17 15:17:11,453] django.server: "GET /admin/miniProgram/film/ HTTP/1.1" 200 21087
 INFO [2021-04-17 15:17:11,573] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
 INFO [2021-04-17 15:17:11,807] django.server: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO [2021-04-22 16:52:50,298] django.utils.autoreload: Watching for file changes with StatReloader
+WARNING [2021-04-22 16:52:52,721] django.server: "GET / HTTP/1.1" 404 179
+WARNING [2021-04-22 16:52:53,228] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-04-22 16:52:56,750] django.server: "GET /admin/ HTTP/1.1" 302 0
+INFO [2021-04-22 16:52:59,238] django.server: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 6011
+INFO [2021-04-22 16:53:00,259] django.server: "GET /static/admin/css/login.css HTTP/1.1" 200 1185
+INFO [2021-04-22 16:53:00,261] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-04-22 16:53:00,272] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-04-22 16:53:00,334] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-04-22 16:53:09,721] django.server: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO [2021-04-22 16:53:09,839] django.server: "GET /admin/ HTTP/1.1" 200 22610
+INFO [2021-04-22 16:53:09,936] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 380
+INFO [2021-04-22 16:53:10,006] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2021-04-22 16:53:10,109] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-04-22 16:53:10,117] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-04-22 16:53:10,139] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-04-22 16:53:13,856] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 84987
+INFO [2021-04-22 16:53:14,030] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6302
+INFO [2021-04-22 16:53:14,044] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-04-22 16:53:14,072] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-22 16:53:14,086] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-04-22 16:53:14,096] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-04-22 16:53:14,102] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-04-22 16:53:14,108] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-04-22 16:53:14,120] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-04-22 16:53:14,130] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-04-22 16:53:14,168] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-04-22 16:53:14,296] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2021-04-22 16:53:15,998] django.server: "GET /admin/accountSystem/account/55/change/ HTTP/1.1" 200 16142
+INFO [2021-04-22 16:53:16,113] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-22 16:53:16,115] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-04-22 16:53:16,116] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-04-22 16:53:16,118] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+INFO [2021-04-22 16:53:16,193] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+INFO [2021-04-22 16:53:42,308] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 84987
+INFO [2021-04-22 16:53:42,424] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-22 16:53:43,575] django.server: "GET /admin/accountSystem/account/add/ HTTP/1.1" 200 15081
+INFO [2021-04-22 16:53:43,684] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-22 16:54:00,617] django.server: "GET /admin/accountSystem/account/add/ HTTP/1.1" 200 15081
+INFO [2021-04-22 16:54:00,719] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-04-22 16:54:00,727] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+INFO [2021-04-22 16:54:00,731] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-04-22 16:54:00,746] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-04-22 16:54:00,749] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-04-22 16:54:00,763] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-22 16:54:00,765] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-04-22 16:54:00,765] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-04-22 16:54:00,767] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-04-22 16:54:00,773] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-04-22 16:54:00,777] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-04-22 16:54:00,782] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-04-22 16:54:00,843] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-04-22 16:54:00,844] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-04-22 16:54:00,887] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+INFO [2021-04-22 16:54:00,889] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-04-22 16:54:00,936] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-04-22 16:54:00,964] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-04-22 16:54:01,970] django.server: "GET /admin/accountSystem/account/add/ HTTP/1.1" 200 15081
+INFO [2021-04-22 16:54:02,074] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-04-22 16:54:02,086] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+INFO [2021-04-22 16:54:02,093] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-04-22 16:54:02,125] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-04-22 16:54:02,125] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-04-22 16:54:02,138] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-04-22 16:54:02,143] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-04-22 16:54:02,153] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-04-22 16:54:02,168] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-04-22 16:54:02,176] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-04-22 16:54:02,197] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-04-22 16:54:02,202] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-04-22 16:54:02,216] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-04-22 16:54:02,222] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+INFO [2021-04-22 16:54:02,250] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-04-22 16:54:02,255] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-04-22 16:54:02,311] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-04-22 16:54:02,316] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+WARNING [2021-04-22 16:54:02,478] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-04-22 16:54:36,172] django.server: "GET /admin/accountSystem/account/add/ HTTP/1.1" 302 0
+INFO [2021-04-22 16:54:36,245] django.server: "GET /admin/login/?next=/admin/accountSystem/account/add/ HTTP/1.1" 200 6063
+WARNING [2021-04-22 16:54:36,580] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-04-22 16:55:00,972] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models.py changed, reloading.
+INFO [2021-04-22 16:55:01,880] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-22 16:55:04,373] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models.py changed, reloading.
+INFO [2021-04-22 16:55:05,351] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-22 16:55:58,224] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models.py changed, reloading.
+INFO [2021-04-22 16:55:59,205] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-22 17:12:43,824] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-04-22 17:12:49,164] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 16:58:32,763] django.utils.autoreload: Watching for file changes with StatReloader
+WARNING [2021-06-19 16:58:36,811] django.server: "GET / HTTP/1.1" 404 179
+WARNING [2021-06-19 16:58:37,240] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-06-19 16:58:47,951] django.server: "GET /admin HTTP/1.1" 301 0
+INFO [2021-06-19 16:58:48,168] django.server: "GET /admin/ HTTP/1.1" 302 0
+INFO [2021-06-19 16:58:50,853] django.server: "GET /admin/login/?next=/admin/ HTTP/1.1" 200 6011
+INFO [2021-06-19 16:58:52,091] django.server: "GET /static/admin/css/login.css HTTP/1.1" 200 1185
+INFO [2021-06-19 16:58:52,092] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-06-19 16:58:52,092] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-06-19 16:58:52,419] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-06-19 16:59:01,010] django.server: "POST /admin/login/?next=/admin/ HTTP/1.1" 200 6174
+INFO [2021-06-19 16:59:06,935] django.server: "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO [2021-06-19 16:59:07,125] django.server: "GET /admin/ HTTP/1.1" 200 22997
+INFO [2021-06-19 16:59:07,238] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 380
+INFO [2021-06-19 16:59:07,358] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-06-19 16:59:07,359] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2021-06-19 16:59:07,372] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-06-19 16:59:07,378] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-06-19 16:59:14,042] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 114475
+INFO [2021-06-19 16:59:14,173] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6302
+INFO [2021-06-19 16:59:14,188] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-06-19 16:59:14,192] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 16:59:14,196] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-06-19 16:59:14,204] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-06-19 16:59:14,215] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-06-19 16:59:14,219] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-06-19 16:59:14,224] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-06-19 16:59:14,231] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-06-19 16:59:14,257] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-06-19 16:59:14,417] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2021-06-19 16:59:19,098] django.server: "GET /admin/accountSystem/account/76/change/ HTTP/1.1" 200 17328
+INFO [2021-06-19 16:59:19,204] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8423
+INFO [2021-06-19 16:59:19,222] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-06-19 16:59:19,228] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-06-19 16:59:19,246] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 16:59:19,306] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 10592
+INFO [2021-06-19 16:59:22,303] django.server: "GET /admin/accountSystem/group/add/?_to_field=id&_popup=1 HTTP/1.1" 200 6867
+INFO [2021-06-19 16:59:22,440] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 16:59:28,982] django.server: "POST /admin/accountSystem/group/add/?_to_field=id&_popup=1 HTTP/1.1" 200 350
+INFO [2021-06-19 16:59:29,108] django.server: "GET /static/admin/js/popup_response.js HTTP/1.1" 200 551
+INFO [2021-06-19 16:59:33,929] django.server: "POST /admin/accountSystem/account/76/change/ HTTP/1.1" 302 0
+INFO [2021-06-19 16:59:35,849] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 115174
+INFO [2021-06-19 16:59:35,979] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 16:59:36,137] django.server: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO [2021-06-19 16:59:45,195] django.server: "GET /admin/accountSystem/account/41/change/ HTTP/1.1" 200 17434
+INFO [2021-06-19 16:59:45,335] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 16:59:48,196] django.server: "GET /admin/accountSystem/group/add/?_to_field=id&_popup=1 HTTP/1.1" 200 6867
+INFO [2021-06-19 16:59:48,334] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 16:59:54,513] django.server: "POST /admin/accountSystem/group/add/?_to_field=id&_popup=1 HTTP/1.1" 200 356
+INFO [2021-06-19 16:59:57,063] django.server: "POST /admin/accountSystem/account/41/change/ HTTP/1.1" 302 0
+INFO [2021-06-19 16:59:58,839] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 115296
+INFO [2021-06-19 16:59:58,974] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:02:12,974] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:02:14,047] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:04:16,696] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:04:17,484] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:04:45,511] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 130299
+INFO [2021-06-19 17:04:45,657] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:06:59,916] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:07:00,608] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:07:15,510] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:07:16,256] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:07:33,292] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:07:34,100] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:08:37,044] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:08:37,757] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:12:10,995] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:12:11,701] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:12:13,070] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:12:13,769] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:12:18,125] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 133572
+INFO [2021-06-19 17:12:18,267] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:15:18,292] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:15:19,015] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:15:47,492] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:15:48,255] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:16:49,127] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:16:49,877] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:17:08,928] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-06-19 17:17:09,630] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-06-19 17:17:15,920] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 144417
+INFO [2021-06-19 17:17:16,053] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:18:48,816] django.server: "GET /admin/accountSystem/account/12/change/ HTTP/1.1" 200 17440
+INFO [2021-06-19 17:18:48,967] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:19:20,615] django.server: "GET /admin/accountSystem/ppassword/9/change/?_to_field=id&_popup=1 HTTP/1.1" 200 6861
+INFO [2021-06-19 17:19:20,772] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:19:24,833] django.server: "POST /admin/accountSystem/ppassword/9/change/?_to_field=id&_popup=1 HTTP/1.1" 200 432
+INFO [2021-06-19 17:19:28,929] django.server: "POST /admin/accountSystem/account/12/change/ HTTP/1.1" 302 0
+INFO [2021-06-19 17:19:30,609] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 144648
+INFO [2021-06-19 17:19:30,749] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:19:34,197] django.server: "GET /admin/accountSystem/account/12/change/ HTTP/1.1" 200 17440
+INFO [2021-06-19 17:19:34,361] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:20:33,112] django.server: "GET /admin/accountSystem/group/add/?_to_field=id&_popup=1 HTTP/1.1" 200 6867
+INFO [2021-06-19 17:20:33,263] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:20:50,218] django.server: "POST /admin/accountSystem/group/add/?_to_field=id&_popup=1 HTTP/1.1" 200 380
+INFO [2021-06-19 17:22:11,040] django.server: "POST /admin/accountSystem/account/12/change/ HTTP/1.1" 302 0
+INFO [2021-06-19 17:22:12,839] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 145280
+INFO [2021-06-19 17:22:13,020] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:24:35,141] django.server: "GET /admin/accountSystem/account/ HTTP/1.1" 200 145049
+INFO [2021-06-19 17:24:35,374] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:24:37,919] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-06-19 17:24:37,925] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-06-19 17:24:37,925] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-06-19 17:24:37,929] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-06-19 17:24:37,935] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-06-19 17:24:37,939] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-06-19 17:24:37,943] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6302
+INFO [2021-06-19 17:24:37,944] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-06-19 17:24:37,960] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-06-19 17:24:37,973] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-06-19 17:24:37,982] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-06-19 17:24:38,030] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-06-19 17:24:38,284] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-06-19 17:24:38,400] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2021-06-19 17:24:38,556] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+WARNING [2021-06-19 17:24:38,714] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-06-19 17:25:23,149] django.server: "GET /admin/accountSystem/account/?group__isnull=True HTTP/1.1" 200 142098
+INFO [2021-06-19 17:25:23,290] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:25:30,233] django.server: "GET /admin/accountSystem/account/75/change/?_changelist_filters=group__isnull%3DTrue HTTP/1.1" 200 17464
+INFO [2021-06-19 17:25:30,375] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:25:34,576] django.server: "POST /admin/accountSystem/account/75/change/?_changelist_filters=group__isnull%3DTrue HTTP/1.1" 302 0
+INFO [2021-06-19 17:25:36,254] django.server: "GET /admin/accountSystem/account/?group__isnull=True HTTP/1.1" 200 140981
+INFO [2021-06-19 17:25:36,388] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:25:41,843] django.server: "GET /admin/accountSystem/account/74/change/?_changelist_filters=group__isnull%3DTrue HTTP/1.1" 200 17539
+INFO [2021-06-19 17:25:41,989] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:25:46,178] django.server: "POST /admin/accountSystem/account/74/change/?_changelist_filters=group__isnull%3DTrue HTTP/1.1" 302 0
+INFO [2021-06-19 17:25:47,950] django.server: "GET /admin/accountSystem/account/?group__isnull=True HTTP/1.1" 200 139261
+INFO [2021-06-19 17:25:48,101] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:25:49,801] django.server: "GET /admin/accountSystem/account/73/change/?_changelist_filters=group__isnull%3DTrue HTTP/1.1" 200 17448
+INFO [2021-06-19 17:25:49,976] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:25:54,266] django.server: "POST /admin/accountSystem/account/73/change/?_changelist_filters=group__isnull%3DTrue HTTP/1.1" 302 0
+INFO [2021-06-19 17:25:56,082] django.server: "GET /admin/accountSystem/account/?group__isnull=True HTTP/1.1" 200 137898
+INFO [2021-06-19 17:25:56,260] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:26:56,129] django.server: "GET /admin/accountSystem/account/?group__isnull=True HTTP/1.1" 200 137677
+INFO [2021-06-19 17:26:56,252] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 16508
+INFO [2021-06-19 17:26:56,260] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 200 89476
+INFO [2021-06-19 17:26:56,267] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5418
+INFO [2021-06-19 17:26:56,273] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6302
+INFO [2021-06-19 17:26:56,276] django.server: "GET /static/admin/js/actions.min.js HTTP/1.1" 200 3237
+INFO [2021-06-19 17:26:56,284] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18344
+INFO [2021-06-19 17:26:56,290] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6078
+INFO [2021-06-19 17:26:56,304] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-06-19 17:26:56,310] django.server: "GET /static/admin/js/prepopulate.min.js HTTP/1.1" 200 388
+INFO [2021-06-19 17:26:56,310] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187
+INFO [2021-06-19 17:26:56,314] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 8632
+INFO [2021-06-19 17:26:56,320] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 200 125266
+INFO [2021-06-19 17:26:56,390] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-06-19 17:26:56,561] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2021-06-19 17:26:56,565] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-06-19 17:26:56,569] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+WARNING [2021-06-19 17:26:56,789] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-06-19 17:27:07,152] django.server: "GET /admin/accountSystem/account/? HTTP/1.1" 200 145100
+INFO [2021-06-19 17:27:07,287] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3187

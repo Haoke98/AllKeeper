@@ -25,6 +25,13 @@ class EEmail(models.Model):
         return self.content
 
 
+class Group(models.Model):
+    name = models.CharField(max_length=50, verbose_name="名称", default="未知组")
+
+    def __str__(self):
+        return "所有%s账号" % self.name
+
+
 class Account(MyModel):
     name = models.CharField(max_length=50, verbose_name="账号归属", default="未知账号")
     username = models.CharField(max_length=40, verbose_name="用户名")
@@ -33,6 +40,7 @@ class Account(MyModel):
     url = models.URLField(verbose_name="网站地址", null=True, blank=True)
     email = models.ForeignKey(verbose_name="关联邮箱", to=EEmail, on_delete=models.CASCADE, null=True, blank=True)
     Introduce = models.TextField(verbose_name="说明", null=True, blank=True)
+    group = models.ForeignKey(verbose_name="所属账号组", to=Group, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return "%s账号" % self.name
