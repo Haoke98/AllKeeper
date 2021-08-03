@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from miniProgram.admin import MyModelAdmin
+from miniProgram.admins.admin import MyModelAdmin
 from .models import *
 
 

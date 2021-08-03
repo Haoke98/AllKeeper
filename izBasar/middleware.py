@@ -1,4 +1,4 @@
-from miniProgram.models import Settings
+from miniProgram.models.models import Settings
 
 
 def sadam_middleware(get_response):

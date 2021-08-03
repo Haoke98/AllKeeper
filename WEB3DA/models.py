@@ -1,9 +1,12 @@
 from django.db import models
 
-from miniProgram.models import Image, MyModel
+
 
 
 # Create your models here.
+from miniProgram.models.models import MyModel, Image
+
+
 class Map(MyModel):
     name = models.CharField(max_length=50, verbose_name='贴图名称')
     # on_delete options is DO_NOTHING because it is unnecessary to delete the image used in else where.

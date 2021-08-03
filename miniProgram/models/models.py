@@ -14,8 +14,7 @@ from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
 from izBasar.settings import MEDIA_ROOT
-from .utils import getVideoInfo
-from izBasar.settings import MEDIA_ROOT
+from miniProgram.utils import getVideoInfo, upLoadImg
 
 
 class ImageInput(TextInput):
@@ -159,9 +158,8 @@ class Image(MyModel):
             tempFilePath = os.path.join(MEDIA_ROOT, tempFileName)
             with open(tempFilePath, 'wb') as f:
                 f.write(self.content.read())
-            from .utils import upLoadImg
             setting = Settings.objects.get_or_create(id=1)[0]
-            url = "%s/miniProgram/getSubcribtionAccessToken" % setting.host
+            url = "%s/miniProgram/subscriptionAccessToken" % setting.host
             access_token = requests.get(url).text
             print("this is access_token by request the local server on the server:%s" % access_token)
             # virtualRequest.method = "GET"

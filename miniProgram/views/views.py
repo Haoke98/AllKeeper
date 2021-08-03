@@ -1,19 +1,24 @@
 import datetime
 # Create your views here.
 import json
+import os
 
+import requests
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.core.mail import send_mail
 from django.http import HttpResponse, Http404
 from django.http import JsonResponse
 from django.shortcuts import redirect
+from django.template import loader
+from django.utils import timezone
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 
 from izBasar.settings import ADMINS, EMAIL_HOST_USER
-from .models import *
-from .utils import analyseGetVideoInfo, beautyDictPrint
+from miniProgram.models import *
+from miniProgram.models.models import User, Settings, House, Video, Article, RedirectUrlRelation, Film
+from miniProgram.utils import analyseGetVideoInfo, beautyDictPrint, upLoadImg
 
 SESSION_KEY_CURR_USER_OPENID = "OPENID"
 SESSION_KEY_CURR_USER = "curr_user"
@@ -101,7 +106,6 @@ def upload_temp_image(request):
                 with open(file_abs_path, 'wb') as f:
                     for chunk in file.chunks():
                         f.write(chunk)
-                from .utils import upLoadImg
                 access_token = getAccessToken()
                 media_id, url = upLoadImg(file_abs_path, access_token, "image")
                 image_url_list.append({'url': url, 'media_id': media_id, 'size': file.size})
@@ -276,13 +280,13 @@ def getMiniProgramAccessToken(request):
     print('gettingMiniProgramAccessToken:(appid:%s,appSecret:%s) %s' % (app.app_id, app.app_secret, access_token))
     return HttpResponse(access_token, content_type='application/json,charset=utf-8')
 
-
 @checkLogin
 @cache_page(2 * 60 * 60)
 def getSubcribtionsAccessToken(request):
     app = Settings.objects.get_or_create(id=1)[0]
     subcribtion = app.subcribtion
     url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + subcribtion.app_id + "&secret=" + subcribtion.app_secret
+    print(url)
     res = requests.get(url)
     res_json = res.json()
     res_json_dic = dict(res_json)

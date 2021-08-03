@@ -1,9 +1,8 @@
-from django.contrib import admin
-
-from .models import *
-
 
 # Register your models here.
+from miniProgram.models.models import *
+from django.contrib import admin
+
 
 class MyModelAdmin(admin.ModelAdmin):
     list_display = list(admin.ModelAdmin.list_display) + ['last_changed_time']
@@ -59,9 +58,6 @@ class UserAdmin(MyModelAdmin):
     avatar.allow_tags = True
 
 
-@admin.register(Subcribtions)
-class subcribtionsAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['app_id', 'app_secret']
 
 
 @admin.register(Settings)

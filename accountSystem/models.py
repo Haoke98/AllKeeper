@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from miniProgram.models import MyModel
+from miniProgram.models.models import MyModel
 
 
 class PPassword(models.Model):
