@@ -58,6 +58,7 @@ function start() {
     echo "starting now......"
     PID_FILE="./${NAME}.pid"
     LOG_FILE="./${NAME}.log"
+    rm LOG_FILE
     nohup ${RUN_CMD} >> ${LOG_FILE}  2>&1 & echo $! > ${PID_FILE}
 }
 
