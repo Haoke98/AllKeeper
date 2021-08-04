@@ -2421,3 +2421,7 @@ INFO [2021-08-04 15:55:26,805] django.server: "GET /admin/miniProgram/image/ HTT
 INFO [2021-08-04 15:55:27,406] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3195
 INFO [2021-08-04 15:56:35,793] django.utils.autoreload: Watching for file changes with StatReloader
 WARNING [2021-08-04 15:56:37,259] django.server: "GET / HTTP/1.1" 404 2937
+INFO [2021-08-04 17:02:26,321] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\izBasar\settings.py changed, reloading.
+INFO [2021-08-04 17:02:27,105] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-08-04 17:05:33,261] django.utils.autoreload: Watching for file changes with StatReloader
+WARNING [2021-08-04 17:05:34,726] django.server: "GET / HTTP/1.1" 404 2937
