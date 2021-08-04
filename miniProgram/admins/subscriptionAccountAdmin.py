@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from miniProgram.admins.admin import MyModelAdmin
-from miniProgram.models.subscriptionAccount import SubscriptionAccount
+from .admin import MyModelAdmin
+from miniProgram.models import SubscriptionAccount
 
 
 @admin.register(SubscriptionAccount)

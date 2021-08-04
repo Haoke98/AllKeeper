@@ -8,7 +8,7 @@ urlpatterns = [
     path('getOpenid<str:js_code>', getUserOpenid),
     path('getAccessToken', getMiniProgramAccessToken),
     path('getSlider', getSlider),
-    path('subscriptionAccessToken', getSubcribtionsAccessToken),
+    path('subscriptionAccessToken', getSubscriptionAccessToken),
     path('buyVIP<str:openid>', buyVIP),
     path('updateUserInfo', updateUserInfo),
     path('UrlRedirector<int:id>', UrlRedirector),

@@ -1,27 +1,26 @@
 import datetime
 # Create your views here.
 import json
-import os
 
 import requests
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.core.mail import send_mail
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import redirect
-from django.template import loader
-from django.utils import timezone
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 
 from izBasar.settings import ADMINS, EMAIL_HOST_USER
 from miniProgram.models import *
-from miniProgram.models.models import User, Settings, House, Video, Article, RedirectUrlRelation, Film
+from miniProgram.services import SubscriptionAccountService
 from miniProgram.utils import analyseGetVideoInfo, beautyDictPrint, upLoadImg
 
 SESSION_KEY_CURR_USER_OPENID = "OPENID"
 SESSION_KEY_CURR_USER = "curr_user"
+
+subscriptionAccountService = SubscriptionAccountService()
 
 
 # Create your views here.
@@ -280,24 +279,12 @@ def getMiniProgramAccessToken(request):
     print('gettingMiniProgramAccessToken:(appid:%s,appSecret:%s) %s' % (app.app_id, app.app_secret, access_token))
     return HttpResponse(access_token, content_type='application/json,charset=utf-8')
 
+
 @checkLogin
 @cache_page(2 * 60 * 60)
-def getSubcribtionsAccessToken(request):
-    app = Settings.objects.get_or_create(id=1)[0]
-    subcribtion = app.subcribtion
-    url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + subcribtion.app_id + "&secret=" + subcribtion.app_secret
-    print(url)
-    res = requests.get(url)
-    res_json = res.json()
-    res_json_dic = dict(res_json)
-    errCode = res_json_dic.get("errcode", 200)
-    if errCode == 200:
-        return HttpResponse(res.json()['access_token'])
-    else:
-        send_mail('[IzBasar]获取公众号AccessToken失败', res.text, EMAIL_HOST_USER,
-                  [ADMINS[0][1], ], fail_silently=False)
-        raise Http404
-        return HttpResponse(res)
+def getSubscriptionAccessToken(request):
+    t = subscriptionAccountService.getAccessToken()
+    return HttpResponse(t)
 
 
 @checkLogin

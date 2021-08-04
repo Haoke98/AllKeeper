@@ -405,7 +405,7 @@ module.exports = function(XRegExp) {
     'use strict';
 
     /**
-     * Adds base support for Unicode matching:
+     * Adds base.py support for Unicode matching:
      * - Adds syntax `\p{..}` for matching Unicode tokens. Tokens can be inverted using `\P{..}` or
      *   `\p{^..}`. Token names ignore case, spaces, hyphens, and underscores. You can omit the
      *   braces for token names that are a single letter (e.g. `\pL` or `PL`).
@@ -2717,7 +2717,7 @@ var XRegExp = require('./xregexp');
 
 require('./addons/build')(XRegExp);
 require('./addons/matchrecursive')(XRegExp);
-require('./addons/unicode-base')(XRegExp);
+require('./addons/unicode-base.py')(XRegExp);
 require('./addons/unicode-blocks')(XRegExp);
 require('./addons/unicode-categories')(XRegExp);
 require('./addons/unicode-properties')(XRegExp);

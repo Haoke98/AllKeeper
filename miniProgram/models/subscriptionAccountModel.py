@@ -1,5 +1,5 @@
-from miniProgram.models.models import MyModel
 from django.db import models
+from .base import MyModel
 
 
 class SubscriptionAccount(MyModel):

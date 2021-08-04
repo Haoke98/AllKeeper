@@ -1,10 +1,4 @@
-import os
-import urllib
-from datetime import datetime
-
-import requests
 from django import forms
-from django.core.files import File
 from django.db import models
 # Create your models here.
 from django.forms import TextInput
@@ -13,8 +7,9 @@ from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
-from izBasar.settings import MEDIA_ROOT
-from miniProgram.utils import getVideoInfo, upLoadImg
+from .image import Image
+from .base import MyModel
+from miniProgram.utils import getVideoInfo
 
 
 class ImageInput(TextInput):
@@ -43,21 +38,6 @@ class ArticleAnalyseInput(TextInput):
         print("this is context on it :", context)
         template = loader.get_template(self.template_name).render(context)
         return mark_safe(template)
-
-
-class MyModel(models.Model):
-    last_changed_time = models.DateTimeField(verbose_name='最近一次修改时间', auto_now=True)
-
-    class Meta:
-        abstract = True
-        ordering = ['-last_changed_time']
-
-    # def save(self, *args,**kwargs):
-    #     self.last_changed_time =
-    #     return super(MyModel,self).save(*args,**kwargs)
-    # def save(self, *args, **kwargs):
-    #     # self.last_changed_time =
-    #     super().save(*args, **kwargs)
 
 
 class RedirectUrlRelation(MyModel):
@@ -130,92 +110,6 @@ class User(MyModel):
             "avatarUrl": self.avatarUrl,
         }
         return userJson
-
-
-class Image(MyModel):
-    id = models.AutoField(primary_key=True)
-    media_id = models.CharField(max_length=43, blank=True, default="#")
-    # url_default_choices = (("#", "#"),)
-    # url = models.CharField(max_length=500, blank=True, default="#",choices=url_default_choices)
-    url = models.CharField(max_length=500, blank=True, default="#")
-    content = models.ImageField(upload_to='img', blank=True)
-
-    def save(self, *args, **kwargs):
-        if self.url == "#":
-            # print(
-            #     "this is upload mode: this picture that user has upload needs to be upload to the subcribtions material space.")
-            # print("self.content==None:", self.content == None, self.content == "", "xxx")
-            # if self.content == "":
-            #     print("this content is null:this picture is saved by URL from the Subcriptions.")
-            # else:
-            # print(self.content)
-            # print(self.content.name)
-            # print(self.content.url)
-            # print(self.content.file)
-            # print(self.content.path)
-            fileExtension = os.path.splitext(self.content.path)[-1]
-            tempFileName = "%s%s" % (str(datetime.now().microsecond), fileExtension)
-            tempFilePath = os.path.join(MEDIA_ROOT, tempFileName)
-            with open(tempFilePath, 'wb') as f:
-                f.write(self.content.read())
-            setting = Settings.objects.get_or_create(id=1)[0]
-            url = "%s/miniProgram/subscriptionAccessToken" % setting.host
-            access_token = requests.get(url).text
-            print("this is access_token by request the local server on the server:%s" % access_token)
-            # virtualRequest.method = "GET"
-            absoulutelyFilePath = os.path.abspath(tempFilePath)
-            # print(absoulutelyFilePath)
-            self.media_id, self.url = upLoadImg(absoulutelyFilePath, access_token, "image")
-            if os.path.exists(absoulutelyFilePath):
-                os.remove(absoulutelyFilePath)
-            # self.content = None
-        else:
-            pass
-        return super(Image, self).save(*args, **kwargs)
-
-    def show(self):
-        return format_html(
-            '''<img src="{}" width="200px" height="100px"  title="{}" onClick="show_big_img(this)"/>''',
-            self.url, "%s\n%s" % (self.__str__(), self.url)
-
-        )
-
-    def getFromOriginHost(self):
-        if self.content:
-            if os.path.exists(self.content.path):
-                print("该图片%s有缓存，不用下载到服务器:%s" % (self, self.content.path))
-            else:
-                self.downloadPictureToServer()
-        else:
-            self.downloadPictureToServer()
-        return self.content.url
-
-    def downloadPictureToServer(self):
-        '''
-        this is a function use to download the picture on the server disk as cache in order to resolve the Cross origin host.
-        :return:Nothing
-        '''
-        print("该图片%s 在服务器上没有缓存，得重新下载：%s" % (self, self.url))
-        CACHE_DIR_NAME = "ImgChageDIR"
-        IMAGE_CHACHE_DIR = os.path.join(MEDIA_ROOT, CACHE_DIR_NAME)
-        if not os.path.exists(IMAGE_CHACHE_DIR):
-            os.makedirs(IMAGE_CHACHE_DIR)
-        EXTENTION = ".png"
-        if 'jpeg' in self.url or 'jpg' in self.url:
-            EXTENTION = ".jpg"
-        filename = "%s%s" % (self, EXTENTION)
-        filePath = os.path.join(IMAGE_CHACHE_DIR, filename)
-        print("this is the base name on the url:%s" % filePath)
-        result = urllib.request.urlretrieve(self.url, filePath)
-        print("下载好了：", result)
-        self.content.save(
-            os.path.join(CACHE_DIR_NAME, filename),  # 如果直接赋值 filename 则变成 img/filename.extention
-            File(open(filePath, mode='rb'))
-        )
-        self.save()
-    # def __str__(self):
-    #     # return mark_safe('<img src="%s" width="50px" />' % (self.url))
-    #     return
 
 
 from django.forms import ModelForm
