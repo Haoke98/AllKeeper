@@ -1,6 +1,7 @@
 import datetime
 # Create your views here.
 import json
+import os
 
 import requests
 from django.contrib.auth.decorators import login_required
@@ -9,11 +10,13 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import redirect
+from django.template import loader
+from django.utils import timezone
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 
 from izBasar.settings import ADMINS, EMAIL_HOST_USER
-from miniProgram.models import *
+from miniProgram import models
 from miniProgram.services import SubscriptionAccountService
 from miniProgram.utils import analyseGetVideoInfo, beautyDictPrint, upLoadImg
 
@@ -49,7 +52,7 @@ def updateSystemInfo(request):
     openid = request.session.get(SESSION_KEY_CURR_USER)
     user_json = ""
     if openid is not None:
-        curr_user = User.objects.get(openid=openid)
+        curr_user = models.User.objects.get(openid=openid)
         curr_user.systemInfo = systemInfo
         curr_user.save()
         user_json = curr_user.json()
@@ -82,7 +85,7 @@ def getAccessToken():
     这个不是一个视图方法
     :return:返回的是一个公众号的AccessToken
     """
-    setting = Settings.objects.get_or_create(id=1)[0]
+    setting = models.Settings.objects.get_or_create(id=1)[0]
     url = "%s/miniProgram/getSubcribtionAccessToken" % setting.host
     print(url)
     access_token = requests.get(url).text
@@ -136,7 +139,7 @@ def upload_temp_image(request):
 @cache_page(timeout=2 * 60 * 60)
 def getAllHousesInfo(request):
     result = {'err_msg': "OK", 'objects': []}
-    houses = House.objects.order_by('-last_changed_time')
+    houses = models.House.objects.order_by('-last_changed_time')
     dict_object = []
     for per in houses:
         dict_object.append(per.json())
@@ -148,7 +151,7 @@ def getAllHousesInfo(request):
 @checkLogin
 def videoUrlMaker(request, vid):
     pureUrl = cache.get(vid)
-    video = Video.objects.get(id=vid)
+    video = models.Video.objects.get(id=vid)
     video.show()
     if pureUrl is None:
         print("this video has not been saved in cache yet, getting it url now......")
@@ -162,7 +165,7 @@ def videoUrlMaker(request, vid):
 @checkLogin
 def getAllArticles(request):
     result = {'err_msg': "OK", 'objects': []}
-    articles = Article.objects.order_by('-last_changed_time')
+    articles = models.Article.objects.order_by('-last_changed_time')
     dict_object = []
     for per in articles:
         dict_object.append(per.json())
@@ -190,7 +193,7 @@ def getArticleInfo(request):
 def updatePhoneNumber(request):
     data = json.loads(request.body)
     _openid = data['openid']
-    curr_user = User.objects.get(openid=_openid)
+    curr_user = models.User.objects.get(openid=_openid)
     print(data['errMsg'])
     print(data['encryptedData'])
     print(data['iv'])
@@ -199,10 +202,10 @@ def updatePhoneNumber(request):
 
 @checkLogin
 @csrf_exempt
-def UrlRedirector(request, id):
-    redirector = RedirectUrlRelation.objects.get(id=id)
-    url = redirector.redirectUrl
-    returnValue = redirector.returnValue
+def UrlRedirection(request, id):
+    rr = models.RedirectUrlRelation.objects.get(id=id)
+    url = rr.redirectUrl
+    returnValue = rr.returnValue
     print(request.body)
     if url == "#":
         if returnValue == "#":
@@ -223,7 +226,7 @@ def UrlRedirector(request, id):
 def updateUserInfo(request):
     openid = request.GET.get('openid')
     data_dic = json.loads(request.body)
-    curr_user = User.objects.filter(openid=openid)[0]
+    curr_user = models.User.objects.filter(openid=openid)[0]
     curr_user.updateUserInfo(data_dic)
     print(openid, data_dic)
     return HttpResponse("update is ok.")
@@ -231,7 +234,7 @@ def updateUserInfo(request):
 
 @checkLogin
 def buyVIP(request, openid):
-    curr_user = User.objects.filter(openid=openid).first()
+    curr_user = models.User.objects.filter(openid=openid).first()
     print(curr_user)
     now = timezone.now()
     print(now)
@@ -245,7 +248,7 @@ def buyVIP(request, openid):
     print(newDatetime)
     curr_user.vip_expiredTime = newDatetime
     curr_user.save()
-    _settings = Settings.objects.first()
+    _settings = models.Settings.objects.first()
     _settings.total_transaction_volume += _settings.VIPprice * 1
     _settings.save()
     text = "the user:\n" + beautyDictPrint(curr_user.json()) + "\n has bought VIP membership.\nPrice:" + str(
@@ -260,7 +263,7 @@ def buyVIP(request, openid):
 @checkLogin
 def getSlider(request):
     result = {'err_msg': "OK", 'objects': []}
-    app = Settings.objects.first()
+    app = models.Settings.objects.first()
     sliders = app.sliders.order_by('-last_changed_time')
     dicts = []
     for per in sliders:
@@ -272,7 +275,7 @@ def getSlider(request):
 
 @cache_page(2 * 60 * 60)
 def getMiniProgramAccessToken(request):
-    app = Settings.objects.first()
+    app = models.Settings.objects.first()
     url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + app.app_id + '&secret=' + app.app_secret
     res = requests.get(url)
     access_token = res.text
@@ -289,7 +292,7 @@ def getSubscriptionAccessToken(request):
 
 @checkLogin
 def getUserOpenid(request, js_code):
-    app = Settings.objects.first()
+    app = models.Settings.objects.first()
     url = 'https://api.weixin.qq.com/sns/jscode2session'
     header = {
         'content-type': 'application/x-www-form-urlencoded',
@@ -304,7 +307,7 @@ def getUserOpenid(request, js_code):
     res_json = res.json()
     openid = res_json['openid']
     print(res_json)
-    curr_user, isCreated = User.objects.get_or_create(openid=openid,
+    curr_user, isCreated = models.User.objects.get_or_create(openid=openid,
                                                       defaults={'vip_expiredTime': timezone.now(),
                                                                 })
     if (isCreated):
@@ -329,12 +332,12 @@ def getFilm(request, id):
     result = {'err_msg': "OK", 'objects': []}
     dicts = []
     if id == 0:
-        films = Film.objects.order_by('-last_changed_time')
+        films = models.Film.objects.order_by('-last_changed_time')
         for per in films:
             dicts.append(per.json(withEpisodes=False))
         result['objects'] = dicts
     else:
-        film = Film.objects.get(id=id)
+        film = models.Film.objects.get(id=id)
         result['objects'] = film.json(withEpisodes=True)
     result = json.dumps(result, ensure_ascii=False)
     return HttpResponse(result, content_type='application/json,charset=utf-8')

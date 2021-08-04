@@ -11,7 +11,7 @@ urlpatterns = [
     path('subscriptionAccessToken', getSubscriptionAccessToken),
     path('buyVIP<str:openid>', buyVIP),
     path('updateUserInfo', updateUserInfo),
-    path('UrlRedirector<int:id>', UrlRedirector),
+    path('UrlRedirector<int:id>', UrlRedirection),
     path('getArticleInfo', getArticleInfo),
     path('getAllArticles', getAllArticles),
     path('videoUrlVid=<int:vid>', videoUrlMaker),
