@@ -19,7 +19,7 @@ class PasswordAdmin(admin.ModelAdmin):
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
     list_display = ['__str__', '_username', '_password', '_url', 'email', 'tel', '_info']
-    list_filter = ['group']
+    list_filter = ['group', 'tel', 'email']
 
     def _url(self, obj):
         if obj.url:
@@ -34,8 +34,9 @@ class AccountAdmin(admin.ModelAdmin):
 
     def _info(self, obj):
         if obj.Introduce:
-            tag = mark_safe('<img src="%s" title="%s" class="copyImg">' % ("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F00%2F94%2F07%2F1456f2b7b284ab1.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626686092&t=af1db3ec9c4eef5dbda46b93e580b3dd",
-                                                                           obj.Introduce))
+            tag = mark_safe('<img src="%s" title="%s" class="copyImg">' % (
+            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F00%2F94%2F07%2F1456f2b7b284ab1.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626686092&t=af1db3ec9c4eef5dbda46b93e580b3dd",
+            obj.Introduce))
         else:
             tag = "-"
         return tag
