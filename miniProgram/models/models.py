@@ -201,6 +201,9 @@ class Film(ModelWithShowRate):
     language = models.ForeignKey(to=Language, on_delete=models.CASCADE, default=1)
     country = models.ForeignKey(to=Country, on_delete=models.CASCADE, default=1)
 
+    class Meta:
+        db_table = "film"
+
     def __str__(self):
         return self.name
 

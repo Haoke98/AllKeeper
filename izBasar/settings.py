@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import platform
+from . import secret
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -30,9 +33,8 @@ if not os.path.exists(MEDIA_ROOT):
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 's3va_7)!ovu!=3j55p2m9@yk0h4-w!l9&v&m#9-(9xduye*@p='
+SECRET_KEY = secret.SECRET_KEY
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
-import platform
 
 WINDOWS = 'Windows'
 LINUX = 'Linux'

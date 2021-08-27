@@ -2545,3 +2545,33 @@ INFO [2021-08-23 10:18:07,382] django.server: "GET /static/admin/js/vendor/xrege
 INFO [2021-08-23 10:18:08,115] django.server: "GET /admin/jsi18n/ HTTP/1.1" 200 3195
 INFO [2021-08-23 10:18:08,171] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
 INFO [2021-08-23 10:18:08,314] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-08-27 13:17:42,181] django.utils.autoreload: Watching for file changes with StatReloader
+WARNING [2021-08-27 13:17:44,007] django.server: "GET / HTTP/1.1" 404 2984
+WARNING [2021-08-27 13:17:44,575] django.server: "GET /favicon.ico HTTP/1.1" 404 3035
+WARNING [2021-08-27 13:18:03,230] django.security.SuspiciousSession: Session data corrupted
+INFO [2021-08-27 13:18:03,299] django.server: "GET /sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 302 0
+WARNING [2021-08-27 13:18:03,830] django.security.SuspiciousSession: Session data corrupted
+INFO [2021-08-27 13:18:06,154] django.server: "GET /sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/login/?next=/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 6199
+INFO [2021-08-27 13:18:06,175] django.server: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO [2021-08-27 13:18:07,015] django.server: "GET /static/admin/css/login.css HTTP/1.1" 200 939
+INFO [2021-08-27 13:18:07,016] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-08-27 13:18:07,017] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18545
+WARNING [2021-08-27 13:18:25,859] django.security.SuspiciousSession: Session data corrupted
+INFO [2021-08-27 13:18:26,716] django.server: "POST /sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/login/?next=/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 302 0
+INFO [2021-08-27 13:18:27,342] django.server: "GET /sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 27742
+INFO [2021-08-27 13:18:27,387] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 380
+INFO [2021-08-27 13:18:27,416] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-08-27 13:18:27,417] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-08-27 13:19:10,595] django.server: "GET /sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/ HTTP/1.1" 200 189408
+INFO [2021-08-27 13:19:10,647] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6874
+INFO [2021-08-27 13:19:10,648] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-08-27 13:19:10,658] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5698
+INFO [2021-08-27 13:19:10,658] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 5984
+INFO [2021-08-27 13:19:10,667] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 7902
+INFO [2021-08-27 13:19:10,669] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 200 7664
+INFO [2021-08-27 13:19:10,673] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO [2021-08-27 13:19:10,701] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 287630
+INFO [2021-08-27 13:19:10,716] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+INFO [2021-08-27 13:19:11,228] django.server: "GET /sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 3195
+INFO [2021-08-27 13:19:11,295] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2021-08-27 13:19:11,410] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876

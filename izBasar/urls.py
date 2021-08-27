@@ -26,7 +26,7 @@ import miniProgram.urls
 from izBasar import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/', admin.site.urls),
     path('miniProgram/', include(miniProgram.urls)),
     url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
     url('^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
