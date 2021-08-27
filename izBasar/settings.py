@@ -172,7 +172,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request',  # <-需要这一行
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -218,15 +218,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+#
+# USE_TZ = False  # true时统一全球时间，不跨时区的应用可以设为False
+# # TIME_ZONE = 'UTC'
+# TIME_ZONE = 'Asia/Shanghai'
+#
+# USE_I18N = True
+#
+# USE_L10N = True
 
-USE_TZ = False  # true时统一全球时间，不跨时区的应用可以设为False
-# TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'zh-Hans'
 TIME_ZONE = 'Asia/Shanghai'
-
 USE_I18N = True
-
-USE_L10N = True
+USE_L10N = False
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
