@@ -20,15 +20,12 @@ from .suit_settings import SUIT_CONFIG
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-PUBLIC_ROOT = BASE_DIR
+PUBLIC_ROOT = os.path.join(BASE_DIR, 'public')
 if not os.path.exists(PUBLIC_ROOT):
     os.mkdir(PUBLIC_ROOT)
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'static'
-STATICFILES_DIRS = [
-    os.path.join(PUBLIC_ROOT, '/static')
-]
+STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
 if not os.path.exists(STATIC_ROOT):
     os.mkdir(STATIC_ROOT)
 
