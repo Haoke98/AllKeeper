@@ -12,23 +12,41 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import platform
+
 from . import secret
+from .suit_settings import SUIT_CONFIG
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+PUBLIC_ROOT = BASE_DIR
+if not os.path.exists(PUBLIC_ROOT):
+    os.mkdir(PUBLIC_ROOT)
+
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-LOG_FILE_DIR = os.path.join(STATIC_ROOT, 'log')
+STATIC_ROOT = 'static'
+STATICFILES_DIRS = [
+    os.path.join(PUBLIC_ROOT, '/static')
+]
+if not os.path.exists(STATIC_ROOT):
+    os.mkdir(STATIC_ROOT)
+
+LOG_FILE_DIR = os.path.join(PUBLIC_ROOT, 'log')
 if not os.path.exists(LOG_FILE_DIR):
     os.mkdir(LOG_FILE_DIR)
-CACHE_DIR = os.path.join(STATIC_ROOT, 'cache')
+
+CACHE_DIR = os.path.join(PUBLIC_ROOT, 'cache')
 res = os.path.join(BASE_DIR, os.path.pardir)
 outerFolder = os.path.abspath(res)
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(PUBLIC_ROOT, 'media')
 if not os.path.exists(MEDIA_ROOT):
     os.mkdir(MEDIA_ROOT)
+
+IMAGE_ROOT = os.path.join(MEDIA_ROOT, "img")
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -43,7 +61,7 @@ SADAM_SET = {
     "BASE_HREF": "BASE_HREF_TWO_PLATFORMS",
 }
 if platform.system() == WINDOWS:
-    SADAM_SET["DEBUG"] = True
+    SADAM_SET["DEBUG"] = False
     SADAM_SET["BASE_HREF"] = "http://10.128.202.191:7000"
 else:
     SADAM_SET["DEBUG"] = False
@@ -127,6 +145,7 @@ LOGGING = {
 #########################
 # Application definition
 INSTALLED_APPS = [
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -166,7 +185,8 @@ ROOT_URLCONF = 'izBasar.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        # 'DIRS': [str.format(BASE_DIR, '/templates')]
+        'DIRS': []
         ,
         'APP_DIRS': True,
         'OPTIONS': {

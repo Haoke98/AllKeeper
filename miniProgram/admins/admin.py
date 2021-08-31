@@ -1,7 +1,8 @@
+import xadmin
+from django.contrib import admin
 
 # Register your models here.
 from miniProgram.models.models import *
-from django.contrib import admin
 
 
 class MyModelAdmin(admin.ModelAdmin):

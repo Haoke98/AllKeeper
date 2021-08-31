@@ -461,6 +461,11 @@ if __name__ == '__main__':
     url = "https://v.qq.com/x/page/v0939knrvw4.html?ptag=qqbrowser"
     url = "https://v.qq.com/x/page/o0833kn5f6b.html?ptag=qqbrowser"
     url = "https://v.qq.com/x/page/x0913mlebtf.html?ptag=qqbrowser"
+
+    url = "http://mmbiz.qpic.cn/mmbiz_png/lBSHibv6GicCap4xicp1tjTKeAddbV3JJwvjdrAGoAzqAI8icaeNdZVrK5NXWScHRosby86EgHJfibPY3OVoTCokufA/0?wx_fmt=png"
+    resp = requests.get(url)
+    with open("test.jpg", "wb") as f:
+        f.write(resp.content)
     # res = getTXOriginalVipByTxURL(url)
     # print(res)
     # vid = "z0974bpqehi"

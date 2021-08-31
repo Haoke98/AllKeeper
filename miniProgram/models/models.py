@@ -7,9 +7,9 @@ from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
-from .image import Image
-from .base import MyModel
 from miniProgram.utils import getVideoInfo
+from .base import MyModel
+from .image import Image
 
 
 class ImageInput(TextInput):
@@ -120,7 +120,7 @@ class UploadForm(ModelForm):
 
     class Meta:
         model = Image
-        fields = ['content', 'media_id', 'url']
+        fields = ['content', 'media_id', 'original_url']
 
 
 class ModelWithShowRate(MyModel):
@@ -208,7 +208,7 @@ class Film(ModelWithShowRate):
         return self.name
 
     def json(self, withEpisodes):
-        json_object = {'film_id': self.id, 'name': self.name, 'cover': self.cover.url}
+        json_object = {'film_id': self.id, 'name': self.name, 'cover': self.cover.original_url}
         if withEpisodes:
             episodes = Video.objects.filter(belongTo=self).order_by('-episodeNum', '-last_changed_time')
             episodes_list = []
@@ -370,9 +370,9 @@ class Video(ModelWithShowRate):
         else:
             self.isTXV = True
         if isForSlider:
-            cover = self.cover.url
+            cover = self.cover.original_url
         else:
-            cover = self.belongTo.cover.url
+            cover = self.belongTo.cover.original_url
 
         return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.episode_name(),
                 'cover': cover,

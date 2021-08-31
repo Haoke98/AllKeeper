@@ -58,6 +58,15 @@ class AccountAdmin(admin.ModelAdmin):
     _username.allow_tags = True
     # list_display = ['__str__', 'username',  ,'url',  'Introduce']
 
+    class Media:
+        def __init__(self):
+            pass
+
+        js = (
+            '/static/js/kindeditor4.1.11/config-account-admin.js'
+            '/static/js/kindeditor4.1.11/lang/zh-CN.js'
+            '/static/js/kindeditor4.1.11/kindeditor-all.js'
+        )
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):

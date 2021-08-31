@@ -41,6 +41,7 @@ class Account(MyModel):
     email = models.ForeignKey(verbose_name="关联邮箱", to=EEmail, on_delete=models.CASCADE, null=True, blank=True)
     Introduce = models.TextField(verbose_name="说明", null=True, blank=True)
     group = models.ForeignKey(verbose_name="所属账号组", to=Group, on_delete=models.CASCADE, null=True, blank=True)
+    icon = models.ImageField(verbose_name="图标", null=True, blank=True)
 
     def __str__(self):
         return "%s账号" % self.name
