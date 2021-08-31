@@ -20,7 +20,8 @@ from .suit_settings import SUIT_CONFIG
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-PUBLIC_ROOT = os.path.join(BASE_DIR, 'public')
+# PUBLIC_ROOT = os.path.join(BASE_DIR, 'public')
+PUBLIC_ROOT = BASE_DIR
 if not os.path.exists(PUBLIC_ROOT):
     os.mkdir(PUBLIC_ROOT)
 
