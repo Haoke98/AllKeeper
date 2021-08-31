@@ -13,12 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
+
+admin.autodiscover()
 from django.contrib.flatpages import sitemaps
 from django.contrib.sitemaps.views import sitemap
-from django.urls import path, include
-from django.views import static
+from django.urls import path
 from django.views.static import serve
 
 import BeansMusic.urls
@@ -30,10 +31,9 @@ from miniProgram.views import image
 urlpatterns = [
     # path('admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/', admin.site.urls),
     path('admin/', admin.site.urls),
-    url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}, name='static'),
-    path('miniProgram/', include(miniProgram.urls)),
+    url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
-    url('^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
+    path('miniProgram/', include(miniProgram.urls)),
     path('W3DA/', include(WEB3DA.urls)),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},

@@ -14,7 +14,6 @@ import os
 import platform
 
 from . import secret
-from .suit_settings import SUIT_CONFIG
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
@@ -143,7 +142,6 @@ LOGGING = {
 #########################
 # Application definition
 INSTALLED_APPS = [
-    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -183,9 +181,7 @@ ROOT_URLCONF = 'izBasar.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': [str.format(BASE_DIR, '/templates')]
-        'DIRS': []
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -254,3 +250,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+FILE_CHARSET = 'gb18030'
+DEFAULT_CHARSET = 'utf-8'
