@@ -11,7 +11,6 @@ from miniProgram.models.image import Image
 def proxy(request):
     id = request.GET.get("id")
     imageObj = Image.objects.get(id=id)
-    print(imageObj.content.path)
     p = os.path.join(IMAGE_ROOT, imageObj.file_name)
     if os.path.exists(p):
         print("已存在")
