@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 import requests
-from django.http import HttpResponse
+from django.shortcuts import redirect
 
 from izBasar.settings import IMAGE_ROOT
 from miniProgram.models.image import Image
@@ -23,4 +23,4 @@ def proxy(request):
         with open(tempFilePath, 'wb') as f:
             f.write(resp.content)
         imageObj.save()
-    return HttpResponse("/static/img/" + imageObj.file_name)
+    return redirect(to="/media/img/" + imageObj.file_name)

@@ -19,8 +19,7 @@ from . import secret
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# PUBLIC_ROOT = os.path.join(BASE_DIR, 'public')
-PUBLIC_ROOT = BASE_DIR
+PUBLIC_ROOT = os.path.join(BASE_DIR, 'public')
 if not os.path.exists(PUBLIC_ROOT):
     os.mkdir(PUBLIC_ROOT)
 
@@ -43,6 +42,9 @@ if not os.path.exists(MEDIA_ROOT):
     os.mkdir(MEDIA_ROOT)
 
 IMAGE_ROOT = os.path.join(MEDIA_ROOT, "img")
+if not os.path.exists(IMAGE_ROOT):
+    os.mkdir(IMAGE_ROOT)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
