@@ -15,6 +15,9 @@ class Language(MyModel):
     name = models.CharField(max_length=100, verbose_name="语言")
     symbol = models.CharField(max_length=100, verbose_name="符号")
 
+    class Meta:
+        db_table = "language"
+
     def __str__(self):
         return "<%s,%s>" % (self.name, self.symbol)
 
@@ -23,6 +26,9 @@ class FilmType(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name="标签名", max_length=50)
     unit = models.CharField(verbose_name="单位", max_length=50)
+
+    class Meta:
+        db_table = "film_type"
 
     def __str__(self):
         return "<%s,%s>" % (self.name, self.unit)
