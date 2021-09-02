@@ -1,6 +1,10 @@
 from django.contrib import admin
 
 # Register your models here.
+from django.utils.html import format_html
+
+from miniProgram.models.country import Country
+from miniProgram.models.film import FilmType, Language, Film, FilmForm
 from miniProgram.models.models import *
 
 

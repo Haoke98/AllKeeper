@@ -60,7 +60,7 @@ SADAM_SET = {
     "BASE_HREF": "BASE_HREF_TWO_PLATFORMS",
 }
 if platform.system() == WINDOWS:
-    SADAM_SET["DEBUG"] = False
+    SADAM_SET["DEBUG"] = True
     SADAM_SET["BASE_HREF"] = "http://10.128.202.191:7000"
 else:
     SADAM_SET["DEBUG"] = False

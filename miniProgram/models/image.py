@@ -14,10 +14,12 @@ from .base import MyModel
 class Image(MyModel):
     id = models.AutoField(primary_key=True)
     media_id = models.CharField(max_length=43, blank=True, default="#")
-    # url_default_choices = (("#", "#"),)
     file_name = models.CharField(verbose_name="文件名", max_length=600, blank=True, default="#")
     original_url = models.CharField(verbose_name="原始链接（公众号）", max_length=500, blank=True, default="#")
     content = models.ImageField(upload_to='img', blank=True)
+
+    class Meta:
+        db_table = "image"
 
     def save(self, *args, **kwargs):
         if self.original_url == "#":

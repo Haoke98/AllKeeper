@@ -14,3 +14,14 @@ class MyModel(models.Model):
     # def save(self, *args, **kwargs):
     #     # self.last_changed_time =
     #     super().save(*args, **kwargs)
+
+
+class ModelWithShowRate(MyModel):
+    showTimes = models.IntegerField(verbose_name="被观看次数", default=0, editable=False)
+
+    def show(self):
+        self.showTimes += 1
+        self.save()
+
+    class Meta:
+        abstract = True
