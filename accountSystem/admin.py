@@ -1,10 +1,14 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import *
+from .models.account import Account
+from .models.accountType import AccountType
+from .models.models import TTel, EEmail, PPassword, Group
 
 
 # Register your models here.
+
+
 @admin.register(TTel, EEmail)
 class UniversalAdmin(admin.ModelAdmin):
     list_display = ['id', 'content']
@@ -18,8 +22,8 @@ class PasswordAdmin(admin.ModelAdmin):
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ['__str__', '_username', '_password', '_url', 'email', 'tel', '_info']
-    list_filter = ['group', 'tel', 'email']
+    list_display = ['__str__', '_username', '_password', '_url', 'email', 'tel', '_info', 'type']
+    list_filter = ['group', 'tel', 'email', 'type']
 
     def _url(self, obj):
         if obj.url:
@@ -65,6 +69,12 @@ class AccountAdmin(admin.ModelAdmin):
             'js/kindeditor4.1.11/kindeditor-all.js',
         ]
 
+
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
+    list_display = ["__str__", "__name__"]
+
+
+@admin.register(AccountType)
+class AccountTypeAdmin(admin.ModelAdmin):
     list_display = ["__str__", "__name__"]

@@ -1,35 +1,8 @@
 from django.db import models
 
-# Create your models here.
-from miniProgram.models.models import MyModel
-
-
-class PPassword(models.Model):
-    password = models.CharField(max_length=20, verbose_name="密码", unique=True)
-
-    def __str__(self):
-        return "密码：%s" % self.password
-
-
-class TTel(models.Model):
-    content = models.CharField(max_length=11, null=True, blank=True)
-
-    def __str__(self):
-        return self.content
-
-
-class EEmail(models.Model):
-    content = models.EmailField(null=True, blank=True)
-
-    def __str__(self):
-        return self.content
-
-
-class Group(models.Model):
-    name = models.CharField(max_length=50, verbose_name="名称", default="未知组")
-
-    def __str__(self):
-        return "所有%s账号" % self.name
+from miniProgram.models import MyModel
+from .accountType import AccountType
+from .models import PPassword, TTel, EEmail, Group
 
 
 class Account(MyModel):
@@ -42,6 +15,11 @@ class Account(MyModel):
     Introduce = models.TextField(verbose_name="说明", null=True, blank=True)
     group = models.ForeignKey(verbose_name="所属账号组", to=Group, on_delete=models.CASCADE, null=True, blank=True)
     icon = models.ImageField(verbose_name="图标", null=True, blank=True)
+    type = models.ForeignKey(verbose_name="类型", to=AccountType, on_delete=models.CASCADE, null=True, blank=True)
+
+    class Meta:
+        verbose_name = "账号"
+        verbose_name_plural = "所有" + verbose_name
 
     def __str__(self):
         return "%s账号" % self.name
