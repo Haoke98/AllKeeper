@@ -91,7 +91,7 @@ makeHasNotAnalysed.short_description = 'make all video has not been analysed.'  
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
     # form = VideoForm
-    list_display = MyModelAdmin.list_display + ['episodeNum', 'belongTo', 'showTimes', 'id', '_cover', 'videoShow',
+    list_display = MyModelAdmin.list_display + ['episodeNum', 'belongTo', 'show_times', 'id', '_cover', 'videoShow',
                                                 # 'isFromSubscription', "hasFirstAnalysed", 'hasAnalysed', 'isTXV',
                                                 # 'formatID', 'destinationID',
                                                 # 'analysedUrl',
@@ -148,7 +148,7 @@ class ImageInlineAdmin(admin.StackedInline):
 
 @admin.register(FilmType)
 class FilmTypeAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['showTimes', 'id', 'name', 'unit']
+    list_display = MyModelAdmin.list_display + ['show_times', 'id', 'name', 'unit']
 
 
 @admin.register(Language)
@@ -164,7 +164,7 @@ class CountryAdmin(admin.ModelAdmin):
 @admin.register(Film)
 class FilmAdmin(admin.ModelAdmin):
     form = FilmForm
-    list_display = MyModelAdmin.list_display + ['nameChinese', 'showTimes', 'id', '_cover', 'type', 'language',
+    list_display = MyModelAdmin.list_display + ['name_chinese', 'show_times', 'id', '_cover', 'type', 'language',
                                                 'country']
     list_filter = ['type', 'language', 'country']
     search_fields = list_display
