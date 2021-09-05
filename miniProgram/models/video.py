@@ -10,11 +10,15 @@ from ..utils import getVideoInfo
 
 class Video(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
-    episodeNum = models.IntegerField(verbose_name='集次', null=True, default=0)
+    episode_num = models.IntegerField(verbose_name='集次', null=True, default=0)
     cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, blank=True, null=False, default=4)
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
-    belongTo = models.ForeignKey(verbose_name="所属电视剧", to=Film, on_delete=models.PROTECT, null=True)
+    film = models.ForeignKey(verbose_name="所属电视剧", to=Film, on_delete=models.PROTECT, null=True)
     vid = models.CharField(verbose_name="vid", max_length=23, default=None, blank=True, null=True)
+    is_hot = models.BooleanField(verbose_name="是否被推", default=False, blank=True)
+
+    class Meta:
+        db_table = "video"
 
     def show(self):
         super(Video, self).show()
@@ -118,13 +122,13 @@ class Video(ModelWithShowRate):
         return "wxv_" not in self.vid
 
     def __str__(self):
-        return format_html("{}{}", self.belongTo, self.episode_name())
+        return format_html("{}{}", self.film, self.episode_name())
 
     def episode_name(self):
-        if self.episodeNum == 0:
+        if self.episode_num == 0:
             return ""
         else:
-            a = format_html("؛{}-{}", self.episodeNum, self.belongTo.type.unit)
+            a = format_html("؛{}-{}", self.episode_num, self.film.type.unit)
             return a
 
     def json(self, isForSlider):
@@ -135,9 +139,9 @@ class Video(ModelWithShowRate):
         if isForSlider:
             cover = self.cover.original_url
         else:
-            cover = self.belongTo.cover.original_url
+            cover = self.film.cover.original_url
 
-        return {'vid': self.id, 'film_id': self.belongTo.id, 'name': self.episode_name(),
+        return {'vid': self.id, 'film_id': self.film.id, 'name': self.episode_name(),
                 'cover': cover,
                 'isTXV': self.isTXV, 'TXVid': self.vid, 'url': self.url,
                 'video_url': "https://x.izbasarweb.xyz/miniProgram/videoUrlVid=%d" % self.id}
@@ -164,4 +168,4 @@ class VideoForm(ModelForm):
 
     class Meta:
         model = Video
-        fields = ['episodeNum', 'url', 'belongTo', 'vid']
+        fields = ['episode_num', 'url', 'film', 'vid']

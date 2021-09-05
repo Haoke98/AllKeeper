@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 # Register your models here.
 from django.utils.html import format_html
 
@@ -91,19 +90,20 @@ makeHasNotAnalysed.short_description = 'make all video has not been analysed.'  
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
     # form = VideoForm
-    list_display = MyModelAdmin.list_display + ['episodeNum', 'belongTo', 'show_times', 'id', '_cover', 'videoShow',
+    list_display = MyModelAdmin.list_display + ['is_hot', 'episode_num', 'film', 'show_times', 'id', '_cover',
+                                                'videoShow',
                                                 # 'isFromSubscription', "hasFirstAnalysed", 'hasAnalysed', 'isTXV',
                                                 # 'formatID', 'destinationID',
                                                 # 'analysedUrl',
                                                 # 'analysedUrl_ExpiredTime',
                                                 # 'TXVid', 'WXVid',
                                                 'vid', 'url', ]
-    list_display_links = list(admin.ModelAdmin.list_display_links) + ['belongTo', '__str__']
+    list_display_links = list(admin.ModelAdmin.list_display_links) + ['film', '__str__']
     search_fields = ('name', 'episodeNum', 'id', 'vid'
                      # 'TXVid', 'WXVid',
                      # 'formatID', 'destinationID',
                      )
-    list_filter = ['belongTo']
+    list_filter = ['film', 'is_hot']
     list_per_page = 20
 
     # actions_on_bottom = [makeHasNotFirstAnalysed, ]
