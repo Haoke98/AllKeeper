@@ -1,0 +1,1046 @@
+INFO [2021-09-02 11:20:30,076] django.utils.autoreload: Watching for file changes with StatReloader
+WARNING [2021-09-02 11:20:31,844] django.server: "GET / HTTP/1.1" 404 179
+INFO [2021-09-02 11:24:39,533] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 11:24:41,857] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl HTTP/1.1" 301 0
+INFO [2021-09-02 11:24:46,049] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 27713
+INFO [2021-09-02 11:24:47,033] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 380
+INFO [2021-09-02 11:24:47,034] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18545
+INFO [2021-09-02 11:24:47,034] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 19513
+INFO [2021-09-02 11:24:47,046] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-09-02 11:24:47,071] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-09-02 11:24:47,071] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-09-02 11:24:47,177] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+INFO [2021-09-02 11:24:47,178] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-09-02 11:24:47,179] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+WARNING [2021-09-02 11:24:47,745] django.server: "GET /favicon.ico HTTP/1.1" 404 179
+INFO [2021-09-02 11:25:25,279] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\apps.py changed, reloading.
+INFO [2021-09-02 11:25:26,231] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 11:25:39,886] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 11:25:48,501] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\apps.py changed, reloading.
+INFO [2021-09-02 11:25:49,567] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 11:25:52,004] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 27713
+ERROR [2021-09-02 11:25:57,196] django.request: Internal Server Error: /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/film/
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\db\models\options.py", line 608, in get_field
+    return self.fields_map[field_name]
+KeyError: '_cover'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\contrib\admin\utils.py", line 265, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "D:\python39\lib\site-packages\django\contrib\admin\utils.py", line 296, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "D:\python39\lib\site-packages\django\db\models\options.py", line 610, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: Film has no field named '_cover'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\db\models\fields\related_descriptors.py", line 173, in __get__
+    rel_obj = self.field.get_cached_value(instance)
+  File "D:\python39\lib\site-packages\django\db\models\fields\mixins.py", line 15, in get_cached_value
+    return instance._state.fields_cache[cache_name]
+KeyError: 'cover'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\python39\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\python39\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\python39\lib\site-packages\MySQLdb\cursors.py", line 319, in _query
+    db.query(q)
+  File "D:\python39\lib\site-packages\MySQLdb\connections.py", line 259, in query
+    _mysql.connection.query(self, query)
+MySQLdb._exceptions.OperationalError: (1054, "Unknown column 'image.last_changed_time' in 'field list'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    response = response.render()
+  File "D:\python39\lib\site-packages\django\template\response.py", line 105, in render
+    self.content = self.rendered_content
+  File "D:\python39\lib\site-packages\django\template\response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "D:\python39\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\base.py", line 33, in render
+    return super().render(context)
+  File "D:\python39\lib\site-packages\django\template\library.py", line 214, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 308, in result_list
+    'results': list(results(cl)),
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 284, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 275, in __init__
+    super().__init__(*items)
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 200, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "D:\python39\lib\site-packages\django\contrib\admin\utils.py", line 274, in lookup_field
+    value = attr(obj)
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\admins\admin.py", line 175, in _cover
+    return obj.cover.show()
+  File "D:\python39\lib\site-packages\django\db\models\fields\related_descriptors.py", line 187, in __get__
+    rel_obj = self.get_object(instance)
+  File "D:\python39\lib\site-packages\django\db\models\fields\related_descriptors.py", line 154, in get_object
+    return qs.get(self.field.get_reverse_related_filter(instance))
+  File "D:\python39\lib\site-packages\django\db\models\query.py", line 431, in get
+    num = len(clone)
+  File "D:\python39\lib\site-packages\django\db\models\query.py", line 262, in __len__
+    self._fetch_all()
+  File "D:\python39\lib\site-packages\django\db\models\query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "D:\python39\lib\site-packages\django\db\models\query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "D:\python39\lib\site-packages\django\db\models\sql\compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\python39\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\python39\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\python39\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\python39\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\python39\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\python39\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\python39\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\python39\lib\site-packages\MySQLdb\cursors.py", line 319, in _query
+    db.query(q)
+  File "D:\python39\lib\site-packages\MySQLdb\connections.py", line 259, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Unknown column 'image.last_changed_time' in 'field list'")
+ERROR [2021-09-02 11:26:01,553] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/film/ HTTP/1.1" 500 145
+INFO [2021-09-02 11:29:35,053] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/film/ HTTP/1.1" 200 22490
+WARNING [2021-09-02 11:29:35,548] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:35,550] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:35,559] django.server: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:35,564] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+INFO [2021-09-02 11:29:35,567] django.server: - Broken pipe from ('127.0.0.1', 51345)
+
+WARNING [2021-09-02 11:29:35,606] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+INFO [2021-09-02 11:29:35,738] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 11:29:36,094] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:36,167] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:36,173] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:36,236] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:36,237] django.server: "GET /static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:36,739] django.server: "GET /static/admin/img/search.svg HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:36,757] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:37,181] django.server: "GET /static/admin/js/core.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:37,654] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:38,077] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:38,494] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:38,918] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:39,418] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.min.js HTTP/1.1" 404 179
+WARNING [2021-09-02 11:29:39,914] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 404 179
+INFO [2021-09-02 11:30:39,403] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\izBasar\settings.py changed, reloading.
+INFO [2021-09-02 11:30:40,512] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 11:30:55,707] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/film/ HTTP/1.1" 200 22482
+INFO [2021-09-02 11:30:56,362] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 11:30:57,368] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 19513
+INFO [2021-09-02 11:30:57,376] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6874
+INFO [2021-09-02 11:30:57,382] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-09-02 11:30:57,382] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-09-02 11:30:57,394] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5698
+INFO [2021-09-02 11:30:57,398] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 5984
+INFO [2021-09-02 11:30:57,404] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 7902
+INFO [2021-09-02 11:30:57,417] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO [2021-09-02 11:30:57,418] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 200 7664
+INFO [2021-09-02 11:30:57,464] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 287630
+INFO [2021-09-02 11:30:57,479] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+INFO [2021-09-02 11:30:57,498] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18545
+INFO [2021-09-02 11:30:57,501] django.server: "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO [2021-09-02 11:30:57,526] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-09-02 11:30:57,539] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+INFO [2021-09-02 11:30:57,541] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2021-09-02 11:30:57,553] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+WARNING [2021-09-02 11:30:58,396] django.server: "GET /favicon.ico HTTP/1.1" 404 3137
+INFO [2021-09-02 11:31:02,952] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/ HTTP/1.1" 200 18289
+INFO [2021-09-02 11:31:04,921] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 27713
+INFO [2021-09-02 11:32:05,155] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\apps.py changed, reloading.
+INFO [2021-09-02 11:32:06,493] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 11:32:10,867] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 11:32:12,967] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 27703
+INFO [2021-09-02 11:35:43,701] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/image/ HTTP/1.1" 200 29355
+INFO [2021-09-02 11:35:44,326] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 11:35:49,374] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 27703
+INFO [2021-09-02 11:36:08,747] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/ HTTP/1.1" 200 108300
+WARNING [2021-09-02 11:36:08,866] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+WARNING [2021-09-02 11:36:08,867] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 11:36:08,876] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+INFO [2021-09-02 11:36:09,457] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 11:36:09,493] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 11:36:09,513] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 11:36:09,541] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 11:49:06,791] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 11:49:08,070] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl HTTP/1.1" 301 0
+INFO [2021-09-02 11:49:09,051] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 27703
+INFO [2021-09-02 11:49:10,088] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 380
+INFO [2021-09-02 11:49:10,089] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18545
+INFO [2021-09-02 11:49:10,091] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 19513
+INFO [2021-09-02 11:49:10,095] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-09-02 11:49:10,116] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-09-02 11:49:10,117] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-09-02 11:49:10,228] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-09-02 11:49:10,229] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+INFO [2021-09-02 11:49:10,232] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+WARNING [2021-09-02 11:49:10,716] django.server: "GET /favicon.ico HTTP/1.1" 404 3137
+INFO [2021-09-02 11:50:45,251] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\image.py changed, reloading.
+INFO [2021-09-02 11:50:46,758] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 12:24:04,508] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 12:24:09,247] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 27703
+WARNING [2021-09-02 12:24:09,988] django.server: "GET /favicon.ico HTTP/1.1" 404 3137
+INFO [2021-09-02 12:24:25,958] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/ HTTP/1.1" 200 108300
+WARNING [2021-09-02 12:24:26,003] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 12:24:26,007] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 12:24:26,024] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 12:24:26,567] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 12:24:27,268] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6874
+INFO [2021-09-02 12:24:27,277] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-09-02 12:24:27,280] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 5984
+INFO [2021-09-02 12:24:27,285] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5698
+INFO [2021-09-02 12:24:27,287] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 7902
+INFO [2021-09-02 12:24:27,294] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO [2021-09-02 12:24:27,322] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 287630
+WARNING [2021-09-02 12:24:27,344] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 12:24:27,352] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+INFO [2021-09-02 12:24:27,355] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+WARNING [2021-09-02 12:24:27,362] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 12:24:27,418] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 200 7664
+INFO [2021-09-02 12:24:27,446] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2021-09-02 12:24:36,198] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/?group__id__exact=3 HTTP/1.1" 200 48474
+WARNING [2021-09-02 12:24:36,241] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 12:24:36,241] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 12:24:36,244] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 12:24:36,738] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 12:24:36,753] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 12:24:36,762] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 12:24:36,770] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 15:40:46,838] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\base.py changed, reloading.
+INFO [2021-09-02 15:40:47,830] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 15:40:57,728] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\base.py changed, reloading.
+INFO [2021-09-02 15:40:58,590] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 15:41:18,957] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\base.py changed, reloading.
+INFO [2021-09-02 15:41:19,723] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 15:42:16,662] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\admins\admin.py changed, reloading.
+INFO [2021-09-02 15:42:17,381] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 15:43:46,651] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 15:43:48,508] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 27703
+INFO [2021-09-02 15:44:14,989] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/film/ HTTP/1.1" 200 22488
+INFO [2021-09-02 15:44:15,365] django.server: "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO [2021-09-02 15:44:15,594] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 15:44:23,108] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/film/?o=4 HTTP/1.1" 200 23184
+INFO [2021-09-02 15:44:23,698] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 15:44:23,722] django.server: "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO [2021-09-02 15:44:26,819] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/film/?o=-4 HTTP/1.1" 200 22926
+INFO [2021-09-02 15:44:27,412] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 15:48:19,787] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\film.py changed, reloading.
+INFO [2021-09-02 15:48:20,573] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 15:53:18,090] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 15:53:19,966] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 27703
+INFO [2021-09-02 15:53:24,692] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/film/ HTTP/1.1" 200 22499
+INFO [2021-09-02 15:53:25,222] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 17:59:38,367] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\country.py changed, reloading.
+INFO [2021-09-02 17:59:39,199] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 18:07:00,301] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\film.py changed, reloading.
+INFO [2021-09-02 18:07:01,117] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 18:09:17,637] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\film.py changed, reloading.
+INFO [2021-09-02 18:09:18,428] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 18:11:57,715] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\film.py changed, reloading.
+INFO [2021-09-02 18:11:58,499] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 18:53:12,220] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-09-02 18:53:13,055] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 18:54:40,428] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models\models.py changed, reloading.
+INFO [2021-09-02 18:54:41,193] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 18:56:42,009] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models\models.py changed, reloading.
+INFO [2021-09-02 18:56:42,804] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 18:56:59,848] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models\models.py changed, reloading.
+INFO [2021-09-02 18:57:00,683] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 19:00:09,035] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models\models.py changed, reloading.
+INFO [2021-09-02 19:00:09,852] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 19:00:18,575] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models\models.py changed, reloading.
+INFO [2021-09-02 19:00:19,386] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 19:02:05,158] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-09-02 19:02:05,941] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 19:02:43,319] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-09-02 19:02:44,190] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 19:03:07,302] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 19:03:09,204] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 28332
+INFO [2021-09-02 19:03:09,238] django.server: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:09,239] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:09,240] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:09,249] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:09,268] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:09,268] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:09,272] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:09,279] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:09,280] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:20,697] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/accounttype/ HTTP/1.1" 200 7188
+INFO [2021-09-02 19:03:20,719] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:20,731] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:20,732] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:20,738] django.server: "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:20,743] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:20,744] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:20,744] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:20,746] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:20,748] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:21,375] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 19:03:21,418] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO [2021-09-02 19:03:25,324] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/ HTTP/1.1" 200 9699
+INFO [2021-09-02 19:03:28,306] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/accounttype/ HTTP/1.1" 200 7188
+INFO [2021-09-02 19:03:28,910] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 19:03:30,748] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/ HTTP/1.1" 200 9699
+INFO [2021-09-02 19:03:44,507] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/ HTTP/1.1" 200 112048
+WARNING [2021-09-02 19:03:44,569] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+WARNING [2021-09-02 19:03:44,573] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:03:44,574] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+INFO [2021-09-02 19:03:46,075] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 19:03:46,089] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:03:46,098] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:03:46,113] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:03:59,746] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/137/change/ HTTP/1.1" 200 22628
+WARNING [2021-09-02 19:03:59,796] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:03:59,797] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+WARNING [2021-09-02 19:03:59,798] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+INFO [2021-09-02 19:04:00,156] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8804
+INFO [2021-09-02 19:04:00,171] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 11097
+INFO [2021-09-02 19:04:00,173] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-09-02 19:04:00,190] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-09-02 19:04:00,470] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 19:04:00,483] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:04:00,489] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:04:00,497] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:04:04,264] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/accounttype/add/?_to_field=id&_popup=1 HTTP/1.1" 200 6185
+INFO [2021-09-02 19:04:04,825] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 19:04:09,226] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/accounttype/add/?_to_field=id&_popup=1 HTTP/1.1" 200 344
+INFO [2021-09-02 19:04:09,269] django.server: "GET /static/admin/js/popup_response.js HTTP/1.1" 200 551
+INFO [2021-09-02 19:04:17,869] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/137/change/ HTTP/1.1" 302 0
+INFO [2021-09-02 19:04:30,296] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/ HTTP/1.1" 200 112606
+WARNING [2021-09-02 19:04:30,327] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:04:30,328] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:04:30,335] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:04:30,854] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 19:04:30,867] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:04:30,875] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:04:30,883] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:04:30,905] django.server: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO [2021-09-02 19:04:52,042] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models\accountType.py changed, reloading.
+INFO [2021-09-02 19:04:52,970] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 19:04:57,310] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 19:04:59,140] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 28300
+INFO [2021-09-02 19:05:20,295] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models\accountType.py changed, reloading.
+INFO [2021-09-02 19:05:21,215] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 19:05:37,484] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models\accountType.py changed, reloading.
+INFO [2021-09-02 19:05:38,243] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 19:05:57,621] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\accountSystem\models\account.py changed, reloading.
+INFO [2021-09-02 19:05:58,455] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-02 19:06:06,752] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 28302
+INFO [2021-09-02 19:06:31,283] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/ HTTP/1.1" 200 112850
+WARNING [2021-09-02 19:06:31,338] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:06:31,338] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:06:31,340] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:06:31,841] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 19:06:31,854] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:06:31,861] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:06:31,869] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:07:14,764] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/136/change/ HTTP/1.1" 200 22883
+WARNING [2021-09-02 19:07:14,806] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:07:14,808] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:07:14,809] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:07:15,378] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 19:07:15,391] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:07:15,398] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:07:15,406] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:07:19,345] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/accounttype/add/?_to_field=id&_popup=1 HTTP/1.1" 200 6185
+INFO [2021-09-02 19:07:19,903] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 19:07:27,620] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/accounttype/add/?_to_field=id&_popup=1 HTTP/1.1" 200 346
+INFO [2021-09-02 19:07:32,622] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/136/change/ HTTP/1.1" 302 0
+INFO [2021-09-02 19:07:43,802] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/ HTTP/1.1" 200 113216
+WARNING [2021-09-02 19:07:43,866] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:07:43,867] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:07:43,869] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:07:44,414] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 19:07:44,427] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:07:44,435] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:07:44,443] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:08:14,662] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/?type__isnull=True HTTP/1.1" 200 118606
+WARNING [2021-09-02 19:08:14,721] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:08:14,726] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:08:14,726] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:08:15,354] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 19:08:15,373] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:08:15,384] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:08:15,396] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:08:26,614] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/135/change/?_changelist_filters=type__isnull%3DTrue HTTP/1.1" 200 23104
+WARNING [2021-09-02 19:08:26,661] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:08:26,662] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:08:26,664] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:08:27,151] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 19:08:27,162] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:08:27,171] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:08:27,181] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-02 19:08:30,745] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/accounttype/add/?_to_field=id&_popup=1 HTTP/1.1" 200 6185
+INFO [2021-09-02 19:08:31,337] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-02 19:08:36,397] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/accounttype/add/?_to_field=id&_popup=1 HTTP/1.1" 200 358
+INFO [2021-09-02 19:08:39,787] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/135/change/?_changelist_filters=type__isnull%3DTrue HTTP/1.1" 302 0
+INFO [2021-09-02 19:08:50,758] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/?type__isnull=True HTTP/1.1" 200 119008
+WARNING [2021-09-02 19:08:50,814] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+WARNING [2021-09-02 19:08:50,815] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:08:50,815] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+INFO [2021-09-02 19:08:51,371] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-02 19:08:51,386] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-02 19:08:51,392] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-02 19:08:51,400] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-04 19:00:16,219] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-04 19:00:21,677] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 28302
+INFO [2021-09-04 19:00:21,706] django.server: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:21,708] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:21,709] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:21,716] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:21,732] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:21,733] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:21,828] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:21,829] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:21,830] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+WARNING [2021-09-04 19:00:22,402] django.server: "GET /favicon.ico HTTP/1.1" 404 3137
+INFO [2021-09-04 19:00:31,907] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/film/ HTTP/1.1" 200 22499
+INFO [2021-09-04 19:00:31,936] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:31,942] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:31,946] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:31,949] django.server: "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:31,952] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:31,954] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:31,954] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:31,956] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:31,957] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:31,970] django.server: "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:32,598] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-04 19:00:32,648] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:43,215] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/ HTTP/1.1" 200 18264
+INFO [2021-09-04 19:00:45,526] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/filmtype/ HTTP/1.1" 200 11435
+INFO [2021-09-04 19:00:46,078] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-04 19:00:53,829] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/filmtype/4/change/ HTTP/1.1" 200 17394
+INFO [2021-09-04 19:00:53,855] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:53,856] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:53,859] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:53,866] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+INFO [2021-09-04 19:00:54,419] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-04 19:01:00,040] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/filmtype/4/change/ HTTP/1.1" 302 0
+INFO [2021-09-04 19:01:00,759] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/filmtype/ HTTP/1.1" 200 11647
+INFO [2021-09-04 19:01:01,422] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-04 19:01:01,454] django.server: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+INFO [2021-09-04 19:01:09,720] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/filmtype/2/change/ HTTP/1.1" 200 17337
+INFO [2021-09-04 19:01:10,326] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-04 19:01:15,828] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/filmtype/2/change/ HTTP/1.1" 302 0
+INFO [2021-09-04 19:01:16,555] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/filmtype/ HTTP/1.1" 200 11649
+INFO [2021-09-04 19:01:17,186] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-04 19:01:20,208] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/filmtype/5/change/ HTTP/1.1" 200 17370
+INFO [2021-09-04 19:01:20,945] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-04 19:01:25,778] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/filmtype/5/change/ HTTP/1.1" 302 0
+INFO [2021-09-04 19:01:26,627] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/filmtype/ HTTP/1.1" 200 11610
+INFO [2021-09-04 19:01:27,260] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-04 19:01:42,215] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/ HTTP/1.1" 200 18264
+INFO [2021-09-04 19:01:45,809] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/film/ HTTP/1.1" 200 22275
+INFO [2021-09-04 19:01:46,356] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-05 20:44:00,941] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\video.py changed, reloading.
+INFO [2021-09-05 20:44:02,071] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-05 21:18:47,810] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\video.py changed, reloading.
+INFO [2021-09-05 21:18:48,884] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-05 21:19:57,729] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\video.py changed, reloading.
+INFO [2021-09-05 21:19:58,680] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-05 21:25:18,587] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-05 21:25:24,781] django.server: - Broken pipe from ('127.0.0.1', 52221)
+
+WARNING [2021-09-05 21:25:25,595] django.server: "GET / HTTP/1.1" 404 3086
+WARNING [2021-09-05 21:25:26,335] django.server: "GET /favicon.ico HTTP/1.1" 404 3137
+INFO [2021-09-05 21:25:36,693] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 28313
+INFO [2021-09-05 21:25:36,727] django.server: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:36,728] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:36,729] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:36,737] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:36,756] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:36,756] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:36,823] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:36,824] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:36,824] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:43,933] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/film/ HTTP/1.1" 200 22275
+INFO [2021-09-05 21:25:43,980] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:43,988] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:43,989] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:43,991] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:43,997] django.server: "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:44,000] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:44,000] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:44,001] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:44,002] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:44,014] django.server: "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:45,152] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-05 21:25:45,192] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO [2021-09-05 21:25:49,831] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/ HTTP/1.1" 200 18264
+ERROR [2021-09-05 21:25:52,939] django.request: Internal Server Error: /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/video/
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\db\models\options.py", line 608, in get_field
+    return self.fields_map[field_name]
+KeyError: '__str__'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\contrib\admin\utils.py", line 265, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "D:\python39\lib\site-packages\django\contrib\admin\utils.py", line 296, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "D:\python39\lib\site-packages\django\db\models\options.py", line 610, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: Video has no field named '__str__'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    response = response.render()
+  File "D:\python39\lib\site-packages\django\template\response.py", line 105, in render
+    self.content = self.rendered_content
+  File "D:\python39\lib\site-packages\django\template\response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "D:\python39\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\base.py", line 33, in render
+    return super().render(context)
+  File "D:\python39\lib\site-packages\django\template\library.py", line 214, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 308, in result_list
+    'results': list(results(cl)),
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 284, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 275, in __init__
+    super().__init__(*items)
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 200, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "D:\python39\lib\site-packages\django\contrib\admin\utils.py", line 278, in lookup_field
+    value = attr()
+  File "E:\myProjects\izbasarBackendDjango\miniProgram\models\video.py", line 125, in __str__
+    return format_html("{}{}", self.belongTo, self.episode_name())
+AttributeError: 'Video' object has no attribute 'belongTo'
+ERROR [2021-09-05 21:25:55,527] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/video/ HTTP/1.1" 500 365969
+INFO [2021-09-05 21:28:20,786] django.utils.autoreload: E:\myProjects\izbasarBackendDjango\miniProgram\models\video.py changed, reloading.
+INFO [2021-09-05 21:28:21,572] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-05 21:28:30,472] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/video/ HTTP/1.1" 200 40034
+INFO [2021-09-05 21:28:30,862] django.server: "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+INFO [2021-09-05 21:28:31,087] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-05 21:48:19,667] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/miniProgram/video/135/change/ HTTP/1.1" 200 23453
+INFO [2021-09-05 21:48:19,695] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+INFO [2021-09-05 21:48:19,702] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+INFO [2021-09-05 21:48:19,702] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+INFO [2021-09-05 21:48:19,718] django.server: "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+INFO [2021-09-05 21:48:19,722] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+INFO [2021-09-05 21:48:20,356] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-05 21:48:29,639] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 28313
+INFO [2021-09-08 04:26:13,887] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:26:14,837] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl HTTP/1.1" 301 0
+INFO [2021-09-08 04:26:15,496] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 302 0
+INFO [2021-09-08 04:26:17,707] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/login/?next=/admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 5452
+INFO [2021-09-08 04:26:18,402] django.server: "GET /static/admin/css/login.css HTTP/1.1" 200 939
+INFO [2021-09-08 04:26:18,403] django.server: "GET /static/admin/css/base.css HTTP/1.1" 200 19513
+INFO [2021-09-08 04:26:18,403] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 200 18545
+INFO [2021-09-08 04:26:18,413] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+INFO [2021-09-08 04:26:18,458] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 85876
+INFO [2021-09-08 04:26:18,470] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 85692
+WARNING [2021-09-08 04:26:19,206] django.server: "GET /favicon.ico HTTP/1.1" 404 3137
+INFO [2021-09-08 04:26:29,819] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/login/?next=/admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 302 0
+INFO [2021-09-08 04:26:30,529] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 28349
+INFO [2021-09-08 04:26:30,549] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 200 380
+INFO [2021-09-08 04:26:30,629] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-09-08 04:26:30,629] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-09-08 04:26:30,635] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 86184
+INFO [2021-09-08 04:26:51,353] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/ HTTP/1.1" 200 111779
+INFO [2021-09-08 04:26:51,408] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 200 6874
+INFO [2021-09-08 04:26:51,424] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 5984
+INFO [2021-09-08 04:26:51,426] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 200 7664
+WARNING [2021-09-08 04:26:51,427] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-08 04:26:51,428] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-08 04:26:51,428] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-08 04:26:51,428] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO [2021-09-08 04:26:51,428] django.server: "GET /static/admin/js/core.js HTTP/1.1" 200 5698
+INFO [2021-09-08 04:26:51,431] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 200 7902
+INFO [2021-09-08 04:26:51,432] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO [2021-09-08 04:26:51,452] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 287630
+INFO [2021-09-08 04:26:51,481] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 232381
+INFO [2021-09-08 04:26:52,092] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-08 04:26:52,116] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-08 04:26:52,123] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-08 04:26:52,129] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-08 04:26:52,185] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO [2021-09-08 04:26:58,390] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/?group__id__exact=1 HTTP/1.1" 200 24210
+WARNING [2021-09-08 04:26:58,430] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-08 04:26:58,430] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-08 04:26:58,433] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-08 04:26:59,002] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-08 04:26:59,017] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-08 04:26:59,025] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-08 04:26:59,030] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-08 04:27:13,840] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/?group__id__exact=2 HTTP/1.1" 200 87214
+WARNING [2021-09-08 04:27:13,880] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-08 04:27:13,881] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-08 04:27:13,883] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-08 04:27:14,461] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+WARNING [2021-09-08 04:27:14,473] django.server: "GET /static/js/kindeditor4.1.11/config-account-admin.js HTTP/1.1" 404 1989
+WARNING [2021-09-08 04:27:14,479] django.server: "GET /static/js/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1959
+WARNING [2021-09-08 04:27:14,485] django.server: "GET /static/js/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1971
+INFO [2021-09-08 04:32:50,096] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\models.py changed, reloading.
+INFO [2021-09-08 04:32:50,983] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:34:25,676] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\models.py changed, reloading.
+INFO [2021-09-08 04:34:26,480] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:36:40,024] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\models.py changed, reloading.
+INFO [2021-09-08 04:36:40,738] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:37:06,270] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\models.py changed, reloading.
+INFO [2021-09-08 04:37:07,047] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:39:50,413] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\admin.py changed, reloading.
+INFO [2021-09-08 04:39:51,136] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:39:58,710] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:40:00,630] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 29282
+INFO [2021-09-08 04:40:09,108] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 8237
+INFO [2021-09-08 04:40:09,712] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 04:40:15,474] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/add/ HTTP/1.1" 200 10175
+INFO [2021-09-08 04:40:16,161] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 04:40:16,371] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 200 8804
+INFO [2021-09-08 04:40:16,373] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-09-08 04:40:16,376] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-09-08 04:40:16,380] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 200 11097
+INFO [2021-09-08 04:40:16,381] django.server: "GET /static/admin/js/calendar.js HTTP/1.1" 200 8466
+INFO [2021-09-08 04:40:16,384] django.server: "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19634
+INFO [2021-09-08 04:40:16,495] django.server: "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+INFO [2021-09-08 04:40:16,496] django.server: "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+INFO [2021-09-08 04:40:17,489] django.server: "GET /static/admin/img/calendar-icons.svg HTTP/1.1" 200 1094
+INFO [2021-09-08 04:41:23,380] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\models.py changed, reloading.
+INFO [2021-09-08 04:41:24,222] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:42:07,642] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\models.py changed, reloading.
+INFO [2021-09-08 04:42:08,416] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:43:23,363] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\models.py changed, reloading.
+INFO [2021-09-08 04:43:24,065] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:44:23,117] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\apps.py changed, reloading.
+INFO [2021-09-08 04:44:23,703] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:44:54,855] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\apps.py changed, reloading.
+INFO [2021-09-08 04:44:55,607] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:45:53,745] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\admin.py changed, reloading.
+INFO [2021-09-08 04:45:54,475] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 04:46:03,552] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/add/ HTTP/1.1" 200 10599
+INFO [2021-09-08 04:46:04,161] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 04:46:11,091] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 29309
+ERROR [2021-09-08 04:46:17,153] django.request: Internal Server Error: /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\python39\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\python39\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\python39\lib\site-packages\MySQLdb\cursors.py", line 319, in _query
+    db.query(q)
+  File "D:\python39\lib\site-packages\MySQLdb\connections.py", line 259, in query
+    _mysql.connection.query(self, query)
+MySQLdb._exceptions.ProgrammingError: (1146, "Table 'web_izbasar_link.debt' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\admin\options.py", line 616, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "D:\python39\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "D:\python39\lib\site-packages\django\views\decorators\cache.py", line 44, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\admin\sites.py", line 232, in inner
+    return view(request, *args, **kwargs)
+  File "D:\python39\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "D:\python39\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\admin\options.py", line 1697, in changelist_view
+    cl = self.get_changelist_instance(request)
+  File "D:\python39\lib\site-packages\django\contrib\admin\options.py", line 736, in get_changelist_instance
+    return ChangeList(
+  File "D:\python39\lib\site-packages\django\contrib\admin\views\main.py", line 100, in __init__
+    self.get_results(request)
+  File "D:\python39\lib\site-packages\django\contrib\admin\views\main.py", line 235, in get_results
+    result_count = paginator.count
+  File "D:\python39\lib\site-packages\django\utils\functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "D:\python39\lib\site-packages\django\core\paginator.py", line 97, in count
+    return c()
+  File "D:\python39\lib\site-packages\django\db\models\query.py", line 412, in count
+    return self.query.get_count(using=self.db)
+  File "D:\python39\lib\site-packages\django\db\models\sql\query.py", line 519, in get_count
+    number = obj.get_aggregation(using, ['__count'])['__count']
+  File "D:\python39\lib\site-packages\django\db\models\sql\query.py", line 504, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+  File "D:\python39\lib\site-packages\django\db\models\sql\compiler.py", line 1175, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\python39\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\python39\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\python39\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\python39\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\python39\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\python39\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\python39\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\python39\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\python39\lib\site-packages\MySQLdb\cursors.py", line 319, in _query
+    db.query(q)
+  File "D:\python39\lib\site-packages\MySQLdb\connections.py", line 259, in query
+    _mysql.connection.query(self, query)
+django.db.utils.ProgrammingError: (1146, "Table 'web_izbasar_link.debt' doesn't exist")
+ERROR [2021-09-08 04:46:19,873] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 500 201751
+INFO [2021-09-08 04:47:00,990] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 8514
+INFO [2021-09-08 04:47:01,605] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 04:47:05,558] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/add/ HTTP/1.1" 200 10599
+INFO [2021-09-08 04:47:06,120] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 04:50:13,758] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/add/ HTTP/1.1" 302 0
+ERROR [2021-09-08 04:50:15,046] django.request: Internal Server Error: /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    response = response.render()
+  File "D:\python39\lib\site-packages\django\template\response.py", line 105, in render
+    self.content = self.rendered_content
+  File "D:\python39\lib\site-packages\django\template\response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "D:\python39\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\defaulttags.py", line 312, in render
+    return nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\base.py", line 33, in render
+    return super().render(context)
+  File "D:\python39\lib\site-packages\django\template\library.py", line 214, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 379, in date_hierarchy
+    'choices': [{
+  File "D:\python39\lib\site-packages\django\db\models\query.py", line 280, in __iter__
+    self._fetch_all()
+  File "D:\python39\lib\site-packages\django\db\models\query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "D:\python39\lib\site-packages\django\db\models\query.py", line 171, in __iter__
+    for row in compiler.results_iter(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size):
+  File "D:\python39\lib\site-packages\django\db\models\sql\compiler.py", line 1122, in apply_converters
+    value = converter(value, expression, connection)
+  File "D:\python39\lib\site-packages\django\db\models\functions\datetime.py", line 248, in convert_value
+    raise ValueError(
+ValueError: Database returned an invalid datetime value. Are time zone definitions for your database installed?
+ERROR [2021-09-08 04:50:17,958] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 500 370820
+INFO [2021-09-08 10:38:16,598] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 10:38:18,356] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 29301
+INFO [2021-09-08 10:38:18,386] django.server: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO [2021-09-08 10:38:18,386] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO [2021-09-08 10:38:18,387] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO [2021-09-08 10:38:18,495] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+INFO [2021-09-08 10:38:18,530] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO [2021-09-08 10:38:18,531] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO [2021-09-08 10:38:18,535] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-08 10:38:18,536] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-08 10:38:18,536] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+ERROR [2021-09-08 10:38:22,267] django.request: Internal Server Error: /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/
+Traceback (most recent call last):
+  File "D:\python39\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\python39\lib\site-packages\django\core\handlers\base.py", line 204, in _get_response
+    response = response.render()
+  File "D:\python39\lib\site-packages\django\template\response.py", line 105, in render
+    self.content = self.rendered_content
+  File "D:\python39\lib\site-packages\django\template\response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "D:\python39\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\template\defaulttags.py", line 312, in render
+    return nodelist.render(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\python39\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\base.py", line 33, in render
+    return super().render(context)
+  File "D:\python39\lib\site-packages\django\template\library.py", line 214, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "D:\python39\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 379, in date_hierarchy
+    'choices': [{
+  File "D:\python39\lib\site-packages\django\db\models\query.py", line 280, in __iter__
+    self._fetch_all()
+  File "D:\python39\lib\site-packages\django\db\models\query.py", line 1324, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "D:\python39\lib\site-packages\django\db\models\query.py", line 171, in __iter__
+    for row in compiler.results_iter(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size):
+  File "D:\python39\lib\site-packages\django\db\models\sql\compiler.py", line 1122, in apply_converters
+    value = converter(value, expression, connection)
+  File "D:\python39\lib\site-packages\django\db\models\functions\datetime.py", line 248, in convert_value
+    raise ValueError(
+ValueError: Database returned an invalid datetime value. Are time zone definitions for your database installed?
+ERROR [2021-09-08 10:38:25,130] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 500 369946
+INFO [2021-09-08 10:39:33,297] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\izBasar\settings.py changed, reloading.
+INFO [2021-09-08 10:39:34,117] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 10:40:41,865] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 10:40:43,614] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 29301
+INFO [2021-09-08 10:40:46,708] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 10994
+INFO [2021-09-08 10:40:46,736] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO [2021-09-08 10:40:46,741] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:40:46,741] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:40:46,744] django.server: "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:40:46,748] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:40:46,752] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:40:46,753] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:40:46,758] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:40:46,759] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:40:47,102] django.server: "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+INFO [2021-09-08 10:40:47,919] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:40:47,948] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO [2021-09-08 10:42:02,363] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\izBasar\settings.py changed, reloading.
+INFO [2021-09-08 10:42:03,098] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 10:42:28,765] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\DebtManagerSystem\models.py changed, reloading.
+INFO [2021-09-08 10:42:29,507] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 10:42:33,691] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 10:42:35,469] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 29301
+INFO [2021-09-08 10:42:39,525] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 10890
+INFO [2021-09-08 10:42:40,119] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:42:58,436] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 10871
+INFO [2021-09-08 10:42:59,026] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:43:36,227] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/1/change/ HTTP/1.1" 200 10730
+INFO [2021-09-08 10:43:36,256] django.server: "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+INFO [2021-09-08 10:43:36,256] django.server: "GET /static/admin/js/calendar.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:43:36,260] django.server: "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:43:36,261] django.server: "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:43:36,262] django.server: "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+INFO [2021-09-08 10:43:36,361] django.server: "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+INFO [2021-09-08 10:43:36,857] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:43:37,020] django.server: "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 304 0
+INFO [2021-09-08 10:43:38,035] django.server: "GET /static/admin/img/calendar-icons.svg HTTP/1.1" 304 0
+INFO [2021-09-08 10:43:45,254] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/1/change/ HTTP/1.1" 302 0
+INFO [2021-09-08 10:43:46,246] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 11130
+INFO [2021-09-08 10:43:46,784] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:43:47,120] django.server: "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO [2021-09-08 10:51:11,508] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/add/ HTTP/1.1" 200 10289
+INFO [2021-09-08 10:51:12,155] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:53:17,699] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/add/ HTTP/1.1" 302 0
+INFO [2021-09-08 10:53:18,566] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 11672
+INFO [2021-09-08 10:53:19,155] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:53:39,246] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/1/change/ HTTP/1.1" 200 10730
+INFO [2021-09-08 10:53:39,841] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:54:03,054] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/1/change/ HTTP/1.1" 302 0
+INFO [2021-09-08 10:54:03,907] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 11732
+INFO [2021-09-08 10:54:04,425] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:54:15,927] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/add/ HTTP/1.1" 200 10289
+INFO [2021-09-08 10:54:16,540] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:54:59,310] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/add/ HTTP/1.1" 302 0
+INFO [2021-09-08 10:55:00,000] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/add/ HTTP/1.1" 200 10591
+INFO [2021-09-08 10:55:00,603] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:56:50,535] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 12086
+INFO [2021-09-08 10:56:51,056] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:57:00,426] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/?ddl__month=10&ddl__year=2021 HTTP/1.1" 200 11559
+INFO [2021-09-08 10:57:00,954] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 10:57:06,098] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/ HTTP/1.1" 200 6716
+INFO [2021-09-08 10:57:08,843] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 12086
+INFO [2021-09-08 10:57:09,423] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 11:26:59,428] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\accountSystem\models\account.py changed, reloading.
+INFO [2021-09-08 11:27:00,299] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 11:27:57,710] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-09-08 11:27:58,522] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 15:39:29,987] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-09-08 15:39:32,087] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/ HTTP/1.1" 200 29347
+INFO [2021-09-08 15:39:32,122] django.server: "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:32,124] django.server: "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:32,125] django.server: "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:32,299] django.server: "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:32,374] django.server: "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:32,374] django.server: "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:32,381] django.server: "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:32,381] django.server: "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:32,381] django.server: "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+WARNING [2021-09-08 15:39:33,162] django.server: "GET /favicon.ico HTTP/1.1" 404 3137
+INFO [2021-09-08 15:39:35,232] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 12304
+INFO [2021-09-08 15:39:35,259] django.server: "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:35,260] django.server: "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:35,277] django.server: "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:35,279] django.server: "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:35,279] django.server: "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:35,280] django.server: "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:35,284] django.server: "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:35,287] django.server: "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:35,288] django.server: "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:35,292] django.server: "GET /static/admin/img/icon-no.svg HTTP/1.1" 304 0
+INFO [2021-09-08 15:39:35,827] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376
+INFO [2021-09-08 15:39:35,863] django.server: "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO [2021-09-08 16:20:04,224] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/DebtManagerSystem/debt/ HTTP/1.1" 200 12304
+INFO [2021-09-08 16:20:04,769] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.1" 200 8376

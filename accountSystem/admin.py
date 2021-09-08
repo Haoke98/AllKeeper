@@ -23,7 +23,7 @@ class PasswordAdmin(admin.ModelAdmin):
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
     list_display = ['__str__', '_username', '_password', '_url', 'email', 'tel', '_info', 'type']
-    list_filter = ['group', 'tel', 'email', 'type']
+    list_filter = ['group', 'type', 'tel', 'email']
 
     def _url(self, obj):
         if obj.url:

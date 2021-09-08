@@ -155,7 +155,8 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'django.contrib.sitemaps',
     'BeansMusic',
-    'accountSystem'
+    'accountSystem',
+    'DebtManagerSystem'
 ]
 CACHES = {
     'default': {
@@ -254,3 +255,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 FILE_CHARSET = 'gb18030'
 DEFAULT_CHARSET = 'utf-8'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -15,7 +15,7 @@ class Account(MyModel):
     Introduce = models.TextField(verbose_name="说明", null=True, blank=True)
     group = models.ForeignKey(verbose_name="所属账号组", to=Group, on_delete=models.CASCADE, null=True, blank=True)
     icon = models.ImageField(verbose_name="图标", null=True, blank=True)
-    type = models.ForeignKey(verbose_name="类型", to=AccountType, on_delete=models.CASCADE, null=True, blank=True)
+    type = models.ForeignKey(verbose_name="类型", to=AccountType, on_delete=models.CASCADE, null=True)
 
     class Meta:
         verbose_name = "账号"
