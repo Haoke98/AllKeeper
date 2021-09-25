@@ -4,13 +4,13 @@ from django.forms import TextInput, ModelForm
 from django.template import loader
 from django.utils.safestring import mark_safe
 
+from accountSystem.models.base import BaseModel
 from .base import ModelWithShowRate
-from .base import MyModel
 from .country import Country
 from .image import Image
 
 
-class Language(MyModel):
+class Language(BaseModel):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, verbose_name="语言")
     symbol = models.CharField(max_length=100, verbose_name="符号")
@@ -19,7 +19,7 @@ class Language(MyModel):
         db_table = "language"
 
     def __str__(self):
-        return "<%s,%s>" % (self.name, self.symbol)
+        return "%s(%s)" % (self.name, self.symbol)
 
 
 class FilmType(ModelWithShowRate):
@@ -31,7 +31,7 @@ class FilmType(ModelWithShowRate):
         db_table = "film_type"
 
     def __str__(self):
-        return "<%s,%s>" % (self.name, self.unit)
+        return "%s(%s)" % (self.name, self.unit)
 
 
 class Film(ModelWithShowRate):

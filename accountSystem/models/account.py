@@ -1,11 +1,11 @@
 from django.db import models
 
-from miniProgram.models import MyModel
 from .accountType import AccountType
+from .base import BaseModel
 from .models import PPassword, TTel, EEmail, Group
 
 
-class Account(MyModel):
+class Account(BaseModel):
     name = models.CharField(max_length=50, verbose_name="账号归属", default="未知账号")
     username = models.CharField(max_length=40, verbose_name="用户名")
     password = models.ForeignKey(to=PPassword, on_delete=models.CASCADE, verbose_name="密码", null=True)

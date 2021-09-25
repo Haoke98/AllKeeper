@@ -5,7 +5,8 @@ from django.template import loader
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 
-from .base import MyModel, ModelWithShowRate
+from accountSystem.models.base import BaseModel
+from .base import ModelWithShowRate
 from .image import Image
 from .video import Video
 
@@ -29,7 +30,7 @@ class ImageInput(TextInput):
         return mark_safe(template)
 
 
-class RedirectUrlRelation(MyModel):
+class RedirectUrlRelation(BaseModel):
     name = models.CharField(max_length=50, null=True)
     id = models.IntegerField(primary_key=True)
     redirectUrl = models.CharField(max_length=500)
@@ -39,7 +40,7 @@ class RedirectUrlRelation(MyModel):
         return "%s(URL重定向关系)" % (self.name)
 
 
-class User(MyModel):
+class User(BaseModel):
     openid = models.CharField(max_length=44)
     vip_expiredTime = models.DateTimeField(verbose_name="VIP过期时间", blank=True, null=True)
     firstTimeLogin = models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -130,7 +131,7 @@ class Article(ModelWithShowRate):
         }
 
 
-class Text(MyModel):
+class Text(BaseModel):
     id = models.AutoField(primary_key=True)
     english_text = models.CharField(max_length=100, verbose_name="英语_值", blank=True)
     uyghur_text = models.CharField(max_length=100, verbose_name="维吾尔语_值", blank=True)
@@ -140,14 +141,14 @@ class Text(MyModel):
         return "<%s,%s,%s>" % (self.english_text, self.uyghur_text, self.chinese_text)
 
 
-class HouseType(MyModel):
+class HouseType(BaseModel):
     name = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
 
 
-class HouseLayout(MyModel):
+class HouseLayout(BaseModel):
     bedRoomCount = models.IntegerField(verbose_name="卧室（个数）")
     livingRoomCount = models.IntegerField(verbose_name="客厅（个数）")
     toiletCount = models.IntegerField(verbose_name="卫生间(个数)", default=1)
@@ -159,7 +160,7 @@ class HouseLayout(MyModel):
         return res
 
 
-class PhoneNumber(MyModel):
+class PhoneNumber(BaseModel):
     owner = models.CharField(max_length=100, verbose_name="电话号拥有者姓名", blank=True)
     number = models.BigIntegerField(verbose_name="联系电话", )
 
@@ -170,7 +171,7 @@ class PhoneNumber(MyModel):
         return "TEL:%s" % (self.__str__())
 
 
-class HousePriceType(MyModel):
+class HousePriceType(BaseModel):
     name = models.CharField(max_length=100, verbose_name="类型名")
     unit = models.CharField(max_length=50, verbose_name="单位")
 
@@ -178,7 +179,7 @@ class HousePriceType(MyModel):
         return "<%s,%s>" % (self.name, self.unit)
 
 
-class HousePrice(MyModel):
+class HousePrice(BaseModel):
     priceType = models.ForeignKey(to=HousePriceType, on_delete=models.CASCADE, null=True)
     price = models.IntegerField(verbose_name="价格（万）")
 
@@ -186,7 +187,7 @@ class HousePrice(MyModel):
         return "%s:%s%s" % (self.priceType.name, self.price, self.priceType.unit)
 
 
-class HouseSizeUnit(MyModel):
+class HouseSizeUnit(BaseModel):
     name = models.CharField(max_length=50, verbose_name="单位称呼")
     unit = models.CharField(max_length=50, verbose_name="单位符号")
 
@@ -194,7 +195,7 @@ class HouseSizeUnit(MyModel):
         return "<%s,%s>" % (self.name, self.unit)
 
 
-class HouseSize(MyModel):
+class HouseSize(BaseModel):
     size = models.FloatField(verbose_name="数字大小")
     unit = models.ForeignKey(to=HouseSizeUnit, on_delete=models.CASCADE, verbose_name="单位")
 
@@ -244,7 +245,7 @@ class HouseForm(ModelForm):
         fields = ['houseType', 'houseLayout', 'size', 'price', 'phoneNum', 'address', 'descriptions', 'images']
 
 
-class Subcribtions(MyModel):
+class Subcribtions(BaseModel):
     name = models.CharField(max_length=50)
     app_id = models.CharField(max_length=18)
     app_secret = models.CharField(max_length=32)
@@ -253,7 +254,7 @@ class Subcribtions(MyModel):
         return self.name
 
 
-class Settings(MyModel):
+class Settings(BaseModel):
     app_name = models.CharField(max_length=50)
     app_id = models.CharField(max_length=18)
     app_secret = models.CharField(max_length=32)
@@ -276,6 +277,6 @@ class Settings(MyModel):
         }
 
 
-class StaticFiles(MyModel):
+class StaticFiles(BaseModel):
     label = models.CharField(verbose_name="文件标签", max_length=50, null=False)
     file = models.FileField(upload_to="static", null=False)

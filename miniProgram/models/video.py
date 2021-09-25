@@ -10,7 +10,7 @@ from ..utils import getVideoInfo
 
 class Video(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
-    episode_num = models.IntegerField(verbose_name='集次', null=True, default=0)
+    episodeNum = models.IntegerField(verbose_name='集次', null=True, default=0)
     cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, blank=True, null=False, default=4)
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
     film = models.ForeignKey(verbose_name="所属电视剧", to=Film, on_delete=models.PROTECT, null=True)
@@ -125,10 +125,10 @@ class Video(ModelWithShowRate):
         return format_html("{}{}", self.film, self.episode_name())
 
     def episode_name(self):
-        if self.episode_num == 0:
+        if self.episodeNum == 0:
             return ""
         else:
-            a = format_html("؛{}-{}", self.episode_num, self.film.type.unit)
+            a = format_html("؛{}-{}", self.episodeNum, self.film.type.unit)
             return a
 
     def json(self, isForSlider):
@@ -168,4 +168,4 @@ class VideoForm(ModelForm):
 
     class Meta:
         model = Video
-        fields = ['episode_num', 'url', 'film', 'vid']
+        fields = ['episodeNum', 'url', 'film', 'vid']

@@ -1,7 +1,9 @@
 from django.db import models
 
+from accountSystem.models.base import BaseModel
 
-class AccountType(models.Model):
+
+class AccountType(BaseModel):
     name = models.CharField(max_length=50, verbose_name="名称", default="未知类型")
 
     class Meta:

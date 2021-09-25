@@ -1,8 +1,9 @@
 from django.db import models
-from .base import MyModel
+
+from accountSystem.models.base import BaseModel
 
 
-class SubscriptionAccount(MyModel):
+class SubscriptionAccount(BaseModel):
     name = models.CharField(max_length=50)
     appId = models.CharField(max_length=18)
     appSecret = models.CharField(max_length=32)

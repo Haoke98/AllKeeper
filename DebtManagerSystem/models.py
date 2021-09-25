@@ -2,7 +2,10 @@ from django.db import models
 
 
 # Create your models here.
-class Debt(models.Model):
+from accountSystem.models.base import BaseModel
+
+
+class Debt(BaseModel):
     created_at = models.DateField(verbose_name="创建时间")
     ddl = models.DateField(verbose_name="还款时间")
     principle = models.FloatField(verbose_name="本金")

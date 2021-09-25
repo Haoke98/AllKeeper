@@ -2,13 +2,14 @@ from django.contrib import admin
 # Register your models here.
 from django.utils.html import format_html
 
+from izBasar.admin import LIST_DISPLAY, showUrl
 from miniProgram.models.country import Country
 from miniProgram.models.film import FilmType, Language, Film, FilmForm
 from miniProgram.models.models import *
 
 
 class MyModelAdmin(admin.ModelAdmin):
-    list_display = list(admin.ModelAdmin.list_display) + ['last_changed_time']
+    list_display = LIST_DISPLAY
 
 
 @admin.register(Article)
@@ -17,7 +18,7 @@ class ArticleAdmin(MyModelAdmin):
 
 
 @admin.register(RedirectUrlRelation)
-class UrlRedirectorAdmin(MyModelAdmin):
+class UrlRedirectAdmin(MyModelAdmin):
     list_display = MyModelAdmin.list_display + ['id', '_url', 'returnValue', '_redirectUrl']
 
     def _redirectUrl(self, obj):
@@ -61,14 +62,13 @@ class UserAdmin(MyModelAdmin):
     avatar.allow_tags = True
 
 
-
-
 @admin.register(Settings)
 class SettingsAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['enableVIP_mode', 'VIPprice', 'app_id', 'app_secret', 'subcribtion',
-                                                'total_transaction_volume','host',
+    list_display = MyModelAdmin.list_display + ['__str__', 'enableVIP_mode', 'VIPprice', 'app_id', 'app_secret',
+                                                'subcribtion',
+                                                'total_transaction_volume', 'host',
                                                 ]
-    list_display_links = ['__str__', 'subcribtion', 'last_changed_time']
+    list_display_links = ['__str__', 'subcribtion', ]
 
 
 def makeHasNotFirstAnalysed(modeladmin, request, queryset):  # 新建一个批量操作的函数，其中有三个参数：
@@ -90,21 +90,24 @@ makeHasNotAnalysed.short_description = 'make all video has not been analysed.'  
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
     # form = VideoForm
-    list_display = MyModelAdmin.list_display + ['is_hot', 'episode_num', 'film', 'show_times', 'id', '_cover',
+    list_display = MyModelAdmin.list_display + ['__str__', 'is_hot', 'episodeNum', 'film', 'show_times',
+                                                '_cover',
                                                 'videoShow',
                                                 # 'isFromSubscription', "hasFirstAnalysed", 'hasAnalysed', 'isTXV',
                                                 # 'formatID', 'destinationID',
                                                 # 'analysedUrl',
                                                 # 'analysedUrl_ExpiredTime',
                                                 # 'TXVid', 'WXVid',
-                                                'vid', 'url', ]
+                                                'vid', '_url', ]
     list_display_links = list(admin.ModelAdmin.list_display_links) + ['film', '__str__']
-    search_fields = ('name', 'episodeNum', 'id', 'vid'
+    search_fields = ('id', 'vid', 'url', 'film__name', 'film__name_chinese'
                      # 'TXVid', 'WXVid',
                      # 'formatID', 'destinationID',
                      )
-    list_filter = ['film', 'is_hot']
+    list_filter = ['is_hot', 'film', 'episodeNum']
     list_per_page = 20
+    autocomplete_fields = ['film']
+    date_hierarchy = 'updatedAt'
 
     # actions_on_bottom = [makeHasNotFirstAnalysed, ]
     # actions_on_top = [makeHasNotAnalysed, ]
@@ -112,21 +115,25 @@ class VideoAdmin(admin.ModelAdmin):
 
     def videoShow(self, obj):
         try:
-            if obj.cover == None:
+            if obj.cover is None:
                 img = ''
             else:
                 img = format_html(
-                    '''<a href="{}"><video  width="200px" height="100px" onClick="copy(this,'src')" controls  name = "media" >< source  src = "{}" type = "video/mp4" ></video></a>''',
+                    '''<a href="{}"><video  width="200px" height="100px" onClick="copy(this,'src')" controls  name = 
+                    "media" >< source  src = "{}" type = "video/mp4" ></video></a>''',
                     obj.analysedUrl, obj.analysedUrl, obj.analysedUrl)
         except Exception as e:
             img = ''
         return img
 
     def _cover(self, obj):
-        if obj.cover == None:
+        if obj.cover is None:
             return ''
         else:
             return obj.cover.show()
+
+    def _url(self, obj):
+        return showUrl(obj.url)
 
     def save_model(self, request, obj, form, change):
         print("user clicked the save button just now for this video:%s change:%s" % (obj, change))
@@ -164,12 +171,14 @@ class CountryAdmin(admin.ModelAdmin):
 @admin.register(Film)
 class FilmAdmin(admin.ModelAdmin):
     form = FilmForm
-    list_display = MyModelAdmin.list_display + ['name_chinese', 'show_times', 'id', '_cover', 'type', 'language',
+    list_display = MyModelAdmin.list_display + ['name', 'name_chinese', 'show_times', 'id', '_cover', 'type',
+                                                'language',
                                                 'country']
     list_filter = ['type', 'language', 'country']
-    search_fields = list_display
+    search_fields = ['name', 'name_chinese']
     inlines = [VideoInlineAdmin]
     list_per_page = 10
+    date_hierarchy = 'updatedAt'
 
     def _cover(self, obj):
         return obj.cover.show()

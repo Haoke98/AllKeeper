@@ -5,13 +5,13 @@ from django.db import models
 from django.utils.datetime_safe import datetime
 from django.utils.html import format_html
 
+from accountSystem.models.base import BaseModel
 from izBasar.settings import IMAGE_ROOT
 from miniProgram.utils import upLoadImg
 from miniProgram.views.views import subscriptionAccountService
-from .base import MyModel
 
 
-class Image(MyModel):
+class Image(BaseModel):
     id = models.AutoField(primary_key=True)
     media_id = models.CharField(max_length=43, blank=True, default="#")
     file_name = models.CharField(verbose_name="文件名", max_length=600, blank=True, default="#")

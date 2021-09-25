@@ -45,7 +45,6 @@ IMAGE_ROOT = os.path.join(MEDIA_ROOT, "img")
 if not os.path.exists(IMAGE_ROOT):
     os.mkdir(IMAGE_ROOT)
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -55,19 +54,12 @@ os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 
 WINDOWS = 'Windows'
 LINUX = 'Linux'
-SADAM_SET = {
-    "DEBUG": False,
-    "BASE_HREF": "BASE_HREF_TWO_PLATFORMS",
-}
-if platform.system() == WINDOWS:
-    SADAM_SET["DEBUG"] = True
-    SADAM_SET["BASE_HREF"] = "http://10.128.202.191:7000"
-else:
-    SADAM_SET["DEBUG"] = False
-    SADAM_SET["BASE_HREF"] = "https://x.izbasarweb.xyz"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = SADAM_SET.get("DEBUG")
+if platform.system() == WINDOWS:
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -249,7 +241,11 @@ LANGUAGE_CODE = 'zh-Hans'
 TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 USE_L10N = False
-USE_TZ = True
+USE_TZ = False
+
+DATETIME_FORMAT = 'Y/m/d H:i:s'
+
+DATE_FORMAT = 'Y/m/d'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

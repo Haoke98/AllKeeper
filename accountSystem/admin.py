@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
+from izBasar.admin import LIST_DISPLAY, showUrl
 from .models.account import Account
 from .models.accountType import AccountType
 from .models.models import TTel, EEmail, PPassword, Group
@@ -11,26 +12,23 @@ from .models.models import TTel, EEmail, PPassword, Group
 
 @admin.register(TTel, EEmail)
 class UniversalAdmin(admin.ModelAdmin):
-    list_display = ['id', 'content']
+    list_display = LIST_DISPLAY + ['id', 'content']
     list_display_links = ['content']
 
 
 @admin.register(PPassword)
 class PasswordAdmin(admin.ModelAdmin):
-    list_display = ['password', ]
+    list_display = LIST_DISPLAY + ['password', ]
 
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ['__str__', '_username', '_password', '_url', 'email', 'tel', '_info', 'type']
+    list_display = LIST_DISPLAY + ['__str__', '_username', '_password', '_url', 'email', 'tel', '_info', 'type']
     list_filter = ['group', 'type', 'tel', 'email']
+    date_hierarchy = 'updatedAt'
 
     def _url(self, obj):
-        if obj.url:
-            tag = mark_safe('''<a href="%s" target="blank" class="button" title="点击跳转">URL</a>''' % obj.url)
-        else:
-            tag = "-"
-        return tag
+        return showUrl(obj.url)
 
     _url.allow_tags = True
 
@@ -47,8 +45,8 @@ class AccountAdmin(admin.ModelAdmin):
 
     def _password(self, obj):
         tag = mark_safe(
-            '''<button type="button" class="button" title="点击复制密码" onclick="copyStr('%s')" >********</button>''' % (
-                obj.password.password))
+            '''<button type="button" class="button" title="%s" onclick="copyStr('%s')" >********</button>''' % (
+                obj.password.password, obj.password.password))
         return tag
 
     _password.allow_tags = True
@@ -72,9 +70,9 @@ class AccountAdmin(admin.ModelAdmin):
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
-    list_display = ["__str__", "__name__"]
+    list_display = LIST_DISPLAY + ["__str__", "__name__"]
 
 
 @admin.register(AccountType)
 class AccountTypeAdmin(admin.ModelAdmin):
-    list_display = ["__str__", "__name__"]
+    list_display = LIST_DISPLAY + ["__str__", "__name__"]
