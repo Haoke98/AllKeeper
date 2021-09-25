@@ -12,7 +12,7 @@ from .models.models import TTel, EEmail, PPassword, Group
 
 @admin.register(TTel, EEmail)
 class UniversalAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['id', 'content']
+    list_display = LIST_DISPLAY + ['id', 'content', 'remark']
     list_display_links = ['content']
 
 
