@@ -16,7 +16,7 @@ class TTel(BaseModel):
     remark = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
-        return self.content
+        return "%s(%s)" % (self.content, self.remark)
 
 
 class EEmail(BaseModel):

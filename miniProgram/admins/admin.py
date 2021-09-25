@@ -43,11 +43,12 @@ class UserAdmin(MyModelAdmin):
 
     def avatar(self, obj):
         try:
-            if obj.avatarUrl == None:
+            if obj.avatarUrl is None:
                 img = ''
             else:
                 img = mark_safe('<img src="%s" width="50px" />' % (obj.avatarUrl,))
         except Exception as e:
+            e.with_traceback()
             img = ''
         return img
 

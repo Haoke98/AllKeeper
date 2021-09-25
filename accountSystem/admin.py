@@ -23,9 +23,12 @@ class PasswordAdmin(admin.ModelAdmin):
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['__str__', '_username', '_password', '_url', 'email', 'tel', '_info', 'type']
+    list_display = LIST_DISPLAY + ['name', '_username', '_password', '_url', 'email', 'tel', '_info', 'type']
     list_filter = ['group', 'type', 'tel', 'email']
+    list_display_links = ['name']
     date_hierarchy = 'updatedAt'
+    search_fields = ['name', 'username', 'password', 'url', 'tel', 'info', 'type']
+    list_select_related = ['type', 'password', 'tel', 'email', 'group']
 
     def _url(self, obj):
         return showUrl(obj.url)
