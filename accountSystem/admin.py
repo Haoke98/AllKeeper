@@ -69,9 +69,9 @@ class AccountAdmin(admin.ModelAdmin):
             pass
 
         js = [
-            'js/kindeditor4.1.11/kindeditor-all.js',
-            'js/kindeditor4.1.11/lang/zh-CN.js',
-            'js/kindeditor4.1.11/config-account-admin.js',
+            'kindeditor4.1.11/kindeditor-all.js',
+            'kindeditor4.1.11/lang/zh-CN.js',
+            'js/config-account-admin.js',
             'js/jquery-3.6.0.min.js',
             'js/clipboardUtil.js',
             'bootstrap-3.4.1-dist/js/bootstrap.js'

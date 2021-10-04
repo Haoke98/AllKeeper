@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>KindEditor Unittest</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 		<link rel="stylesheet" href="../lib/qunit/qunit.css" />
 		<!-- <script src="../lib/firebug-lite/build/firebug-lite.js#startOpened"></script> -->
 		<script src="../lib/qunit/qunit.js"></script>
@@ -13,6 +14,9 @@
 		<script src="../src/event.js"></script>
 		<script src="../src/html.js"></script>
 		<script src="../src/selector.js"></script>
+		<script src="../src/node.js"></script>
+		<script src="../src/cmd.js"></script>
+		<script src="../src/main.js"></script>
 	</head>
 	<body>
 		<h1 id="qunit-header">KindEditor Unittest</h1>
@@ -20,9 +24,9 @@
 		<ol id="qunit-tests"></ol>
 
 		<!-- test data 01 -->
-		<div id="test-data-01" class="test-class" style="display:none;">
+		<div id="test-data-01" class="test-class" style="width:300px;">
 			<p>
-abcd<strong>efg</strong>hijk<img src="./data/logo_180_30.gif" border="0" />xyz<br />
+abcd<strong>efg</strong>hijk<img src="data/logo_180_30.gif" border="0" />xyz<br />
 01<span style="color:red;font-size:14px;">23456</span>789<br />
 </p>
 			<div>div area</div>
@@ -32,7 +36,7 @@ abcd<strong>efg</strong>hijk<img src="./data/logo_180_30.gif" border="0" />xyz<b
 		<!-- test data 02 -->
 		<div id="test-data-02" class="test-class" style="display:none;">
 			<p>
-				<strong></strong>hijk<img src="./data/logo_180_30.gif" border="0" /><br />
+				<strong></strong>hijk<img src="data/logo_180_30.gif" border="0" /><br />
 				<span style="color:red;font-size:14px;">23456</span>789<br />
 			</p>
 			<div></div>
@@ -40,7 +44,7 @@ abcd<strong>efg</strong>hijk<img src="./data/logo_180_30.gif" border="0" />xyz<b
 		<!-- test data 03 -->
 		<div id="test-data-03" class="test-class" style="display:none;">
 			<p>
-				<strong> </strong>hijk <img src="./data/logo_180_30.gif" /> <br />
+				<strong> </strong>hijk <img src="data/logo_180_30.gif" /> <br />
 				1<span style="color:red;"> 23 456 </span> 789 <br />
 			</p>
 			<div>abc
@@ -51,6 +55,8 @@ g			<embed/> </div>
 			<div> </div>
 		</div>
 		<!-- include test files -->
-		<script src="selector.js"></script>
+
+		<script src="node.js"></script>
+
 	</body>
 </html>

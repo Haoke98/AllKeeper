@@ -3114,3 +3114,19 @@ INFO [2021-10-04 15:38:11,964] django.utils.autoreload: E:\myProjects\Izbasar\ba
 INFO [2021-10-04 15:38:12,951] django.utils.autoreload: Watching for file changes with StatReloader
 INFO [2021-10-04 15:38:24,069] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/?q=%E5%85%A8%E5%9B%BD HTTP/1.0" 200 30374
 INFO [2021-10-04 15:38:24,751] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.0" 200 8377
+INFO [2021-10-04 16:11:25,309] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-10-04 16:11:26,372] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-10-04 16:13:58,866] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/?q=%E5%85%A8%E5%9B%BD HTTP/1.0" 200 30351
+INFO [2021-10-04 16:13:59,611] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.0" 200 8377
+INFO [2021-10-04 16:14:03,886] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/147/change/?_changelist_filters=q%3D%25E5%2585%25A8%25E5%259B%25BD HTTP/1.0" 200 35424
+INFO [2021-10-04 16:14:04,481] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.0" 200 8377
+INFO [2021-10-04 16:18:59,910] django.server: "POST /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/147/change/?_changelist_filters=q%3D%25E5%2585%25A8%25E5%259B%25BD HTTP/1.0" 302 0
+INFO [2021-10-04 16:19:01,166] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/?q=%E5%85%A8%E5%9B%BD HTTP/1.0" 200 32695
+INFO [2021-10-04 16:19:03,904] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.0" 200 8377
+INFO [2021-10-04 16:19:06,946] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/147/change/?_changelist_filters=q%3D%25E5%2585%25A8%25E5%259B%25BD HTTP/1.0" 200 36890
+INFO [2021-10-04 16:19:07,614] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/jsi18n/ HTTP/1.0" 200 8377
+INFO [2021-10-04 16:30:43,165] django.server: "GET /admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/accountSystem/account/?q=%E5%85%A8%E5%9B%BD HTTP/1.0" 200 32411
+INFO [2021-10-04 16:31:10,993] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-10-04 16:31:11,995] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-10-04 16:31:42,043] django.utils.autoreload: E:\myProjects\Izbasar\backend\PythonDjango\accountSystem\admin.py changed, reloading.
+INFO [2021-10-04 16:31:43,171] django.utils.autoreload: Watching for file changes with StatReloader
