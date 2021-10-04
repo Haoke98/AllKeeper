@@ -7,19 +7,29 @@ from miniProgram.models.country import Country
 from miniProgram.models.film import FilmType, Language, Film, FilmForm
 from miniProgram.models.models import *
 
+admin.site.site_title = "IzBasar工作室后天管理系统"
+# 登录页导航条和首页导航条标题
+admin.site.site_header = "IzBasar媒体工作室后台管理系统欢迎您"
+# 主页标题
+admin.site.index_title = "欢迎登陆"
 
-class MyModelAdmin(admin.ModelAdmin):
+
+class BaseAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY
+    date_hierarchy = 'updatedAt'
+
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
 
 
 @admin.register(Article)
-class ArticleAdmin(MyModelAdmin):
-    list_display = MyModelAdmin.list_display + ['description', 'cover_url', 'url']
+class ArticleAdmin(BaseAdmin):
+    list_display = BaseAdmin.list_display + ['description', 'cover_url', 'url']
 
 
 @admin.register(RedirectUrlRelation)
-class UrlRedirectAdmin(MyModelAdmin):
-    list_display = MyModelAdmin.list_display + ['id', '_url', 'returnValue', '_redirectUrl']
+class UrlRedirectAdmin(BaseAdmin):
+    list_display = BaseAdmin.list_display + ['id', '_url', 'returnValue', '_redirectUrl']
 
     def _redirectUrl(self, obj):
         x = mark_safe('<a href="%s">%s</a>' % (obj.redirectUrl, obj.redirectUrl))
@@ -33,12 +43,12 @@ class UrlRedirectAdmin(MyModelAdmin):
 
 
 @admin.register(User)
-class UserAdmin(MyModelAdmin):
-    list_display = MyModelAdmin.list_display + ['last_login_time',
-                                                'vip_expiredTime',
-                                                "remark",
-                                                'avatar', 'nickName', '_gender',
-                                                'language', 'city', 'province', 'country', 'firstTimeLogin']
+class UserAdmin(BaseAdmin):
+    list_display = BaseAdmin.list_display + ['last_login_time',
+                                             'vip_expiredTime',
+                                             "remark",
+                                             'avatar', 'nickName', '_gender',
+                                             'language', 'city', 'province', 'country', 'firstTimeLogin']
     date_hierarchy = 'last_login_time'
 
     def avatar(self, obj):
@@ -65,10 +75,10 @@ class UserAdmin(MyModelAdmin):
 
 @admin.register(Settings)
 class SettingsAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['__str__', 'enableVIP_mode', 'VIPprice', 'app_id', 'app_secret',
-                                                'subcribtion',
-                                                'total_transaction_volume', 'host',
-                                                ]
+    list_display = BaseAdmin.list_display + ['__str__', 'enableVIP_mode', 'VIPprice', 'app_id', 'app_secret',
+                                             'subcribtion',
+                                             'total_transaction_volume', 'host',
+                                             ]
     list_display_links = ['__str__', 'subcribtion', ]
 
 
@@ -88,19 +98,77 @@ def makeHasNotAnalysed(modeladmin, request, queryset):  # 新建一个批量操�
 makeHasNotAnalysed.short_description = 'make all video has not been analysed.'  # 这个是在界面显示的描述信息
 
 
-@admin.register(Video)
-class VideoAdmin(admin.ModelAdmin):
+class VideoInlineAdmin(admin.TabularInline):
+    model = Video
+    min_num = 0
+    extra = 0
     # form = VideoForm
-    list_display = MyModelAdmin.list_display + ['__str__', 'is_hot', 'episodeNum', 'film', 'show_times',
-                                                '_cover',
-                                                'videoShow',
-                                                # 'isFromSubscription', "hasFirstAnalysed", 'hasAnalysed', 'isTXV',
-                                                # 'formatID', 'destinationID',
-                                                # 'analysedUrl',
-                                                # 'analysedUrl_ExpiredTime',
-                                                # 'TXVid', 'WXVid',
-                                                'vid', '_url', ]
-    list_display_links = list(admin.ModelAdmin.list_display_links) + ['film', '__str__']
+
+
+class ImageInlineAdmin(admin.StackedInline):
+    model = Image
+    extra = 0
+
+
+class PictureShowAdmin(BaseAdmin):
+    def __init__(self, model, admin_site):
+        self.list_display = super().list_display + ['_img']
+        super().__init__(model, admin_site)
+
+    def _img(self, obj):
+        _url = ""
+        if hasattr(obj, "original_url"):
+            _url = obj.original_url
+        if hasattr(obj, "cover"):
+            if hasattr(obj.cover, "original_url"):
+                _url = obj.cover.original_url
+        return format_html(
+            '''<img src="{}" width="200px" height="100px"  title="{}" onClick="show_big_img(this)"/>''',
+            _url, "%s\n%s" %
+                  (obj.__str__(), _url)
+
+        )
+
+    _img.short_description = "封面"
+
+    class Media:
+        js = (
+            'js/jquery-3.6.0.min.js',
+            'js/imageUtil.js'
+        )
+
+
+@admin.register(Image)
+class ImageAdmin(PictureShowAdmin):
+    form = UploadForm
+
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        print(super().list_display)
+        self.list_display = super().list_display + ['_img', 'media_id', 'content']
+        print(self.list_display)
+
+
+@admin.register(Film)
+class FilmAdmin(PictureShowAdmin):
+    form = FilmForm
+    list_filter = ['type', 'language', 'country']
+    search_fields = ['name', 'name_chinese']
+    inlines = [VideoInlineAdmin]
+    list_per_page = 10
+    date_hierarchy = 'updatedAt'
+
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        self.list_display = super().list_display + ['name', 'name_chinese', 'show_times', '_img', 'type',
+                                                    'language',
+                                                    'country']
+
+
+@admin.register(Video)
+class VideoAdmin(PictureShowAdmin):
+    # form = VideoForm
+    list_display_links = ['film', '__str__']
     search_fields = ('id', 'vid', 'url', 'film__name', 'film__name_chinese'
                      # 'TXVid', 'WXVid',
                      # 'formatID', 'destinationID',
@@ -109,10 +177,22 @@ class VideoAdmin(admin.ModelAdmin):
     list_per_page = 20
     autocomplete_fields = ['film']
     date_hierarchy = 'updatedAt'
+    inlines = []
 
     # actions_on_bottom = [makeHasNotFirstAnalysed, ]
     # actions_on_top = [makeHasNotAnalysed, ]
     # actions = [makeHasNotAnalysed, makeHasNotFirstAnalysed]
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        self.list_display = super().list_display + ['__str__', 'is_hot', 'episodeNum', 'film', 'show_times',
+                                                    '_img',
+                                                    'videoShow',
+                                                    # 'isFromSubscription', "hasFirstAnalysed", 'hasAnalysed', 'isTXV',
+                                                    # 'formatID', 'destinationID',
+                                                    # 'analysedUrl',
+                                                    # 'analysedUrl_ExpiredTime',
+                                                    # 'TXVid', 'WXVid',
+                                                    'vid', '_url', ]
 
     def videoShow(self, obj):
         try:
@@ -127,12 +207,6 @@ class VideoAdmin(admin.ModelAdmin):
             img = ''
         return img
 
-    def _cover(self, obj):
-        if obj.cover is None:
-            return ''
-        else:
-            return obj.cover.show()
-
     def _url(self, obj):
         return showUrl(obj.url)
 
@@ -142,101 +216,64 @@ class VideoAdmin(admin.ModelAdmin):
         obj.save()
 
 
-class VideoInlineAdmin(admin.TabularInline):
-    model = Video
-    min_num = 0
-    extra = 0
-    # form = VideoForm
-
-
-class ImageInlineAdmin(admin.StackedInline):
-    model = Image
-    extra = 0
-
-
 @admin.register(FilmType)
 class FilmTypeAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['show_times', 'id', 'name', 'unit']
+    list_display = BaseAdmin.list_display + ['show_times', 'id', 'name', 'unit']
 
 
 @admin.register(Language)
 class LanguageAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['id', 'symbol']
+    list_display = BaseAdmin.list_display + ['id', 'symbol']
 
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
-    list_display = MyModelAdmin.list_display + ['id', 'symbol']
-
-
-@admin.register(Film)
-class FilmAdmin(admin.ModelAdmin):
-    form = FilmForm
-    list_display = MyModelAdmin.list_display + ['name', 'name_chinese', 'show_times', 'id', '_cover', 'type',
-                                                'language',
-                                                'country']
-    list_filter = ['type', 'language', 'country']
-    search_fields = ['name', 'name_chinese']
-    inlines = [VideoInlineAdmin]
-    list_per_page = 10
-    date_hierarchy = 'updatedAt'
-
-    def _cover(self, obj):
-        return obj.cover.show()
-
-
-@admin.register(Image)
-class ImageAdmin(MyModelAdmin):
-    form = UploadForm
-    list_display = MyModelAdmin.list_display + ['show', 'id', 'media_id', 'content']
-
-    def show(self, obj):
-        return obj.show()
+    list_display = BaseAdmin.list_display + ['id', 'symbol']
 
 
 @admin.register(HouseType)
-class HouseTypeAdmin(MyModelAdmin):
+class HouseTypeAdmin(BaseAdmin):
     exclude = ('',)
 
 
 @admin.register(House)
-class HouseAdmin(MyModelAdmin):
+class HouseAdmin(BaseAdmin):
     form = HouseForm
-    list_display = MyModelAdmin.list_display + ['houseType', 'houseLayout', 'size', 'price', 'phoneNum', 'address',
-                                                'descriptions']
+    list_display = BaseAdmin.list_display + ['houseType', 'houseLayout', 'size', 'price', 'phoneNum', 'address',
+                                             'descriptions']
     list_select_related = ['houseType', 'houseLayout']
 
 
 @admin.register(HouseLayout)
-class HouseLayoutAdmin(MyModelAdmin):
+class HouseLayoutAdmin(BaseAdmin):
     exclude = ('',)
 
 
 @admin.register(PhoneNumber)
-class PhoneNumberAdmin(MyModelAdmin):
+class PhoneNumberAdmin(BaseAdmin):
     exclude = ('',)
 
 
 @admin.register(HousePriceType)
-class HousePriceTypeAdmin(MyModelAdmin):
+class HousePriceTypeAdmin(BaseAdmin):
     exclude = ('',)
 
 
 @admin.register(HousePrice)
-class HousePriceAdmin(MyModelAdmin):
+class HousePriceAdmin(BaseAdmin):
     exclude = ('',)
 
 
 @admin.register(HouseSizeUnit)
-class HouseSizeUnitAdmin(MyModelAdmin):
+class HouseSizeUnitAdmin(BaseAdmin):
     exclude = ('',)
 
 
 @admin.register(HouseSize)
-class HouseSizeAdmin(MyModelAdmin):
+class HouseSizeAdmin(BaseAdmin):
     exclude = ('',)
 
 
 @admin.register(StaticFiles)
-class StaticFilesAdmin(MyModelAdmin):
-    list_display = MyModelAdmin.list_display + ['label', 'file']
+class StaticFilesAdmin(BaseAdmin):
+    list_display = BaseAdmin.list_display + ['label', 'file']

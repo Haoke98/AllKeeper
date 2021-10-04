@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from miniProgram.admins.admin import MyModelAdmin
+from miniProgram.admins.admin import BaseAdmin
 from .models import *
 
 
@@ -45,8 +45,8 @@ from .models import *
 
 # Register your models here.
 @admin.register(Map)
-class MapAdmin(MyModelAdmin):
-    list_display = MyModelAdmin.list_display + ['_map']
+class MapAdmin(BaseAdmin):
+    list_display = BaseAdmin.list_display + ['_map']
 
     def _map(self, obj):
         return obj.map.show()

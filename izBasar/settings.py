@@ -12,12 +12,13 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import platform
+from pathlib import Path
 
 from . import secret
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 PUBLIC_ROOT = os.path.join(BASE_DIR, 'public')
 if not os.path.exists(PUBLIC_ROOT):
@@ -28,22 +29,20 @@ STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
 if not os.path.exists(STATIC_ROOT):
     os.mkdir(STATIC_ROOT)
 
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(PUBLIC_ROOT, 'media')
+# if not os.path.exists(MEDIA_ROOT):
+#     os.mkdir(MEDIA_ROOT)
+#
+IMAGE_ROOT = os.path.join(STATIC_ROOT, "img")
+if not os.path.exists(IMAGE_ROOT):
+    os.mkdir(IMAGE_ROOT)
+
 LOG_FILE_DIR = os.path.join(PUBLIC_ROOT, 'log')
 if not os.path.exists(LOG_FILE_DIR):
     os.mkdir(LOG_FILE_DIR)
 
-CACHE_DIR = os.path.join(PUBLIC_ROOT, 'cache')
-res = os.path.join(BASE_DIR, os.path.pardir)
-outerFolder = os.path.abspath(res)
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(PUBLIC_ROOT, 'media')
-if not os.path.exists(MEDIA_ROOT):
-    os.mkdir(MEDIA_ROOT)
-
-IMAGE_ROOT = os.path.join(MEDIA_ROOT, "img")
-if not os.path.exists(IMAGE_ROOT):
-    os.mkdir(IMAGE_ROOT)
+CACHE_DIR = os.path.join(BASE_DIR, 'cache')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/

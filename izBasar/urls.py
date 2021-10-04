@@ -13,14 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include
+from django.conf.urls.static import static
 from django.contrib import admin
 
 admin.autodiscover()
 from django.contrib.flatpages import sitemaps
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path
-from django.views.static import serve
 
 import BeansMusic.urls
 import WEB3DA.urls
@@ -29,15 +29,16 @@ from izBasar import settings
 from miniProgram.views import image
 
 urlpatterns = [
-    path('admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/', admin.site.urls),
-    # path('admin/', admin.site.urls),
-    url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
-    url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
-    path('miniProgram/', include(miniProgram.urls)),
-    path('W3DA/', include(WEB3DA.urls)),
-    path('admin/doc/', include('django.contrib.admindocs.urls')),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-         name='django.contrib.sitemaps.views.sitemap'),
-    path('BeansMusic/', include(BeansMusic.urls)),
-    path('image/proxy', image.proxy)
-]
+                  path('admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/', admin.site.urls),
+                  # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+                  # url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
+                  path('miniProgram/', include(miniProgram.urls)),
+                  path('W3DA/', include(WEB3DA.urls)),
+                  path('admin/doc/', include('django.contrib.admindocs.urls')),
+                  path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+                       name='django.contrib.sitemaps.views.sitemap'),
+                  path('BeansMusic/', include(BeansMusic.urls)),
+                  path('image/proxy', image.proxy)
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+print(settings.STATIC_ROOT)

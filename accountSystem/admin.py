@@ -24,11 +24,11 @@ class PasswordAdmin(admin.ModelAdmin):
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY + ['name', '_username', '_password', '_url', 'email', 'tel', '_info', 'type']
-    list_filter = ['group', 'type', 'tel', 'email']
     list_display_links = ['name']
     date_hierarchy = 'updatedAt'
-    search_fields = ['name', 'username', 'password', 'url', 'tel', 'info', 'type']
-    list_select_related = ['type', 'password', 'tel', 'email', 'group']
+    search_fields = ['name', 'username', 'url', 'Introduce']
+    list_filter = ['group', 'type', 'tel', 'email']
+    list_select_related = list_filter + ['password']
 
     def _url(self, obj):
         return showUrl(obj.url)
@@ -48,7 +48,7 @@ class AccountAdmin(admin.ModelAdmin):
 
     def _password(self, obj):
         tag = mark_safe(
-            '''<button type="button" class="button" title="%s" onclick="copyStr('%s')" >********</button>''' % (
+            '''<button type="button" class="button" title="%s" onclick="copyWithElement(this,'%s')" >********</button>''' % (
                 obj.password.password, obj.password.password))
         return tag
 
@@ -64,12 +64,18 @@ class AccountAdmin(admin.ModelAdmin):
     # list_display = ['__str__', 'username',  ,'url',  'Introduce']
 
     class Media:
-        js = [
-            'js/kindeditor4.1.11/config-account-admin.js',
-            'js/kindeditor4.1.11/lang/zh-CN.js',
-            'js/kindeditor4.1.11/kindeditor-all.js',
-        ]
 
+        def __init__(self):
+            pass
+
+        js = [
+            'js/kindeditor4.1.11/kindeditor-all.js',
+            'js/kindeditor4.1.11/lang/zh-CN.js',
+            'js/kindeditor4.1.11/config-account-admin.js',
+            'js/jquery-3.6.0.min.js',
+            'js/clipboardUtil.js',
+            'bootstrap-3.4.1-dist/js/bootstrap.js'
+        ]
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
