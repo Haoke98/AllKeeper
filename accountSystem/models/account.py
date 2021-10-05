@@ -12,12 +12,13 @@ class Account(BaseModel):
     tel = models.ForeignKey(verbose_name="绑定的手机号", to=TTel, on_delete=models.CASCADE, null=True, blank=True)
     url = models.URLField(verbose_name="网站地址", null=True, blank=True)
     email = models.ForeignKey(verbose_name="关联邮箱", to=EEmail, on_delete=models.CASCADE, null=True, blank=True)
-    Introduce = models.TextField(verbose_name="说明", null=True, blank=True)
+    info = models.TextField(verbose_name="说明", null=True, blank=True)
     group = models.ForeignKey(verbose_name="所属账号组", to=Group, on_delete=models.CASCADE, null=True, blank=True)
     icon = models.ImageField(verbose_name="图标", null=True, blank=True)
     type = models.ForeignKey(verbose_name="类型", to=AccountType, on_delete=models.CASCADE, null=True)
 
     class Meta:
+        db_table = "account"
         verbose_name = "账号"
         verbose_name_plural = "所有" + verbose_name
 
