@@ -1,6 +1,6 @@
 //需要先引入'kindeditor4.1.11/kindeditor-all.js','kindeditor4.1.11/lang/zh-CN.js' 和  'js/jquery-3.6.0.min.js',
 KindEditor.ready(function (k) {
-    window.editor = k.create('#id_Introduce', {
+    window.editor = k.create('#id_info', {
         resizeType: 1,
         allowPreviewEmoticons: false,
         allowImageRemote: false,
@@ -24,7 +24,7 @@ function activatePopupInfo() {
                 position: 'right center',
                 //     // target   : '.test.image',
                 // title: title,
-                content: info
+                html: info
             });
         })
 
@@ -33,7 +33,7 @@ function activatePopupInfo() {
 
 function getInfo(id, onSuccess) {
     $.ajax({
-        url: "https://web.izbasar.link/api2/account/info",
+        url: "/api2/account/info",
         type: "GET",
         data: {
             id: id,
@@ -53,4 +53,12 @@ function getInfo(id, onSuccess) {
 
         }
     })
+}
+
+function goToDetail(el) {
+    console.log("goToDetail:", el)
+    let x = $(el).prev()
+    console.log("x:", x)
+    console.log("a:", x[0])
+    x[0].click();
 }

@@ -1,39 +1,25 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
+from accountSystem.models import Account
 from izBasar.admin import LIST_DISPLAY
-from .models.account import Account
-from .models.accountType import AccountType
-from .models.models import TTel, EEmail, PPassword, Group
-
-
-# Register your models here.
-
-
-@admin.register(TTel, EEmail)
-class UniversalAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['id', 'content', 'remark']
-    list_display_links = ['content']
-
-
-@admin.register(PPassword)
-class PasswordAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['password', ]
 
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['_name', '_username', '_password', '_url', 'email', 'tel', '_info', 'type']
+    list_display = LIST_DISPLAY + ['_name', '_username', '_password', '_url', '_info', 'type']
     list_display_links = ['id', '_name']
     date_hierarchy = 'updatedAt'
-    search_fields = ['name', 'username', 'url', 'Introduce']
-    list_filter = ['group', 'type', 'tel', 'email']
-    list_select_related = list_filter + ['password']
+    search_fields = ['name', 'username', 'url', 'info']
+    list_filter = ['group', 'type', 'tels', 'emails']
+    list_select_related = ['group', 'type', 'password']
+    autocomplete_fields = ['tels', 'emails', 'password', 'group', 'type']
     list_per_page = 10
+    actions = ['actionTelAndEmailMigration']
 
     def _url(self, obj):
         tag = mark_safe('''
-                    <a class="ui circular icon red button" href="%s">
+                    <a class="ui circular icon red button" href="%s" target="blank">
                         <i class="linkify icon"></i>
                     </a>
             ''' % obj.url)
@@ -92,10 +78,16 @@ class AccountAdmin(admin.ModelAdmin):
 
     def _name(self, obj):
         tag = mark_safe(
-            '''<a class="ui teal tag label" style="width:20em;">%s</a>''' % obj.name)
+            '''<a class="ui teal tag label" style="width:20em;" onclick="goToDetail(this)">%s</a>''' % obj.name)
         return tag
 
     _name.allow_tags = True
+
+    def actionTelAndEmailMigration(self, request, queryset):
+        for obj in queryset:
+            obj.tels.add(obj.tel)
+            obj.emails.add(obj.email)
+            obj.save()
 
     class Media:
 
@@ -114,13 +106,3 @@ class AccountAdmin(admin.ModelAdmin):
             'js/clipboardUtil.js',
             'bootstrap-3.4.1-dist/js/bootstrap.js'
         ]
-
-
-@admin.register(Group)
-class GroupAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ["__str__", "__name__"]
-
-
-@admin.register(AccountType)
-class AccountTypeAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ["__str__", "__name__"]
