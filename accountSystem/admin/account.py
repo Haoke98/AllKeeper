@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from accountSystem.models import Account
+from accountSystem.models import Account, Tel, Email
 from izBasar.admin import LIST_DISPLAY
 
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['_name', '_username', '_password', '_url', '_info', 'type']
+    list_display = LIST_DISPLAY + ['_name', '_username', '_password', '_url', '_tels', '_emails', '_info', 'type']
     list_display_links = ['id', '_name']
     date_hierarchy = 'updatedAt'
     search_fields = ['name', 'username', 'url', 'info']
@@ -82,6 +82,56 @@ class AccountAdmin(admin.ModelAdmin):
         return tag
 
     _name.allow_tags = True
+
+    def _tels(self, obj):
+        items: str = ""
+        tels = obj.tels.all()
+        print(obj.id, obj.name, tels)
+        for tel in tels:
+            items += self._getTelItem(tel)
+        finalList = '''
+                <div class="ui list">
+                    %s              
+                </div>
+        ''' % items
+        return mark_safe(finalList)
+
+    def _getTelItem(self, tel: Tel):
+        item = '''
+                        <div class="item">
+                            <i class="phone square icon"></i>
+                            <div class="content">
+                              <a class="header">%s</a>
+                              
+                            </div>
+                        </div>
+                ''' % tel.content
+        return mark_safe(item)
+
+    def _emails(self, obj: Account):
+        items: str = ""
+        emails = obj.emails.all()
+        print(obj.id, obj.name, emails)
+        for email in emails:
+            items += self._getEmailItem(email)
+        finalList = '''
+                <div class="ui list">
+                    %s              
+                </div>
+        ''' % items
+        return mark_safe(finalList)
+
+    def _getEmailItem(self, email: Email):
+        item = '''
+                        <div class="item">
+                            <i class="paper plane icon"></i>
+                            <div class="content">
+                              <a class="header">%s</a>
+
+                            </div>
+                        </div>
+                ''' % email.content
+        return mark_safe(item)
 
     def actionTelAndEmailMigration(self, request, queryset):
         for obj in queryset:
