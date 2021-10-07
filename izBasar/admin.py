@@ -25,3 +25,31 @@ class BaseAdmin(admin.ModelAdmin):
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
+
+
+class PictureShowAdmin(BaseAdmin):
+    def __init__(self, model, admin_site):
+        self.list_display = super().list_display + ['_img']
+        super().__init__(model, admin_site)
+
+    def _img(self, obj):
+        _url = ""
+        if hasattr(obj, "originalUrl"):
+            _url = obj.originalUrl
+        if hasattr(obj, "cover"):
+            if hasattr(obj.cover, "originalUrl"):
+                _url = obj.cover.originalUrl
+        return format_html(
+            '''<img src="{}" width="200px" height="100px"  title="{}" onClick="show_big_img(this)"/>''',
+            _url, "%s\n%s" %
+                  (obj.__str__(), _url)
+
+        )
+
+    _img.short_description = "封面"
+
+    class Media:
+        js = (
+            'js/jquery-3.6.0.min.js',
+            'js/imageUtil.js'
+        )

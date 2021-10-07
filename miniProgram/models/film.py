@@ -52,7 +52,7 @@ class Film(ModelWithShowRate):
         return self.name
 
     def json(self, withEpisodes):
-        json_object = {'film_id': self.id, 'name': self.name, 'cover': self.cover.original_url}
+        json_object = {'film_id': self.id, 'name': self.name, 'cover': self.cover.originalUrl}
         if withEpisodes:
             # episodes = Video.objects.filter(belongTo=self).order_by('-episodeNum', '-last_changed_time')
             episodes_list = []

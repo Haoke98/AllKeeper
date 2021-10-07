@@ -2,7 +2,7 @@ from django.contrib import admin
 # Register your models here.
 from django.utils.safestring import mark_safe
 
-from izBasar.admin import showUrl, BaseAdmin
+from izBasar.admin import showUrl, BaseAdmin, PictureShowAdmin
 from miniProgram.models import *
 from miniProgram.models.country import Country
 from miniProgram.models.film import FilmType, Language, Film, FilmForm
@@ -101,34 +101,6 @@ class VideoInlineAdmin(admin.TabularInline):
 class ImageInlineAdmin(admin.StackedInline):
     model = Image
     extra = 0
-
-
-class PictureShowAdmin(BaseAdmin):
-    def __init__(self, model, admin_site):
-        self.list_display = super().list_display + ['_img']
-        super().__init__(model, admin_site)
-
-    def _img(self, obj):
-        _url = ""
-        if hasattr(obj, "original_url"):
-            _url = obj.original_url
-        if hasattr(obj, "cover"):
-            if hasattr(obj.cover, "original_url"):
-                _url = obj.cover.original_url
-        return format_html(
-            '''<img src="{}" width="200px" height="100px"  title="{}" onClick="show_big_img(this)"/>''',
-            _url, "%s\n%s" %
-                  (obj.__str__(), _url)
-
-        )
-
-    _img.short_description = "封面"
-
-    class Media:
-        js = (
-            'js/jquery-3.6.0.min.js',
-            'js/imageUtil.js'
-        )
 
 
 @admin.register(Image)

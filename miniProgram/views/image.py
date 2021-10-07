@@ -16,7 +16,7 @@ def proxy(request):
         print("已存在")
     else:
         print("重新加载")
-        resp = requests.get(imageObj.original_url)
+        resp = requests.get(imageObj.originalUrl)
         imageObj.fileName = "%s%s" % (str(datetime.now().microsecond), ".jpg")
         tempFilePath = os.path.join(IMAGE_ROOT, imageObj.fileName)
         with open(tempFilePath, 'wb') as f:
