@@ -14,10 +14,10 @@ class BaseModel(models.Model):
 
 
 class ModelWithShowRate(BaseModel):
-    show_times = models.IntegerField(verbose_name="被观看次数", default=0, editable=False)
+    showTimes = models.IntegerField(verbose_name="被观看次数", default=0, editable=False)
 
     def show(self):
-        self.show_times += 1
+        self.showTimes += 1
         self.save()
 
     class Meta:

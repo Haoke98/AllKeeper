@@ -1,4 +1,3 @@
-from django.db import models
 from django.forms import ModelForm
 from django.utils import timezone
 
@@ -92,7 +91,7 @@ class UploadForm(ModelForm):
 
     class Meta:
         model = Image
-        fields = ['content', 'media_id', 'original_url']
+        fields = ['content', 'mediaId', 'originalUrl']
 
 
 class Article(ModelWithShowRate):

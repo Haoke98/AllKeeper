@@ -15,7 +15,7 @@ class Video(ModelWithShowRate):
     url = models.URLField(verbose_name='公众号文章链接', default="视频不见了的视频的链接", blank=True)
     film = models.ForeignKey(verbose_name="所属电视剧", to=Film, on_delete=models.PROTECT, null=True)
     vid = models.CharField(verbose_name="vid", max_length=23, default=None, blank=True, null=True)
-    is_hot = models.BooleanField(verbose_name="是否被推", default=False, blank=True)
+    isHot = models.BooleanField(verbose_name="是否被推", default=False, blank=True)
 
     class Meta:
         verbose_name = "视频"

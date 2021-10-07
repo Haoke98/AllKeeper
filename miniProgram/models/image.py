@@ -13,9 +13,9 @@ from miniProgram.views.views import subscriptionAccountService
 
 class Image(BaseModel):
     id = models.AutoField(primary_key=True)
-    media_id = models.CharField(max_length=43, blank=True, default="#")
-    file_name = models.CharField(verbose_name="文件名", max_length=600, blank=True, default="#")
-    original_url = models.CharField(verbose_name="原始链接（公众号）", max_length=500, blank=True, default="#")
+    mediaId = models.CharField(max_length=43, blank=True, default="#")
+    fileName = models.CharField(verbose_name="文件名", max_length=600, blank=True, default="#")
+    originalUrl = models.CharField(verbose_name="原始链接（公众号）", max_length=500, blank=True, default="#")
     content = models.ImageField(upload_to='img', blank=True)
 
     class Meta:
@@ -25,16 +25,16 @@ class Image(BaseModel):
     def save(self, *args, **kwargs):
         if self.original_url == "#":
             fileExtension = os.path.splitext(self.content.path)[-1]
-            self.file_name = "%s%s" % (str(datetime.now().microsecond), fileExtension)
-            tempFilePath = os.path.join(IMAGE_ROOT, self.file_name)
+            self.fileName = "%s%s" % (str(datetime.now().microsecond), fileExtension)
+            tempFilePath = os.path.join(IMAGE_ROOT, self.fileName)
             with open(tempFilePath, 'wb') as f:
                 f.write(self.content.read())
             try:
                 accessToken = subscriptionAccountService.getAccessToken()
                 print("accesstoken", accessToken)
                 absolutelyFilePath = os.path.abspath(tempFilePath)
-                self.media_id, self.original_url = upLoadImg(absolutelyFilePath, accessToken, "image")
-                print(self.media_id, self.original_url)
+                self.mediaId, self.original_url = upLoadImg(absolutelyFilePath, accessToken, "image")
+                print(self.mediaId, self.original_url)
             except BaseException as e:
                 print("发生了异常", e)
         else:

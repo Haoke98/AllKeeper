@@ -38,7 +38,7 @@ class FilmType(ModelWithShowRate):
 class Film(ModelWithShowRate):
     id = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name='电影标题', max_length=100)
-    name_chinese = models.CharField(verbose_name="电影标题（中文）", max_length=100, blank=True, null=True)
+    nameChinese = models.CharField(verbose_name="电影标题（中文）", max_length=100, blank=True, null=True)
     cover = models.ForeignKey(to=Image, on_delete=models.DO_NOTHING, null=True)
     type = models.ForeignKey(to=FilmType, on_delete=models.CASCADE, default=1)
     language = models.ForeignKey(to=Language, on_delete=models.CASCADE, default=1)
@@ -74,7 +74,7 @@ class Film(ModelWithShowRate):
         self.type.show()
         super(Film, self).show()
 
-    show_times = models.IntegerField(verbose_name="被观看次数", default=0, )
+    showTimes = models.IntegerField(verbose_name="被观看次数", default=0, )
 
 
 class ArticleAnalyseInput(TextInput):
@@ -95,4 +95,4 @@ class FilmForm(ModelForm):
 
     class Meta:
         model = Film
-        fields = ['name', 'name_chinese', 'cover', 'type', 'language', 'country']
+        fields = ['name', 'nameChinese', 'cover', 'type', 'language', 'country']

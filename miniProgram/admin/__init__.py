@@ -138,7 +138,7 @@ class ImageAdmin(PictureShowAdmin):
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
         print(super().list_display)
-        self.list_display = super().list_display + ['_img', 'media_id', 'content']
+        self.list_display = super().list_display + ['_img', 'mediaId', 'content']
         print(self.list_display)
 
 
@@ -146,14 +146,14 @@ class ImageAdmin(PictureShowAdmin):
 class FilmAdmin(PictureShowAdmin):
     form = FilmForm
     list_filter = ['type', 'language', 'country']
-    search_fields = ['name', 'name_chinese']
+    search_fields = ['name', 'nameChinese']
     inlines = [VideoInlineAdmin]
     list_per_page = 10
     date_hierarchy = 'updatedAt'
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
-        self.list_display = super().list_display + ['name', 'name_chinese', 'show_times', '_img', 'type',
+        self.list_display = super().list_display + ['name', 'nameChinese', 'showTimes', '_img', 'type',
                                                     'language',
                                                     'country']
 
@@ -162,11 +162,11 @@ class FilmAdmin(PictureShowAdmin):
 class VideoAdmin(PictureShowAdmin):
     # form = VideoForm
     list_display_links = ['film', '__str__']
-    search_fields = ('id', 'vid', 'url', 'film__name', 'film__name_chinese'
+    search_fields = ('id', 'vid', 'url', 'film__name', 'film__nameChinese'
                      # 'TXVid', 'WXVid',
                      # 'formatID', 'destinationID',
                      )
-    list_filter = ['is_hot', 'film', 'episodeNum']
+    list_filter = ['isHot', 'film', 'episodeNum']
     list_per_page = 20
     autocomplete_fields = ['film']
     date_hierarchy = 'updatedAt'
@@ -177,7 +177,7 @@ class VideoAdmin(PictureShowAdmin):
     # actions = [makeHasNotAnalysed, makeHasNotFirstAnalysed]
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
-        self.list_display = super().list_display + ['__str__', 'is_hot', 'episodeNum', 'film', 'show_times',
+        self.list_display = super().list_display + ['__str__', 'isHot', 'episodeNum', 'film', 'showTimes',
                                                     '_img',
                                                     'videoShow',
                                                     # 'isFromSubscription', "hasFirstAnalysed", 'hasAnalysed', 'isTXV',
@@ -211,7 +211,7 @@ class VideoAdmin(PictureShowAdmin):
 
 @admin.register(FilmType)
 class FilmTypeAdmin(admin.ModelAdmin):
-    list_display = BaseAdmin.list_display + ['show_times', 'id', 'name', 'unit']
+    list_display = BaseAdmin.list_display + ['showTimes', 'id', 'name', 'unit']
 
 
 @admin.register(Language)
