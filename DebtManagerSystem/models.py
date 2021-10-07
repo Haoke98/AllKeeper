@@ -1,8 +1,7 @@
 from django.db import models
 
-
 # Create your models here.
-from accountSystem.models.base import BaseModel
+from izBasar.models import BaseModel
 
 
 class Debt(BaseModel):
@@ -14,6 +13,5 @@ class Debt(BaseModel):
     paid_off = models.BooleanField(verbose_name="已还清", default=False)
 
     class Meta:
-        db_table = "debt"
         verbose_name = "债务"
         verbose_name_plural = "所有" + verbose_name

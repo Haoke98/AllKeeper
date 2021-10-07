@@ -4,8 +4,7 @@ from django.forms import TextInput, ModelForm
 from django.template import loader
 from django.utils.safestring import mark_safe
 
-from accountSystem.models.base import BaseModel
-from .base import ModelWithShowRate
+from izBasar.models import BaseModel, ModelWithShowRate
 from .country import Country
 from .image import Image
 
@@ -16,7 +15,8 @@ class Language(BaseModel):
     symbol = models.CharField(max_length=100, verbose_name="符号")
 
     class Meta:
-        db_table = "language"
+        verbose_name = "语言"
+        verbose_name_plural = "所有" + verbose_name
 
     def __str__(self):
         return "%s(%s)" % (self.name, self.symbol)
@@ -28,7 +28,8 @@ class FilmType(ModelWithShowRate):
     unit = models.CharField(verbose_name="单位", max_length=50)
 
     class Meta:
-        db_table = "film_type"
+        verbose_name = "Film类别"
+        verbose_name_plural = "所有" + verbose_name
 
     def __str__(self):
         return "%s(%s)" % (self.name, self.unit)
@@ -44,7 +45,8 @@ class Film(ModelWithShowRate):
     country = models.ForeignKey(to=Country, on_delete=models.CASCADE, default=1)
 
     class Meta:
-        db_table = "film"
+        verbose_name = "Film"
+        verbose_name_plural = "所有" + verbose_name
 
     def __str__(self):
         return self.name

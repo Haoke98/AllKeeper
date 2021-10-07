@@ -1,25 +1,18 @@
 from django.contrib import admin
 # Register your models here.
-from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 
-from izBasar.admin import LIST_DISPLAY, showUrl
+from izBasar.admin import showUrl, BaseAdmin
+from miniProgram.models import *
 from miniProgram.models.country import Country
 from miniProgram.models.film import FilmType, Language, Film, FilmForm
-from miniProgram.models.models import *
+from .subscriptionAccountAdmin import *
 
 admin.site.site_title = "IzBasar工作室后天管理系统"
 # 登录页导航条和首页导航条标题
 admin.site.site_header = "IzBasar媒体工作室后台管理系统欢迎您"
 # 主页标题
 admin.site.index_title = "欢迎登陆"
-
-
-class BaseAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY
-    date_hierarchy = 'updatedAt'
-
-    def __init__(self, model, admin_site):
-        super().__init__(model, admin_site)
 
 
 @admin.register(Article)
@@ -229,49 +222,6 @@ class LanguageAdmin(admin.ModelAdmin):
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
     list_display = BaseAdmin.list_display + ['id', 'symbol']
-
-
-@admin.register(HouseType)
-class HouseTypeAdmin(BaseAdmin):
-    exclude = ('',)
-
-
-@admin.register(House)
-class HouseAdmin(BaseAdmin):
-    form = HouseForm
-    list_display = BaseAdmin.list_display + ['houseType', 'houseLayout', 'size', 'price', 'phoneNum', 'address',
-                                             'descriptions']
-    list_select_related = ['houseType', 'houseLayout']
-
-
-@admin.register(HouseLayout)
-class HouseLayoutAdmin(BaseAdmin):
-    exclude = ('',)
-
-
-@admin.register(PhoneNumber)
-class PhoneNumberAdmin(BaseAdmin):
-    exclude = ('',)
-
-
-@admin.register(HousePriceType)
-class HousePriceTypeAdmin(BaseAdmin):
-    exclude = ('',)
-
-
-@admin.register(HousePrice)
-class HousePriceAdmin(BaseAdmin):
-    exclude = ('',)
-
-
-@admin.register(HouseSizeUnit)
-class HouseSizeUnitAdmin(BaseAdmin):
-    exclude = ('',)
-
-
-@admin.register(HouseSize)
-class HouseSizeAdmin(BaseAdmin):
-    exclude = ('',)
 
 
 @admin.register(StaticFiles)

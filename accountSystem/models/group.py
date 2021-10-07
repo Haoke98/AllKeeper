@@ -1,8 +1,9 @@
 from django.db import models
 
-# Create your models here.
-from accountSystem.models.base import BaseModel
+from izBasar.models import BaseModel
 
+
+# Create your models here.
 
 class Group(BaseModel):
     name = models.CharField(max_length=50, verbose_name="名称", default="未知组")

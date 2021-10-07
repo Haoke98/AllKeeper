@@ -1,6 +1,6 @@
 from django.db import models
 
-from .base import BaseModel
+from izBasar.models import BaseModel
 from .email import Email
 from .group import Group
 from .password import Password

@@ -147,7 +147,8 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'BeansMusic',
     'accountSystem',
-    'DebtManagerSystem'
+    'DebtManagerSystem',
+    'HousingTransactionSystem'
 ]
 CACHES = {
     'default': {

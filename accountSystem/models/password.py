@@ -1,6 +1,6 @@
 from django.db import models
 
-from accountSystem.models.base import BaseModel
+from izBasar.models import BaseModel
 
 
 class Password(BaseModel):

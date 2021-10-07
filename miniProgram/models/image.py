@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.datetime_safe import datetime
 from django.utils.html import format_html
 
-from accountSystem.models.base import BaseModel
+from izBasar.models import BaseModel
 from izBasar.settings import IMAGE_ROOT
 from miniProgram.utils import upLoadImg
 from miniProgram.views.views import subscriptionAccountService
@@ -19,7 +19,8 @@ class Image(BaseModel):
     content = models.ImageField(upload_to='img', blank=True)
 
     class Meta:
-        db_table = "image"
+        verbose_name = "图片"
+        verbose_name_plural = "所有" + verbose_name
 
     def save(self, *args, **kwargs):
         if self.original_url == "#":

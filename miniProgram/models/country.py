@@ -1,6 +1,6 @@
 from django.db import models
 
-from accountSystem.models.base import BaseModel
+from izBasar.models import BaseModel
 
 
 class Country(BaseModel):
@@ -9,7 +9,8 @@ class Country(BaseModel):
     symbol = models.CharField(max_length=100, verbose_name="符号")
 
     class Meta:
-        db_table = "country"
+        verbose_name = "国家"
+        verbose_name_plural = "所有" + verbose_name
 
     def __str__(self):
         return "%s(%s)" % (self.name, self.symbol)

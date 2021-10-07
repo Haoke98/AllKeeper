@@ -2,7 +2,7 @@ from django.db import models
 from django.forms import ModelForm
 from django.utils.html import format_html
 
-from .base import ModelWithShowRate
+from izBasar.models import ModelWithShowRate
 from .film import Film
 from .image import Image
 from ..utils import getVideoInfo
@@ -18,7 +18,8 @@ class Video(ModelWithShowRate):
     is_hot = models.BooleanField(verbose_name="是否被推", default=False, blank=True)
 
     class Meta:
-        db_table = "video"
+        verbose_name = "视频"
+        verbose_name_plural = "所有" + verbose_name
 
     def show(self):
         super(Video, self).show()

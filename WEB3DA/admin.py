@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from miniProgram.admins.admin import BaseAdmin
+from izBasar.admin import BaseAdmin
 from .models import *
 
 
