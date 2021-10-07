@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+import mimetypes
 import os
 import platform
 from pathlib import Path
@@ -253,3 +253,7 @@ FILE_CHARSET = 'gb18030'
 DEFAULT_CHARSET = 'utf-8'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+mimetypes.add_type('text/css', '.css')
+mimetypes.add_type('application/javascript', '.js')
+mimetypes.add_type('text/html', '.html')
