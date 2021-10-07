@@ -46,15 +46,4 @@ from .models import *
 # Register your models here.
 @admin.register(Map)
 class MapAdmin(BaseAdmin):
-    list_display = BaseAdmin.list_display + ['_map']
-
-    def _map(self, obj):
-        return obj.map.show()
-
-    # form = MapForm
-    # chooseable_img_list = [(v.id, v.show()) for v in Image.objects.all()]
-    # formfield_overrides = {
-    #
-    # }
-
-    # list_select_related = []
+    list_display = BaseAdmin.list_display
