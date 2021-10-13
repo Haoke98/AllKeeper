@@ -8,6 +8,8 @@ from accountSystem.models.type import Type
 from izBasar.admin import LIST_DISPLAY
 
 
+# TODO：把这里的所有都移植到 __init__.py中去，然后把这个admin包中的admin.py文件删除了。
+
 # Register your admin models here.
 @admin.register(Tel, Email)
 class UniversalAdmin(admin.ModelAdmin):

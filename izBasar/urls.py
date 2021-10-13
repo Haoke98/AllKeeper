@@ -27,9 +27,9 @@ import WEB3DA.urls
 import miniProgram.urls
 from izBasar import settings
 from miniProgram.views import image
-
+from .secret import ADMIN_PATH
 urlpatterns = [
-                  path('admin/sadaaasdfjkaljskldjf12sadf34e12kdfjxkljkljfklqwxsdkl/', admin.site.urls),
+                  path('admin/'+ADMIN_PATH, admin.site.urls),
                   # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
                   # url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
                   path('miniProgram/', include(miniProgram.urls)),
