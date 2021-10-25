@@ -29,7 +29,7 @@ from izBasar import settings
 from miniProgram.views import image
 from .secret import ADMIN_PATH
 urlpatterns = [
-                  path('admin/'+ADMIN_PATH, admin.site.urls),
+                  path(ADMIN_PATH, admin.site.urls),
                   # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
                   # url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
                   path('miniProgram/', include(miniProgram.urls)),
