@@ -284,4 +284,4 @@ SIMPLEUI_ICON = {
 
 SIMPLEUI_LOGO = 'http://59.110.225.84/media/izbasar/logo_square.png'
 SIMPLEUI_HOME_INFO = False  # 首页上的simpleUI的版本信息板块。
-SIMPLEUI_ANALYSIS = True  # 收集信息（TODO：不太好，等正式上线后建议关闭；否则出现信息泄露）
+SIMPLEUI_ANALYSIS = False# 收集信息（TODO：不太好，等正式上线后建议关闭；否则出现信息泄露）
