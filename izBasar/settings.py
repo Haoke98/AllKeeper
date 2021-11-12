@@ -24,7 +24,7 @@ PUBLIC_ROOT = os.path.join(BASE_DIR, 'public')
 if not os.path.exists(PUBLIC_ROOT):
     os.mkdir(PUBLIC_ROOT)
 
-STATIC_URL = '/static/'
+STATIC_URL = '/sdm/static/'
 STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
 if not os.path.exists(STATIC_ROOT):
     os.mkdir(STATIC_ROOT)
