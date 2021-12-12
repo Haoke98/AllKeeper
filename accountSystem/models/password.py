@@ -4,7 +4,7 @@ from izBasar.models import BaseModel
 
 
 class Password(BaseModel):
-    password = models.CharField(max_length=20, verbose_name="密码", unique=True)
+    password = models.CharField(max_length=36, verbose_name="密码", unique=True)
 
     class Meta:
         verbose_name = "密码"
