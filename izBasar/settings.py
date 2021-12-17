@@ -51,14 +51,10 @@ CACHE_DIR = os.path.join(BASE_DIR, 'cache')
 SECRET_KEY = secret.SECRET_KEY
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 
-WINDOWS = 'Windows'
-LINUX = 'Linux'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if platform.system() == WINDOWS:
-    DEBUG = True
-else:
-    DEBUG = False
+from . import IS_DEBUG
+DEBUG = IS_DEBUG
 
 ALLOWED_HOSTS = ['*']
 
