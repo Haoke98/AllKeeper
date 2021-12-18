@@ -15,34 +15,53 @@ import platform
 from pathlib import Path
 
 from . import secret
+from .simpleUISettings import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+LOG_FILE_DIR = os.path.join(BASE_DIR, 'log')
+if not os.path.exists(LOG_FILE_DIR):
+    os.mkdir(LOG_FILE_DIR)
+CACHE_DIR = os.path.join(BASE_DIR, 'cache')
 
 PUBLIC_ROOT = os.path.join(BASE_DIR, 'public')
 if not os.path.exists(PUBLIC_ROOT):
     os.mkdir(PUBLIC_ROOT)
 
-STATIC_URL = '/sdm/static/'
+from . import _STATIC_URL
+
+STATIC_URL = _STATIC_URL
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
+SITE_ROOT = os.path.abspath(os.path.join(SITE_ROOT, '../'))
 STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
+print("SITE_ROOT:", SITE_ROOT)
+print("STATIC_ROOT:", STATIC_ROOT)
+STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
+                       "django.contrib.staticfiles.finders.AppDirectoriesFinder")
+# 静态资源目录列表
+# 注：当DEBUG=True时，Django将为开发环境提供静态资源服务，该服务将从这些文件夹中搜取静态资源。
+# 注：当DEBUG=False时，Django将不会再启动静态资源，如果启动了静态资源，也将会从STATIC__ROOT文件夹中搜取静态资源。
+# 注：当执行python manage.py collectstatic 命令时，将把STATICFILES__DIR中的所有静态资源复制到STATIC__ROOT中去
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'accountSystem/static'),
+    os.path.join(BASE_DIR, 'common-static'),
+]
+print("STATICFILES_DIR:", STATICFILES_DIRS)
+
 if not os.path.exists(STATIC_ROOT):
     os.mkdir(STATIC_ROOT)
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(PUBLIC_ROOT, 'media')
-# if not os.path.exists(MEDIA_ROOT):
-#     os.mkdir(MEDIA_ROOT)
-#
-IMAGE_ROOT = os.path.join(STATIC_ROOT, "img")
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PUBLIC_ROOT, 'media')
+if not os.path.exists(MEDIA_ROOT):
+    os.mkdir(MEDIA_ROOT)
+
+IMAGE_ROOT = os.path.join(MEDIA_ROOT, "img")
 if not os.path.exists(IMAGE_ROOT):
     os.mkdir(IMAGE_ROOT)
-
-LOG_FILE_DIR = os.path.join(PUBLIC_ROOT, 'log')
-if not os.path.exists(LOG_FILE_DIR):
-    os.mkdir(LOG_FILE_DIR)
-
-CACHE_DIR = os.path.join(BASE_DIR, 'cache')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -52,9 +71,9 @@ SECRET_KEY = secret.SECRET_KEY
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-from . import IS_DEBUG
+from . import _DEBUG
 
-DEBUG = IS_DEBUG
+DEBUG = _DEBUG
 
 ALLOWED_HOSTS = ['*']
 
@@ -254,33 +273,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 mimetypes.add_type('text/css', '.css')
 mimetypes.add_type('application/javascript', '.js')
 mimetypes.add_type('text/html', '.html')
-
-# SIMPLE UI config.
-SIMPLEUI_DEFAULT_THEME = 'admin.lte.css'
-
-SIMPLEUI_ICON = {
-    '所有手机号': 'fas fa-phone-square',
-    '房屋交易系统': 'fas fa-warehouse',
-    'Web3Da': 'fas fa-cubes',
-    '债务管理及分析系统': 'fas fa-wallet',
-    '影院': 'fas fa-film',
-    '账号管理系统': 'fas fa-tasks',
-    '所有密码': 'fas fa-key',
-    'Maps': 'fas fa-map',
-    '所有图片': 'fas fa-images',
-    '所有电子邮箱': 'fas fa-at',
-    '所有语言': 'fas fa-language',
-    '用户': 'fas fa-user-shield',
-    '所有Film': 'fas fa-film',
-    '所有视频': 'fab fa-youtube',
-    'Static filess': 'fas fa-folder-open',
-    'Settingss': 'fas fa-cogs',
-    '所有国家': 'fas fa-globe-asia',
-    '所有债务': 'fas fa-money-bill-wave',
-    '所有账号类型': 'fab fa-accusoft',
-    '所有账号': 'fas fa-address-book'
-}
-
-SIMPLEUI_LOGO = 'http://59.110.225.84/media/izbasar/logo_square.png'
-SIMPLEUI_HOME_INFO = False  # 首页上的simpleUI的版本信息板块。
-SIMPLEUI_ANALYSIS = False  # 收集信息（TODO：不太好，等正式上线后建议关闭；否则出现信息泄露）

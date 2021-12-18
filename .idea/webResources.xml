@@ -6,6 +6,8 @@
         <entryData>
           <resourceRoots>
             <path value="file://$PROJECT_DIR$/public" />
+            <path value="file://$PROJECT_DIR$/accountSystem/static" />
+            <path value="file://$PROJECT_DIR$/common-static" />
           </resourceRoots>
         </entryData>
       </entry>

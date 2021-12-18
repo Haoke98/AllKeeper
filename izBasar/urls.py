@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import include
 from django.conf.urls.static import static
 from django.contrib import admin
+# from django.contrib.staticfiles.views import serve
+from django.views.static import serve
 
 admin.autodiscover()
 from django.contrib.flatpages import sitemaps
@@ -28,9 +30,10 @@ import miniProgram.urls
 from izBasar import settings
 from miniProgram.views import image
 from .secret import ADMIN_PATH
+from django.urls import re_path
 urlpatterns = [
                   path(ADMIN_PATH, admin.site.urls),
-                  # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+                  # re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
                   # url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
                   path('miniProgram/', include(miniProgram.urls)),
                   path('W3DA/', include(WEB3DA.urls)),
@@ -40,5 +43,3 @@ urlpatterns = [
                   path('BeansMusic/', include(BeansMusic.urls)),
                   path('image/proxy', image.proxy)
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-print(settings.STATIC_ROOT)

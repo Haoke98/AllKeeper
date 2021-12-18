@@ -15,8 +15,8 @@
 
 @font-face {
   font-family: 'Icons';
-  src: url("./../themes/default/assets/fonts/icons.eot");
-  src: url("./../themes/default/assets/fonts/icons.eot?#iefix") format('embedded-opentype'), url("./../themes/default/assets/fonts/icons.woff2") format('woff2'), url("./../themes/default/assets/fonts/icons.woff") format('woff'), url("./../themes/default/assets/fonts/icons.ttf") format('truetype'), url("./../themes/default/assets/fonts/icons.svg#icons") format('svg');
+  src: url("../themes/default/assets/fonts/icons.eot");
+  src: url("../themes/default/assets/fonts/icons.eot?#iefix") format('embedded-opentype'), url("../themes/default/assets/fonts/icons.woff2") format('woff2'), url("../themes/default/assets/fonts/icons.woff") format('woff'), url("../themes/default/assets/fonts/icons.ttf") format('truetype'), url("../themes/default/assets/fonts/icons.svg#icons") format('svg');
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -4066,8 +4066,8 @@ i.icon.youtube.play:before {
 /* Load & Define Icon Font */
 @font-face {
   font-family: 'outline-icons';
-  src: url("./../themes/default/assets/fonts/outline-icons.eot");
-  src: url("./../themes/default/assets/fonts/outline-icons.eot?#iefix") format('embedded-opentype'), url("./../themes/default/assets/fonts/outline-icons.woff2") format('woff2'), url("./../themes/default/assets/fonts/outline-icons.woff") format('woff'), url("./../themes/default/assets/fonts/outline-icons.ttf") format('truetype'), url("./../themes/default/assets/fonts/outline-icons.svg#icons") format('svg');
+  src: url("../themes/default/assets/fonts/outline-icons.eot");
+  src: url("../themes/default/assets/fonts/outline-icons.eot?#iefix") format('embedded-opentype'), url("../themes/default/assets/fonts/outline-icons.woff2") format('woff2'), url("../themes/default/assets/fonts/outline-icons.woff") format('woff'), url("../themes/default/assets/fonts/outline-icons.ttf") format('truetype'), url("../themes/default/assets/fonts/outline-icons.svg#icons") format('svg');
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -4452,8 +4452,8 @@ i.icon.star.empty:before {
 /* Load & Define Brand Font */
 @font-face {
   font-family: 'brand-icons';
-  src: url("./../themes/default/assets/fonts/brand-icons.eot");
-  src: url("./../themes/default/assets/fonts/brand-icons.eot?#iefix") format('embedded-opentype'), url("./../themes/default/assets/fonts/brand-icons.woff2") format('woff2'), url("./../themes/default/assets/fonts/brand-icons.woff") format('woff'), url("./../themes/default/assets/fonts/brand-icons.ttf") format('truetype'), url("./../themes/default/assets/fonts/brand-icons.svg#icons") format('svg');
+  src: url("../themes/default/assets/fonts/brand-icons.eot");
+  src: url("../themes/default/assets/fonts/brand-icons.eot?#iefix") format('embedded-opentype'), url("../themes/default/assets/fonts/brand-icons.woff2") format('woff2'), url("../themes/default/assets/fonts/brand-icons.woff") format('woff'), url("../themes/default/assets/fonts/brand-icons.ttf") format('truetype'), url("../themes/default/assets/fonts/brand-icons.svg#icons") format('svg');
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
