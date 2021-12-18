@@ -5159,3 +5159,1561 @@ INFO [2021-12-18 02:52:02,180] django.server: "GET /bupt2018213267@Sdm98jsi18n/ 
 INFO [2021-12-18 02:52:03,836] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30616
 INFO [2021-12-18 02:52:04,129] django.server: "GET /bupt2018213267@Sdm98miniProgram/settings/ HTTP/1.1" 200 30053
 INFO [2021-12-18 02:52:04,340] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+INFO [2021-12-18 02:56:18,089] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/models/account.py changed, reloading.
+INFO [2021-12-18 02:56:18,572] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 02:58:11,081] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/models/account.py changed, reloading.
+INFO [2021-12-18 02:58:11,409] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 03:03:32,643] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 03:03:33,102] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 03:04:09,725] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 03:04:10,155] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 03:04:16,444] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 03:04:16,776] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 03:04:21,829] django.server: "GET /bupt2018213267@Sdm98WEB3DA/map/ HTTP/1.1" 200 26201
+INFO [2021-12-18 03:04:21,956] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+ERROR [2021-12-18 03:04:28,595] django.request: Internal Server Error: /bupt2018213267@Sdm98accountSystem/group/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/options.py", line 608, in get_field
+    return self.fields_map[field_name]
+KeyError: '__name__'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 266, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 297, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/options.py", line 610, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: Group has no field named '__name__'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 176, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/base.py", line 33, in render
+    return super().render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/library.py", line 215, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 309, in result_list
+    'results': list(results(cl)),
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 285, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 276, in __init__
+    super().__init__(*items)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 201, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 277, in lookup_field
+    attr = getattr(obj, name)
+AttributeError: 'Group' object has no attribute '__name__'
+ERROR [2021-12-18 03:04:30,781] django.server: "GET /bupt2018213267@Sdm98accountSystem/group/ HTTP/1.1" 500 429741
+INFO [2021-12-18 03:04:30,801] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84506
+WARNING [2021-12-18 03:04:30,819] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:04:30,821] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:04:30,822] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:04:30,822] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:04:30,823] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:04:30,829] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:04:30,831] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:04:30,831] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:04:30,931] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 03:04:30,935] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:04:30,943] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:04:30,948] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:04:30,952] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:04:30,956] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:04:30,960] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:04:30,964] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:04:30,968] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:04:32,507] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/add/ HTTP/1.1" 200 28521
+WARNING [2021-12-18 03:04:32,525] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+INFO [2021-12-18 03:04:32,526] django.server: "GET /sdm/static/admin/css/forms.css HTTP/1.1" 200 8835
+INFO [2021-12-18 03:04:32,528] django.server: "GET /sdm/static/admin/css/vendor/select2/select2.css HTTP/1.1" 200 17358
+INFO [2021-12-18 03:04:32,530] django.server: "GET /sdm/static/admin/css/autocomplete.css HTTP/1.1" 200 9114
+WARNING [2021-12-18 03:04:32,535] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:04:32,536] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+INFO [2021-12-18 03:04:32,539] django.server: "GET /sdm/static/admin/css/widgets.css HTTP/1.1" 200 11097
+WARNING [2021-12-18 03:04:32,539] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:04:32,540] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+INFO [2021-12-18 03:04:32,541] django.server: "GET /sdm/static/admin/js/autocomplete.js HTTP/1.1" 200 1121
+WARNING [2021-12-18 03:04:32,548] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:04:32,549] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:04:32,549] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:04:32,549] django.server: "GET /sdm/static/admin/js/vendor/select2/select2.full.js HTTP/1.1" 200 173566
+INFO [2021-12-18 03:04:32,552] django.server: "GET /sdm/static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO [2021-12-18 03:04:32,554] django.server: "GET /sdm/static/admin/js/prepopulate_init.js HTTP/1.1" 200 492
+INFO [2021-12-18 03:04:32,556] django.server: "GET /sdm/static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO [2021-12-18 03:04:32,557] django.server: "GET /sdm/static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO [2021-12-18 03:04:32,684] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 03:04:32,689] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:04:32,696] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:04:32,699] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:04:32,706] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:04:32,709] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:04:32,714] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:04:32,717] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:04:32,722] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:05:08,796] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 03:05:09,248] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 03:05:16,448] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84506
+WARNING [2021-12-18 03:05:16,480] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:05:16,480] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:05:16,480] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:05:16,481] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:05:16,482] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:05:16,490] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:05:16,490] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:05:16,490] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:05:16,589] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 03:05:16,594] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:05:16,601] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:05:16,606] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:05:16,610] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:05:16,615] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:05:16,620] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:05:16,624] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:05:16,629] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:05:18,245] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/add/ HTTP/1.1" 200 27698
+WARNING [2021-12-18 03:05:18,269] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:05:18,272] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:05:18,278] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:05:18,289] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:05:18,297] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:05:18,298] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:05:18,299] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:05:18,299] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:05:18,391] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 03:05:18,396] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:05:18,402] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:05:18,406] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:05:18,412] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:05:18,416] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:05:18,420] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:05:18,424] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:05:18,428] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:05:21,158] django.server: "GET /bupt2018213267@Sdm98autocomplete/?app_label=accountSystem&model_name=account&field_name=typeBeta HTTP/1.1" 200 1084
+INFO [2021-12-18 03:05:24,091] django.server: "GET /bupt2018213267@Sdm98autocomplete/?app_label=accountSystem&model_name=account&field_name=typeBeta HTTP/1.1" 200 1084
+INFO [2021-12-18 03:05:28,275] django.server: "GET /bupt2018213267@Sdm98autocomplete/?app_label=accountSystem&model_name=account&field_name=typeBeta HTTP/1.1" 200 1084
+INFO [2021-12-18 03:05:31,750] django.server: "GET /bupt2018213267@Sdm98autocomplete/?app_label=accountSystem&model_name=account&field_name=typeBeta HTTP/1.1" 200 1084
+INFO [2021-12-18 03:05:34,916] django.server: "GET /bupt2018213267@Sdm98autocomplete/?term=gua&app_label=accountSystem&model_name=account&field_name=typeBeta HTTP/1.1" 200 46
+INFO [2021-12-18 03:05:35,664] django.server: "GET /bupt2018213267@Sdm98autocomplete/?term=&app_label=accountSystem&model_name=account&field_name=typeBeta HTTP/1.1" 200 1084
+INFO [2021-12-18 03:05:35,665] django.server: - Broken pipe from ('127.0.0.1', 63271)
+
+INFO [2021-12-18 03:05:36,043] django.server: "GET /bupt2018213267@Sdm98autocomplete/?term=%E5%AE%98%E7%BD%91%E8%B4%A6%E5%8F%B7&app_label=accountSystem&model_name=account&field_name=typeBeta HTTP/1.1" 200 46
+INFO [2021-12-18 03:05:36,522] django.server: "GET /bupt2018213267@Sdm98autocomplete/?term=%E5%AE%98%E7%BD%91%E8%B4%A6&app_label=accountSystem&model_name=account&field_name=typeBeta HTTP/1.1" 200 46
+INFO [2021-12-18 03:05:36,523] django.server: - Broken pipe from ('127.0.0.1', 63584)
+
+INFO [2021-12-18 03:05:36,868] django.server: "GET /bupt2018213267@Sdm98autocomplete/?term=%E5%AE%98%E7%BD%91&app_label=accountSystem&model_name=account&field_name=typeBeta HTTP/1.1" 200 151
+INFO [2021-12-18 03:05:36,869] django.server: - Broken pipe from ('127.0.0.1', 63607)
+
+INFO [2021-12-18 03:05:37,377] django.server: "GET /bupt2018213267@Sdm98autocomplete/?term=&app_label=accountSystem&model_name=account&field_name=typeBeta HTTP/1.1" 200 1084
+INFO [2021-12-18 03:18:03,247] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84506
+WARNING [2021-12-18 03:18:03,272] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:18:03,272] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:03,275] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:18:03,276] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:18:03,280] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:18:03,284] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:03,285] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:18:03,285] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:18:03,380] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 03:18:03,385] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:18:03,397] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:03,401] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:18:03,405] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:18:03,410] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:18:03,414] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:03,419] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:18:03,422] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:18:30,245] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=2&typeBeta__id__exact=6 HTTP/1.1" 200 50520
+WARNING [2021-12-18 03:18:30,273] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:18:30,279] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:30,280] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:18:30,280] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:18:30,280] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:18:30,288] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:30,289] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:18:30,289] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:18:30,384] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 03:18:30,389] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:18:30,396] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:30,400] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:18:30,404] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:18:30,408] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:18:30,412] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:30,416] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:18:30,420] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:18:42,880] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?group__id__exact=2&type__id__exact=2&typeBeta__id__exact=6 HTTP/1.1" 200 51219
+WARNING [2021-12-18 03:18:42,900] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:42,903] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:18:42,904] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:18:42,906] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:18:42,908] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:18:42,912] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:42,912] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+WARNING [2021-12-18 03:18:42,912] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+INFO [2021-12-18 03:18:43,008] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 03:18:43,013] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:18:43,020] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:43,024] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:18:43,028] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:18:43,032] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:18:43,036] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:43,041] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:18:43,045] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:18:48,082] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?group__id__exact=2&type__id__exact=2 HTTP/1.1" 200 89098
+WARNING [2021-12-18 03:18:48,108] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:18:48,111] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:48,112] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:18:48,116] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:18:48,116] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:18:48,118] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:48,120] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:18:48,121] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:18:48,217] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 03:18:48,221] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:18:48,232] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:48,235] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:18:48,239] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:18:48,243] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:18:48,247] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:48,251] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:18:48,254] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:18:52,865] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=2&group__id__exact=2&type__id__exact=2 HTTP/1.1" 200 71443
+WARNING [2021-12-18 03:18:52,884] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:18:52,890] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:18:52,893] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:52,904] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:18:52,904] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:18:52,905] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:18:52,905] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:52,906] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 03:18:53,004] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 03:18:53,016] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 03:18:53,025] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:53,029] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 03:18:53,033] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 03:18:53,037] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 03:18:53,041] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 03:18:53,045] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 03:18:53,049] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:10:57,403] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 13:10:58,541] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 13:35:42,238] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 13:35:42,718] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 13:36:07,633] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 302 0
+INFO [2021-12-18 13:36:07,809] django.server: "GET /bupt2018213267@Sdm98login/?next=/bupt2018213267%40Sdm98accountSystem/account/ HTTP/1.1" 200 4277
+INFO [2021-12-18 13:36:08,000] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 302 0
+INFO [2021-12-18 13:36:08,135] django.server: "GET /bupt2018213267@Sdm98login/?next=/bupt2018213267%40Sdm98 HTTP/1.1" 200 4233
+INFO [2021-12-18 13:36:23,224] django.server: "POST /bupt2018213267@Sdm98login/?next=/bupt2018213267%40Sdm98 HTTP/1.1" 302 0
+INFO [2021-12-18 13:36:23,588] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30616
+INFO [2021-12-18 13:36:28,795] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84575
+INFO [2021-12-18 13:36:28,808] django.server: "GET /sdm/static/admin/css/base.css?_=2.7 HTTP/1.1" 304 0
+INFO [2021-12-18 13:36:28,819] django.server: "GET /sdm/static/admin/css/changelists.css?_=20180905 HTTP/1.1" 304 0
+INFO [2021-12-18 13:36:28,821] django.server: "GET /sdm/static/admin/css/responsive.css?_=20180905 HTTP/1.1" 304 0
+INFO [2021-12-18 13:36:28,822] django.server: "GET /sdm/static/admin/css/fonts.css HTTP/1.1" 304 0
+WARNING [2021-12-18 13:36:28,828] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:36:28,829] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:36:28,829] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:36:28,829] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:36:28,829] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+INFO [2021-12-18 13:36:28,838] django.server: "GET /sdm/static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+WARNING [2021-12-18 13:36:28,841] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:36:28,841] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:36:28,841] django.server: "GET /sdm/static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO [2021-12-18 13:36:28,842] django.server: "GET /sdm/static/admin/js/core.js HTTP/1.1" 304 0
+WARNING [2021-12-18 13:36:28,842] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+INFO [2021-12-18 13:36:28,845] django.server: "GET /sdm/static/admin/js/actions.js HTTP/1.1" 304 0
+INFO [2021-12-18 13:36:28,845] django.server: "GET /sdm/static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO [2021-12-18 13:36:28,845] django.server: "GET /sdm/static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO [2021-12-18 13:36:28,846] django.server: "GET /sdm/static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO [2021-12-18 13:36:28,846] django.server: "GET /sdm/static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO [2021-12-18 13:36:28,846] django.server: "GET /sdm/static/admin/js/vendor/jquery/jquery.min.js HTTP/1.1" 304 0
+INFO [2021-12-18 13:36:28,999] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 13:36:29,010] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:36:29,019] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:36:29,022] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:36:29,025] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:36:29,029] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:36:29,033] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:36:29,037] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 13:36:29,051] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:36:29,095] django.server: "GET /sdm/static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+INFO [2021-12-18 13:36:29,106] django.server: "GET /sdm/static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+INFO [2021-12-18 13:37:26,582] django.server: "GET /sdm/static/admin/simpleui-x/theme/e-purple-pro.css HTTP/1.1" 200 4360
+INFO [2021-12-18 13:37:28,832] django.server: "GET /sdm/static/admin/simpleui-x/theme/e-black.css HTTP/1.1" 200 4420
+ERROR [2021-12-18 13:37:54,150] django.request: Internal Server Error: /bupt2018213267@Sdm98accountSystem/group/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/options.py", line 608, in get_field
+    return self.fields_map[field_name]
+KeyError: '__name__'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 266, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 297, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/options.py", line 610, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: Group has no field named '__name__'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 176, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/base.py", line 33, in render
+    return super().render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/library.py", line 215, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 309, in result_list
+    'results': list(results(cl)),
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 285, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 276, in __init__
+    super().__init__(*items)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 201, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 277, in lookup_field
+    attr = getattr(obj, name)
+AttributeError: 'Group' object has no attribute '__name__'
+ERROR [2021-12-18 13:37:56,853] django.server: "GET /bupt2018213267@Sdm98accountSystem/group/ HTTP/1.1" 500 430314
+INFO [2021-12-18 13:40:35,499] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 13:40:35,998] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 13:40:45,288] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 13:40:45,745] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 13:41:22,975] django.server: "GET /sdm/static/admin/simpleui-x/theme/element.css HTTP/1.1" 200 4200
+INFO [2021-12-18 13:41:26,119] django.server: "GET /sdm/static/admin/simpleui-x/theme/highdmin.css HTTP/1.1" 200 4335
+INFO [2021-12-18 13:41:27,774] django.server: "GET /sdm/static/admin/simpleui-x/theme/purple.css HTTP/1.1" 200 4506
+INFO [2021-12-18 13:41:30,614] django.server: "GET /sdm/static/admin/simpleui-x/theme/e-green-pro.css HTTP/1.1" 200 4352
+INFO [2021-12-18 13:41:32,625] django.server: "GET /sdm/static/admin/simpleui-x/theme/x-blue.css HTTP/1.1" 200 4453
+INFO [2021-12-18 13:41:33,344] django.server: "GET /sdm/static/admin/simpleui-x/theme/e-red.css HTTP/1.1" 200 4428
+INFO [2021-12-18 13:41:36,226] django.server: "GET /sdm/static/admin/simpleui-x/theme/e-red-pro.css HTTP/1.1" 200 4352
+INFO [2021-12-18 13:41:47,806] django.server: "GET /sdm/static/admin/simpleui-x/theme/x-green.css HTTP/1.1" 200 4360
+INFO [2021-12-18 13:41:55,201] django.server: "GET /sdm/static/admin/simpleui-x/theme/aircraft.css HTTP/1.1" 200 4973
+INFO [2021-12-18 13:47:12,668] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/izBasar/settings.py changed, reloading.
+INFO [2021-12-18 13:47:13,177] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 13:47:18,447] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/izBasar/settings.py changed, reloading.
+INFO [2021-12-18 13:47:18,948] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 13:47:33,597] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30628
+INFO [2021-12-18 13:47:34,827] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84560
+WARNING [2021-12-18 13:47:34,856] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:47:34,856] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:47:34,857] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:47:34,857] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:47:34,857] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:47:34,865] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 13:47:34,866] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:47:34,866] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:47:35,029] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 13:47:35,034] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:47:35,045] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:47:35,049] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:47:35,054] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:47:35,058] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:47:35,062] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:47:35,066] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 13:47:35,069] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:49:25,614] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/izBasar/settings.py changed, reloading.
+INFO [2021-12-18 13:49:26,118] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 13:49:33,059] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30638
+INFO [2021-12-18 13:49:33,987] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84560
+WARNING [2021-12-18 13:49:34,021] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:49:34,021] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:49:34,022] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:49:34,022] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:49:34,022] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:49:34,030] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:49:34,030] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 13:49:34,031] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:49:34,127] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 13:49:34,132] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:49:34,143] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:49:34,147] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:49:34,151] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:49:34,154] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:49:34,158] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:49:34,162] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 13:49:34,166] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:49:37,510] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30638
+INFO [2021-12-18 13:49:38,392] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84560
+WARNING [2021-12-18 13:49:38,416] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:49:38,425] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:49:38,430] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:49:38,431] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:49:38,431] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:49:38,432] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:49:38,439] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 13:49:38,440] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:49:38,529] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 13:49:38,534] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:49:38,541] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:49:38,546] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:49:38,551] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:49:38,555] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:49:38,559] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:49:38,563] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 13:49:38,568] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:50:19,165] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/izBasar/settings.py changed, reloading.
+INFO [2021-12-18 13:50:19,662] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 13:50:22,877] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30644
+INFO [2021-12-18 13:50:23,779] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84560
+WARNING [2021-12-18 13:50:23,817] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:50:23,817] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:50:23,817] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:50:23,817] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:50:23,817] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:50:23,827] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:50:23,827] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 13:50:23,827] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:50:23,911] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 13:50:23,915] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:50:23,921] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:50:23,926] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:50:23,930] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:50:23,934] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:50:23,938] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:50:23,941] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 13:50:23,945] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:53:33,534] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30644
+INFO [2021-12-18 13:53:34,345] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84560
+WARNING [2021-12-18 13:53:34,363] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:53:34,366] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:53:34,369] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:53:34,369] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:53:34,370] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:53:34,373] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:53:34,376] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+WARNING [2021-12-18 13:53:34,376] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+INFO [2021-12-18 13:53:34,469] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 13:53:34,474] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 13:53:34,486] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:53:34,491] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 13:53:34,495] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 13:53:34,499] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 13:53:34,503] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 13:53:34,507] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 13:53:34,511] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 13:54:15,181] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/izBasar/settings.py changed, reloading.
+INFO [2021-12-18 13:54:15,726] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 13:54:48,492] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30636
+INFO [2021-12-18 14:06:45,089] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/izBasar/settings.py changed, reloading.
+INFO [2021-12-18 14:06:45,584] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:06:52,076] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30640
+INFO [2021-12-18 14:07:07,348] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/izBasar/settings.py changed, reloading.
+INFO [2021-12-18 14:07:07,842] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:07:13,051] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30640
+INFO [2021-12-18 14:11:00,315] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/izBasar/settings.py changed, reloading.
+INFO [2021-12-18 14:11:00,905] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:11:49,774] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/izBasar/settings.py changed, reloading.
+INFO [2021-12-18 14:11:50,275] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:11:55,788] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30658
+INFO [2021-12-18 14:15:29,964] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 14:15:30,462] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:15:36,439] django.server: "GET /bupt2018213267@Sdm98 HTTP/1.1" 200 30658
+INFO [2021-12-18 14:15:39,735] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84560
+WARNING [2021-12-18 14:15:39,770] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:15:39,770] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:15:39,770] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:15:39,770] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:15:39,770] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:39,778] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:15:39,778] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:39,778] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:15:39,874] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:15:39,878] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:15:39,888] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:39,897] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:15:39,902] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:15:39,906] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:15:39,910] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:39,914] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:15:39,918] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+ERROR [2021-12-18 14:15:41,313] django.request: Internal Server Error: /bupt2018213267@Sdm98accountSystem/group/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/options.py", line 608, in get_field
+    return self.fields_map[field_name]
+KeyError: '__name__'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 266, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 297, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/options.py", line 610, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: Group has no field named '__name__'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 176, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/base.py", line 33, in render
+    return super().render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/library.py", line 215, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 309, in result_list
+    'results': list(results(cl)),
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 285, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 276, in __init__
+    super().__init__(*items)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 201, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 277, in lookup_field
+    attr = getattr(obj, name)
+AttributeError: 'Group' object has no attribute '__name__'
+ERROR [2021-12-18 14:15:43,439] django.server: "GET /bupt2018213267@Sdm98accountSystem/group/ HTTP/1.1" 500 430483
+INFO [2021-12-18 14:15:43,781] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84560
+WARNING [2021-12-18 14:15:43,800] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:15:43,803] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:43,807] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:15:43,809] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:15:43,811] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:15:43,811] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:43,814] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:15:43,814] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:15:43,899] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:15:43,904] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:15:43,910] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:43,914] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:15:43,918] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:15:43,922] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:15:43,925] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:43,929] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:15:43,933] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:15:58,316] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84560
+WARNING [2021-12-18 14:15:58,345] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:58,345] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:15:58,350] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:15:58,353] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:15:58,357] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:15:58,358] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:15:58,358] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:58,358] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:15:58,462] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:15:58,467] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:15:58,477] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:58,485] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:15:58,491] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:15:58,497] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:15:58,502] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:15:58,507] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:15:58,512] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:07,491] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 302 0
+INFO [2021-12-18 14:16:08,403] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 84560
+WARNING [2021-12-18 14:16:08,422] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:08,425] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:08,426] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:08,432] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:08,437] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:08,438] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:08,438] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:08,438] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:08,537] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:16:08,542] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:08,549] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:08,553] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:08,557] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:08,561] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:08,572] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:08,577] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:08,583] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:28,064] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=2 HTTP/1.1" 200 83106
+WARNING [2021-12-18 14:16:28,095] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:28,098] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:28,098] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:28,099] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:28,100] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:28,107] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:28,108] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:28,108] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:28,205] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:16:28,210] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:28,218] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:28,222] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:28,226] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:28,230] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:28,234] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:28,238] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:28,242] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:33,260] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/?p=2 HTTP/1.1" 302 0
+INFO [2021-12-18 14:16:34,140] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=2 HTTP/1.1" 200 83106
+WARNING [2021-12-18 14:16:34,165] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:34,168] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:34,174] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:34,175] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:34,175] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:34,178] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:34,179] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+WARNING [2021-12-18 14:16:34,179] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+INFO [2021-12-18 14:16:34,294] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:16:34,300] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:34,309] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:34,313] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:34,317] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:34,321] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:34,325] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:34,332] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:34,340] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:37,343] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=3 HTTP/1.1" 200 87303
+WARNING [2021-12-18 14:16:37,376] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:37,379] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:37,380] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:37,386] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:37,386] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:37,388] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:37,389] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+WARNING [2021-12-18 14:16:37,389] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+INFO [2021-12-18 14:16:37,496] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:16:37,501] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:37,509] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:37,513] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:37,524] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:37,533] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:37,539] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:37,549] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:37,556] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:42,911] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/?p=3 HTTP/1.1" 302 0
+INFO [2021-12-18 14:16:43,754] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=3 HTTP/1.1" 200 87303
+WARNING [2021-12-18 14:16:43,781] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:43,782] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:43,782] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:43,783] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:43,787] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:43,791] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:43,792] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:43,792] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:43,910] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:16:43,919] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:43,926] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:43,930] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:43,934] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:43,938] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:43,951] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:43,955] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:43,959] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:49,515] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=4 HTTP/1.1" 200 85854
+WARNING [2021-12-18 14:16:49,549] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:49,556] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:49,557] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:49,557] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:49,557] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:49,562] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:49,563] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:49,563] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:49,667] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:16:49,673] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:49,680] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:49,684] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:49,688] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:49,693] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:49,698] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:49,703] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:49,707] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:56,872] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/?p=4 HTTP/1.1" 302 0
+INFO [2021-12-18 14:16:57,738] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=4 HTTP/1.1" 200 85854
+WARNING [2021-12-18 14:16:57,774] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:57,775] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:57,776] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:57,777] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:57,781] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:57,782] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:57,786] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:57,786] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:16:57,890] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:16:57,894] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:16:57,901] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:57,906] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:16:57,910] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:16:57,914] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:16:57,918] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:16:57,922] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:16:57,928] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:03,805] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 200 85893
+WARNING [2021-12-18 14:17:03,845] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:03,845] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:03,845] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:03,846] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:03,847] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:03,855] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:03,856] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:03,856] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:03,957] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:17:03,962] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:03,970] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:03,974] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:03,978] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:03,983] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:03,987] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:03,991] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:03,995] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:09,506] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 302 0
+INFO [2021-12-18 14:17:10,333] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 200 85893
+WARNING [2021-12-18 14:17:10,360] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:10,366] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:10,369] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:10,370] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:10,374] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:10,377] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:10,377] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:10,377] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:10,477] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:17:10,501] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:10,511] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:10,516] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:10,520] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:10,524] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:10,528] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:10,532] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:10,536] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:13,214] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=6 HTTP/1.1" 200 83016
+WARNING [2021-12-18 14:17:13,241] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:13,241] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:13,242] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:13,242] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:13,243] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:13,249] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:13,250] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:13,251] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:13,370] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:17:13,374] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:13,381] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:13,385] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:13,390] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:13,394] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:13,398] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:13,402] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:13,406] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:17,283] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/?p=6 HTTP/1.1" 302 0
+INFO [2021-12-18 14:17:18,061] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=6 HTTP/1.1" 200 83016
+WARNING [2021-12-18 14:17:18,095] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:18,099] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:18,101] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:18,101] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:18,103] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:18,105] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:18,109] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+WARNING [2021-12-18 14:17:18,109] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+INFO [2021-12-18 14:17:18,222] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:17:18,227] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:18,234] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:18,239] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:18,243] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:18,248] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:18,252] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:18,257] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:18,261] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:20,263] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=7 HTTP/1.1" 200 86635
+WARNING [2021-12-18 14:17:20,291] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:20,294] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:20,296] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:20,297] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:20,300] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:20,305] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:20,305] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:20,306] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:20,422] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:17:20,426] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:20,433] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:20,437] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:20,445] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:20,450] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:20,454] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:20,458] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:20,461] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:23,887] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/?p=7 HTTP/1.1" 302 0
+INFO [2021-12-18 14:17:24,789] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=7 HTTP/1.1" 200 86635
+WARNING [2021-12-18 14:17:24,816] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:24,816] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:24,818] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:24,818] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:24,819] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:24,826] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:24,826] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:24,827] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:24,927] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:17:24,931] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:24,938] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:24,942] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:24,946] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:24,950] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:24,954] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:24,958] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:24,962] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:35,372] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=8 HTTP/1.1" 200 86553
+WARNING [2021-12-18 14:17:35,406] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:35,407] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:35,408] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:35,409] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:35,410] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:35,416] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:35,417] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+WARNING [2021-12-18 14:17:35,417] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+INFO [2021-12-18 14:17:35,530] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:17:35,537] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:35,546] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:35,550] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:35,554] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:35,558] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:35,562] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:35,566] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:35,570] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:41,412] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/?p=8 HTTP/1.1" 302 0
+INFO [2021-12-18 14:17:42,230] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=8 HTTP/1.1" 200 86467
+WARNING [2021-12-18 14:17:42,258] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:42,259] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:42,262] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:42,263] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:42,271] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:42,271] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:42,272] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:42,272] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:17:42,378] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:17:42,390] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:17:42,401] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:42,407] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:17:42,411] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:17:42,416] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:17:42,421] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:17:42,426] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:17:42,430] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:18:14,606] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 14:18:15,084] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:19:11,082] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=8 HTTP/1.1" 302 0
+INFO [2021-12-18 14:19:13,447] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?e=1 HTTP/1.1" 200 187827
+WARNING [2021-12-18 14:19:13,500] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:13,505] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:13,505] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:13,505] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:13,508] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:13,515] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:13,520] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:19:13,524] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:19:13,604] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:19:13,608] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:13,614] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:13,618] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:13,622] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:13,627] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:13,631] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:13,635] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:19:13,638] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:19:20,060] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=3 HTTP/1.1" 200 186893
+WARNING [2021-12-18 14:19:20,083] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:20,097] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:20,099] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:20,101] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:20,104] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:20,105] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:20,113] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:19:20,116] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:19:20,224] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:19:20,230] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:20,238] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:20,243] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:20,247] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:20,252] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:20,256] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:20,260] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:19:20,265] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:19:32,826] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/?p=3 HTTP/1.1" 302 0
+INFO [2021-12-18 14:19:35,288] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=3 HTTP/1.1" 200 186893
+WARNING [2021-12-18 14:19:35,328] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:35,329] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:35,329] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:35,332] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:35,337] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:35,342] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:35,342] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:19:35,343] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:19:35,448] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:19:35,454] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:35,464] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:35,470] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:35,474] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:35,479] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:35,484] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:35,488] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:19:35,492] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:19:41,630] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=4 HTTP/1.1" 200 186512
+WARNING [2021-12-18 14:19:41,669] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:41,669] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:41,671] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:41,675] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:41,675] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:41,679] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:41,681] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:19:41,681] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:19:41,781] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:19:41,786] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:41,793] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:41,797] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:41,801] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:41,806] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:41,810] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:41,814] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:19:41,818] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:19:47,663] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/?p=4 HTTP/1.1" 302 0
+INFO [2021-12-18 14:19:50,312] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=4 HTTP/1.1" 200 186512
+WARNING [2021-12-18 14:19:50,346] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:50,350] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:50,351] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:50,354] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:50,359] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+WARNING [2021-12-18 14:19:50,360] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:50,360] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:50,360] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+INFO [2021-12-18 14:19:50,459] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:19:50,464] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:50,472] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:50,478] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:50,482] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:50,487] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:50,491] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:50,496] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:19:50,499] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:19:54,343] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 200 99497
+WARNING [2021-12-18 14:19:54,385] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:54,386] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:54,386] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:54,386] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:54,386] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:54,396] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:19:54,396] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:54,397] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:19:54,513] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:19:54,519] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:19:54,529] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:54,534] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:19:54,540] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:19:54,545] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:19:54,550] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:19:54,555] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:19:54,560] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:20:01,317] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 302 0
+INFO [2021-12-18 14:20:02,356] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 200 99446
+WARNING [2021-12-18 14:20:02,391] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:20:02,394] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:20:02,394] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:20:02,394] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:20:02,394] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:20:02,403] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:20:02,404] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:20:02,404] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:20:02,502] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:20:02,508] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:20:02,515] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:20:02,521] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:20:02,526] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:20:02,530] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:20:02,534] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:20:02,539] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:20:02,543] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:20:43,744] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 14:20:44,235] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:21:04,432] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 200 84351
+WARNING [2021-12-18 14:21:04,469] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:21:04,469] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:21:04,469] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:21:04,469] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:21:04,469] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:21:04,479] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:21:04,479] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:21:04,479] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:21:04,583] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:21:04,588] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:21:04,595] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:21:04,600] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:21:04,604] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:21:04,608] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:21:04,612] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:21:04,616] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:21:04,620] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:21:08,907] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/135/change/?_changelist_filters=p%3D5 HTTP/1.1" 200 28883
+INFO [2021-12-18 14:21:08,932] django.server: "GET /sdm/static/admin/css/forms.css HTTP/1.1" 304 0
+WARNING [2021-12-18 14:21:08,933] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:21:08,937] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+INFO [2021-12-18 14:21:08,940] django.server: "GET /sdm/static/admin/css/vendor/select2/select2.css HTTP/1.1" 304 0
+WARNING [2021-12-18 14:21:08,940] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+INFO [2021-12-18 14:21:08,940] django.server: "GET /sdm/static/admin/css/autocomplete.css HTTP/1.1" 304 0
+WARNING [2021-12-18 14:21:08,941] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:21:08,945] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:21:08,959] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:21:08,961] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:21:08,963] django.server: "GET /sdm/static/admin/js/vendor/select2/select2.full.js HTTP/1.1" 304 0
+INFO [2021-12-18 14:21:08,967] django.server: "GET /sdm/static/admin/js/autocomplete.js HTTP/1.1" 304 0
+INFO [2021-12-18 14:21:08,970] django.server: "GET /sdm/static/admin/css/widgets.css HTTP/1.1" 304 0
+WARNING [2021-12-18 14:21:08,970] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+INFO [2021-12-18 14:21:08,975] django.server: "GET /sdm/static/admin/js/change_form.js HTTP/1.1" 304 0
+INFO [2021-12-18 14:21:08,979] django.server: "GET /sdm/static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+INFO [2021-12-18 14:21:08,984] django.server: "GET /sdm/static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO [2021-12-18 14:21:08,987] django.server: "GET /sdm/static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO [2021-12-18 14:21:09,051] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:21:09,055] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:21:09,061] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:21:09,065] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:21:09,071] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:21:09,075] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:21:09,079] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:21:09,083] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:21:09,087] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:21:17,097] django.server: "GET /bupt2018213267@Sdm98autocomplete/?app_label=accountSystem&model_name=account&field_name=types HTTP/1.1" 200 1084
+INFO [2021-12-18 14:21:20,810] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 200 84351
+WARNING [2021-12-18 14:21:20,840] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:21:20,841] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:21:20,845] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:21:20,845] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:21:20,851] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:21:20,853] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:21:20,854] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+WARNING [2021-12-18 14:21:20,854] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+INFO [2021-12-18 14:21:20,967] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:21:20,973] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:21:20,981] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:21:20,985] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:21:20,989] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:21:20,994] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:21:20,998] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:21:21,003] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:21:21,011] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:26:34,509] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 14:26:35,005] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:27:11,736] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 14:27:12,253] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:27:21,724] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 200 87347
+WARNING [2021-12-18 14:27:21,774] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:27:21,774] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:27:21,774] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:27:21,774] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:27:21,775] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:27:21,782] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:27:21,784] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:27:21,785] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:27:21,925] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:27:21,929] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:27:21,940] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:27:21,945] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:27:21,949] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:27:21,953] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:27:21,957] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:27:21,961] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:27:21,966] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:28:21,430] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 14:28:21,961] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:28:27,999] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 200 87603
+WARNING [2021-12-18 14:28:28,039] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:28:28,039] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:28:28,040] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:28:28,040] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:28:28,041] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:28:28,049] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+WARNING [2021-12-18 14:28:28,050] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:28:28,050] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+INFO [2021-12-18 14:28:28,392] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:28:28,403] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:28:28,414] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:28:28,419] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:28:28,423] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:28:28,428] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:28:28,432] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:28:28,437] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:28:28,442] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:28:47,014] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/132/change/?_changelist_filters=p%3D5 HTTP/1.1" 200 28915
+WARNING [2021-12-18 14:28:47,038] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:28:47,050] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:28:47,050] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:28:47,050] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:28:47,050] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:28:47,051] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:28:47,056] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:28:47,056] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:28:47,377] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:28:47,386] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:28:47,395] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:28:47,400] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:28:47,411] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:28:47,416] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:28:47,422] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:28:47,427] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:28:47,432] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:28:49,622] django.server: "GET /bupt2018213267@Sdm98accountSystem/type/add/?_to_field=id&_popup=1 HTTP/1.1" 200 16667
+INFO [2021-12-18 14:28:49,873] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+INFO [2021-12-18 14:28:55,918] django.server: "POST /bupt2018213267@Sdm98accountSystem/type/add/?_to_field=id&_popup=1 HTTP/1.1" 200 340
+INFO [2021-12-18 14:28:55,932] django.server: "GET /sdm/static/admin/js/popup_response.js HTTP/1.1" 200 551
+INFO [2021-12-18 14:28:59,966] django.server: "POST /bupt2018213267@Sdm98accountSystem/account/132/change/?_changelist_filters=p%3D5 HTTP/1.1" 302 0
+INFO [2021-12-18 14:29:01,199] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 200 88387
+WARNING [2021-12-18 14:29:01,221] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:29:01,233] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:29:01,233] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:29:01,234] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:29:01,235] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:29:01,235] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:29:01,240] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:29:01,240] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:29:01,347] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:29:01,360] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:29:01,367] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:29:01,372] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:29:01,376] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:29:01,380] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:29:01,384] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:29:01,388] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:29:01,391] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:29:49,487] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 14:29:49,954] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:30:05,340] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 14:30:05,791] django.utils.autoreload: Watching for file changes with StatReloader
+ERROR [2021-12-18 14:30:40,217] django.request: Internal Server Error: /bupt2018213267@Sdm98accountSystem/account/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/options.py", line 622, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/utils/decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/views/decorators/cache.py", line 56, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/sites.py", line 236, in inner
+    return view(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/utils/decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/utils/decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/options.py", line 1828, in changelist_view
+    'selection_note': _('0 of %(cnt)s selected') % {'cnt': len(cl.result_list)},
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/query.py", line 262, in __len__
+    self._fetch_all()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/query.py", line 1354, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1189, in execute_sql
+    sql, params = self.as_sql()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 531, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 59, in pre_sql_setup
+    self.setup_query()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 50, in setup_query
+    self.select, self.klass_info, self.annotation_col_map = self.get_select()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 253, in get_select
+    related_klass_infos = self.get_related_selections(select)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1012, in get_related_selections
+    raise FieldError(
+django.core.exceptions.FieldError: Invalid field name(s) given in select_related: 'types'. Choices are: password, type, group
+ERROR [2021-12-18 14:30:41,978] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=5 HTTP/1.1" 500 145099
+INFO [2021-12-18 14:31:00,803] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 14:31:01,274] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:31:11,127] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 83329
+WARNING [2021-12-18 14:31:11,170] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:31:11,172] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:31:11,172] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:31:11,175] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:31:11,175] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:31:11,183] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:31:11,183] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:31:11,183] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:31:11,429] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:31:11,442] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:31:11,451] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:31:11,459] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:31:11,465] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:31:11,471] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:31:11,477] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:31:11,483] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:31:11,488] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:31:28,558] django.server: "GET /bupt2018213267@Sdm98miniProgram/settings/ HTTP/1.1" 200 30053
+INFO [2021-12-18 14:31:28,583] django.server: "GET /sdm/static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+INFO [2021-12-18 14:31:28,672] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+INFO [2021-12-18 14:31:28,701] django.server: "GET /sdm/static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+INFO [2021-12-18 14:31:28,706] django.server: "GET /sdm/static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+INFO [2021-12-18 14:32:58,349] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/models/account.py changed, reloading.
+INFO [2021-12-18 14:32:58,826] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:33:57,730] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/models/account.py changed, reloading.
+INFO [2021-12-18 14:33:58,205] django.utils.autoreload: Watching for file changes with StatReloader
+ERROR [2021-12-18 14:34:04,899] django.request: Internal Server Error: /bupt2018213267@Sdm98accountSystem/account/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/options.py", line 622, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/utils/decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/views/decorators/cache.py", line 56, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/sites.py", line 236, in inner
+    return view(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/utils/decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/utils/decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/options.py", line 1828, in changelist_view
+    'selection_note': _('0 of %(cnt)s selected') % {'cnt': len(cl.result_list)},
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/query.py", line 262, in __len__
+    self._fetch_all()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/query.py", line 1354, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/query.py", line 51, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1189, in execute_sql
+    sql, params = self.as_sql()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 531, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 59, in pre_sql_setup
+    self.setup_query()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 50, in setup_query
+    self.select, self.klass_info, self.annotation_col_map = self.get_select()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 253, in get_select
+    related_klass_infos = self.get_related_selections(select)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1012, in get_related_selections
+    raise FieldError(
+django.core.exceptions.FieldError: Invalid field name(s) given in select_related: 'type'. Choices are: password, group
+ERROR [2021-12-18 14:34:06,711] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 500 144500
+INFO [2021-12-18 14:34:53,282] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 14:34:53,769] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:35:02,113] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 83330
+WARNING [2021-12-18 14:35:02,160] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:35:02,161] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:35:02,161] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:35:02,161] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:35:02,161] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:35:02,170] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:35:02,170] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+WARNING [2021-12-18 14:35:02,171] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+INFO [2021-12-18 14:35:02,355] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:35:02,360] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:35:02,368] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:35:02,374] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:35:02,379] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:35:02,384] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:35:02,389] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:35:02,399] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:35:02,403] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+ERROR [2021-12-18 14:35:07,396] django.request: Internal Server Error: /bupt2018213267@Sdm98accountSystem/type/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/options.py", line 608, in get_field
+    return self.fields_map[field_name]
+KeyError: '__name__'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 266, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 297, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/db/models/options.py", line 610, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: Type has no field named '__name__'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 176, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 153, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 168, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 977, in render
+    return SafeString(''.join([
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 978, in <listcomp>
+    node.render_annotated(context) for node in self
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/base.py", line 938, in render_annotated
+    return self.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/base.py", line 33, in render
+    return super().render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/template/library.py", line 215, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 309, in result_list
+    'results': list(results(cl)),
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 285, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 276, in __init__
+    super().__init__(*items)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/templatetags/admin_list.py", line 201, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/django/contrib/admin/utils.py", line 277, in lookup_field
+    attr = getattr(obj, name)
+AttributeError: 'Type' object has no attribute '__name__'
+ERROR [2021-12-18 14:35:09,963] django.server: "GET /bupt2018213267@Sdm98accountSystem/type/ HTTP/1.1" 500 430428
+INFO [2021-12-18 14:36:02,055] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/admin.py changed, reloading.
+INFO [2021-12-18 14:36:02,534] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:36:12,176] django.server: "GET /bupt2018213267@Sdm98accountSystem/group/ HTTP/1.1" 200 36619
+INFO [2021-12-18 14:36:12,326] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+INFO [2021-12-18 14:36:31,127] django.server: "GET /bupt2018213267@Sdm98accountSystem/type/ HTTP/1.1" 200 46695
+INFO [2021-12-18 14:36:31,257] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+INFO [2021-12-18 14:37:24,287] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/admin.py changed, reloading.
+INFO [2021-12-18 14:37:24,776] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:37:30,887] django.server: "GET /bupt2018213267@Sdm98accountSystem/type/ HTTP/1.1" 200 39489
+INFO [2021-12-18 14:37:31,050] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+INFO [2021-12-18 14:37:42,283] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/admin.py changed, reloading.
+INFO [2021-12-18 14:37:42,721] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:37:45,513] django.server: "GET /bupt2018213267@Sdm98accountSystem/type/ HTTP/1.1" 200 42375
+INFO [2021-12-18 14:37:45,658] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+INFO [2021-12-18 14:38:02,114] django.server: "GET /bupt2018213267@Sdm98accountSystem/group/ HTTP/1.1" 200 36619
+INFO [2021-12-18 14:38:02,254] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+INFO [2021-12-18 14:38:15,476] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/admin.py changed, reloading.
+INFO [2021-12-18 14:38:15,973] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:38:21,490] django.server: "GET /bupt2018213267@Sdm98accountSystem/type/ HTTP/1.1" 200 40932
+INFO [2021-12-18 14:38:21,641] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+INFO [2021-12-18 14:38:27,181] django.server: "GET /bupt2018213267@Sdm98accountSystem/type/?p=2 HTTP/1.1" 200 37546
+INFO [2021-12-18 14:38:27,323] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+INFO [2021-12-18 14:38:29,381] django.server: "GET /bupt2018213267@Sdm98accountSystem/type/?p=1 HTTP/1.1" 200 41322
+INFO [2021-12-18 14:38:29,535] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+INFO [2021-12-18 14:38:59,979] django.utils.autoreload: /Users/shadikesadamu/Documents/projects/izbasar/django-admin/accountSystem/admin/account.py changed, reloading.
+INFO [2021-12-18 14:39:00,545] django.utils.autoreload: Watching for file changes with StatReloader
+INFO [2021-12-18 14:39:04,583] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/ HTTP/1.1" 200 76058
+WARNING [2021-12-18 14:39:04,621] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:39:04,621] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:39:04,621] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:39:04,621] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:39:04,621] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:39:04,630] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:39:04,630] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+WARNING [2021-12-18 14:39:04,631] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+INFO [2021-12-18 14:39:04,733] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:39:04,737] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:39:04,744] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:39:04,748] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:39:04,752] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:39:04,756] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:39:04,759] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:39:04,765] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:39:04,768] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:41:49,871] django.server: "GET /sdm/static/admin/simpleui-x/theme/orange.css HTTP/1.1" 200 4598
+INFO [2021-12-18 14:42:02,217] django.server: "GET /bupt2018213267@Sdm98accountSystem/account/?p=2 HTTP/1.1" 200 74321
+WARNING [2021-12-18 14:42:02,249] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:42:02,253] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:42:02,254] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:42:02,256] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:42:02,258] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:42:02,261] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:42:02,262] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:42:02,263] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976
+INFO [2021-12-18 14:42:02,385] django.server: "GET /bupt2018213267@Sdm98jsi18n/ HTTP/1.1" 200 8377
+WARNING [2021-12-18 14:42:02,393] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.css HTTP/1.1" 404 1973
+WARNING [2021-12-18 14:42:02,401] django.server: "GET /sdm/static/kindeditor4.1.11/kindeditor-all.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:42:02,406] django.server: "GET /sdm/static/kindeditor4.1.11/lang/zh-CN.js HTTP/1.1" 404 1958
+WARNING [2021-12-18 14:42:02,410] django.server: "GET /sdm/static/js/jquery-3.6.0.min.js HTTP/1.1" 404 1934
+WARNING [2021-12-18 14:42:02,420] django.server: "GET /sdm/static/js/config-account-admin.js HTTP/1.1" 404 1946
+WARNING [2021-12-18 14:42:02,429] django.server: "GET /sdm/static/Semantic-UI-CSS-master/semantic.js HTTP/1.1" 404 1970
+WARNING [2021-12-18 14:42:02,433] django.server: "GET /sdm/static/js/clipboardUtil.js HTTP/1.1" 404 1925
+WARNING [2021-12-18 14:42:02,437] django.server: "GET /sdm/static/bootstrap-3.4.1-dist/js/bootstrap.js HTTP/1.1" 404 1976

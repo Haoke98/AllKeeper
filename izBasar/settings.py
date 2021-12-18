@@ -51,9 +51,9 @@ CACHE_DIR = os.path.join(BASE_DIR, 'cache')
 SECRET_KEY = secret.SECRET_KEY
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 from . import IS_DEBUG
+
 DEBUG = IS_DEBUG
 
 ALLOWED_HOSTS = ['*']
@@ -259,7 +259,7 @@ mimetypes.add_type('text/html', '.html')
 SIMPLEUI_DEFAULT_THEME = 'admin.lte.css'
 
 SIMPLEUI_ICON = {
-    '所有手机号': 'fab fa-whatsapp',
+    '所有手机号': 'fas fa-phone-square',
     '房屋交易系统': 'fas fa-warehouse',
     'Web3Da': 'fas fa-cubes',
     '债务管理及分析系统': 'fas fa-wallet',
@@ -275,9 +275,12 @@ SIMPLEUI_ICON = {
     '所有视频': 'fab fa-youtube',
     'Static filess': 'fas fa-folder-open',
     'Settingss': 'fas fa-cogs',
-    '所有国家': 'fas fa-globe-asia'
+    '所有国家': 'fas fa-globe-asia',
+    '所有债务': 'fas fa-money-bill-wave',
+    '所有账号类型': 'fab fa-accusoft',
+    '所有账号': 'fas fa-address-book'
 }
 
 SIMPLEUI_LOGO = 'http://59.110.225.84/media/izbasar/logo_square.png'
 SIMPLEUI_HOME_INFO = False  # 首页上的simpleUI的版本信息板块。
-SIMPLEUI_ANALYSIS = False# 收集信息（TODO：不太好，等正式上线后建议关闭；否则出现信息泄露）
+SIMPLEUI_ANALYSIS = False  # 收集信息（TODO：不太好，等正式上线后建议关闭；否则出现信息泄露）

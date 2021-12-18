@@ -26,5 +26,6 @@ class PasswordAdmin(admin.ModelAdmin):
 
 @admin.register(Group, Type)
 class GroupAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ["__str__", "__name__"]
+    list_display = LIST_DISPLAY + ["__str__"]
     search_fields = ['name']
+    list_per_page = 14

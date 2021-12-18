@@ -1,21 +1,21 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from accountSystem.models import Account, Tel, Email
+from accountSystem.models import Account, Tel, Email, Type
 from izBasar.admin import LIST_DISPLAY
 
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['_name', '_username', '_password', '_url', '_tels', '_emails', '_info', 'type']
+    list_display = LIST_DISPLAY + ['_name', '_username', '_password', '_url', '_tels', '_emails', '_info', '_types']
     list_display_links = ['id', '_name']
     date_hierarchy = 'updatedAt'
-    search_fields = ['name', 'username', 'url', 'info']
-    list_filter = ['group', 'type', 'tels', 'emails']
-    list_select_related = ['group', 'type', 'password']
-    autocomplete_fields = ['tels', 'emails', 'password', 'group', 'type']
-    list_per_page = 10
-    actions = ['actionTelAndEmailMigration']
+    search_fields = ['name', 'username', 'url', 'info', 'types__name']
+    list_filter = ['group', 'tels', 'emails', 'types']
+    list_select_related = ['group', 'password']
+    autocomplete_fields = ['tels', 'emails', 'password', 'group', 'types']
+    list_per_page = 8
+    actions = []
 
     def _url(self, obj):
         tag = mark_safe('''
@@ -133,11 +133,37 @@ class AccountAdmin(admin.ModelAdmin):
                 ''' % email.content
         return mark_safe(item)
 
+    def _types(self, obj: Account):
+        items: str = ""
+        types = obj.types.all()
+        print(obj.id, obj.name, types)
+        for item in types:
+            items += self._getTypeItem(item)
+        result = '''
+                        <div class="ui list">
+                            %s              
+                        </div>
+                ''' % items
+        return mark_safe(result)
+
+    def _getTypeItem(self, email: Type):
+        item = '''
+                        <div class="item">
+                            <i class="paper plane icon"></i>
+                            <div class="content">
+                              <a class="header">%s</a>
+
+                            </div>
+                        </div>
+                ''' % email.name
+        return mark_safe(item)
+
     def actionTelAndEmailMigration(self, request, queryset):
         for obj in queryset:
-            obj.tels.add(obj.tel)
-            obj.emails.add(obj.email)
+            obj.types.add(obj.type)
             obj.save()
+
+    actionTelAndEmailMigration.short_description = '数据迁移升级操作'
 
     class Media:
 
