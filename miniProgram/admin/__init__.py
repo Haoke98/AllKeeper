@@ -8,9 +8,9 @@ from miniProgram.models.country import Country
 from miniProgram.models.film import FilmType, Language, Film, FilmForm
 from .subscriptionAccountAdmin import *
 
-admin.site.site_title = "IzBasar工作室后天管理系统"
+admin.site.site_title = "SDM工作室后天管理系统"
 # 登录页导航条和首页导航条标题
-admin.site.site_header = "IzBasar媒体工作室后台管理系统欢迎您"
+admin.site.site_header = "SDM媒体工作室后台管理系统欢迎您"
 # 主页标题
 admin.site.index_title = "欢迎登陆"
 

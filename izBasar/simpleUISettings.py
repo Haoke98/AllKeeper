@@ -23,7 +23,8 @@ SIMPLEUI_ICON = {
     '所有账号类型': 'fab fa-accusoft',
     '所有账号': 'fas fa-address-book'
 }
+from . import _STATIC_URL
 
-SIMPLEUI_LOGO = 'http://59.110.225.84/media/izbasar/logo_square.png'
+SIMPLEUI_LOGO = _STATIC_URL + 'img/logo-sdm.png'
 SIMPLEUI_HOME_INFO = False  # 首页上的simpleUI的版本信息板块。
 SIMPLEUI_ANALYSIS = False  # 收集信息（TODO：不太好，等正式上线后建议关闭；否则出现信息泄露）

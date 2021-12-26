@@ -17,9 +17,8 @@ from django.conf.urls import include
 from django.conf.urls.static import static
 from django.contrib import admin
 # from django.contrib.staticfiles.views import serve
-from django.views.static import serve
+from django.views.generic import RedirectView
 
-admin.autodiscover()
 from django.contrib.flatpages import sitemaps
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path
@@ -30,7 +29,10 @@ import miniProgram.urls
 from izBasar import settings
 from miniProgram.views import image
 from .secret import ADMIN_PATH
-from django.urls import re_path
+from . import _STATIC_URL
+
+admin.autodiscover()
+
 urlpatterns = [
                   path(ADMIN_PATH, admin.site.urls),
                   # re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
@@ -41,5 +43,6 @@ urlpatterns = [
                   path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
                        name='django.contrib.sitemaps.views.sitemap'),
                   path('BeansMusic/', include(BeansMusic.urls)),
-                  path('image/proxy', image.proxy)
+                  path('image/proxy', image.proxy),
+                  path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

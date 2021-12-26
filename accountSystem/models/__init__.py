@@ -4,3 +4,4 @@ from .group import Group
 from .password import Password
 from .tel import Tel
 from .type import Type
+from .wechat import Wechat

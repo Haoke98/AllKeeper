@@ -7,13 +7,15 @@ from izBasar.admin import LIST_DISPLAY
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['_name', '_username', '_password', '_url', '_tels', '_emails', '_info', '_types']
+    list_display = LIST_DISPLAY + ['_name', '_username', '_password', '_url', '_tels', '_emails', 'wechat', '_info',
+                                   '_types']
     list_display_links = ['id', '_name']
     date_hierarchy = 'updatedAt'
-    search_fields = ['name', 'username', 'url', 'info', 'types__name']
-    list_filter = ['group', 'tels', 'emails', 'types']
-    list_select_related = ['group', 'password']
-    autocomplete_fields = ['tels', 'emails', 'password', 'group', 'types']
+    search_fields = ['name', 'username', 'url', 'info', 'types__name', 'wechat__wx_id', 'wechat__nickName',
+                     'wechat__remark']
+    list_filter = ['group', 'tels', 'emails', 'types', 'wechat']
+    list_select_related = ['group', 'password', 'wechat']
+    autocomplete_fields = ['tels', 'emails', 'password', 'group', 'types', 'wechat']
     list_per_page = 8
     actions = []
 

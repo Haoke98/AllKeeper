@@ -1,6 +1,7 @@
 from django.db import models
 
 from izBasar.models import BaseModel
+from .wechat import Wechat
 from .email import Email
 from .group import Group
 from .password import Password
@@ -16,6 +17,7 @@ class Account(BaseModel):
     url = models.URLField(verbose_name="网站地址", null=True, blank=True)
     tels = models.ManyToManyField(verbose_name="所有绑定的手机号", to=Tel, related_name="tels", blank=True)
     emails = models.ManyToManyField(verbose_name="所有绑定的电子邮箱", to=Email, related_name="emails", blank=True)
+    wechat = models.OneToOneField(verbose_name='绑定的微信', blank=True, null=True, on_delete=models.CASCADE, to=Wechat)
     group = models.ForeignKey(verbose_name="所属账号组", to=Group, on_delete=models.CASCADE, null=True, blank=True)
     info = models.TextField(verbose_name="说明", null=True, blank=True)
     icon = models.ImageField(verbose_name="图标", null=True, blank=True)

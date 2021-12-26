@@ -13,7 +13,7 @@ from izBasar.admin import LIST_DISPLAY
 # Register your admin models here.
 @admin.register(Tel, Email)
 class UniversalAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['id', 'content', 'remark']
+    list_display = LIST_DISPLAY + ['content', 'remark']
     list_display_links = ['content']
     search_fields = ['content']
 

@@ -5,7 +5,7 @@ from izBasar.models import BaseModel
 
 class Email(BaseModel):
     content = models.EmailField(null=True, blank=True)
-    remark = models.CharField(max_length=100, null=True, blank=True)
+    remark = models.CharField(max_length=100, null=True, blank=True, verbose_name="备注")
 
     class Meta:
         verbose_name = "电子邮箱"
