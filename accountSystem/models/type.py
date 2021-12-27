@@ -4,7 +4,7 @@ from izBasar.models import BaseModel
 
 
 class Type(BaseModel):
-    name = models.CharField(max_length=50, verbose_name="名称", default="未知类型")
+    name = models.CharField(max_length=50, unique=True, verbose_name="名称", default="未知类型")
 
     class Meta:
         verbose_name = "账号类型"
