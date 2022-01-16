@@ -13,10 +13,10 @@
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <option name="launchJavascriptDebuger" value="false" />
-    <option name="port" value="7010" />
+    <option name="port" value="7020" />
     <option name="host" value="" />
     <option name="additionalOptions" value="" />
-    <option name="browserUrl" value="http://127.0.0.1:7010/admin/sadamBuptXjSlrch" />
+    <option name="browserUrl" value="http://127.0.0.1:7010/bupt2018213267@Sdm98" />
     <option name="runTestServer" value="false" />
     <option name="runNoReload" value="false" />
     <option name="useCustomRunCommand" value="false" />

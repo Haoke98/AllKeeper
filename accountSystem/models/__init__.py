@@ -5,3 +5,5 @@ from .password import Password
 from .tel import Tel
 from .type import Type
 from .wechat import Wechat
+from .server import Server
+from .serverUser import ServerUser

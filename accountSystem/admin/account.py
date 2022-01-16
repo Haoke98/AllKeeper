@@ -2,11 +2,11 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 
 from accountSystem.models import Account, Tel, Email, Type
-from izBasar.admin import LIST_DISPLAY
+from izBasar.admin import LIST_DISPLAY,BaseAdmin
 
 
 @admin.register(Account)
-class AccountAdmin(admin.ModelAdmin):
+class AccountAdmin(BaseAdmin):
     list_display = LIST_DISPLAY + ['_name', '_username', '_password', '_url', '_tels', '_emails', 'wechat', '_info',
                                    '_types']
     list_display_links = ['id', '_name']
@@ -42,22 +42,7 @@ class AccountAdmin(admin.ModelAdmin):
     _url.allow_tags = True
 
     def _password(self, obj):
-        tag = mark_safe(
-            '''<div class="ui left labeled button" tabindex="0">
-                    <div class="ui button">
-                        <i class="eye icon"></i>
-                    </div>
-                    <a class="ui basic left pointing label">
-                    ******
-                    </a>
-                    <div class="ui vertical animated button blue" onclick="copyStr('%s')" >
-                        <div class="hidden content" style="color:white;" >复制</div>
-                        <div class="visible content">
-                                <i class="copy icon"></i>
-                        </div>
-                    </div>
-                </div>''' % obj.password.password)
-        return tag
+        return BaseAdmin.password(obj.password.password)
 
     _password.allow_tags = True
 
@@ -173,14 +158,10 @@ class AccountAdmin(admin.ModelAdmin):
             pass
 
         css = {
-            'all': ('Semantic-UI-CSS-master/semantic.css',)
         }
         js = [
             'kindeditor4.1.11/kindeditor-all.js',
             'kindeditor4.1.11/lang/zh-CN.js',
-            'js/jquery-3.6.0.min.js',
+
             'js/config-account-admin.js',
-            'Semantic-UI-CSS-master/semantic.js',
-            'js/clipboardUtil.js',
-            'bootstrap-3.4.1-dist/js/bootstrap.js'
         ]

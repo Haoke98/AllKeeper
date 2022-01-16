@@ -23,8 +23,39 @@ class BaseAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY
     date_hierarchy = 'updatedAt'
 
-    def __init__(self, model, admin_site):
-        super().__init__(model, admin_site)
+    @staticmethod
+    def password(obj):
+        tag = mark_safe(
+            '''<div class="ui left labeled button" tabindex="0">
+                    <div class="ui button">
+                        <i class="eye icon"></i>
+                    </div>
+                    <a class="ui basic left pointing label">
+                    ******
+                    </a>
+                    <div class="ui vertical animated button blue" onclick="copyStr('%s')" >
+                        <div class="hidden content" style="color:white;" >复制</div>
+                        <div class="visible content">
+                                <i class="copy icon"></i>
+                        </div>
+                    </div>
+                </div>''' % obj)
+        return tag
+
+    class Media:
+
+        def __init__(self):
+            pass
+
+        css = {
+            'all': ('Semantic-UI-CSS-master/semantic.css',)
+        }
+        js = [
+            'js/jquery-3.6.0.min.js',
+            'Semantic-UI-CSS-master/semantic.js',
+            'js/clipboardUtil.js',
+            'bootstrap-3.4.1-dist/js/bootstrap.js'
+        ]
 
 
 class PictureShowAdmin(BaseAdmin):
