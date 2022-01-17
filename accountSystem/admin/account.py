@@ -20,12 +20,7 @@ class AccountAdmin(BaseAdmin):
     actions = []
 
     def _url(self, obj):
-        tag = mark_safe('''
-                    <a class="ui circular icon red button" href="%s" target="blank">
-                        <i class="linkify icon"></i>
-                    </a>
-            ''' % obj.url)
-        return tag
+        return BaseAdmin.shwoUrl(obj.url)
 
     _url.allow_tags = True
 
@@ -47,19 +42,7 @@ class AccountAdmin(BaseAdmin):
     _password.allow_tags = True
 
     def _username(self, obj):
-        tag = mark_safe(
-            '''<div class="ui left labeled button" tabindex="0">
-                    <a class="ui basic right pointing label" style="width:20em;">
-                    %s
-                    </a>
-                    <div class="ui vertical animated button blue" onclick="copyStr('%s')" >
-                        <div class="hidden content" style="color:white;" >1</div>
-                        <div class="visible content">
-                                <i class="copy icon"></i>
-                        </div>
-                    </div>
-                </div>''' % (obj.username, obj.username))
-        return tag
+        return BaseAdmin.username(obj.username)
 
     _username.allow_tags = True
 

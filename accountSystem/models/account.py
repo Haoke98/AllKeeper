@@ -23,7 +23,7 @@ class Account(BaseModel):
     icon = models.ImageField(verbose_name="图标", null=True, blank=True)
 
     class Meta:
-        verbose_name = "账号"
+        verbose_name = "通用账号"
         verbose_name_plural = "所有" + verbose_name
 
     def __str__(self):

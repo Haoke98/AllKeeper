@@ -24,6 +24,22 @@ class BaseAdmin(admin.ModelAdmin):
     date_hierarchy = 'updatedAt'
 
     @staticmethod
+    def username(obj):
+        tag = mark_safe(
+            '''<div class="ui left labeled button" tabindex="0">
+                    <a class="ui basic right pointing label" style="width:10em;">
+                    %s
+                    </a>
+                    <div class="ui vertical animated button blue" onclick="copyStr('%s')" >
+                        <div class="hidden content" style="color:white;" >1</div>
+                        <div class="visible content">
+                                <i class="copy icon"></i>
+                        </div>
+                    </div>
+                </div>''' % (obj, obj))
+        return tag
+
+    @staticmethod
     def password(obj):
         tag = mark_safe(
             '''<div class="ui left labeled button" tabindex="0">
@@ -40,6 +56,15 @@ class BaseAdmin(admin.ModelAdmin):
                         </div>
                     </div>
                 </div>''' % obj)
+        return tag
+
+    @staticmethod
+    def shwoUrl(url: str):
+        tag = mark_safe('''
+                    <a class="ui circular icon red button" href="%s" target="blank">
+                        <i class="linkify icon"></i>
+                    </a>
+            ''' % url)
         return tag
 
     class Media:

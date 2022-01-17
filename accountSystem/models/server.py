@@ -23,4 +23,4 @@ class Server(BaseModel):
         verbose_name_plural = f"所有{verbose_name}"
 
     def __str__(self):
-        return f"服务器（{self.ip}）"
+        return f"服务器（{self.ip},{self.remark}）"
