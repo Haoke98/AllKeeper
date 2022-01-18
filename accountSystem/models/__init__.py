@@ -8,3 +8,5 @@ from .wechat import Wechat
 from .server import Server
 from .serverUser import ServerUser
 from .bt import BT
+from .dbServer import DbServer
+from .dbServerUser import DbServerUser

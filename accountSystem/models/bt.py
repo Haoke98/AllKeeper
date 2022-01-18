@@ -13,6 +13,7 @@ class BT(BaseModel):
     basicAuthPassword = models.ForeignKey(to=Password, related_name="basicAuthPassword", on_delete=models.CASCADE,
                                           verbose_name="BasicAuth密码", null=True, blank=True)
     path = models.CharField(max_length=50, verbose_name="面板路径", null=True, blank=True)
+    domain = models.URLField(verbose_name="绑定的域名", null=True, blank=True)
 
     class Meta:
         verbose_name = "宝塔"

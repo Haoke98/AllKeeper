@@ -29,6 +29,11 @@ class BtAdmin(BaseAdmin):
         return BaseAdmin.password(obj.basicAuthPassword.password)
 
     def _url(self, obj):
-        if obj.path:
-            return BaseAdmin.shwoUrl(f"http://{obj.server.ip}:{obj.port}{obj.path}")
-        return BaseAdmin.shwoUrl(f"http://{obj.server.ip}:{obj.port}")
+        if obj.domain is None:
+            if obj.path:
+                return BaseAdmin.shwoUrl(f"http://{obj.server.ip}:{obj.port}/{obj.path}")
+            return BaseAdmin.shwoUrl(f"http://{obj.server.ip}:{obj.port}")
+        else:
+            if obj.path:
+                return BaseAdmin.shwoUrl(f"{obj.domain}:{obj.port}/{obj.path}")
+            return BaseAdmin.shwoUrl(f"{obj.domain}:{obj.port}")
