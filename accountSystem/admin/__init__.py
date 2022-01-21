@@ -6,3 +6,4 @@ from .serverUser import ServerUserAdmin
 from .bt import BtAdmin
 from .dbServer import DbServerAdmin
 from .dbServerUser import DbServerUserAdmin
+from .tel import TelAdmin
