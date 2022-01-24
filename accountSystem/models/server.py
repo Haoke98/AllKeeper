@@ -13,7 +13,8 @@ class Server(BaseModel):
     hosterOptions = (
         (1, '阿里云'),
         (2, '腾讯云'),
-        (3, '哈密市希望科技有限公司')
+        (3, '哈密市希望科技有限公司'),
+        (4, '新疆丝路融创网络科技有限公司（局域网）')
     )
     hoster = models.PositiveSmallIntegerField(choices=hosterOptions, null=True, blank=False, verbose_name="托管方")
     remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True)

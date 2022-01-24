@@ -148,3 +148,4 @@ class AccountAdmin(BaseAdmin):
 
             'js/config-account-admin.js',
         ]
+    

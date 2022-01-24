@@ -5,10 +5,13 @@ from ..models import DbServerUser
 
 @admin.register(DbServerUser)
 class DbServerUserAdmin(BaseAdmin):
-    list_display = LIST_DISPLAY + ['username', '_password', 'hasRootPriority', 'server', 'owner']
+    list_display = LIST_DISPLAY + ['_username', '_password', 'hasRootPriority', 'server', 'owner']
     autocomplete_fields = ['password', 'server', 'owner']
     list_filter = ['hasRootPriority', 'server', 'owner']
     list_select_related = autocomplete_fields
+
+    def _username(self, obj):
+        return BaseAdmin.username(obj.username)
 
     def _password(self, obj):
         return BaseAdmin.password(obj.password.password)
