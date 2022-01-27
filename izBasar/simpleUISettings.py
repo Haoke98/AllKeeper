@@ -26,6 +26,7 @@ SIMPLEUI_ICON = {
     '所有服务器': 'fas fa-server',
     '所有服务器用户': 'fas fa-user-astronaut',
     'House prices': 'fas fa-funnel-dollar',
+    'House price types': 'fas fa-file-invoice-dollar',
     'Phone numbers': 'fas fa-phone-square'
 }
 from . import _STATIC_URL
