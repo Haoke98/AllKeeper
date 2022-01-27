@@ -21,7 +21,12 @@ SIMPLEUI_ICON = {
     '所有国家': 'fas fa-globe-asia',
     '所有债务': 'fas fa-money-bill-wave',
     '所有账号类型': 'fab fa-accusoft',
-    '所有账号': 'fas fa-address-book'
+    '所有账号': 'fas fa-address-book',
+    '所有宝塔': 'fab fa-fort-awesome',
+    '所有服务器': 'fas fa-server',
+    '所有服务器用户': 'fas fa-user-astronaut',
+    'House prices': 'fas fa-funnel-dollar',
+    'Phone numbers': 'fas fa-phone-square'
 }
 from . import _STATIC_URL
 

@@ -6,3 +6,11 @@ if __name__ == '__main__':
     print(y)
     x = ':'.join(y)
     print(x)
+
+
+    a = 'a'
+    print(a>'b' or 'c')
+
+
+    c=[1,2,3]
+    print(c*3)
