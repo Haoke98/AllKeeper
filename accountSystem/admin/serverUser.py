@@ -5,7 +5,7 @@ from ..models import ServerUser
 
 @admin.register(ServerUser)
 class ServerUserAdmin(BaseAdmin):
-    list_display = LIST_DISPLAY + ['_username', '_password', 'hasRootPriority', 'server', 'owner']
+    list_display = LIST_DISPLAY + ['_username', '_password', 'hasRootPriority', '_ip', 'owner']
     autocomplete_fields = ['password', 'server', 'owner']
     list_filter = ['hasRootPriority', 'server', 'owner']
     list_select_related = autocomplete_fields
@@ -17,6 +17,9 @@ class ServerUserAdmin(BaseAdmin):
         return BaseAdmin.password(obj.password.password)
 
     _password.short_description = "密码"
+
+    def _ip(self, obj):
+        return BaseAdmin.username(obj.server.ip)
 
 
 class ServerUserInlineAdmin(admin.TabularInline):

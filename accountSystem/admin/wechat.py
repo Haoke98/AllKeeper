@@ -1,16 +1,26 @@
 from django.contrib import admin
 from accountSystem.models import Wechat
-from izBasar.admin import LIST_DISPLAY
+from izBasar.admin import LIST_DISPLAY, BaseAdmin
 
 
 @admin.register(Wechat)
-class UniversalAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['wx_id', 'nickName', 'password', 'tel', 'group', 'remark']
-    list_display_links = ['wx_id', 'nickName']
+class WechatAdmin(BaseAdmin):
+    list_display = ['_id', 'createdAt', 'updatedAt', 'deletedAt', '_tel', '_password', 'nickName', 'email', 'group',
+                    'remark']
+    list_display_links = ['_id', 'nickName', 'email']
     date_hierarchy = 'updatedAt'
-    search_fields = ['wx_id', 'nickName', 'remark']
-    list_filter = ['tel', 'group']
-    list_select_related = ['group', 'password']
-    autocomplete_fields = ['tel', 'password', 'group']
+    search_fields = ['id', 'nickName', 'remark', 'email', ]
+    list_filter = ['tel', 'group', 'email']
+    list_select_related = list_filter
+    autocomplete_fields = list_filter + ['password']
     list_per_page = 8
     actions = []
+
+    def _id(self, obj):
+        return BaseAdmin.username(obj.id)
+
+    def _password(self, obj):
+        return BaseAdmin.password(obj.password.password)
+
+    def _tel(self, obj):
+        return BaseAdmin.username(obj.tel.content)

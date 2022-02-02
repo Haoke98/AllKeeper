@@ -4,15 +4,22 @@ from .tel import Tel
 from .group import Group
 from .password import Password
 from izBasar.models import BaseModel
+from .email import Email
 
 
 class Wechat(BaseModel):
-    wx_id = models.CharField(max_length=20, unique=True, null=True, blank=True)
-    nickName = models.CharField(max_length=20, null=True, blank=True)
-    password = models.ForeignKey(to=Password, on_delete=models.CASCADE, verbose_name="密码", null=True, blank=True)
+    id = models.CharField(verbose_name="微信号（ID）", primary_key=True, max_length=20, unique=True, null=False, blank=False,
+                          db_index=True)
+    nickName = models.CharField(max_length=20, null=True, blank=True, db_index=True)
+    password = models.ForeignKey(to=Password, on_delete=models.CASCADE, verbose_name="密码", null=True, blank=True,
+                                 db_index=True)
     tel = models.OneToOneField(verbose_name="绑定的手机号", to=Tel, on_delete=models.CASCADE, null=True, blank=True)
     group = models.ForeignKey(verbose_name="所属账号组", to=Group, on_delete=models.CASCADE, null=True, blank=True)
     remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True)
+    email = models.OneToOneField(verbose_name="绑定的邮箱", to=Email, on_delete=models.CASCADE, null=True, blank=True,
+                                 db_index=True, help_text="你可以使用一验证过的邮箱地址登陆微信，也可以用它来找回微信密码")
+
+    # TODO:新增绑定邮箱和QQ（创建QQ模型进行关联）
 
     class Meta:
         verbose_name = "微信"
@@ -20,6 +27,6 @@ class Wechat(BaseModel):
 
     def __str__(self):
         if self.remark is None:
-            return "微信(%s)" % self.ID
+            return "微信(%s)" % self.id
         else:
-            return "微信(%s,%s)" % (self.ID, self.remark)
+            return "微信(%s,%s)" % (self.id, self.remark)
