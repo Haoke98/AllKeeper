@@ -8,7 +8,7 @@ from .serverUser import ServerUserInlineAdmin
 class ServerAdmin(BaseAdmin):
     list_display = LIST_DISPLAY + ["_ip", '_password', 'remark', 'group',
                                    'hoster']
-    list_display_links = ["_ip"]
+    list_display_links = ['id', 'remark', 'group', 'hoster']
     list_filter = ['group', 'hoster']
     date_hierarchy = 'updatedAt'
     search_fields = ['ip', 'rootPwd.password',

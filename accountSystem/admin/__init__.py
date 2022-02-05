@@ -5,8 +5,7 @@ from accountSystem.models.group import Group
 from accountSystem.models.password import Password
 from accountSystem.models.type import Type
 from izBasar.admin import LIST_DISPLAY
-from .account import AccountAdmin
-from .account import AccountAdmin
+from .account import AccountAdmin, Account
 from .bt import BtAdmin
 from .bt import BtAdmin
 from .dbServer import DbServerAdmin
@@ -20,6 +19,7 @@ from .serverUser import ServerUserAdmin
 from .tel import TelAdmin
 from .tel import TelAdmin
 from .wechat import WechatAdmin
+
 
 # Register your admin models here.
 @admin.register(Email)
@@ -37,6 +37,9 @@ class PasswordAdmin(admin.ModelAdmin):
 
 @admin.register(Group, Type)
 class GroupAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ["__str__"]
+    list_display = LIST_DISPLAY + ["__str__", '_count']
     search_fields = ['name']
     list_per_page = 14
+
+    def _count(self, obj):
+        return Account.objects.filter(types=obj.id).count()

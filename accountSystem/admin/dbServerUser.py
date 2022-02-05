@@ -9,6 +9,7 @@ class DbServerUserAdmin(BaseAdmin):
     autocomplete_fields = ['password', 'server', 'owner']
     list_filter = ['hasRootPriority', 'server', 'owner']
     list_select_related = autocomplete_fields
+    raw_id_fields = ('owner', 'server')
 
     def _username(self, obj):
         return BaseAdmin.username(obj.username)

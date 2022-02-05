@@ -6,9 +6,10 @@ from .dbServerUser import DbServerUserInlineAdmin
 
 @admin.register(DbServer)
 class DbServerAdmin(BaseAdmin):
-    list_display = LIST_DISPLAY + ['server', '_password', 'remark', ]
-    list_display_links = ['server']
-    list_filter = ['server']
+    list_display = LIST_DISPLAY + ['server',
+                                   'port', '_password', 'remark', ]
+    list_display_links = ['server', 'port']
+    list_filter = ['server', 'port']
     date_hierarchy = 'updatedAt'
     search_fields = ['rootPwd.password',
                      'remark', ]

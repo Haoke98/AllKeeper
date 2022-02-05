@@ -2,24 +2,28 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 
 from accountSystem.models import Account, Tel, Email, Type
-from izBasar.admin import LIST_DISPLAY,BaseAdmin
+from izBasar.admin import LIST_DISPLAY, BaseAdmin
 
 
 @admin.register(Account)
 class AccountAdmin(BaseAdmin):
-    list_display = LIST_DISPLAY + ['_name', '_username', '_password', '_url', '_tels', '_emails', 'wechat', '_info',
-                                   '_types']
-    list_display_links = ['id', '_name']
+    list_display = LIST_DISPLAY + ['platform', '_username', '_password', '_url', '_tels', '_emails', 'wechat', '_info',
+                                   '_name', '_types',
+                                   ]
+    list_display_links = ['id', 'platform', '_types']
     date_hierarchy = 'updatedAt'
-    search_fields = ['name', 'username', 'url', 'info', 'types__name', 'wechat__wx_id', 'wechat__nickName',
+    search_fields = ['name', 'username', 'url', 'info', 'types__name', 'wechat__id', 'wechat__nickName',
                      'wechat__remark']
-    list_filter = ['group', 'tels', 'emails', 'types', 'wechat']
+    list_filter = ['group', 'platform', 'tels', 'emails', 'types', 'wechat']
     list_select_related = ['group', 'password', 'wechat']
-    autocomplete_fields = ['tels', 'emails', 'password', 'group', 'types', 'wechat']
+    autocomplete_fields = ['platform', 'tels', 'emails', 'password', 'group', 'types', 'wechat']
     list_per_page = 8
     actions = []
 
     def _url(self, obj):
+        if obj.platform is not None:
+            return BaseAdmin.shwoUrl(obj.platform.url)
+            # TODO:判断灵活的数据url，本应该是type的URL。
         return BaseAdmin.shwoUrl(obj.url)
 
     _url.allow_tags = True
@@ -148,4 +152,3 @@ class AccountAdmin(BaseAdmin):
 
             'js/config-account-admin.js',
         ]
-    
