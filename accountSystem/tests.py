@@ -1,16 +1,18 @@
-from django.test import TestCase
+
 
 # Create your tests here.
+import uuid
+
+from izBasar.secret import wxOa
+
 if __name__ == '__main__':
-    y = 'abcdefg'.split('cd')
-    print(y)
-    x = ':'.join(y)
-    print(x)
-
-
-    a = 'a'
-    print(a>'b' or 'c')
-
-
-    c=[1,2,3]
-    print(c*3)
+    # print(generateRandomStr(32))
+    x = uuid.uuid4()
+    print(x, len(str(x)))
+    wxOa.getQr(str(x))
+    # app1.parseURLSchema("weixin://dl/business/?t=aKKbayt9kEf")
+    # openLink = app2.generateUrlscheme(query=f"{uuid.uuid4()}&https://1.ink", env="develop")
+    # img = qrcode.make(openLink)
+    # img.save("openlink.png")
+    # img.show()
+    # app2.parseURLSchema("weixin://dl/business/?t=TkkDUqffnlu")

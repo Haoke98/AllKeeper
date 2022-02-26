@@ -5,9 +5,9 @@ from ..models import BT
 
 @admin.register(BT)
 class BtAdmin(BaseAdmin):
-    list_display = LIST_DISPLAY + ['port', 'server', '_username', '_password', '_url', '_basicAuthUsername',
-                                   '_basicAuthPassword',
-                                   ]
+    list_display = ['id', 'port', 'server', '_username', '_password', '_url', '_basicAuthUsername',
+                    '_basicAuthPassword', 'updatedAt',
+                    'createdAt', 'deletedAt', ]
     autocomplete_fields = ['server', 'password', 'basicAuthPassword']
     list_filter = ['server']
     list_display_links = ['port', 'server']
