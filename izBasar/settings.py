@@ -219,7 +219,7 @@ DATABASES = {
         'PASSWORD': DB.MYSQL_PASSWORD,
         'PORT': DB.MYSQL_PORT,
         'HOST': DB.MYSQL_HOST,
-    }
+    },
 }
 
 # Password validation

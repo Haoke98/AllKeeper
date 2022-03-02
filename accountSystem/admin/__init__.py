@@ -8,10 +8,11 @@ from izBasar.admin import LIST_DISPLAY
 from .account import AccountAdmin, Account
 from .bt import BtAdmin
 from .bt import BtAdmin
-from .dbServer import DbServerAdmin
-from .dbServer import DbServerAdmin
-from .dbServerUser import DbServerUserAdmin
-from .dbServerUser import DbServerUserAdmin
+from .dbService import DbServiceAdmin
+from .dbService import DbServiceAdmin
+from .dbServiceUser import DbServiceUserAdmin
+from .dbServiceUser import DbServiceUserAdmin
+from .es import ElasticSearchAdmin
 from .server import ServerAdmin
 from .server import ServerAdmin
 from .serverUser import ServerUserAdmin

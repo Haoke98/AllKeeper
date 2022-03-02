@@ -1,11 +1,14 @@
 from django.contrib import admin
-from ..models import DbServer
+
 from izBasar.admin import LIST_DISPLAY, BaseAdmin
-from .dbServerUser import DbServerUserInlineAdmin
+from .dbServiceUser import DbServiceUserInlineAdmin
+from ..forms import DbServiceForm
+from ..models import DbService
 
 
-@admin.register(DbServer)
-class DbServerAdmin(BaseAdmin):
+@admin.register(DbService)
+class DbServiceAdmin(BaseAdmin):
+    form = DbServiceForm
     list_display = LIST_DISPLAY + ['server',
                                    'port', '_password', 'remark', ]
     list_display_links = ['server', 'port']
@@ -14,10 +17,10 @@ class DbServerAdmin(BaseAdmin):
     search_fields = ['rootPwd.password',
                      'remark', ]
     search_help_text = ['你好，这是搜索帮助语句！']
-    autocomplete_fields = ['rootPwd', 'server']
-    inlines = [DbServerUserInlineAdmin]
+    autocomplete_fields = ['server']
+    inlines = [DbServiceUserInlineAdmin]
 
     def _password(self, obj):
-        return BaseAdmin.password(obj.rootPwd.password)
+        return BaseAdmin.password(obj.pwd)
 
     _password.short_description = "root密码"
