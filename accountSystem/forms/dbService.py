@@ -10,4 +10,4 @@ class DbServiceForm(ModelForm):
 
     class Meta:
         model = DbService
-        fields = ['server', 'port', 'pwd', 'remark']
+        fields = ['server', 'ttype', 'port', 'pwd', 'remark']

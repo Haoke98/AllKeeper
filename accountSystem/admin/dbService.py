@@ -10,9 +10,9 @@ from ..models import DbService
 class DbServiceAdmin(BaseAdmin):
     form = DbServiceForm
     list_display = LIST_DISPLAY + ['server',
-                                   'port', '_password', 'remark', ]
-    list_display_links = ['server', 'port']
-    list_filter = ['server', 'port']
+                                   'port', '_username', '_password', 'ttype', 'remark', ]
+    list_display_links = ['createdAt', 'updatedAt', 'server', 'port', 'ttype']
+    list_filter = ['server', 'port', 'ttype']
     date_hierarchy = 'updatedAt'
     search_fields = ['rootPwd.password',
                      'remark', ]
@@ -24,3 +24,11 @@ class DbServiceAdmin(BaseAdmin):
         return BaseAdmin.password(obj.pwd)
 
     _password.short_description = "root密码"
+
+    def _username(self, obj):
+        username = 'root'
+        if obj.ttype == 1:
+            username = 'postgres'
+        return BaseAdmin.username(username)
+
+    _username.short_description = "用户名"

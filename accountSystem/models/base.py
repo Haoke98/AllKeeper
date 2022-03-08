@@ -6,7 +6,7 @@ from .server import Server
 
 
 class BaseAccountModel(BaseModel):
-    remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True)
+    remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True, db_index=True)
 
     class Meta:
         abstract = True
@@ -14,8 +14,8 @@ class BaseAccountModel(BaseModel):
 
 class BaseServiceModel(BaseAccountModel):
     server = models.ForeignKey(to=Server, on_delete=models.CASCADE, verbose_name="服务器", null=True,
-                               blank=False)
-    port = models.PositiveIntegerField(verbose_name="端口", default=8888, blank=False)
+                               blank=False, db_index=True)
+    port = models.PositiveIntegerField(verbose_name="端口", default=8888, blank=False, db_index=True)
 
     class Meta:
         abstract = True

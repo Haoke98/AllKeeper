@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from izBasar.admin import LIST_DISPLAY, BaseAdmin
-from ..forms import DbServiceUserForm
+from ..forms import DbServiceUserForm, DbServiceUserFormBase
 from ..models import DbServiceUser
 
 
@@ -26,6 +26,7 @@ class DbServiceUserAdmin(BaseAdmin):
 class DbServiceUserInlineAdmin(admin.TabularInline):
     model = DbServiceUser
     autocomplete_fields = ['server', 'owner']
+    exclude = ('password',)
     min_num = 0
     extra = 0
-    form = DbServiceUserForm
+    form = DbServiceUserFormBase
