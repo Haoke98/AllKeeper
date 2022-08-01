@@ -2,15 +2,15 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 
 from accountSystem.models import Account, Tel, Email, Type
-from izBasar.admin import LIST_DISPLAY, BaseAdmin
+from izBasar.admin import BaseAdmin
 
 
 @admin.register(Account)
 class AccountAdmin(BaseAdmin):
-    list_display = LIST_DISPLAY + ['platform', '_username', '_password', '_url', '_tels', '_emails', 'wechat', '_info',
-                                   '_name', '_types',
-                                   ]
-    list_display_links = ['id', 'platform', '_types']
+    list_display = ['id', 'platform', '_username', '_password', '_url', '_tels', '_emails', 'wechat', '_info',
+                    '_name'
+                    ]
+    list_display_links = ['id', 'platform']
     date_hierarchy = 'updatedAt'
     search_fields = ['name', 'username', 'url', 'info', 'types__name', 'wechat__id', 'wechat__nickName',
                      'wechat__remark']
@@ -52,7 +52,7 @@ class AccountAdmin(BaseAdmin):
 
     def _name(self, obj):
         tag = mark_safe(
-            '''<a class="ui teal tag label" style="width:20em;" onclick="goToDetail(this)">%s</a>''' % obj.name)
+            '''<a class="ui teal tag label" style="width:10em;white-space:nowrap;" onclick="goToDetail(this)">%s</a>''' % obj.name)
         return tag
 
     _name.allow_tags = True
@@ -60,7 +60,6 @@ class AccountAdmin(BaseAdmin):
     def _tels(self, obj):
         items: str = ""
         tels = obj.tels.all()
-        print(obj.id, obj.name, tels)
         for tel in tels:
             items += self._getTelItem(tel)
         finalList = '''
@@ -85,7 +84,6 @@ class AccountAdmin(BaseAdmin):
     def _emails(self, obj: Account):
         items: str = ""
         emails = obj.emails.all()
-        print(obj.id, obj.name, emails)
         for email in emails:
             items += self._getEmailItem(email)
         finalList = '''
@@ -110,7 +108,6 @@ class AccountAdmin(BaseAdmin):
     def _types(self, obj: Account):
         items: str = ""
         types = obj.types.all()
-        print(obj.id, obj.name, types)
         for item in types:
             items += self._getTypeItem(item)
         result = '''

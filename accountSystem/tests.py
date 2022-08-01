@@ -1,18 +1,17 @@
-
-
 # Create your tests here.
-import uuid
+from django.test import TestCase
 
-from izBasar.secret import wxOa
+from .models import Server
 
-if __name__ == '__main__':
-    # print(generateRandomStr(32))
-    x = uuid.uuid4()
-    print(x, len(str(x)))
-    wxOa.getQr(str(x))
-    # app1.parseURLSchema("weixin://dl/business/?t=aKKbayt9kEf")
-    # openLink = app2.generateUrlscheme(query=f"{uuid.uuid4()}&https://1.ink", env="develop")
-    # img = qrcode.make(openLink)
-    # img.save("openlink.png")
-    # img.show()
-    # app2.parseURLSchema("weixin://dl/business/?t=TkkDUqffnlu")
+
+class ServerTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        pass
+
+    def test_list(self):
+        serverObjs = Server.objects.all()
+        for serverObj in serverObjs:
+            print(serverObj.ip)
+        resp = self.client.get('/all-keeper/server')
+        self.assertEqual(resp.status_code, 200)

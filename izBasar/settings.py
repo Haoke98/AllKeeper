@@ -161,6 +161,8 @@ INSTALLED_APPS = [
     'WEB3DA',
     'django.contrib.admindocs',
     'django.contrib.sitemaps',
+    'rest_framework',
+    'docutils',
     'BeansMusic',
     'accountSystem',
     'DebtManagerSystem',
@@ -281,3 +283,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 mimetypes.add_type('text/css', '.css')
 mimetypes.add_type('application/javascript', '.js')
 mimetypes.add_type('text/html', '.html')
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "accountSystem.pagination.StandardPagination",
+    "PAGE_SIZE": 10
+}

@@ -7,3 +7,7 @@
 *.db
 *.dbf
 *.dbt
+*.crt
+*.key
+*.pem
+/test.py

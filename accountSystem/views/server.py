@@ -1,0 +1,27 @@
+from rest_framework import viewsets
+from rest_framework.views import APIView
+
+from utils.http_helper import RestResponse
+from ..models import Server
+from ..pagination import StandardPagination
+from ..serializers import ServerSerializer
+
+
+class ServerView(APIView):
+
+    def get(self, request, format=True):
+        serverObjsQS = Server.objects.all()
+        # return RestResponse(200, "OK", pagination.page(page))
+        pagination = StandardPagination()
+        # pagination = PageNumberPagination()
+        # pagination.page = 1
+        # pagination.page_size = 10
+        ret = pagination.paginate_queryset(serverObjsQS, request)
+        serializer = ServerSerializer(ret, many=True)
+        return RestResponse(200, "ok", serializer.data)
+
+
+class ServerViewSet(viewsets.ModelViewSet):
+    queryset = Server.objects.all()
+    serializer_class = ServerSerializer
+    pagination_class = StandardPagination

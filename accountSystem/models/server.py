@@ -8,8 +8,8 @@ from .password import Password
 class Server(BaseModel):
     group = models.ForeignKey(verbose_name="所属个体/组织", to=Group, on_delete=models.CASCADE, null=True, blank=True)
     ip = models.GenericIPAddressField(null=False, blank=False, unique=True)
-    rootPwd = models.ForeignKey(to=Password, on_delete=models.CASCADE, verbose_name="密码", null=True,
-                                blank=False)
+    rootUsername = models.CharField(max_length=32, verbose_name="root用户名", blank=False, default="root")
+    rootPassword = models.CharField(max_length=32, verbose_name="root密码", blank=False, null=True)
     hosterOptions = (
         (1, '阿里云'),
         (2, '腾讯云'),
@@ -17,6 +17,7 @@ class Server(BaseModel):
         (4, '新疆丝路融创网络科技有限公司（局域网）')
     )
     hoster = models.PositiveSmallIntegerField(choices=hosterOptions, null=True, blank=False, verbose_name="托管方")
+    bios = models.CharField(verbose_name="BIOS", max_length=32, null=True, blank=True)
     remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True)
 
     class Meta:

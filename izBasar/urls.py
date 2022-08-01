@@ -16,20 +16,21 @@ Including another URLconf
 from django.conf.urls import include
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.flatpages import sitemaps
+from django.contrib.sitemaps.views import sitemap
+from django.template.defaulttags import url
+from django.urls import path, re_path
 # from django.contrib.staticfiles.views import serve
 from django.views.generic import RedirectView
 
-from django.contrib.flatpages import sitemaps
-from django.contrib.sitemaps.views import sitemap
-from django.urls import path
-
 import BeansMusic.urls
 import WEB3DA.urls
+import accountSystem.urls
 import miniProgram.urls
 from izBasar import settings
 from miniProgram.views import image
-from .secret import ADMIN_PATH
 from . import _STATIC_URL
+from .secret import ADMIN_PATH
 
 admin.autodiscover()
 
@@ -44,5 +45,6 @@ urlpatterns = [
                        name='django.contrib.sitemaps.views.sitemap'),
                   path('BeansMusic/', include(BeansMusic.urls)),
                   path('image/proxy', image.proxy),
+                  re_path('^all-keeper/', include(accountSystem.urls)),
                   path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

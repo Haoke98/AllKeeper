@@ -1,3 +1,12 @@
+# _*_ codign:utf8 _*_
+"""====================================
+@Author:Sadam·Sadik
+@Email：1903249375@qq.com
+@Date：2022/7/26
+@Software: PyCharm
+@disc:
+======================================="""
+
 # Create your views here.
 import datetime as dt
 import json
@@ -8,7 +17,10 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from accountSystem.models.account import Account
+from .auth import login
+from .menu import getMenuList
+from .server import ServerView, ServerViewSet
+from .device import DeviceViewSets
 
 
 @csrf_exempt
