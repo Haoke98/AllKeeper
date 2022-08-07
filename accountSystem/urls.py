@@ -1,11 +1,10 @@
 from django.urls import re_path
 from rest_framework.routers import DefaultRouter
 
-from .views import ServerViewSet, login, getMenuList, DeviceViewSets
+from .views import ServerViewSet, login, getMenuList, DeviceView, DeviceRegionView
 
 router = DefaultRouter()
 router.register(r'server', viewset=ServerViewSet)
-router.register(r'device', viewset=DeviceViewSets)
 # server_list = ServerViewSet.as_view({
 #     'get': 'list',
 #     'post': 'create'
@@ -14,7 +13,8 @@ router.register(r'device', viewset=DeviceViewSets)
 #     'get': 'retrieve'
 # })
 urlpatterns = [
-                  # re_path('^servers/$', server_list),
+                  re_path('^device$', DeviceView.as_view()),
+                  re_path('^device/region$', DeviceRegionView.as_view()),
                   # re_path('^server/(?P<pk>[0-9]+)$', server_detail),
                   re_path('^login$', login),
                   re_path('^system/menu$', getMenuList),

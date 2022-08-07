@@ -7,7 +7,6 @@ from .dbServiceUser import DbServiceUser
 from .email import Email
 from .es import ElasticSearch
 from .group import Group
-from .internet import Device
 from .password import Password
 from .region import Country, City
 from .server import Server

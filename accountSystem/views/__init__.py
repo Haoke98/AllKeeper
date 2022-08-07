@@ -18,9 +18,9 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .auth import login
+from .device import DeviceView,DeviceRegionView
 from .menu import getMenuList
 from .server import ServerView, ServerViewSet
-from .device import DeviceViewSets
 
 
 @csrf_exempt

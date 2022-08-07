@@ -7,4 +7,3 @@
 @disc:
 ======================================="""
 from .server import ServerSerializer
-from .device import DeviceSerializer
