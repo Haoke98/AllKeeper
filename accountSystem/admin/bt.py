@@ -1,5 +1,6 @@
 from django.contrib import admin
-from izBasar.admin import BaseAdmin, LIST_DISPLAY
+
+from izBasar.admin import BaseAdmin
 from ..models import BT
 
 
@@ -29,11 +30,14 @@ class BtAdmin(BaseAdmin):
         return BaseAdmin.password(obj.basicAuthPassword.password)
 
     def _url(self, obj):
-        if obj.domain is None:
-            if obj.path:
-                return BaseAdmin.shwoUrl(f"http://{obj.server.ip}:{obj.port}/{obj.path}")
-            return BaseAdmin.shwoUrl(f"http://{obj.server.ip}:{obj.port}")
+        uri = "http://"
+        if obj.basicAuthUsername and obj.basicAuthPassword:
+            uri += f"{obj.basicAuthUsername}:{obj.basicAuthPassword.password}@"
+        if obj.domain:
+            uri += obj.domain
         else:
-            if obj.path:
-                return BaseAdmin.shwoUrl(f"{obj.domain}:{obj.port}/{obj.path}")
-            return BaseAdmin.shwoUrl(f"{obj.domain}:{obj.port}")
+            uri += obj.server.ip
+        uri += f":{obj.port}"
+        if obj.path:
+            uri += f"/{obj.path}"
+        return BaseAdmin.shwoUrl(uri)

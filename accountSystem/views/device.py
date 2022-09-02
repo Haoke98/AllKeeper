@@ -50,6 +50,8 @@ class DeviceRegionView(views.View):
             subDivisionBuckets: list[dict] = resp1.get("aggregations").get("subDivisions").get("buckets")
             for subDivisionBucket in subDivisionBuckets:
                 subDivisionNameEn = subDivisionBucket.get("key")
+                if subDivisionNameEn == "":
+                    continue
                 resp2 = clientHM194.search(index=INDEX_DEVICES, size=1, query={
                     "bool": {
                         "must": [
@@ -80,6 +82,42 @@ class DeviceRegionView(views.View):
                 subDivision: dict = resp2.get("hits").get("hits")[0].get("_source").get("geoinfo").get("subdivisions")
                 subDivision.setdefault("doc_count", subDivisionBucket.get("doc_count"))
                 # TODO:统计城市City的数量
+                cities: list[dict] = []
+                cityBuckets: list[dict] = resp2.get("aggregations").get("city").get("buckets")
+                for cityBucket in cityBuckets:
+                    cityNameEn = cityBucket.get("key")
+                    if cityNameEn == "":
+                        continue
+                    resp3 = clientHM194.search(index=INDEX_DEVICES, size=1, query={
+                        "bool": {
+                            "must": [
+                                {
+                                    "term": {
+                                        "geoinfo.country.code.keyword": {
+                                            "value": countryCode
+                                        }
+                                    }
+                                },
+                                {
+                                    "term": {
+                                        "geoinfo.subdivisions.names.en.keyword": {
+                                            "value": subDivisionNameEn
+                                        }
+                                    }
+                                }, {
+                                    "term": {
+                                        "geoinfo.city.names.en.keyword": {
+                                            "value": cityNameEn
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    })
+                    city: dict = resp3.get("hits").get("hits")[0].get("_source").get("geoinfo").get("city")
+                    city.setdefault("doc_count", cityBucket.get("doc_count"))
+                    cities.append(city)
+                subDivision.setdefault("children", cities)
                 subDivisions.append(subDivision)
             country.setdefault("children", subDivisions)
             result.append(country)
