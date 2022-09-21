@@ -18,7 +18,8 @@ class Server(BaseModel):
     hoster = models.PositiveSmallIntegerField(choices=hosterOptions, null=True, blank=False, verbose_name="托管方")
     bios = models.CharField(verbose_name="BIOS", max_length=32, null=True, blank=True)
     remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True)
-    ssh = models.IntegerField(verbose_name="ssh端口", default=22, blank=True)
+    ssh = models.IntegerField(verbose_name="SSH端口", default=22, blank=True)
+    mac = models.CharField(max_length=17, verbose_name="MAC地址", blank=True, null=True)
 
     class Meta:
         verbose_name = "服务器"
