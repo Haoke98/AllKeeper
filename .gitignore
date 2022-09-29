@@ -11,3 +11,4 @@
 *.key
 *.pem
 /test.py
+/accountSystem/minioTest.py

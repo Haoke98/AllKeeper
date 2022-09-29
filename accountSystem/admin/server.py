@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from izBasar.admin import BaseAdmin
 from .serverUser import ServerUserInlineAdmin
+from ..forms.server import ServerForm
 from ..models import Server
 
 
@@ -16,6 +17,7 @@ class ServerAdmin(BaseAdmin):
     search_fields = ['ip', 'remark', 'hoster']
     search_help_text = ['你好，这是搜索帮助语句！']
     autocomplete_fields = ['group']
+    form = ServerForm
     inlines = [ServerUserInlineAdmin]
 
     def _ip(self, obj):
@@ -30,3 +32,19 @@ class ServerAdmin(BaseAdmin):
         return BaseAdmin.password(obj.bios)
 
     _biosPassword.short_description = "BIOS密码"
+
+
+    class Media:
+
+        def __init__(self):
+            pass
+
+        css = {
+        }
+        js = [
+            'kindeditor4.1.11/kindeditor-all.js',
+            'kindeditor4.1.11/lang/zh-CN.js',
+
+            'js/server-admin-kind-editor-config.js',
+        ]
+

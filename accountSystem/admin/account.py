@@ -147,5 +147,5 @@ class AccountAdmin(BaseAdmin):
             'kindeditor4.1.11/kindeditor-all.js',
             'kindeditor4.1.11/lang/zh-CN.js',
 
-            'js/config-account-admin.js',
+            'js/account-admin-kind-editor-config.js',
         ]

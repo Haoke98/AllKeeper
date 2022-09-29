@@ -6,7 +6,8 @@ from .group import Group
 
 class Server(BaseModel):
     group = models.ForeignKey(verbose_name="所属个体/组织", to=Group, on_delete=models.CASCADE, null=True, blank=True)
-    ip = models.GenericIPAddressField(null=False, blank=False, unique=True)
+    ip = models.GenericIPAddressField(verbose_name="IP地址", null=False, blank=False, unique=True,
+                                      help_text="可以是IPV4/IPV6")
     rootUsername = models.CharField(max_length=32, verbose_name="root用户名", blank=False, default="root")
     rootPassword = models.CharField(max_length=32, verbose_name="root密码", blank=False, null=True)
     hosterOptions = (
@@ -17,9 +18,9 @@ class Server(BaseModel):
     )
     hoster = models.PositiveSmallIntegerField(choices=hosterOptions, null=True, blank=False, verbose_name="托管方")
     bios = models.CharField(verbose_name="BIOS", max_length=32, null=True, blank=True)
-    remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True)
     ssh = models.IntegerField(verbose_name="SSH端口", default=22, blank=True)
     mac = models.CharField(max_length=17, verbose_name="MAC地址", blank=True, null=True)
+    remark = models.TextField(verbose_name="备注", max_length=100, null=True, blank=True)
 
     class Meta:
         verbose_name = "服务器"
