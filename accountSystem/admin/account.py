@@ -15,8 +15,8 @@ class AccountAdmin(BaseAdmin):
     search_fields = ['name', 'username', 'url', 'info', 'types__name', 'wechat__id', 'wechat__nickName',
                      'wechat__remark']
     list_filter = ['group', 'platform', 'tels', 'emails', 'types', 'wechat']
-    list_select_related = ['group', 'password', 'wechat']
-    autocomplete_fields = ['platform', 'tels', 'emails', 'password', 'group', 'types', 'wechat']
+    list_select_related = ['group', 'wechat']
+    autocomplete_fields = ['platform', 'tels', 'emails', 'group', 'types', 'wechat']
     list_per_page = 8
     actions = []
 
@@ -41,7 +41,7 @@ class AccountAdmin(BaseAdmin):
     _url.allow_tags = True
 
     def _password(self, obj):
-        return BaseAdmin.password(obj.password.password)
+        return BaseAdmin.password(obj.pwd)
 
     _password.allow_tags = True
 

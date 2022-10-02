@@ -1,12 +1,12 @@
 from django.db import models
 
 from izBasar.models import BaseModel
-from .wechat import Wechat
 from .email import Email
 from .group import Group
 from .password import Password
 from .tel import Tel
 from .type import Type
+from .wechat import Wechat
 
 
 class Account(BaseModel):
@@ -14,7 +14,7 @@ class Account(BaseModel):
     platform = models.ForeignKey(verbose_name="所属平台", to=Type, on_delete=models.CASCADE, related_name="platform",
                                  null=True, limit_choices_to=models.Q(url__isnull=False))
     username = models.CharField(max_length=40, verbose_name="用户名")
-    password = models.ForeignKey(to=Password, on_delete=models.CASCADE, verbose_name="密码", null=True)
+    pwd = models.CharField(max_length=32, verbose_name="密码", null=True, blank=False)
     tels = models.ManyToManyField(verbose_name="所有绑定的手机号", to=Tel, related_name="tels", blank=True)
     emails = models.ManyToManyField(verbose_name="所有绑定的电子邮箱", to=Email, related_name="emails", blank=True)
     wechat = models.ForeignKey(verbose_name='绑定的微信', blank=True, null=True, on_delete=models.CASCADE, to=Wechat)
