@@ -12,7 +12,7 @@ class WechatAdmin(BaseAdmin):
     search_fields = ['id', 'nickName', 'remark', 'email', ]
     list_filter = ['tel', 'group', 'email']
     list_select_related = list_filter
-    autocomplete_fields = list_filter + ['password']
+    autocomplete_fields = list_filter
     list_per_page = 8
     actions = []
 
@@ -20,7 +20,7 @@ class WechatAdmin(BaseAdmin):
         return BaseAdmin.username(obj.id)
 
     def _password(self, obj):
-        return BaseAdmin.password(obj.password.password)
+        return BaseAdmin.password(obj.pwd)
 
     def _tel(self, obj):
         return BaseAdmin.username(obj.tel.content)

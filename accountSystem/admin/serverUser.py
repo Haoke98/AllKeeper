@@ -1,20 +1,23 @@
 from django.contrib import admin
+
 from izBasar.admin import LIST_DISPLAY, BaseAdmin
+from ..forms import ServerUserForm
 from ..models import ServerUser
 
 
 @admin.register(ServerUser)
 class ServerUserAdmin(BaseAdmin):
     list_display = LIST_DISPLAY + ['_username', '_password', 'hasRootPriority', '_ip', 'owner']
-    autocomplete_fields = ['password', 'server', 'owner']
+    autocomplete_fields = ['server', 'owner']
     list_filter = ['hasRootPriority', 'server', 'owner']
     list_select_related = autocomplete_fields
+    form = ServerUserForm
 
     def _username(self, obj):
         return BaseAdmin.username(obj.username)
 
     def _password(self, obj):
-        return BaseAdmin.password(obj.password.password)
+        return BaseAdmin.password(obj.pwd)
 
     _password.short_description = "密码"
 
@@ -24,6 +27,7 @@ class ServerUserAdmin(BaseAdmin):
 
 class ServerUserInlineAdmin(admin.TabularInline):
     model = ServerUser
-    autocomplete_fields = ['password', 'server', 'owner']
+    form = ServerUserForm
+    autocomplete_fields = ['server', 'owner']
     min_num = 0
     extra = 0

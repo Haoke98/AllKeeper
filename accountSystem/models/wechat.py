@@ -1,18 +1,16 @@
 from django.db import models
 
-from .tel import Tel
-from .group import Group
-from .password import Password
 from izBasar.models import BaseModel
 from .email import Email
+from .group import Group
+from .tel import Tel
 
 
 class Wechat(BaseModel):
     id = models.CharField(verbose_name="微信号（ID）", primary_key=True, max_length=20, unique=True, null=False, blank=False,
                           db_index=True)
     nickName = models.CharField(max_length=20, null=True, blank=True, db_index=True)
-    password = models.ForeignKey(to=Password, on_delete=models.CASCADE, verbose_name="密码", null=True, blank=True,
-                                 db_index=True)
+    pwd = models.CharField(max_length=32, verbose_name="密码", null=True, blank=True)
     tel = models.OneToOneField(verbose_name="绑定的手机号", to=Tel, on_delete=models.CASCADE, null=True, blank=True)
     group = models.ForeignKey(verbose_name="所属账号组", to=Group, on_delete=models.CASCADE, null=True, blank=True)
     remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True)

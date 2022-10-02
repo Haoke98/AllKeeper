@@ -9,7 +9,7 @@ class BtAdmin(BaseAdmin):
     list_display = ['id', 'port', 'server', '_username', '_password', '_url', '_basicAuthUsername',
                     '_basicAuthPassword', 'updatedAt',
                     'createdAt', 'deletedAt', ]
-    autocomplete_fields = ['server', 'password', 'basicAuthPassword']
+    autocomplete_fields = ['server']
     list_filter = ['server']
     list_display_links = ['port', 'server']
 
@@ -17,7 +17,7 @@ class BtAdmin(BaseAdmin):
         return BaseAdmin.username(obj.username)
 
     def _password(self, obj):
-        return BaseAdmin.password(obj.password.password)
+        return BaseAdmin.password(obj.pwd)
 
     def _basicAuthUsername(self, obj):
         if obj.basicAuthUsername is None:
@@ -25,14 +25,14 @@ class BtAdmin(BaseAdmin):
         return BaseAdmin.username(obj.basicAuthUsername)
 
     def _basicAuthPassword(self, obj):
-        if obj.basicAuthPassword is None:
+        if obj.basicAuthPwd is None:
             return None
-        return BaseAdmin.password(obj.basicAuthPassword.password)
+        return BaseAdmin.password(obj.basicAuthPwd)
 
     def _url(self, obj):
         uri = "http://"
-        if obj.basicAuthUsername and obj.basicAuthPassword:
-            uri += f"{obj.basicAuthUsername}:{obj.basicAuthPassword.password}@"
+        if obj.basicAuthUsername and obj.basicAuthPwd:
+            uri += f"{obj.basicAuthUsername}:{obj.basicAuthPwd}@"
         if obj.domain:
             uri += obj.domain
         else:
