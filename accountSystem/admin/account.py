@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
+from accountSystem.forms import AccountForm
 from accountSystem.models import Account, Tel, Email, Type
 from izBasar.admin import BaseAdmin
 
@@ -19,6 +20,7 @@ class AccountAdmin(BaseAdmin):
     autocomplete_fields = ['platform', 'tels', 'emails', 'group', 'types', 'wechat']
     list_per_page = 8
     actions = []
+    form = AccountForm
 
     def _url(self, obj):
         if obj.platform is not None:

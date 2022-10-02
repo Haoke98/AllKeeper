@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from izBasar.admin import BaseAdmin
 from .serverUser import ServerUserInlineAdmin
-from ..forms.server import ServerForm
+from ..forms import ServerForm
 from ..models import Server
 
 
