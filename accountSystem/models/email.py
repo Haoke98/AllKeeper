@@ -1,12 +1,12 @@
 from django.db import models
 
-from izBasar.models import BaseModel
+from .account import BaseAccount
 
 
-class Email(BaseModel):
+class Email(BaseAccount):
+    # TODO:需要增加别名了
     content = models.EmailField(null=True, blank=True)
     remark = models.CharField(max_length=100, null=True, blank=True, verbose_name="备注")
-    pwd = models.CharField(max_length=32, verbose_name="密码", null=True, blank=False)
 
     class Meta:
         verbose_name = "电子邮箱"
