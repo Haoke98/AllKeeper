@@ -157,16 +157,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'miniProgram',
-    'WEB3DA',
     'django.contrib.admindocs',
     'django.contrib.sitemaps',
     'rest_framework',
     'docutils',
-    'BeansMusic',
     'accountSystem',
     'DebtManagerSystem',
-    'HousingTransactionSystem'
 ]
 CACHES = {
     'default': {

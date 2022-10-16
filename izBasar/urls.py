@@ -23,12 +23,10 @@ from django.urls import path, re_path
 # from django.contrib.staticfiles.views import serve
 from django.views.generic import RedirectView
 
-import BeansMusic.urls
-import WEB3DA.urls
 import accountSystem.urls
-import miniProgram.urls
+
 from izBasar import settings
-from miniProgram.views import image
+
 from . import _STATIC_URL
 from .secret import ADMIN_PATH
 
@@ -38,13 +36,10 @@ urlpatterns = [
                   path(ADMIN_PATH, admin.site.urls),
                   # re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
                   # url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
-                  path('miniProgram/', include(miniProgram.urls)),
-                  path('W3DA/', include(WEB3DA.urls)),
+
                   path('admin/doc/', include('django.contrib.admindocs.urls')),
                   path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
                        name='django.contrib.sitemaps.views.sitemap'),
-                  path('BeansMusic/', include(BeansMusic.urls)),
-                  path('image/proxy', image.proxy),
                   re_path('^all-keeper/', include(accountSystem.urls)),
                   path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
