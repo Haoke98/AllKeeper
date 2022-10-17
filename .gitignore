@@ -12,3 +12,4 @@
 *.pem
 /test.py
 /accountSystem/minioTest.py
+/DigitalWorld/minioTest.py

@@ -1,25 +1,15 @@
-<div align="center"><img width="200" src="http://59.110.225.84/media/izbasar/logo_square.png"/>
-<h1> IzBasar继承者多功能管理平台 </h1>
-
-简体中文 |  [English](./README.en.md)
-
-<p>
-  基于Django3.2.7+Vue2+ElementUI的相对比较自动化生成的后台管理系统。借助SimpleUI开源项目对Django原生的Admin后台管理页面进行了二次开发和优化改进而生成的比较现代化的后台管理系统。
-</p>
+<div align="center">
+  <img height="320px" src="assets/LOGO.png"/>
+  <div>简体中文 | <a href="./README.en.md">English</a></div>
+  <p>
+    基于Django3.2.7+Vue2+ElementUI的相对比较自动化生成的后台管理系统。借助SimpleUI开源项目对Django原生的Admin后台管理页面进行了二次开发和优化改进而生成的比较现代化的后台管理系统。
+  </p>
 </div>
 
 [![stars](https://img.shields.io/github/stars/chuzhixin/vue-admin-beautiful?style=flat-square&logo=GitHub)](https://gitee.com/touzixinjiang/background-management-system)
 [![star](https://gitee.com/chu1204505056/vue-admin-beautiful/badge/star.svg?theme=gray)](https://gitee.com/touzixinjiang/background-management-system)
 [![star](./public/djangoVersionTag.svg?theme=gray)](https://www.djangoproject.com/)
 [![star](./public/pythonVersionTag.svg?theme=gray)](https://www.python.org/)
-
-## 分支
-
-  | 名称                                                                                        | 简介                                                   |
-  | -------------------------------------------------------------------------------------------|-------------------------------------------------------|
-  | [🚀 withES](https://gitee.com/touzixinjiang/background-management-system)    |   目前默认版本：所有企业数据都由ES驱动，而不再由MySQL驱动。    |
-  | [🎉 master ](https://gitee.com/touzixinjiang/background-management-system/tree/master/)         |                                                       |
-  | [⚡ develop ](https://gitee.com/touzixinjiang/background-management-system/tree/develop/)        |                                                       |
 
 ## 联系我们
 

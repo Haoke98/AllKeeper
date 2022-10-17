@@ -25,12 +25,12 @@ SIMPLEUI_ICON = {
     '所有宝塔': 'fab fa-fort-awesome',
     '所有服务器': 'fas fa-server',
     '所有服务器用户': 'fas fa-user-astronaut',
-    'House prices': 'fas fa-funnel-dollar',
+    'Elastic searchs': 'el-icon-s-data',
     'House price types': 'fas fa-file-invoice-dollar',
     'Phone numbers': 'fas fa-phone-square'
 }
 from . import _STATIC_URL
 
-SIMPLEUI_LOGO = _STATIC_URL + 'img/logo-sdm.png'
+SIMPLEUI_LOGO = _STATIC_URL + 'img/LOGO.png'
 SIMPLEUI_HOME_INFO = False  # 首页上的simpleUI的版本信息板块。
 SIMPLEUI_ANALYSIS = False  # 收集信息（TODO：不太好，等正式上线后建议关闭；否则出现信息泄露）
