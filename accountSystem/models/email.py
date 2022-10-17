@@ -5,7 +5,6 @@ from .account import BaseAccount
 
 class Email(BaseAccount):
     # TODO:需要增加别名了
-    content = models.EmailField(null=True, blank=True)
     remark = models.CharField(max_length=100, null=True, blank=True, verbose_name="备注")
 
     class Meta:
@@ -13,7 +12,15 @@ class Email(BaseAccount):
         verbose_name_plural = "所有" + verbose_name
 
     def __str__(self):
-        if self.remark is None:
-            return "%s" % self.content
+        A = self.username
+        B = self.remark
+        if A is None:
+            if B is None:
+                return "空邮件对象"
+            else:
+                return str(B)
         else:
-            return "%s(%s)" % (self.content, self.remark)
+            if B is None:
+                return str(A)
+            else:
+                return "%s(%s)" % (A, B)

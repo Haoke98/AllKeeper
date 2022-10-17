@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from accountSystem.models.email import Email
 from accountSystem.models.group import Group
 from accountSystem.models.type import Type
 from izBasar.admin import LIST_DISPLAY
@@ -19,15 +18,9 @@ from .serverUser import ServerUserAdmin
 from .tel import TelAdmin
 from .tel import TelAdmin
 from .wechat import WechatAdmin
-
+from .email import EmailAdmin
 
 # Register your admin models here.
-@admin.register(Email)
-class UniversalAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['content', 'remark']
-    list_display_links = ['content']
-    search_fields = ['content']
-
 @admin.register(Group, Type)
 class GroupAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY + ["__str__", '_count']

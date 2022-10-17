@@ -104,7 +104,7 @@ class AccountAdmin(BaseAdmin):
 
                             </div>
                         </div>
-                ''' % email.content
+                ''' % email.username
         return mark_safe(item)
 
     def _types(self, obj: Account):
