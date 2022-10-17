@@ -6,26 +6,6 @@
   </p>
 </div>
 
-[![stars](https://img.shields.io/github/stars/chuzhixin/vue-admin-beautiful?style=flat-square&logo=GitHub)](https://gitee.com/touzixinjiang/background-management-system)
-[![star](https://gitee.com/chu1204505056/vue-admin-beautiful/badge/star.svg?theme=gray)](https://gitee.com/touzixinjiang/background-management-system)
-[![star](./public/djangoVersionTag.svg?theme=gray)](https://www.djangoproject.com/)
-[![star](./public/pythonVersionTag.svg?theme=gray)](https://www.python.org/)
-
-## 联系我们
-
-- 如果二次开发或者部署过程中有什么问题，可以随时联系我们。
-- 联系QQ： 1903249375 
-- 联系微信：sadam190
-- 电话：15899198230
-
-<table>
-<tr>
-<td>
-<img width="200px" src="http://59.110.225.84/static/sdm/qr_qq.png">
-</td>
-</tr>
-</table>
-
 ## 🌱 运行项目命令
 
 ```bash
@@ -35,7 +15,7 @@ python manange.py runserver 7000
 nohup python manange.py runserver 7000 > app.log 2>&1 & echo $! > app.pid
 ```
 
-## 我们承诺将定期赞助的开源项目（感谢巨人）
+## 感谢巨人
 
 <a title="Python" href="https://www.python.org/" target="_blank">
 <img height="100" src="https://www.python.org/static/img/python-logo.png"/>
@@ -50,11 +30,25 @@ nohup python manange.py runserver 7000 > app.log 2>&1 & echo $! > app.pid
 <img height="100" src="https://simpleui.72wo.com/static/images/logo.png"/>
 </a>
 
-## 框架杰出贡献者
-
+## 杰出贡献者
 
 <a href="https://gitee.com/sadam98" target="_blank">
   <img width="50px" style="border-radius:999px" src="https://portrait.gitee.com/uploads/avatars/user/1882/5648408_sadam98_1580052770.png!avatar200"/>
 </a>
+
+## 联系我们
+
+- 如果二次开发或者部署过程中有什么问题，可以随时联系我们。
+- 联系QQ： 1903249375
+- 联系微信：sadam190
+- 电话：15899198230
+
+<table>
+<tr>
+<td>
+<img width="200px" src="http://59.110.225.84/static/sdm/qr_qq.png">
+</td>
+</tr>
+</table>
 
 ## 友情链接
