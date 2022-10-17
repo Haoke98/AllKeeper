@@ -205,18 +205,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'izBasar.wsgi.application'
 
-from .secret import DB
+from .secret import MYSQL_DATABASE, MYSQL_USER_NAME, MYSQL_PASSWORD, MYSQL_PORT, MYSQL_HOST
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': DB.MYSQL_DATABASE,
-        'USER': DB.MYSQL_USER_NAME,
-        'PASSWORD': DB.MYSQL_PASSWORD,
-        'PORT': DB.MYSQL_PORT,
-        'HOST': DB.MYSQL_HOST,
+        'NAME': MYSQL_DATABASE,
+        'USER': MYSQL_USER_NAME,
+        'PASSWORD': MYSQL_PASSWORD,
+        'PORT': MYSQL_PORT,
+        'HOST': MYSQL_HOST,
     },
     'AllKeeper': {
         'ENGINE': 'django.db.backends.sqlite3',

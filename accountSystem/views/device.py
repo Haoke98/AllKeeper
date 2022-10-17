@@ -11,7 +11,7 @@ import json
 from django.http import HttpResponse
 from rest_framework import views
 
-from izBasar.secret import clientHM194
+from izBasar import clientHM194
 
 INDEX_DEVICES = "devices"
 
