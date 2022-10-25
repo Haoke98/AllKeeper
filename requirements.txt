@@ -1,0 +1,9 @@
+Django==4.0
+djangorestframework==3.14.0
+elasticsearch==8.4.3
+minio==7.1.11
+paramiko==2.11.0
+Pillow==9.2.0
+Pygments==2.11.2
+PyMySQL==1.0.2
+requests==2.28.1
