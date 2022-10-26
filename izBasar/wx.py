@@ -18,7 +18,7 @@ class WxApp:
         self.secret = secret
         self._name = name
 
-    def getAccessToken(self) -> None | str:
+    def getAccessToken(self) -> str:
         url = f"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={self.id}&secret={self.secret}"
         resp = requests.get(url)
         if resp.status_code == 200:
@@ -66,7 +66,7 @@ class WxOfficialAccount(WxApp):
     """
     微信公众号模型
     """
-    def getQrTicket(self, scene_id: str) -> str | None:
+    def getQrTicket(self, scene_id: str) -> str:
         url = f"https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={self.getAccessToken()}"
         data = {
             "expire_seconds": 3600,
