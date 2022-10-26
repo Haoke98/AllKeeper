@@ -31,7 +31,7 @@ class BaseAdmin(admin.ModelAdmin):
                     %s
                     </a>
                     <div class="ui vertical animated button blue" onclick="copyStr('%s')" >
-                        <div class="hidden content" style="color:white;" >1</div>
+                        <div class="hidden content" style="color:white;" >复制</div>
                         <div class="visible content">
                                 <i class="copy icon"></i>
                         </div>
