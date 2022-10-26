@@ -7,4 +7,4 @@ Pygments==2.11.2
 PyMySQL==1.0.2
 requests==2.28.1
 docutils==0.19
-simpleui==latest
+simpleui==2022.6.131
