@@ -7,3 +7,5 @@ Pillow==9.2.0
 Pygments==2.11.2
 PyMySQL==1.0.2
 requests==2.28.1
+docutils==0.19
+simpleui==latest
