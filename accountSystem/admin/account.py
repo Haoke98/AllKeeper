@@ -146,8 +146,4 @@ class AccountAdmin(BaseAdmin):
         css = {
         }
         js = [
-            'kindeditor4.1.11/kindeditor-all.js',
-            'kindeditor4.1.11/lang/zh-CN.js',
-
-            'js/account-admin-kind-editor-config.js',
         ]

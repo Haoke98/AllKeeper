@@ -79,7 +79,10 @@ class BaseAdmin(admin.ModelAdmin):
             'js/jquery-3.6.0.min.js',
             'Semantic-UI-CSS-master/semantic.js',
             'js/clipboardUtil.js',
-            'bootstrap-3.4.1-dist/js/bootstrap.js'
+            'bootstrap-3.4.1-dist/js/bootstrap.js',
+            'kindeditor4.1.11/kindeditor-all.js',
+            'kindeditor4.1.11/lang/zh-CN.js',
+            'js/base-admin-model-kind-editor-config.js',
         ]
 
 

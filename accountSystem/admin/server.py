@@ -42,9 +42,5 @@ class ServerAdmin(BaseAdmin):
         css = {
         }
         js = [
-            'kindeditor4.1.11/kindeditor-all.js',
-            'kindeditor4.1.11/lang/zh-CN.js',
-
-            'js/server-admin-kind-editor-config.js',
         ]
 

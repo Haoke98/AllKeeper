@@ -19,7 +19,7 @@ class ServerForm(ModelForm):
 
     class Meta:
         model = Server
-        fields = ['group', 'hoster', 'ip', 'rootUsername', 'rootPassword', 'bios', 'ssh', 'mac', 'remark']
+        fields = ['group', 'hoster', 'ip', 'rootUsername', 'rootPassword', 'bios', 'ssh', 'mac', 'remark', 'info']
 
 
 # class ServerUserForm(ServerFormBase):
