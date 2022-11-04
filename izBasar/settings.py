@@ -17,7 +17,6 @@ from pathlib import Path
 from . import secret
 from .simpleUISettings import *
 
-
 CSRF_TRUSTED_ORIGINS = ['http://keeper.sdm.net']
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'none'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -93,6 +92,9 @@ EMAIL_HOST_PASSWORD = "bhwuenurolvldjga"  # 密码(用第三方平台登陆授�
 SERVER_EMAIL = EMAIL_HOST_USER  # 必须要设置 不然logger中得handler：admin_Email 无法发送错误报告邮件，  SERVER_EMAIL必须和 EMAIL_HOST_USER一样才能成功发送
 DEFAULT_FROM_EMAIL = 'SadamSadik <1903249375@qq.com>'
 
+LOG_REQUEST_ID_HEADER = "HTTP_X_REQUEST_ID"
+GENERATE_REQUEST_ID_IF_NOT_IN_HEADER = True
+REQUEST_ID_RESPONSE_HEADER = "RESPONSE_HEADER_NAME"
 #########################
 ## Django Logging  BEGIN
 #########################
@@ -101,9 +103,18 @@ DEFAULT_FROM_EMAIL = 'SadamSadik <1903249375@qq.com>'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+        'request_id': {
+            '()': 'log_request_id.filters.RequestIDFilter'
+        },
+        'new_add': {
+            '()': 'izBasar.middlewares.RequestLogFilter',
+        },
+
+    },
     'formatters': {
         'standard': {
-            'format': '%(levelname)s [%(asctime)s] [%(request_id)s] %(filename)s-%(funcName)s-%(lineno)s: %(message)s'
+            'format': '%(asctime)s[%(levelname)s][%(source_ip)s][%(filename)s][%(funcName)s][%(lineno)s][%(message)s][%(request_id)s]'
             # 这里使用filter request_id里的request_id字段
         },
         'default': {
@@ -114,15 +125,17 @@ LOGGING = {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
+            'filters': ['new_add', 'request_id'],
             'formatter': 'standard',  # 这里使用上面的formatter: standard
         },
         'file': {  # 记录到日志文件(需要创建对应的目录，否则会出错)
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
+            'filters': ['new_add', 'request_id'],
             'filename': os.path.join(LOG_FILE_DIR, 'debug.log'),  # 日志输出文件
             'maxBytes': 1024 * 1024 * 5,  # 文件大小
             'backupCount': 5,  # 备份份数
-            'formatter': 'default',  # 使用哪种formatters日志格式
+            'formatter': 'standard',  # 使用哪种formatters日志格式
         },
         'mail_admins': {
             'level': 'ERROR',
@@ -133,7 +146,7 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],  # 这里使用上面的handler: console
+            'handlers': ['console', 'file'],  # 这里使用上面的handler: console
             'level': 'INFO',
             'propagate': True,
         },
@@ -179,6 +192,7 @@ CACHES = {
     }
 }
 MIDDLEWARE = [
+    'log_request_id.middleware.RequestIDMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -186,7 +200,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'izBasar.middleware.sadam_middleware'
+    'izBasar.middlewares.RequestLogMiddleware',
 ]
 
 ROOT_URLCONF = 'izBasar.urls'
@@ -281,6 +295,7 @@ DEFAULT_CHARSET = 'utf-8'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 mimetypes.add_type('text/css', '.css')
+mimetypes.add_type('text/css', '.min.css')
 mimetypes.add_type('application/javascript', '.js')
 mimetypes.add_type('text/html', '.html')
 
