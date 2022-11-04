@@ -95,11 +95,8 @@ DEFAULT_FROM_EMAIL = 'SadamSadik <1903249375@qq.com>'
 LOG_REQUEST_ID_HEADER = "HTTP_X_REQUEST_ID"
 GENERATE_REQUEST_ID_IF_NOT_IN_HEADER = True
 REQUEST_ID_RESPONSE_HEADER = "RESPONSE_HEADER_NAME"
-#########################
-## Django Logging  BEGIN
-#########################
 
-# LOGGING_DIR 日志文件存放目录
+########### Django Logging  BEGIN ##############
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -114,7 +111,7 @@ LOGGING = {
     },
     'formatters': {
         'standard': {
-            'format': '%(asctime)s[%(levelname)s][%(source_ip)s][%(filename)s][%(funcName)s][%(lineno)s][%(message)s][%(request_id)s]'
+            'format': '[%(asctime)s][%(levelname)s][%(source_ip)s][%(hostname)s][%(request_id)s][%(filename)s:%(lineno)s(%(funcName)s)]%(message)s'
             # 这里使用filter request_id里的request_id字段
         },
         'default': {
@@ -162,9 +159,9 @@ LOGGING = {
         }
     }
 }
-#########################
-## Django Logging  END
-#########################
+##############    Django Logging  END   ##############
+
+
 # Application definition
 INSTALLED_APPS = [
     'simpleui',
