@@ -17,6 +17,9 @@ from pathlib import Path
 from . import secret
 from .simpleUISettings import *
 
+
+CSRF_TRUSTED_ORIGINS = ['http://keeper.sdm.net']
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'none'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,6 +35,7 @@ if not os.path.exists(PUBLIC_ROOT):
 from . import _STATIC_URL
 
 STATIC_URL = _STATIC_URL
+print("STATIC_ROOT_URL:", STATIC_URL)
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))

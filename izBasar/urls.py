@@ -42,4 +42,4 @@ urlpatterns = [
                        name='django.contrib.sitemaps.views.sitemap'),
                   re_path('^all-keeper/', include(accountSystem.urls)),
                   path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
-              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT, show_indexes=True)
