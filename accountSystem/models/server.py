@@ -1,11 +1,11 @@
 from django.db import models
 
 from izBasar.models import BaseModel
-from .group import Group
+from .human import Human
 
 
 class Server(BaseModel):
-    group = models.ForeignKey(verbose_name="所属个体/组织", to=Group, on_delete=models.CASCADE, null=True, blank=True)
+    group = models.ForeignKey(verbose_name="所属个体/组织", to=Human, on_delete=models.CASCADE, null=True, blank=True)
     ip = models.GenericIPAddressField(verbose_name="IP地址", null=False, blank=False, unique=True,
                                       help_text="可以是IPV4/IPV6")
     rootUsername = models.CharField(max_length=32, verbose_name="root用户名", blank=False, default="root")

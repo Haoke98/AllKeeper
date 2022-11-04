@@ -1,13 +1,13 @@
 from django.db import models
 
 from izBasar.models import BaseModel
-from .group import Group
+from .human import Human
 
 
 class Tel(BaseModel):
     content = models.CharField(max_length=11, unique=True, null=True, blank=True)
     remark = models.CharField(max_length=100, null=True, blank=True)
-    owner = models.ForeignKey(verbose_name="所属个体/组织", to=Group, on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.ForeignKey(verbose_name="所属个体/组织", to=Human, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         verbose_name = "手机号"

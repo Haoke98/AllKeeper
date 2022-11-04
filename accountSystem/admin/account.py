@@ -14,10 +14,10 @@ class AccountAdmin(BaseAdmin):
     list_display_links = ['id', 'platform']
     date_hierarchy = 'updatedAt'
     search_fields = ['name', 'username', 'url', 'info', 'types__name', 'wechat__id', 'wechat__nickName',
-                     'wechat__remark']
+                     'wechat__remark', 'platform__name', 'platform__url']
     list_filter = ['group', 'platform', 'tels', 'emails', 'types', 'wechat']
     list_select_related = ['group', 'wechat']
-    autocomplete_fields = ['platform', 'tels', 'emails', 'group', 'types', 'wechat']
+    autocomplete_fields = ['platform', 'tels', 'emails', 'types', 'wechat']
     list_per_page = 8
     actions = []
     form = AccountForm

@@ -2,7 +2,7 @@ from django.db import models
 
 from izBasar.models import BaseModel
 from .email import Email
-from .group import Group
+from .human import Human
 from .tel import Tel
 
 
@@ -12,7 +12,7 @@ class Wechat(BaseModel):
     nickName = models.CharField(max_length=20, null=True, blank=True, db_index=True)
     pwd = models.CharField(max_length=32, verbose_name="密码", null=True, blank=True)
     tel = models.OneToOneField(verbose_name="绑定的手机号", to=Tel, on_delete=models.CASCADE, null=True, blank=True)
-    group = models.ForeignKey(verbose_name="所属账号组", to=Group, on_delete=models.CASCADE, null=True, blank=True)
+    group = models.ForeignKey(verbose_name="所属账号组", to=Human, on_delete=models.CASCADE, null=True, blank=True)
     remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True)
     email = models.OneToOneField(verbose_name="绑定的邮箱", to=Email, on_delete=models.CASCADE, null=True, blank=True,
                                  db_index=True, help_text="你可以使用一验证过的邮箱地址登陆微信，也可以用它来找回微信密码")

@@ -18,15 +18,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.flatpages import sitemaps
 from django.contrib.sitemaps.views import sitemap
-from django.template.defaulttags import url
 from django.urls import path, re_path
 # from django.contrib.staticfiles.views import serve
 from django.views.generic import RedirectView
-
 import accountSystem.urls
-
 from izBasar import settings
-
 from . import _STATIC_URL
 from .secret import ADMIN_PATH
 
@@ -42,4 +38,4 @@ urlpatterns = [
                        name='django.contrib.sitemaps.views.sitemap'),
                   re_path('^all-keeper/', include(accountSystem.urls)),
                   path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
-              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT, show_indexes=True)
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,10 +1,11 @@
 from django.urls import re_path
 from rest_framework.routers import DefaultRouter
 
-from .views import ServerViewSet, login, getMenuList, DeviceView, DeviceRegionView
+from .views import ServerViewSet, login, getMenuList, DeviceView, DeviceRegionView, HumanViewSet
 
 router = DefaultRouter()
 router.register(r'server', viewset=ServerViewSet)
+router.register(r'human', viewset=HumanViewSet)
 # server_list = ServerViewSet.as_view({
 #     'get': 'list',
 #     'post': 'create'
@@ -18,7 +19,7 @@ urlpatterns = [
                   # re_path('^server/(?P<pk>[0-9]+)$', server_detail),
                   re_path('^login$', login),
                   re_path('^system/menu$', getMenuList),
-                  # path('getAccessToken', getAccessToken),
+                  # re_path('^human$', HumanView.as_view()),
                   # path('getSlider', getSlider),
                   # path('getSubcribtionAccessToken', getSubcribtionsAccessToken),
                   # path('buyVIP<str:openid>', buyVIP)

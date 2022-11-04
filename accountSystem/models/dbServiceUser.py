@@ -2,7 +2,7 @@ from django.db import models
 
 from .base import BaseServiceUserModel
 from .dbService import DbService
-from .group import Group
+from .human import Human
 
 
 class DbServiceUser(BaseServiceUserModel):

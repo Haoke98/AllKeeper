@@ -6,7 +6,7 @@ from .dbService import DbService
 from .dbServiceUser import DbServiceUser
 from .email import Email
 from .es import ElasticSearch
-from .group import Group
+from .human import Human
 from .region import Country, City
 from .server import Server
 from .serverUser import ServerUser

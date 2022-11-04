@@ -7,3 +7,4 @@
 @disc:
 ======================================="""
 from .server import ServerSerializer
+from .human import HumanSerializer
