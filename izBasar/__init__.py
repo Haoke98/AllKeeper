@@ -1,7 +1,6 @@
 import platform
 
-from . import secret
-from izBasar.secret import ES_HM194_URI, ES_HM194_USERNAME, ES_HM194_PASSWORD
+from .secret import ES_HM194_URI, ES_HM194_USERNAME, ES_HM194_PASSWORD
 
 _DEBUG = False
 _STATIC_URL = '/static/'
