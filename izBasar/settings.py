@@ -111,8 +111,9 @@ LOGGING = {
     },
     'formatters': {
         'standard': {
-            'format': '[%(asctime)s][%(levelname)s][%(process)d:%(threadName)s][%(source_ip)s][%(hostname)s][%(request_id)s][%(filename)s:%(lineno)s(%(funcName)s)]%(message)s'
             # 这里使用filter request_id里的request_id字段
+            'format': '[{asctime:s}][{levelname:^7s}][{processName:s}({process:d}):{threadName:s}({thread:d})][{source_ip}][{hostname}][{request_id}][{filename:s}:{lineno:d}:{funcName:s}]{message:s}',
+            'style': '{',
         },
         'default': {
             'format': '%(levelname)s [%(asctime)s] %(name)s: %(message)s'
