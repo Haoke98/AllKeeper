@@ -8,3 +8,4 @@ PyMySQL==1.0.2
 requests==2.28.1
 docutils==0.19
 django-simpleui==2022.1
+concurrent-log-handler==0.9.20

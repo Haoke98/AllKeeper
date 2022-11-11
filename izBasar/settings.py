@@ -127,12 +127,20 @@ LOGGING = {
         },
         'file': {  # 记录到日志文件(需要创建对应的目录，否则会出错)
             'level': 'INFO',
-            'class': 'logging.handlers.RotatingFileHandler',
             'filters': ['new_add', 'request_id'],
-            'filename': os.path.join(LOG_FILE_DIR, 'debug.log'),  # 日志输出文件
-            'maxBytes': 1024 * 1024 * 5,  # 文件大小
-            'backupCount': 5,  # 备份份数
+            'filename': os.path.join(LOG_FILE_DIR, 'AllKeeper.log'),  # 日志输出文件
             'formatter': 'standard',  # 使用哪种formatters日志格式
+            'backupCount': 100,  # 备份份数
+            'encoding': 'utf-8',
+
+            # 按照时间切割
+            'class': 'izBasar.log.CommonTimedRotatingFileHandler',
+            'when': 'midnight',
+            'interval': 1,
+
+            # 按照文件大小切割
+            # 'class': 'logging.handlers.RotatingFileHandler',
+            # 'maxBytes': 1024 * 1024 * 5,  # 文件大小
         },
         'mail_admins': {
             'level': 'ERROR',
