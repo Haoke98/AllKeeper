@@ -10,3 +10,4 @@ docutils==0.19
 django-simpleui==2022.1
 concurrent-log-handler==0.9.20
 django-log-request-id==2.0.0
+jwcrypto==1.4.2
