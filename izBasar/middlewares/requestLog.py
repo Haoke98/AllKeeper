@@ -38,15 +38,18 @@ class RequestLogMiddleware(MiddlewareMixin):
     """
 
     def process_request(self, request):
-        local.hostname = socket.gethostname()
-        local.dest_ip = socket.gethostbyname(local.hostname)
-        local.username = request.user
-        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR', '')
-        if x_forwarded_for:
-            source_ip = x_forwarded_for.split(',')[0]  # 所以这里是真实的ip
-        else:
-            source_ip = request.META.get('REMOTE_ADDR')  # 这里获得代理ip
-        local.source_ip = source_ip
+        try:
+            local.hostname = socket.gethostname()
+            local.dest_ip = socket.gethostbyname(local.hostname)
+            local.username = request.user
+            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR', '')
+            if x_forwarded_for:
+                source_ip = x_forwarded_for.split(',')[0]  # 所以这里是真实的ip
+            else:
+                source_ip = request.META.get('REMOTE_ADDR')  # 这里获得代理ip
+            local.source_ip = source_ip
+        except Exception as e:
+            logging.warning(f"Exception occurred during the requestLog middleware. E:[{e}]")
 
     def process_response(self, request, response):
         return response
