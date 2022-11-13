@@ -11,11 +11,12 @@ import json
 
 from django.views.decorators.csrf import csrf_exempt
 
-from izBasar.secret import ADMIN_USERNAME, ADMIN_PASSWORD
+from izBasar.secret import ADMIN_USERNAME, ADMIN_PASSWORD, JWT_SIGNATURE, JWT_ISSUER
+from izBasar.settings import JWT_EXPIRED_DELTA
 from utils.encrypt import md5
 from utils.http_helper import RestResponse
 
-from jwcrypto import jwt, jwk
+import jwt
 
 @csrf_exempt
 def login(request):
@@ -24,12 +25,18 @@ def login(request):
         username: str = data.get("username")
         password: str = data.get("password")
         if username == ADMIN_USERNAME and password == md5(ADMIN_PASSWORD):
-            key = jwk.JWK(generate='oct', size=256)
-            token = jwt.JWT(header={"alg": "HS256"}, claims={"username": username, "createdAt": str(datetime.datetime.now())})
-            token.make_signed_token(key)
-            jwt_str = token.serialize()
+            payload = {
+                'exp': datetime.datetime.utcnow() + JWT_EXPIRED_DELTA,  # 过期时间
+                'iat': datetime.datetime.utcnow(),  # 开始时间
+                'iss': JWT_ISSUER,  # 签名
+                'data': {  # 内容，一般存放该用户id和开始时间
+                    'username': username,
+                    'b': 2,
+                },
+            }
+            token = jwt.encode(payload, JWT_SIGNATURE, algorithm='HS256')
             return RestResponse(200, "ok", {
-                "token": jwt_str,
+                "token": token,
                 "userInfo": {
                     "userId": "1",
                     "userName": "Administrator",

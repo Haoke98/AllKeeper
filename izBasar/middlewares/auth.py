@@ -1,9 +1,30 @@
+import logging
 
-def sadam_middleware(get_response):
-    def middleware(request):
-        # setting = Settings.objects.get_or_create(id=1)[0]
-        # setting.host = "http://%s" % request.META['HTTP_HOST']
-        # setting.save()
-        return get_response(request)
+import jwt
+from django.utils.deprecation import MiddlewareMixin
+from izBasar.secret import JWT_SIGNATURE
+from utils.http_helper import RestResponse
 
-    return middleware
+
+class AuthCheck(MiddlewareMixin):
+    """
+    鉴权中间件
+    """
+
+    def process_request(self, request):
+        if request.path == "/all-keeper/login":
+            pass
+        else:
+            try:
+                token = request.headers['Authorization'].replace("Bearer ", "")
+                payload_data = jwt.decode(token, JWT_SIGNATURE, algorithms=['HS256'])
+                # TODO: 处理payload
+                print("payloadData:", payload_data)
+            except jwt.ExpiredSignatureError:
+                return RestResponse(1200, "token 已经失效")
+            except Exception as _err:
+                logging.error(f"鉴权异常：[{_err}]")
+                return RestResponse(4200, "token 解析失败")
+
+    def process_response(self, request, response):
+        return response

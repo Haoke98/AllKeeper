@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
+import datetime
 import mimetypes
 import os
 import platform
@@ -207,6 +208,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'izBasar.middlewares.RequestLogMiddleware',
+    'izBasar.middlewares.AuthCheck'
 ]
 
 ROOT_URLCONF = 'izBasar.urls'
@@ -309,3 +311,5 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "accountSystem.pagination.StandardPagination",
     "PAGE_SIZE": 10
 }
+
+JWT_EXPIRED_DELTA = datetime.timedelta(hours=1)
