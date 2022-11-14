@@ -16,3 +16,6 @@
 *pyc
 */migrations/
 .DS_Store
+/public/
+nohup.out
+

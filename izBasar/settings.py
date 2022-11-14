@@ -18,7 +18,7 @@ from pathlib import Path
 from . import secret
 from .simpleUISettings import *
 
-CSRF_TRUSTED_ORIGINS = ['http://keeper.sdm.net']
+CSRF_TRUSTED_ORIGINS = ['http://keeper.sdm.net','http://kept.sdm.net']
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'none'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
