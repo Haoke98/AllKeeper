@@ -12,9 +12,7 @@ class AuthCheck(MiddlewareMixin):
     """
 
     def process_request(self, request):
-        if request.path == "/all-keeper/login":
-            pass
-        else:
+        if str(request.path).startswith("/all-keeper/") and request.path != "/all-keeper/login":
             try:
                 token = request.headers['Authorization'].replace("Bearer ", "")
                 payload_data = jwt.decode(token, JWT_SIGNATURE, algorithms=['HS256'])

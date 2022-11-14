@@ -32,10 +32,8 @@ urlpatterns = [
                   path(ADMIN_PATH, admin.site.urls),
                   # re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
                   # url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
-
                   path('admin/doc/', include('django.contrib.admindocs.urls')),
-                  path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-                       name='django.contrib.sitemaps.views.sitemap'),
+                  path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
                   re_path('^all-keeper/', include(accountSystem.urls)),
                   path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
