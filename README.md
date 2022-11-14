@@ -15,6 +15,16 @@ python manange.py runserver 7000
 nohup python manange.py runserver 7000 > app.log 2>&1 & echo $! > app.pid
 ```
 
+## 常见问题
+### 问题一:下拉框选择列表获取失败
+现在Windows上执行一下命令
+```shell
+python3 manage.py collectstatic
+```
+然后执行一下命令
+```shell
+scp -rC /Users/shadikesadamu/Projects/izbasar/django-admin/public root@192.168.1.100:/root/AllKeeper/
+```
 ## 感谢巨人
 
 <a title="Python" href="https://www.python.org/" target="_blank">

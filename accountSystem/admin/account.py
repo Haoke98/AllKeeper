@@ -17,7 +17,7 @@ class AccountAdmin(BaseAdmin):
                      'wechat__remark', 'platform__name', 'platform__url']
     list_filter = ['group', 'platform', 'tels', 'emails', 'types', 'wechat']
     list_select_related = ['group', 'wechat']
-    autocomplete_fields = ['platform', 'tels', 'emails', 'types', 'wechat']
+    autocomplete_fields = ['platform', 'tels', 'emails', 'types', 'wechat', 'group']
     list_per_page = 8
     actions = []
     form = AccountForm
