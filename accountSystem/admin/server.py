@@ -18,7 +18,7 @@ class ServerAdmin(BaseAdmin):
     search_help_text = ['你好，这是搜索帮助语句！']
     autocomplete_fields = ['group']
     form = ServerForm
-    inlines = [ServerUserInlineAdmin]
+    #inlines = [ServerUserInlineAdmin]
 
     def _ip(self, obj):
         return BaseAdmin.username(obj.ip)
