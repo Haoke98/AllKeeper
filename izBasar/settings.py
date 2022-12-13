@@ -88,10 +88,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.qq.com'  # 如果是 163 改成 smtp.163.com
 EMAIL_PORT = 465
-EMAIL_HOST_USER = ADMINS[2][1]  # 帐号
-EMAIL_HOST_PASSWORD = "bhwuenurolvldjga"  # 密码(用第三方平台登陆授权码）
+EMAIL_HOST_USER = secret.SMTP_EMAIL  # 帐号
+EMAIL_HOST_PASSWORD = secret.SMTP_PASSWORD  # 密码(用第三方平台登陆授权码）
 SERVER_EMAIL = EMAIL_HOST_USER  # 必须要设置 不然logger中得handler：admin_Email 无法发送错误报告邮件，  SERVER_EMAIL必须和 EMAIL_HOST_USER一样才能成功发送
-DEFAULT_FROM_EMAIL = 'SadamSadik <1903249375@qq.com>'
+DEFAULT_FROM_EMAIL = f'SadamSadik <{secret.SMTP_EMAIL}>'
 
 LOG_REQUEST_ID_HEADER = "HTTP_X_REQUEST_ID"
 GENERATE_REQUEST_ID_IF_NOT_IN_HEADER = True
