@@ -49,10 +49,6 @@ scp -rC /Users/shadikesadamu/Projects/izbasar/django-admin/public root@192.168.1
 ## 联系我们
 
 - 如果二次开发或者部署过程中有什么问题，可以随时联系我们。
-- 联系QQ： 1903249375
-- 联系微信：sadam190
-- 电话：15899198230
-
 <table>
 <tr>
 <td>
