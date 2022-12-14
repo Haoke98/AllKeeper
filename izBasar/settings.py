@@ -18,7 +18,7 @@ from pathlib import Path
 from . import secret
 from .simpleUISettings import *
 
-CSRF_TRUSTED_ORIGINS = ['http://keeper.sdm.net','http://kept.sdm.net']
+CSRF_TRUSTED_ORIGINS = ['http://keeper.sdm.net', 'http://kept.sdm.net']
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'none'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,7 +83,7 @@ ALLOWED_HOSTS = ['*']
 
 APPEND_SLASH = True
 
-ADMINS = (('Sadam·Sadik', '1903249375@qq.com'), ('Haoke98', 'kws11@qq.com'), ('!', 'callme_0920@qq.com'))  # 接受报错的账号
+ADMINS = (('Sadam·Sadik', '1903249375@qq.com'),)  # 接受报错的账号
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.qq.com'  # 如果是 163 改成 smtp.163.com
