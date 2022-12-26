@@ -1,6 +1,6 @@
 import platform
 
-from .secret import ES_HM194_URI, ES_HM194_USERNAME, ES_HM194_PASSWORD
+from .secret import ES_URI, ES_USERNAME, ES_PASSWORD
 
 _DEBUG = False
 _STATIC_URL = '/static/'
@@ -34,5 +34,5 @@ except:
 print(f"this app is running on {CURRENT_SYSTEM},DEBUG:{_DEBUG}")
 from elasticsearch import Elasticsearch
 
-clientHM194 = Elasticsearch(hosts=ES_HM194_URI, http_auth=(ES_HM194_USERNAME, ES_HM194_PASSWORD),
-                            timeout=3600)
+esClient = Elasticsearch(hosts=ES_URI, http_auth=(ES_USERNAME, ES_PASSWORD),
+                         timeout=3600)

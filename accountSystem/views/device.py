@@ -11,7 +11,7 @@ import json
 from django.http import HttpResponse
 from rest_framework import views
 
-from izBasar import clientHM194
+from izBasar import esClient
 
 INDEX_DEVICES = "devices"
 
@@ -19,7 +19,7 @@ INDEX_DEVICES = "devices"
 class DeviceRegionView(views.View):
     def get(self, request):
         result = []
-        resp = clientHM194.search(index=INDEX_DEVICES, size=0, aggs={
+        resp = esClient.search(index=INDEX_DEVICES, size=0, aggs={
             "country": {
                 "terms": {
                     "field": "geoinfo.country.code.keyword",
@@ -30,7 +30,7 @@ class DeviceRegionView(views.View):
         countryBuckets: list[dict] = resp.get("aggregations").get("country").get("buckets")
         for countryBucket in countryBuckets:
             countryCode = countryBucket.get("key")
-            resp1 = clientHM194.search(index=INDEX_DEVICES, size=1, query={
+            resp1 = esClient.search(index=INDEX_DEVICES, size=1, query={
                 "term": {
                     "geoinfo.country.code.keyword": {
                         "value": countryCode
@@ -52,7 +52,7 @@ class DeviceRegionView(views.View):
                 subDivisionNameEn = subDivisionBucket.get("key")
                 if subDivisionNameEn == "":
                     continue
-                resp2 = clientHM194.search(index=INDEX_DEVICES, size=1, query={
+                resp2 = esClient.search(index=INDEX_DEVICES, size=1, query={
                     "bool": {
                         "must": [
                             {
@@ -88,7 +88,7 @@ class DeviceRegionView(views.View):
                     cityNameEn = cityBucket.get("key")
                     if cityNameEn == "":
                         continue
-                    resp3 = clientHM194.search(index=INDEX_DEVICES, size=1, query={
+                    resp3 = esClient.search(index=INDEX_DEVICES, size=1, query={
                         "bool": {
                             "must": [
                                 {
@@ -126,5 +126,5 @@ class DeviceRegionView(views.View):
 
 class DeviceView(views.View):
     def get(self, request):
-        resp = clientHM194.search(index=INDEX_DEVICES)
+        resp = esClient.search(index=INDEX_DEVICES)
         return HttpResponse(json.dumps(resp, ensure_ascii=False), headers={"content-type": "application/json"})
