@@ -10,12 +10,6 @@
 先在izbasar目录下新建一个secret.py文件
 ```python
 _DEBUG = False
-MYSQL_USER_NAME = ""
-MYSQL_PASSWORD = ""
-MYSQL_DATABASE = MYSQL_USER_NAME
-MYSQL_PORT = 3307
-MYSQL_HOST = ""
-
 
 SECRET_KEY = ''
 ADMIN_PATH = ''
@@ -24,21 +18,12 @@ ADMIN_PASSWORD = ""
 JWT_SIGNATURE = SECRET_KEY
 JWT_ISSUER = ""
 
-
 ES_HM194_USERNAME = ""
 ES_HM194_PASSWORD = ""
 ES_HM194_URI = ""
 
-
 SMTP_EMAIL = ""
 SMTP_PASSWORD = ""
-
-#TODO:这一块儿必须要改成只有敏感信息留下，其他类这样的具有代码性质的部分移植到git track中去。
-from .wx import WxApplet, WxOfficialAccount
-app1 = WxApplet("", "", name="")
-app2 = WxApplet("", "", name="")
-wxOa = WxOfficialAccount("", "", name="")
-wxOa1 = WxOfficialAccount("", "", name="")
 ```
 再执行以下命令来产生数据库文件
 ```shell
