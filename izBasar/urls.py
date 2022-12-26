@@ -37,5 +37,6 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     re_path('^all-keeper/', include(accountSystem.urls)),
     path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
-    re_path(r'^static/(?P<path>.*)$', serve, ({'document_root': settings.STATIC_ROOT}))
+    re_path(r'^static/(?P<path>.*)$', serve, ({'document_root': settings.STATIC_ROOT})),
+    re_path(r'^photologue/', include('photologue.urls', namespace='photologue'))
 ]

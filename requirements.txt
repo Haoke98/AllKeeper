@@ -11,3 +11,5 @@ django-simpleui==2022.1
 concurrent-log-handler==0.9.20
 django-log-request-id==2.0.0
 pyjwt==2.6.0
+django-photologue~=3.15.1
+django-sortedm2m~=3.1.1

@@ -175,6 +175,7 @@ LOGGING = {
 # Application definition
 INSTALLED_APPS = [
     'simpleui',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -187,7 +188,10 @@ INSTALLED_APPS = [
     'docutils',
     'accountSystem',
     'DebtManagerSystem',
+    'photologue',
+    'sortedm2m'
 ]
+SITE_ID = 1
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
@@ -237,14 +241,6 @@ from .secret import MYSQL_DATABASE, MYSQL_USER_NAME, MYSQL_PASSWORD, MYSQL_PORT,
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': MYSQL_DATABASE,
-        'USER': MYSQL_USER_NAME,
-        'PASSWORD': MYSQL_PASSWORD,
-        'PORT': MYSQL_PORT,
-        'HOST': MYSQL_HOST,
-    },
-    'AllKeeper': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'AllKeeper.db')
     }
@@ -252,7 +248,7 @@ DATABASES = {
 
 DATABASE_ROUTERS = ['izBasar.database_router.DatabaseAppsRouter']
 DATABASE_APPS_MAPPING = {
-    'accountSystem': 'AllKeeper',
+    'accountSystem': 'default',
 }
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
