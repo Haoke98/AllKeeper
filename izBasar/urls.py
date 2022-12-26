@@ -21,6 +21,7 @@ from django.urls import path, re_path
 # from django.contrib.staticfiles.views import serve
 from django.views.generic import RedirectView
 from django.views.static import serve
+from photologue.sitemaps import GallerySitemap, PhotoSitemap
 
 import accountSystem.urls
 from izBasar import settings
@@ -38,5 +39,10 @@ urlpatterns = [
     re_path('^all-keeper/', include(accountSystem.urls)),
     path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
     re_path(r'^static/(?P<path>.*)$', serve, ({'document_root': settings.STATIC_ROOT})),
+    re_path(r'^media/(?P<path>.*)$', serve, ({'document_root': settings.MEDIA_ROOT})),
     re_path(r'^photologue/', include('photologue.urls', namespace='photologue'))
 ]
+sitemaps = {
+    'photologue_galleries': GallerySitemap,
+    'photologue_photos': PhotoSitemap,
+}
