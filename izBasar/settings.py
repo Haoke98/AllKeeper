@@ -59,9 +59,7 @@ if not os.path.exists(STATIC_ROOT):
     os.mkdir(STATIC_ROOT)
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(PUBLIC_ROOT, 'media')
-if not os.path.exists(MEDIA_ROOT):
-    os.mkdir(MEDIA_ROOT)
+MEDIA_ROOT = secret.MEDIA_ROOT
 
 IMAGE_ROOT = os.path.join(MEDIA_ROOT, "img")
 if not os.path.exists(IMAGE_ROOT):

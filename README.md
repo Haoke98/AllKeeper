@@ -25,6 +25,8 @@ ES_CA = "/usr/etc/http_ca.ctr"
 
 SMTP_EMAIL = ""
 SMTP_PASSWORD = ""
+
+MEDIA_ROOT = "/home/media"
 ```
 再执行以下命令来产生数据库文件
 ```shell
