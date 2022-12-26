@@ -49,6 +49,25 @@ python3 manage.py collectstatic
 ```shell
 scp -rC /Users/shadikesadamu/Projects/izbasar/django-admin/public root@192.168.1.100:/root/AllKeeper/
 ```
+### 问题二：Sqlite版本问题
+> 异常：django.core.exceptions.ImproperlyConfigured: SQLite 3.9.0 or later is required (found 3.7.17).
+
+解决方案：
+1. 首先检查确认现有版本：
+```shell
+sqlite3 --version
+```
+2. 其次安装正确版本的sqlite（如报错提示，必须大于等于3.9.0)
+![](assets/20221227015348.jpg)
+从SQLite官网下载最新版本的软件包
+```shell
+wget https://www.sqlite.org/2022/sqlite-autoconf-3400000.tar.gz
+tar -xvzf sqlite-autoconf-3400000.tar.gz 
+cd sqlite-autoconf-3400000.tar.gz
+./configure
+make && make install
+echo export LD_LIBRARY_PATH="/usr/local/lib">> ~/.bashrc
+```
 ## 感谢巨人
 
 <a title="Python" href="https://www.python.org/" target="_blank">
