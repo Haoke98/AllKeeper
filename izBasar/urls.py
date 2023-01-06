@@ -22,25 +22,31 @@ from django.urls import path, re_path
 from django.views.generic import RedirectView
 from django.views.static import serve
 from photologue.sitemaps import GallerySitemap, PhotoSitemap
+from revproxy.views import ProxyView
 
 import accountSystem.urls
 from izBasar import settings
 from . import _STATIC_URL
 from .secret import ADMIN_PATH
 
-admin.autodiscover()
 
+class TestProxyView(ProxyView):
+    upstream = "http://localhost:3000"
+    add_remote_user = True
+    add_x_forwarded = True
+
+
+admin.autodiscover()
 urlpatterns = [
     path(ADMIN_PATH, admin.site.urls),
-    # re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
-    # url('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     re_path('^all-keeper/', include(accountSystem.urls)),
     path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
     re_path(r'^static/(?P<path>.*)$', serve, ({'document_root': settings.STATIC_ROOT})),
     re_path(r'^media/(?P<path>.*)$', serve, ({'document_root': settings.MEDIA_ROOT})),
-    re_path(r'^photologue/', include('photologue.urls', namespace='photologue'))
+    re_path(r'^photologue/', include('photologue.urls', namespace='photologue')),
+    re_path(r'^new_req/(?P<path>.*)$', TestProxyView.as_view())
 ]
 sitemaps = {
     'photologue_galleries': GallerySitemap,
