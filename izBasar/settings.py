@@ -234,19 +234,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'izBasar.wsgi.application'
 
-from .secret import MYSQL_DATABASE, MYSQL_USER_NAME, MYSQL_PASSWORD, MYSQL_PORT, MYSQL_HOST
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'AllKeeper.db')
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': secret.MYSQL_DATABASE,
+        'HOST': secret.MYSQL_HOST,
+        'PORT': secret.MYSQL_PORT,
+        'USER': secret.MYSQL_USERNAME,
+        'PASSWORD': secret.MYSQL_PASSWORD,
+        'CONN_MAX_AGE': 60 * 60
     }
 }
 
 DATABASE_ROUTERS = ['izBasar.database_router.DatabaseAppsRouter']
 DATABASE_APPS_MAPPING = {
+    'core': 'default',
+    'admin': 'default',
+    'auth': 'default',
+    'contenttypes': 'default',
+    'sessions': 'default',
+    'sites': 'default',
     'accountSystem': 'default',
 }
 # Password validation
