@@ -1,0 +1,16 @@
+[Unit]
+Description=WebSSH Tools
+#Documentation
+After=lanproxy.service
+#Before
+#Wants
+#Requires
+
+[Service]
+Type=simple
+ExecStart=/opt/python3.11/bin/wssh --port=5555
+#ExecStop=
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

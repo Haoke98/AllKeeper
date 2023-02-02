@@ -1,0 +1,17 @@
+[Unit]
+Description=AllKeeper Service
+#Documentation
+#After=lanproxy.service
+After=webssh.service
+#Before
+#Wants
+#Requires
+
+[Service]
+Type=simple
+ExecStart=/opt/pypy3.9-v7.3.11-linux64/bin/pypy3 /opt/AllKeeper/manage.py runserver 0:8001
+#ExecStop=
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
