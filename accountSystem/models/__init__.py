@@ -13,3 +13,4 @@ from .serverUser import ServerUser
 from .tel import Tel
 from .type import Type
 from .wechat import Wechat
+from .scripts import Script

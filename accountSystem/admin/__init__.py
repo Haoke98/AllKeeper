@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+# Register your admin models here.
 from accountSystem.models.type import Type
 from izBasar.admin import LIST_DISPLAY
 from .account import AccountAdmin, Account
@@ -18,8 +19,8 @@ from .serverUser import ServerUserAdmin
 from .tel import TelAdmin
 from .tel import TelAdmin
 from .wechat import WechatAdmin
-# Register your admin models here.
 from ..models import Human
+from .scripts import ScriptAdmin
 
 
 @admin.register(Human, Type)
