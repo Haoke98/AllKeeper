@@ -1,8 +1,9 @@
 /static/cache/
-/izBasar/secret.py
 /static/log/
 /public/log/
 /log/
+secret.py
+.secret.py.swp
 .idea
 *.db
 *.dbf
