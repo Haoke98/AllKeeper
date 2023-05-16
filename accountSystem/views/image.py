@@ -7,18 +7,27 @@ from PIL import Image
 from django.http import HttpResponse
 
 from utils.http_helper import RestResponse
+import cv2
 
 
 def thumbnail(request):
     import pyheif
     if request.method == 'GET':
-        image_path: str = request.GET.get('path')
-        image_path = image_path.replace(' ', '+')
-        if image_path.endswith(".heic") or image_path.endswith(".HEIC"):
-            hief_img = pyheif.read(image_path)
+        media_path: str = request.GET.get('path')
+        media_path = media_path.replace(' ', '+')
+        ext = media_path.lower().split(".")[-1]
+        if ext in ["heic"]:
+            hief_img = pyheif.read(media_path)
             image = Image.frombytes(hief_img.mode, hief_img.size, hief_img.data, "raw", hief_img.mode, hief_img.stride)
+        elif ext in ["mp4", "mov"]:
+            cap = cv2.VideoCapture(media_path)
+            success, img = cap.read()
+            if success:
+                image = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+            else:
+                image = Image.open("/root/吃屎.JPEG")
         else:
-            image = Image.open(image_path)
+            image = Image.open(media_path)
         width = int(request.GET.get("width", 200))
         height = int(request.GET.get("height", 200))
         image.thumbnail((width, height))
