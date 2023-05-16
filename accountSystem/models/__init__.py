@@ -14,3 +14,4 @@ from .tel import Tel
 from .type import Type
 from .wechat import Wechat
 from .scripts import Script
+from .breath import BreathInfo

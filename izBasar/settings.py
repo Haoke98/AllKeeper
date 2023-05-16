@@ -104,7 +104,7 @@ LOGGING = {
             '()': 'log_request_id.filters.RequestIDFilter'
         },
         'new_add': {
-            '()': 'izBasar.middlewares.RequestLogFilter',
+            '()': 'middlewares.RequestLogFilter',
         },
 
     },
@@ -210,8 +210,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'izBasar.middlewares.RequestLogMiddleware',
-    'izBasar.middlewares.AuthCheck'
+    'middlewares.RequestLogMiddleware',
+    'middlewares.AuthCheck'
 ]
 
 ROOT_URLCONF = 'izBasar.urls'

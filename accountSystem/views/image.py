@@ -3,7 +3,6 @@ import math
 import os
 from io import BytesIO
 
-import pyheif
 from PIL import Image
 from django.http import HttpResponse
 
@@ -11,6 +10,7 @@ from utils.http_helper import RestResponse
 
 
 def thumbnail(request):
+    import pyheif
     if request.method == 'GET':
         image_path: str = request.GET.get('path')
         image_path = image_path.replace(' ', '+')

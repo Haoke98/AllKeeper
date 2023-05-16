@@ -2,6 +2,7 @@ import logging
 
 import jwt
 from django.utils.deprecation import MiddlewareMixin
+
 from izBasar.secret import JWT_SIGNATURE
 from utils.http_helper import RestResponse
 
@@ -13,7 +14,7 @@ class AuthCheck(MiddlewareMixin):
 
     def process_request(self, request):
         if str(request.path).startswith("/all-keeper/"):
-            if request.path != "/all-keeper/login":
+            if request.path != "/all-keeper/login" and request.path != "/all-keeper/breath":
                 if str(request.path).startswith("/all-keeper/images/thumbnail"):
                     token = request.GET.get('token')
                 else:

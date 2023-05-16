@@ -1,7 +1,7 @@
 from django.urls import re_path
 from rest_framework.routers import DefaultRouter
 
-from .views import ServerViewSet, login, getMenuList, DeviceView, DeviceRegionView, HumanViewSet, image
+from .views import ServerViewSet, login, getMenuList, DeviceView, DeviceRegionView, HumanViewSet, image, breath
 
 router = DefaultRouter()
 router.register(r'server', viewset=ServerViewSet)
@@ -22,6 +22,7 @@ urlpatterns = [
                   # re_path('^human$', HumanView.as_view()),
                   re_path('^images/thumbnail', image.thumbnail, name='thumbnail'),
                   re_path('^images', image.image_view),
+                  re_path('^breath', breath.BreathView),
                   # path('getSubcribtionAccessToken', getSubcribtionsAccessToken),
                   # path('buyVIP<str:openid>', buyVIP)
               ] + router.urls

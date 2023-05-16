@@ -40,7 +40,31 @@ python manange.py runserver 7000
 # 后台运行
 nohup python manange.py runserver 7000 > app.log 2>&1 & echo $! > app.pid
 ```
+### Nginx 配置实现媒体文件的缩略图功能
+nginx 下载地址 http://nginx.org/en/download.html
 
+编译参数：--with-http_image_filter_module
+```editorconfig
+http{
+    ...
+    server{
+        ...
+        location /icloud-shortcut {
+            video_thumb;
+            image_filter resize 100 200;
+            image_filter_jpeg_quality 80;
+            alias /external/SADAM/icloud/photos;
+            autoindex on;
+        }
+        location /icloud {
+            alias /external/SADAM/icloud/photos;
+            autoindex on;
+        }
+        ...
+    }
+    ...
+}
+```
 ## 常见问题
 ### 问题一:下拉框选择列表获取失败
 现在Windows上执行一下命令
