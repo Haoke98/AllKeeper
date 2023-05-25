@@ -65,6 +65,28 @@ http{
     ...
 }
 ```
+### 配置系统服务并开启自启动
+先创建allkeeper.service文件并复制allkeeper.service.sample的内容
+```shell
+cp allkeeper.service.sample allkeeper.service
+```
+再修改内容, 再移到系统服务单位存储目录
+```shell
+vi allkeeper.service
+mv allkeeper.service /usr/lib/systemd/system/
+```
+加载新加入的服务单位
+```shell
+systemctl daemon-reload
+```
+启动服务
+```shell
+systemctl start allkeeper.service
+```
+开启开机自启动
+```shell
+systemctl enable allkeeper.service
+```
 ## 常见问题
 ### 问题一:下拉框选择列表获取失败
 现在Windows上执行一下命令
