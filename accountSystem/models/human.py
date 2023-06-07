@@ -10,7 +10,7 @@ class Human(BaseModel):
 
     class Meta:
         verbose_name = "个体/组织"
-        verbose_name_plural = "所有" + verbose_name
+        verbose_name_plural = "社工库"
         db_table = "accountSystem_group"
 
     def __str__(self):
