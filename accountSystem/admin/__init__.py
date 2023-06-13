@@ -13,6 +13,7 @@ from .dbServiceUser import DbServiceUserAdmin
 from .dbServiceUser import DbServiceUserAdmin
 from .email import EmailAdmin
 from .es import ElasticSearchAdmin
+from .human import HumanAdmin
 from .scripts import ScriptAdmin
 from .server import ServerAdmin
 from .server import ServerAdmin
@@ -21,10 +22,9 @@ from .serverUser import ServerUserAdmin
 from .tel import TelAdmin
 from .tel import TelAdmin
 from .wechat import WechatAdmin
-from ..models import Human
 
 
-@admin.register(Human, Type)
+@admin.register(Type)
 class GroupAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY + ["__str__", '_count']
     search_fields = ['name']
