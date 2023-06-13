@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from izBasar.admin import LIST_DISPLAY
 from ..models import Tel
 
