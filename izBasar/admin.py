@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
-LIST_DISPLAY = ['id', 'updatedAt', 'createdAt', 'deletedAt']
+LIST_DISPLAY = ['id', 'updatedAt', 'createdAt']
 
 
 def showUrl(url):
