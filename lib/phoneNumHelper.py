@@ -7,6 +7,9 @@
 @disc:
 ======================================="""
 import re
+from urllib.parse import urlencode  # python3
+
+import requests
 
 
 def get_carrier(phone_number: str) -> str:
@@ -34,3 +37,15 @@ def get_carrier(phone_number: str) -> str:
             return "未知运营商"
     else:
         return "无效的手机号码"
+
+
+def get_location_carrier_info(token, tel):
+    params = urlencode({'mobile': tel, 'datatype': 'json'})
+    url = 'https://api.ip138.com/mobile/?' + params
+    headers = {"token": token}  # token为示例
+    resp = requests.get(url, 'GET', headers=headers)
+    return resp.text.split(" ")
+
+
+if __name__ == '__main__':
+    get_location_carrier_info("d2d4f78056097718ea20fb835b9b2251", "17590037828")
