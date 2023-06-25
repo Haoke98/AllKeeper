@@ -87,6 +87,57 @@ systemctl start allkeeper.service
 ```shell
 systemctl enable allkeeper.service
 ```
+
+### 开启数据库定时备份
+#### 1. 首先，创建一个备份脚本（例如：backup_mysql.bat（Windows）或backup_mysql.sh（Linux）），包含以下内容：
+
+Windows脚本（backup_mysql.bat）：
+```shell
+@echo off
+For /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set mydate=%%c-%%a-%%b)
+For /f "tokens=1-2 delims=/:" %%a in ("%TIME%") do (set mytime=%%a%%b)
+set mydatetime=%mydate%_%mytime%
+set BackupFile=backup_directory\backup_%mydatetime%.sql
+"mysql_install_directory\bin\mysqldump.exe" -u USERNAME -pPASSWORD DATABASE_NAME > %BackupFile%
+```
+Linux脚本（backup_mysql.sh）：
+```shell
+#!/bin/sh
+script_path="$(dirname "$(readlink -f "$0")")"
+echo "当前脚本所在路径：$script_path"
+backup_dir=${script_path}/backup_sql
+mkdir -p $backup_dir
+mysqldump -u all_keeper -p 1_nDb9tk0pwa all_keeper > ${backup_dir}/all-keeper_`date +%Y%m%d%H%M%S`.sql
+```
+将backup_directory替换为您想存储备份文件的目录
+
+将mysql_install_directory替换为MySQL安装目录
+
+使用真实的数据库用户名代替USERNAME
+
+使用真实的数据库密码代替PASSWORD
+
+使用要备份的数据库名称代替DATABASE_NAME
+
+#### 2. 为脚本设置可执行权限（仅在Linux上需要）：
+```shell
+chmod +x backup_mysql.sh
+```
+#### 3. 创建一个定时任务（Windows Task Scheduler或Linux的cron）：
+a) Windows定时任务：
+
+打开任务计划程序
+单击"创建基本任务"，然后设置触发器（例如：每天、每周等），并选择刚创建的备份脚本作为要执行的操作。
+
+b) Linux的cron任务：
+
+在终端中键入crontab -e以编辑cron配置
+添加以下内容（根据实际情况修改）：
+```shell
+0 2 * * * /path/to/backup_mysql.sh
+```
+这将在每天凌晨2点执行备份任务。请将/path/to替换为脚本的实际路径。
+
 ## 常见问题
 ### 问题一:下拉框选择列表获取失败
 现在Windows上执行一下命令
