@@ -15,12 +15,23 @@ from ..models import Transaction, CapitalAccount
 
 @admin.register(CapitalAccount)
 class CapitalAccountAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['name', 'owner', 'balance']
+    list_display = LIST_DISPLAY + ['name', 'owner', 'balance', 'left']
     list_filter = ['owner']
     autocomplete_fields = ['owner']
     date_hierarchy = 'createdAt'
     search_fields = ['name', 'owner__name']
-    # list_filter = ['paid_off', 'whose', 'ddl']
+
+    def left(self, obj):
+        result = obj.balance
+        all1 = Transaction.objects.filter(_from=obj).all()
+        all2 = Transaction.objects.filter(to=obj).all()
+        for i1 in all1:
+            result = result - i1.value
+        for i2 in all2:
+            result = result + i2.value
+        return result
+
+    left.short_description = "可用余额"
     # ordering = ('ddl',)
 
 
