@@ -22,6 +22,7 @@ from .serverUser import ServerUserAdmin
 from .tel import TelAdmin
 from .tel import TelAdmin
 from .wechat import WechatAdmin
+from .trade import CapitalAccountAdmin,TransactionAdmin
 
 
 @admin.register(Type)

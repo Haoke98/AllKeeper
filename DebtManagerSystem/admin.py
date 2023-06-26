@@ -3,7 +3,7 @@ from django.contrib.admin.views.main import ChangeList
 from django.db.models import Sum
 
 from izBasar.admin import LIST_DISPLAY
-from .models import Debt, Transaction, Node
+from .models import Debt
 
 
 class ItemChangeList(ChangeList):
@@ -36,19 +36,3 @@ class DebtAdmin(admin.ModelAdmin):
         return super().changelist_view(request, extra_context=extra_context)
 
 
-@admin.register(Node)
-class NodeAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['name']
-    date_hierarchy = 'createdAt'
-    search_fields = ['name']
-    # list_filter = ['paid_off', 'whose', 'ddl']
-    # ordering = ('ddl',)
-
-
-@admin.register(Transaction)
-class TransactionAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['_from', 'to', 'value', 'info']
-    list_filter = ['_from', 'to']
-    autocomplete_fields = ['_from', 'to']
-    date_hierarchy = 'createdAt'
-    # ordering = ('ddl',)
