@@ -11,7 +11,7 @@ class CapitalAccount(BaseModel):
     owner = models.ForeignKey(Human, on_delete=models.CASCADE, verbose_name="拥有者", null=True, related_name='owner')
 
     def __str__(self):
-        return f"交易节点({self.name})"
+        return f"{self.owner}---{self.name}"
 
     class Meta:
         verbose_name = "资金账户"

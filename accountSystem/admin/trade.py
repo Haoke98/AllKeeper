@@ -19,7 +19,7 @@ class CapitalAccountAdmin(admin.ModelAdmin):
     list_filter = ['owner']
     autocomplete_fields = ['owner']
     date_hierarchy = 'createdAt'
-    search_fields = ['name']
+    search_fields = ['name', 'owner__name']
     # list_filter = ['paid_off', 'whose', 'ddl']
     # ordering = ('ddl',)
 
