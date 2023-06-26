@@ -37,8 +37,8 @@ class CapitalAccountAdmin(admin.ModelAdmin):
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'at', '_from', 'to', 'value', 'info', 'createdAt', 'updatedAt']
-    list_filter = ['_from', 'to']
+    list_display = ['id', 'at', '_from', 'to', 'value', 'remark', 'info', 'createdAt', 'updatedAt']
     autocomplete_fields = ['_from', 'to']
+    list_filter = ['to__owner', 'to', 'remark']
     date_hierarchy = 'createdAt'
     # ordering = ('ddl',)

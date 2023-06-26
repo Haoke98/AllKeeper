@@ -23,6 +23,7 @@ class Transaction(BaseModel):
     to = models.ForeignKey(related_name="_to", verbose_name="资金去处", to=CapitalAccount, on_delete=models.CASCADE)
     value = models.FloatField(verbose_name="金额（RMB)", default=0.0)
     at = models.DateTimeField(verbose_name="交易发生时间")
+    remark = models.CharField(verbose_name="备注", max_length=50, null=True, blank=False)
 
     def __str__(self):
         return f"资金流动（{self.id}"
