@@ -31,9 +31,11 @@ class DebtAdmin(admin.ModelAdmin):
     def changelist_view(self, request, extra_context=None):
         response = super().changelist_view(request, extra_context)
         print(response.context_data['cl'].aggregate_values)
-        total_amount = response.context_data['cl'].aggregate_values['principle__sum']
+        aggvs = response.context_data['cl'].aggregate_values
         extra_context = extra_context or {}
-        extra_context['total_num'] = total_amount
+        extra_context['principle__sum'] = aggvs['principle__sum']
+        extra_context['interest__sum'] = aggvs['interest__sum']
+        extra_context['sum'] = aggvs['interest__sum']+aggvs['principle__sum']
         return super().changelist_view(request, extra_context=extra_context)
 
 
