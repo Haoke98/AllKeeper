@@ -7,8 +7,11 @@ from izBasar.models import BaseModel
 # Create your models here.
 class CapitalAccount(BaseModel):
     name = models.CharField(verbose_name="标题", max_length=100)
-    balance = models.FloatField(verbose_name="消费额度", default=0.0)
+    consumptionLimit = models.FloatField(verbose_name="消费额度", default=0.0)
+    withdrawalLimit = models.FloatField(verbose_name="取现额度", default=0.0)
+    temporaryLimit = models.FloatField(verbose_name="临时消费额度", default=0.0)
     owner = models.ForeignKey(Human, on_delete=models.CASCADE, verbose_name="拥有者", null=True, related_name='owner')
+    isCredit = models.BooleanField(default=False, verbose_name="是否为信用账户")
 
     def __str__(self):
         return f"{self.owner}---{self.name}"

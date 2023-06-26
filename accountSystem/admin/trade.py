@@ -15,24 +15,56 @@ from ..models import Transaction, CapitalAccount
 
 @admin.register(CapitalAccount)
 class CapitalAccountAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['name', 'owner', 'balance', 'left']
-    list_filter = ['owner']
+    list_display = LIST_DISPLAY + ['name', 'owner', 'isCredit', 'balance', 'consumptionLimit', 'withdrawalLimit',
+                                   'temporaryLimit',
+                                   'left', 'toBeReturn']
+    list_filter = ['owner', 'isCredit']
     autocomplete_fields = ['owner']
     date_hierarchy = 'createdAt'
     search_fields = ['name', 'owner__name']
 
-    def left(self, obj):
-        result = obj.balance
-        all1 = Transaction.objects.filter(_from=obj).all()
-        all2 = Transaction.objects.filter(to=obj).all()
-        for i1 in all1:
-            result = result - i1.value
-        for i2 in all2:
-            result = result + i2.value
-        return result
-
-    left.short_description = "可用余额"
     # ordering = ('ddl',)
+    def balance(self, obj):
+        if obj.isCredit:
+            return ""
+        else:
+            result = 0
+            for i1 in Transaction.objects.filter(_from=obj).all():
+                result = result - i1.value
+            for i2 in Transaction.objects.filter(to=obj).all():
+                result = result + i2.value
+            return result
+
+    balance.short_description = "余额"
+
+    def left(self, obj):
+        if obj.isCredit:
+            result1 = obj.temporaryLimit
+            for i1 in Transaction.objects.filter(_from=obj).all():
+                result1 = result1 - i1.value
+            resul2 = obj.consumptionLimit + obj.withdrawalLimit
+            result = result1 + resul2
+            return result
+        else:
+            return ""
+
+    left.short_description = "可用额度"
+
+    def toBeReturn(self, obj):
+        if obj.isCredit:
+            result = 0
+            print(obj.name, result)
+            for i1 in Transaction.objects.filter(_from=obj).all():
+                result = result + i1.value
+                print("          借了", i1.value, result)
+            for i2 in Transaction.objects.filter(to=obj).all():
+                result = result - i2.value
+                print("          还了", i2.value, result)
+            return result
+        else:
+            return ""
+
+    toBeReturn.short_description = "待还"
 
 
 @admin.register(Transaction)
