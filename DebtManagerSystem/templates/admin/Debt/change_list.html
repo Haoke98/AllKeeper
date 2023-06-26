@@ -1,0 +1,17 @@
+{% extends "admin/change_list.html" %}
+
+{% block result_list %}
+  {{ block.super }}
+  <tfoot>
+    <tr>
+      {# 这里我们添加了一列作为说明 #}
+      <td colspan="{{ cl.colspan|add:"-1" }}"><strong>总和：</strong></td>
+      <td>
+        <strong>
+          {# 在这里计算总和值。例如，我们假设数字数据存储在 num 这一列中。#}
+          {{ total_num }}
+        </strong>
+      </td>
+    </tr>
+  </tfoot>
+{% endblock %}

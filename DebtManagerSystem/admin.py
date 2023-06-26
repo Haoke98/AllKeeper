@@ -20,6 +20,7 @@ class DebtAdmin(admin.ModelAdmin):
     date_hierarchy = 'ddl'
     list_filter = ['paid_off', 'whose', 'ddl']
     ordering = ('ddl',)
+    change_list_template = 'admin/Debt/change_list.html'
 
     def sum(self, obj):
         return obj.principle + obj.interest
@@ -32,7 +33,7 @@ class DebtAdmin(admin.ModelAdmin):
         print(response.context_data['cl'].aggregate_values)
         total_amount = response.context_data['cl'].aggregate_values['principle__sum']
         extra_context = extra_context or {}
-        extra_context['total_amount'] = total_amount
+        extra_context['total_num'] = total_amount
         return super().changelist_view(request, extra_context=extra_context)
 
 
