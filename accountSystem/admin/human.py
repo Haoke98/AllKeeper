@@ -30,10 +30,10 @@ class TelInlineAdmin(admin.TabularInline):
 
 @admin.register(Human)
 class HumanAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ["name", 'idCardNum', 'sex', '_tels', 'WB_ID', 'DY_ID', 'DY_home',
-                                   'license_plate_number', 'info','_count']
+    list_display = LIST_DISPLAY + ["name", 'idCardNum', 'sex', 'birthday', '_tels', 'WB_ID', 'DY_ID', 'DY_home',
+                                   'license_plate_number', 'info', '_count']
     search_fields = ['name', 'idCardNum']
-    list_filter = ['sex']
+    list_filter = ['sex', 'birthday']
     list_per_page = 14
     inlines = [TelInlineAdmin]
 
