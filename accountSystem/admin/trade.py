@@ -15,15 +15,16 @@ from ..models import Transaction, CapitalAccount
 
 @admin.register(CapitalAccount)
 class CapitalAccountAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['name', 'owner', 'isCredit', 'balance', 'consumptionLimit', 'withdrawalLimit',
+    list_display = LIST_DISPLAY + ['owner_natural_person', 'owner_market_subject', 'name', 'isCredit', 'balance',
+                                   'consumptionLimit', 'withdrawalLimit',
                                    'temporaryLimit',
-                                   'left', 'toBeReturn']
-    list_filter = ['owner', 'isCredit']
-    autocomplete_fields = ['owner']
+                                   'left', 'toBeReturn', 'repaymentAt']
+    list_filter = ['owner_natural_person', 'owner_market_subject', 'isCredit', 'repaymentAt']
+    autocomplete_fields = ['owner_natural_person', 'owner_market_subject']
     date_hierarchy = 'createdAt'
-    search_fields = ['name', 'owner__name']
+    search_fields = ['name', ]
+    ordering = ('repaymentAt',)
 
-    # ordering = ('ddl',)
     def balance(self, obj):
         if obj.isCredit:
             return ""
@@ -71,6 +72,6 @@ class CapitalAccountAdmin(admin.ModelAdmin):
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ['id', 'at', '_from', 'to', 'value', 'remark', 'info', 'createdAt', 'updatedAt']
     autocomplete_fields = ['_from', 'to']
-    list_filter = ['to__owner', 'to', 'remark']
+    list_filter = ['to', 'remark']
     date_hierarchy = 'createdAt'
-    # ordering = ('ddl',)
+    ordering = ('-at',)

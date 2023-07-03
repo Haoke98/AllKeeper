@@ -1,20 +1,31 @@
 from django.db import models
 
-from accountSystem.models import Human
 from izBasar.models import BaseModel
+from .human import Human
+from .marketsubject import MarketSubject
 
 
 # Create your models here.
 class CapitalAccount(BaseModel):
+    owner_natural_person = models.ForeignKey(Human, on_delete=models.CASCADE, verbose_name="拥有者(自然人)", null=True,
+                                             blank=True,
+                                             related_name='owner_natural_person')
+    owner_market_subject = models.ForeignKey(MarketSubject, on_delete=models.CASCADE, verbose_name="拥有者(市场主题)",
+                                             null=True, blank=True,
+                                             related_name='owner_market_subject')
     name = models.CharField(verbose_name="标题", max_length=100)
-    consumptionLimit = models.FloatField(verbose_name="消费额度", default=0.0)
-    withdrawalLimit = models.FloatField(verbose_name="取现额度", default=0.0)
-    temporaryLimit = models.FloatField(verbose_name="临时消费额度", default=0.0)
-    owner = models.ForeignKey(Human, on_delete=models.CASCADE, verbose_name="拥有者", null=True, related_name='owner')
     isCredit = models.BooleanField(default=False, verbose_name="是否为信用账户")
+    consumptionLimit = models.FloatField(verbose_name="消费额度", default=0.0, blank=True)
+    withdrawalLimit = models.FloatField(verbose_name="取现额度", default=0.0, blank=True)
+    temporaryLimit = models.FloatField(verbose_name="临时消费额度", default=0.0, blank=True)
+    repaymentAt = models.DateField(verbose_name="还款日", null=True, blank=True)
 
     def __str__(self):
-        return f"{self.owner}---{self.name}"
+        if self.owner_natural_person:
+            return f"{self.owner_natural_person}---{self.name}"
+        if self.owner_market_subject:
+            return f"{self.owner_market_subject}---{self.name}"
+        return f"CapitalAccount({self.id})---{self.name}"
 
     class Meta:
         verbose_name = "资金账户"

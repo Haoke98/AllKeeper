@@ -14,6 +14,7 @@ from .dbServiceUser import DbServiceUserAdmin
 from .email import EmailAdmin
 from .es import ElasticSearchAdmin
 from .human import HumanAdmin
+from .market_subject import MarketSubjectAdmin
 from .scripts import ScriptAdmin
 from .server import ServerAdmin
 from .server import ServerAdmin
@@ -21,8 +22,8 @@ from .serverUser import ServerUserAdmin
 from .serverUser import ServerUserAdmin
 from .tel import TelAdmin
 from .tel import TelAdmin
+from .trade import CapitalAccountAdmin, TransactionAdmin
 from .wechat import WechatAdmin
-from .trade import CapitalAccountAdmin,TransactionAdmin
 
 
 @admin.register(Type)
