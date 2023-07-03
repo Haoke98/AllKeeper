@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 
 from izBasar.models import BaseModel
+from lib import zodiacHelper
 
 
 # Create your models here.
@@ -13,6 +14,9 @@ class Human(BaseModel):
     sex = models.CharField(max_length=1, choices=(("男", "男"), ("女", "女")),
                            verbose_name="性别", null=True, blank=True)
     birthday = models.DateField(verbose_name="出生日期", null=True, blank=True)
+    zodiac = models.CharField(verbose_name='星座', max_length=50, null=True, blank=True)
+    birthplace = models.CharField(verbose_name="出生地", null=True, blank=True, max_length=255)
+    collage = models.CharField(verbose_name="毕业院校", null=True, blank=True, max_length=100)
     WB_ID = models.CharField(max_length=50, verbose_name="微博ID", help_text="微博首页：https://weibo.com/u/{ID}", null=True,
                              blank=True)
     DY_home = models.CharField(max_length=100, verbose_name="抖音首页", help_text="抖音首页：https://www.douyin.com/user/{系统ID}",
@@ -30,6 +34,8 @@ class Human(BaseModel):
         return self.name
 
     def save(self, *args, **kwargs):
+        if self.birthday:
+            self.zodiac = zodiacHelper.get_zodiac_sign(self.birthday.strftime("%Y/%m/%d"))
         if self.idCardNum:
             birthday_str = self.idCardNum[6:14]
             self.birthday = datetime.datetime.strptime(birthday_str, "%Y%m%d").date()
