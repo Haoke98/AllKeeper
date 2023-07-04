@@ -13,6 +13,7 @@ class Human(BaseModel):
     idCardNum = models.CharField(max_length=18, verbose_name="身份证号", null=True, blank=True)
     sex = models.CharField(max_length=1, choices=(("男", "男"), ("女", "女")),
                            verbose_name="性别", null=True, blank=True)
+    ethnic = models.CharField(max_length=50, verbose_name="民族", null=True, blank=True)
     birthday = models.DateField(verbose_name="出生日期", null=True, blank=True)
     zodiac = models.CharField(verbose_name='星座', max_length=50, null=True, blank=True)
     birthplace = models.CharField(verbose_name="出生地", null=True, blank=True, max_length=255)
@@ -36,21 +37,23 @@ class Human(BaseModel):
     def save(self, *args, **kwargs):
         if self.birthday:
             self.zodiac = zodiacHelper.get_zodiac_sign(self.birthday.strftime("%Y/%m/%d"))
-        if self.idCardNum:
-            birthday_str = self.idCardNum[6:14]
-            self.birthday = datetime.datetime.strptime(birthday_str, "%Y%m%d").date()
-            self.sex = ['女', '男'][int(self.idCardNum[14])]
-        else:
-            if self.birthday:
-                if self.sex:
-                    self.idCardNum = self.birthday.strftime(f"******%Y%m%d{['女', '男'].index(self.sex)}***")
-                else:
-                    self.idCardNum = self.birthday.strftime("******%Y%m%d****")
-            else:
-                if self.sex:
-                    self.idCardNum = f"**************{['女', '男'].index(self.sex)}***"
-                else:
-                    pass
+        if self.idCardNum and self.birthday:
             pass
-
+        elif self.idCardNum and not self.birthday:
+            birthday_str = self.idCardNum[6:14]
+            if birthday_str != "********":
+                self.birthday = datetime.datetime.strptime(birthday_str, "%Y%m%d").date()
+                self.zodiac = zodiacHelper.get_zodiac_sign(self.birthday.strftime("%Y/%m/%d"))
+            if self.idCardNum[14] != "*":
+                self.sex = ['女', '男'][int(self.idCardNum[14])]
+        elif not self.idCardNum and self.birthday:
+            if self.sex:
+                self.idCardNum = self.birthday.strftime(f"******%Y%m%d{['女', '男'].index(self.sex)}***")
+            else:
+                self.idCardNum = self.birthday.strftime("******%Y%m%d****")
+        elif not self.idCardNum and not self.birthday:
+            if self.sex:
+                self.idCardNum = f"**************{['女', '男'].index(self.sex)}***"
+            else:
+                pass
         super().save(*args, **kwargs)
