@@ -37,23 +37,28 @@ class Human(BaseModel):
     def save(self, *args, **kwargs):
         if self.birthday:
             self.zodiac = zodiacHelper.get_zodiac_sign(self.birthday.strftime("%Y/%m/%d"))
-        if self.idCardNum and self.birthday:
-            pass
-        elif self.idCardNum and not self.birthday:
-            birthday_str = self.idCardNum[6:14]
-            if birthday_str != "********":
-                self.birthday = datetime.datetime.strptime(birthday_str, "%Y%m%d").date()
-                self.zodiac = zodiacHelper.get_zodiac_sign(self.birthday.strftime("%Y/%m/%d"))
-            if self.idCardNum[14] != "*":
-                self.sex = ['女', '男'][int(self.idCardNum[14])]
-        elif not self.idCardNum and self.birthday:
-            if self.sex:
-                self.idCardNum = self.birthday.strftime(f"******%Y%m%d{['女', '男'].index(self.sex)}***")
-            else:
-                self.idCardNum = self.birthday.strftime("******%Y%m%d****")
-        elif not self.idCardNum and not self.birthday:
-            if self.sex:
-                self.idCardNum = f"**************{['女', '男'].index(self.sex)}***"
-            else:
+        if self.idCardNum:
+            if self.birthday:
                 pass
+            else:
+                birthday_str = self.idCardNum[6:14]
+                if "*" not in birthday_str:
+                    self.birthday = datetime.datetime.strptime(birthday_str, "%Y%m%d").date()
+                    self.zodiac = zodiacHelper.get_zodiac_sign(self.birthday.strftime("%Y/%m/%d"))
+            if self.idCardNum[14] == "*":
+                if self.sex:
+                    self.idCardNum = self.idCardNum[0:14] + str(['女', '男'].index(self.sex)) + self.idCardNum[15:]
+            else:
+                self.sex = ['女', '男'][int(self.idCardNum[14])]
+        else:
+            if self.birthday:
+                if self.sex:
+                    self.idCardNum = self.birthday.strftime(f"******%Y%m%d{['女', '男'].index(self.sex)}***")
+                else:
+                    self.idCardNum = self.birthday.strftime("******%Y%m%d****")
+            else:
+                if self.sex:
+                    self.idCardNum = f"**************{['女', '男'].index(self.sex)}***"
+                else:
+                    pass
         super().save(*args, **kwargs)
