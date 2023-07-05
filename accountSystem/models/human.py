@@ -40,7 +40,9 @@ class Human(BaseModel):
             self.zodiac = zodiacHelper.get_zodiac_sign(self.birthday.strftime("%Y/%m/%d"))
         if self.idCardNum:
             if self.birthday:
-                pass
+                birthday_str = self.idCardNum[6:14]
+                if "*" in birthday_str:
+                    self.idCardNum = self.idCardNum[0:6] + self.birthday.strftime("%Y%m%d") + self.idCardNum[14:]
             else:
                 birthday_str = self.idCardNum[6:14]
                 if "*" not in birthday_str:
