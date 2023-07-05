@@ -19,17 +19,18 @@ class Human(BaseModel):
     birthplace = models.CharField(verbose_name="出生地", null=True, blank=True, max_length=255)
     collage = models.CharField(verbose_name="毕业院校", null=True, blank=True, max_length=100)
     WB_ID = models.CharField(max_length=50, verbose_name="微博ID", help_text="微博首页：https://weibo.com/u/{ID}", null=True,
-                             blank=True)
+                             blank=True, unique=True)
     DY_home = models.CharField(max_length=100, verbose_name="抖音首页", help_text="抖音首页：https://www.douyin.com/user/{系统ID}",
-                               null=True, blank=True)
-    DY_ID = models.CharField(max_length=50, verbose_name="抖音ID", null=True, blank=True)
+                               null=True, blank=True, unique=True)
+    DY_ID = models.CharField(max_length=50, verbose_name="抖音ID", null=True, blank=True, unique=True)
     license_plate_number = models.CharField(max_length=50, verbose_name="车牌号", help_text="可以通过人人查中查询到车主信息", null=True,
-                                            blank=True)
+                                            blank=True, unique=True)
 
     class Meta:
         verbose_name = "人"
         verbose_name_plural = "社工库"
         db_table = "accountSystem_group"
+        unique_together = ['name', 'idCardNum']
 
     def __str__(self):
         return self.name
