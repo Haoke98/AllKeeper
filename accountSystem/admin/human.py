@@ -35,7 +35,7 @@ class HumanAdmin(admin.ModelAdmin):
                                    'DY_ID',
                                    'DY_home',
                                    'license_plate_number', 'birthplace', 'info', '_count']
-    search_fields = ['name', 'idCardNum']
+    search_fields = ['name', 'idCardNum', 'license_plate_number', 'WB_ID', 'DY_ID', 'DY_home', 'birthplace']
     list_filter = ['sex', 'birthday', 'zodiac', 'ethnic', 'collage']
     list_per_page = 14
     inlines = [TelInlineAdmin]
