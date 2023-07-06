@@ -32,6 +32,7 @@ class TelInlineAdmin(admin.TabularInline):
 class HumanAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY + ["name", 'idCardNum', 'sex', 'birthday', 'zodiac', 'ethnic', '_tels', 'collage',
                                    'WB_ID',
+                                   "weibo_home",
                                    'DY_ID',
                                    'DY_home',
                                    'license_plate_number', 'birthplace', 'info', '_count']
@@ -70,3 +71,12 @@ class HumanAdmin(admin.ModelAdmin):
         return mark_safe(finalList)
 
     _tels.short_description = "联系方式"
+
+    def weibo_home(self, obj):
+        if obj.WB_ID:
+            url = f"https://weibo.com/u/{obj.WB_ID}"
+            return mark_safe(f'<a href="{url}" target="blank">{url}</a>')
+        else:
+            return None
+
+    weibo_home.short_description = "微博首页链接"
