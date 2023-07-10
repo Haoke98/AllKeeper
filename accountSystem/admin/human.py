@@ -11,8 +11,7 @@ from django.forms import ModelForm
 from django.utils.safestring import mark_safe
 
 from izBasar.admin import LIST_DISPLAY
-from lib import imageHelper
-from lib.weiboHelper import Weibo
+from lib import imageHelper,weiboHelper
 from ..models import Human, Account
 from ..models import Tel
 
@@ -77,7 +76,7 @@ class HumanAdmin(admin.ModelAdmin):
     def weibo_avatar(self, obj):
         if obj.WB_ID:
             url = f"https://weibo.com/u/{obj.WB_ID}"
-            info = Weibo.info(obj.WB_ID)
+            info = weiboHelper.info(obj.WB_ID)
             user_info = info['user']
             screen_name = user_info['screen_name']
             profile_image_url = user_info['profile_image_url']

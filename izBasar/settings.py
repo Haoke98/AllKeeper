@@ -244,7 +244,11 @@ DATABASES = {
         'PORT': secret.MYSQL_PORT,
         'USER': secret.MYSQL_USERNAME,
         'PASSWORD': secret.MYSQL_PASSWORD,
-        'CONN_MAX_AGE': 60 * 60
+        'CONN_MAX_AGE': 60 * 60,
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+            'use_unicode': True,
+        },
     }
 }
 

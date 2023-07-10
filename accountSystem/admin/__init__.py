@@ -24,7 +24,7 @@ from .tel import TelAdmin
 from .tel import TelAdmin
 from .trade import CapitalAccountAdmin, TransactionAdmin
 from .wechat import WechatAdmin
-
+from .weibo import WeiboAdmin
 
 @admin.register(Type)
 class GroupAdmin(admin.ModelAdmin):
