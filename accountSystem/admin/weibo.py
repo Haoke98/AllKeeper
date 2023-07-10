@@ -17,9 +17,9 @@ from ..models import Weibo
 
 @admin.register(Weibo)
 class WeiboAdmin(admin.ModelAdmin):
-    list_display = ["id","_avatar","name",  'gender', 'birthday', 'zodiac', 'school','description' ,'followersCount','friendsCount','statusesCount','location','isSVIP','userType']
+    list_display = ["id","_avatar","name",  'gender', 'birthday', 'zodiac', 'school','description' ,'registeredAt','followersCount','friendsCount','statusesCount','location','ipLocation','isSVIP','userType','mbrank','mbtype','pcNew','sunshineCredit']
     search_fields = ['id','name','description']
-    list_filter = ['gender', 'birthday', 'zodiac','school','location','isSVIP','userType']
+    list_filter = ['gender', 'birthday', 'zodiac','school','location','ipLocation','isSVIP','userType','mbrank','mbtype','pcNew','registeredAt','sunshineCredit']
     list_per_page = 14
     inlines = []
 
@@ -42,7 +42,9 @@ class WeiboAdmin(admin.ModelAdmin):
             infoResp = weiboHelper.info(obj.id)
             detailResp = weiboHelper.detail(obj.id)
             userInfo = infoResp['user']
+            print("=========================="*4)
             print(userInfo)
+            print("^^^^^^^^^^^^^^^^^^^^^^^^^^"*4)
             obj.name = userInfo['screen_name']
             obj.avatar = userInfo['profile_image_url']
             obj.description = userInfo['description']
@@ -54,6 +56,16 @@ class WeiboAdmin(admin.ModelAdmin):
             if userInfo['svip']==1:
                 obj.isSVIP = True
             obj.userType = userInfo['user_type']
+            obj.mbrank = userInfo['mbrank']
+            obj.mbtype = userInfo['mbtype']
+            obj.pcNew = userInfo['pc_new']
+            obj.registeredAt = detailResp['created_at']
+            obj.ipLocation = detailResp['ip_location']
+            if "-" in detailResp['birthday']:
+                obj.birthday,obj.zodiac = detailResp['birthday'].split(' ')
+            else:
+                obj.zodiac = detailResp['birthday']
+            obj.sunshineCredit = detailResp['sunshine_credit']['level']
         else:
             print("Form: ",form)
         return super().save_model(request, obj, form, change)

@@ -22,10 +22,12 @@ class Weibo(BaseModel):
     location = models.CharField(max_length=100, verbose_name="位置", null=True, blank=True)
     ipLocation = models.CharField(max_length=100, verbose_name="IP位置", null=True, blank=True)
     sunshineCredit = models.CharField(max_length=50, verbose_name="阳光信用",  null=True, blank=True)
-    isSVIP = models.BooleanField(verbose_name="是否为SVIP",default=False)
     userType = models.IntegerField(null=True,blank=True)
     avatar = models.CharField(max_length=255,null=True,blank=True,verbose_name="头像")
-
+    mbrank = models.IntegerField(null=True,blank=True,verbose_name="VIP等级")
+    mbtype = models.IntegerField(null=True,blank=True)
+    isSVIP = models.BooleanField(verbose_name="是否为SVIP",default=False)
+    pcNew = models.IntegerField(null=True,blank=True)
 
     class Meta:
         verbose_name = "微博账户"
