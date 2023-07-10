@@ -28,6 +28,7 @@ class Weibo(BaseModel):
     mbtype = models.IntegerField(null=True,blank=True)
     isSVIP = models.BooleanField(verbose_name="是否为SVIP",default=False)
     pcNew = models.IntegerField(null=True,blank=True)
+    labels = models.CharField(max_length=255,null=True,blank=True,verbose_name="标签")
 
     class Meta:
         verbose_name = "微博账户"

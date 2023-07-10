@@ -17,8 +17,8 @@ from ..models import Weibo
 
 @admin.register(Weibo)
 class WeiboAdmin(admin.ModelAdmin):
-    list_display = ["id","_avatar","name",  'gender', 'birthday', 'zodiac', 'school','description' ,'registeredAt','followersCount','friendsCount','statusesCount','location','ipLocation','isSVIP','userType','mbrank','mbtype','pcNew','sunshineCredit']
-    search_fields = ['id','name','description']
+    list_display = ["id","_avatar","name",  'gender', 'birthday', 'zodiac', 'school','description' ,'registeredAt','followersCount','friendsCount','statusesCount','location','ipLocation','isSVIP','userType','mbrank','mbtype','pcNew','sunshineCredit','labels']
+    search_fields = ['id','name','description','labels']
     list_filter = ['gender', 'birthday', 'zodiac','school','location','ipLocation','isSVIP','userType','mbrank','mbtype','pcNew','registeredAt','sunshineCredit']
     list_per_page = 14
     inlines = []
@@ -38,7 +38,6 @@ class WeiboAdmin(admin.ModelAdmin):
 
     def save_model(self, request: Any, obj: Any, form: Any, change: Any) -> None:
         if not change:
-            print("正在新建微博账户:",obj.id)
             infoResp = weiboHelper.info(obj.id)
             detailResp = weiboHelper.detail(obj.id)
             userInfo = infoResp['user']
@@ -66,6 +65,12 @@ class WeiboAdmin(admin.ModelAdmin):
             else:
                 obj.zodiac = detailResp['birthday']
             obj.sunshineCredit = detailResp['sunshine_credit']['level']
+            if detailResp.keys().__contains__('education'):
+                obj.school = detailResp['education']['school']
+            labels = []
+            for label in detailResp['label_desc']:
+                labels.append(label['name'])
+            obj.labels = '|'.join(labels)
         else:
-            print("Form: ",form)
+            pass
         return super().save_model(request, obj, form, change)
