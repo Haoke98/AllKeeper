@@ -3,7 +3,7 @@ import datetime
 from django.db import models
 
 from izBasar.models import BaseModel
-from lib import zodiacHelper
+from lib import zodiacHelper,weiboHelper
 
 
 # Create your models here.
@@ -38,6 +38,44 @@ class Weibo(BaseModel):
         if self.name:
             return f"{self.name}({self.id})"
         return f"微博账户({self.id})"
+    def collect(self):
+            isOk,infoResp = weiboHelper.info(self.id)
+            if isOk:
+                detailResp = weiboHelper.detail(self.id)
+                userInfo = infoResp['user']
+                print("=========================="*4)
+                print(userInfo)
+                print("^^^^^^^^^^^^^^^^^^^^^^^^^^"*4)
+                self.name = userInfo['screen_name']
+                self.avatar = userInfo['profile_image_url']
+                self.description = userInfo['description']
+                self.location = userInfo['location']
+                self.gender = userInfo['gender']
+                self.followersCount = userInfo['followers_count']
+                self.friendsCount = userInfo['friends_count']
+                self.statusesCount = userInfo['statuses_count']
+                if userInfo['svip']==1:
+                    self.isSVIP = True
+                self.userType = userInfo['user_type']
+                self.mbrank = userInfo['mbrank']
+                self.mbtype = userInfo['mbtype']
+                self.pcNew = userInfo['pc_new']
+                self.registeredAt = detailResp['created_at']
+                self.ipLocation = detailResp['ip_location']
+                if "-" in detailResp['birthday']:
+                    self.birthday,self.zodiac = detailResp['birthday'].split(' ')
+                else:
+                    self.zodiac = detailResp['birthday']
+                self.sunshineCredit = detailResp['sunshine_credit']['level']
+                if detailResp.keys().__contains__('education'):
+                    self.school = detailResp['education']['school']
+                labels = []
+                for label in detailResp['label_desc']:
+                    labels.append(label['name'])
+                self.labels = '|'.join(labels)
+                return True
+            else:
+                 return False
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
+            super().save(*args, **kwargs)

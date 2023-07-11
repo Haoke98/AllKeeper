@@ -52,16 +52,13 @@ class Human(BaseModel):
                 if self.sex:
                     self.idCardNum = self.idCardNum[0:14] + str(['女', '男'].index(self.sex)) + self.idCardNum[15:]
             else:
-                self.sex = ['女', '男'][int(self.idCardNum[14])]
+                if int(self.idCardNum[16])%2==0:
+                    self.sex = '女'#偶数
+                else:
+                    self.sex = '男'#奇数
         else:
             if self.birthday:
-                if self.sex:
-                    self.idCardNum = self.birthday.strftime(f"******%Y%m%d{['女', '男'].index(self.sex)}***")
-                else:
-                    self.idCardNum = self.birthday.strftime("******%Y%m%d****")
+                self.idCardNum = self.birthday.strftime("******%Y%m%d****")    
             else:
-                if self.sex:
-                    self.idCardNum = f"**************{['女', '男'].index(self.sex)}***"
-                else:
-                    pass
+                pass
         super().save(*args, **kwargs)

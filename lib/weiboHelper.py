@@ -31,9 +31,18 @@ def info(uid: str):
         resp = requests.get(f"https://weibo.com/ajax/profile/info?uid={uid}", headers={
             "Cookie": "SUB=_2AkMU0XJPf8NxqwJRmfoRxG7gboVyyw3EieKijYOUJRMxHRl-yT9kqkI9tRB6P1FcoA_jiiwlWkU1njUraklGH8yyp3eg; SUBP=0033WrSXqPxfM72-Ws9jqgMF55529P9D9W5o-1D0KVWj47oMwKycwlRH; SINAGLOBAL=3835450204212.678.1670249850113; ULV=1670249850168:1:1:1:3835450204212.678.1670249850113:; XSRF-TOKEN=szpHdnejDXDZYbx6Z4qSgioL; WBPSESS=1QIptkPh0r7VTljIOfRP67LOhyoJ1yOf94TLlawIatqfNeS0xdW8Sei-I-A4Dksn0mlpb1M64xnYWdD0Pas_puBut1fMAOtq8YLZdv81Xf8Dc5AwXo-3S4K8jrf0VE5Rcj3F2sMwDYgSb4nxONnzki84VKkpLKAh5pPuJTTE-WI="
         })
-        print(resp.json())
-        data = resp.json()['data']
-        return data
+        print(resp.status_code)
+        contentType = resp.headers['Content-Type']
+        if 'text' in contentType:
+            #   print(resp.status_code,"异常:",resp.text)
+              return False,None
+        elif 'application/json' in contentType:
+            print(resp.json())
+            data = resp.json()['data']
+            return True,data
+        else:
+              print("ContentType:",contentType)
+              return False,None
         # user_info = data['user']
         # profile_image_url = user_info['profile_image_url']
         # image = urllib.request.urlopen(profile_image_url).read()

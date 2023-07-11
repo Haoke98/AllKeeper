@@ -74,17 +74,17 @@ class HumanAdmin(admin.ModelAdmin):
     _tels.short_description = "联系方式"
 
     def weibo_avatar(self, obj):
-        if obj.WB_ID:
-            url = f"https://weibo.com/u/{obj.WB_ID}"
-            info = weiboHelper.info(obj.WB_ID)
-            user_info = info['user']
-            screen_name = user_info['screen_name']
-            profile_image_url = user_info['profile_image_url']
-            profile_image_base64 = imageHelper.image_to_base64(profile_image_url)
-            return mark_safe(f'''
-            <a href="{url}" target="blank"><img src="data:image/jpeg;base64,{profile_image_base64}" title="{screen_name}"></a>
-            ''')
-        else:
+        # if obj.WB_ID:
+        #     url = f"https://weibo.com/u/{obj.WB_ID}"
+        #     info = weiboHelper.info(obj.WB_ID)
+        #     user_info = info['user']
+        #     screen_name = user_info['screen_name']
+        #     profile_image_url = user_info['profile_image_url']
+        #     profile_image_base64 = imageHelper.image_to_base64(profile_image_url)
+        #     return mark_safe(f'''
+        #     <a href="{url}" target="blank"><img src="data:image/jpeg;base64,{profile_image_base64}" title="{screen_name}"></a>
+        #     ''')
+        # else:
             return None
 
     weibo_avatar.short_description = "微博头像"
