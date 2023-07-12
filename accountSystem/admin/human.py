@@ -33,10 +33,8 @@ class TelInlineAdmin(admin.TabularInline):
 class HumanAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY + ["name", 'idCardNum', 'sex', 'birthday', 'zodiac', 'ethnic', '_tels', 'collage',
                                    'WB_ID',
-                                   "weibo_avatar",
-                                   'DY_ID',
-                                   'DY_home',
-                                   'license_plate_number', 'birthplace', 'info', '_count']
+                                   'douyin',
+                                   'license_plate_number', 'birthplace', '_count','info']
     search_fields = ['name', 'idCardNum', 'license_plate_number', 'WB_ID', 'DY_ID', 'DY_home', 'birthplace']
     list_filter = ['sex', 'birthday', 'zodiac', 'ethnic', 'collage']
     list_per_page = 14
@@ -88,3 +86,83 @@ class HumanAdmin(admin.ModelAdmin):
             return None
 
     weibo_avatar.short_description = "微博头像"
+
+    def douyin(self,obj):
+        if obj.DY_home:
+            txt = "抖音首页"
+            url = f"https://www.douyin.com/user/{obj.DY_home}"
+            if obj.DY_ID:
+                txt = obj.DY_ID
+            return mark_safe(f'''
+            <a href="{url}" target="blank">{txt}</a>
+            ''')
+
+
+
+    # 显示在列表顶部的一些自定义html，可以是vue组件，会被vue渲染
+    top_html = ' <el-alert title="这是顶部的" type="success"></el-alert>'
+    # 也可以是方法的形式来返回html
+
+    def get_top_html(self, request):
+        return self.top_html
+    
+    fields_options = {
+        'id': {
+            'fixed': 'left',
+            'width': '50px',
+            'align': 'center'
+        },
+        'createdAt': {
+            'width': '200px',
+            'align': 'left'
+        },
+        'updatedAt': {
+            'width': '200px',
+            'align': 'left'
+        },
+        'name': {
+            'width': '200px',
+            'align': 'left'
+        },
+        'idCardNum': {
+            'width': '200px',
+            'align': 'left'
+        },
+        'birthday': {
+            'width': '110px',
+            'align': 'left'
+        },
+        '_tels': {
+            'width': '120px',
+            'align': 'left'
+        },
+        'collage':{
+            'width': '120px',
+            'align': 'left'
+        },
+        
+        'DY_ID':{
+            'width': '120px',
+            'align': 'left'
+        },
+        'WB_ID':{
+            'width': '120px',
+            'align': 'left'
+        },
+        'douyin':{
+            'width': '120px',
+            'align': 'left'
+        },
+        'license_plate_number':{
+            'width': '120px',
+            'align': 'left'
+        },
+        'birthplace':{
+            'width': '400px',
+            'align': 'left'
+        },
+        'info':{
+            'width': '1000px',
+            'align': 'left'
+        },
+    }

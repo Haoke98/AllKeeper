@@ -172,6 +172,7 @@ LOGGING = {
 
 # Application definition
 INSTALLED_APPS = [
+    'simplepro',
     'simpleui',
     'django.contrib.sites',
     'django.contrib.admin',
@@ -211,7 +212,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'middlewares.RequestLogMiddleware',
-    'middlewares.AuthCheck'
+    'middlewares.AuthCheck',
+    # 加入simplepro的中间件
+    'simplepro.middlewares.SimpleMiddleware'
 ]
 
 ROOT_URLCONF = 'izBasar.urls'

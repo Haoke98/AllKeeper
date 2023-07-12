@@ -50,7 +50,6 @@ class WeiboAdmin(admin.ModelAdmin):
     list_per_page = 14
     inlines = []
     actions = [collect_data,update]
-
     
     def _avatar(self, obj):
         if obj.avatar:
@@ -70,3 +69,23 @@ class WeiboAdmin(admin.ModelAdmin):
         else:
             pass
         return super().save_model(request, obj, form, change)
+
+    # 显示在列表顶部的一些自定义html，可以是vue组件，会被vue渲染
+    top_html = ' <el-alert title="这是顶部的" type="success"></el-alert>'
+    # 也可以是方法的形式来返回html
+
+    def get_top_html(self, request):
+        return self.top_html
+    
+    fields_options = {
+        'id': {
+            'fixed': 'left',
+            'width': '80px',
+            'align': 'center'
+        },
+        'create_time': {
+            'fixed': 'right',
+            'width': '200px',
+            'align': 'left'
+        }
+    }
