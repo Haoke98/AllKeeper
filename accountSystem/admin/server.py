@@ -17,7 +17,7 @@ class ServerAdmin(BaseAdmin):
     search_help_text = ['你好，这是搜索帮助语句！']
     autocomplete_fields = ['group']
     form = ServerForm
-
+    list_per_page = 10
     # inlines = [ServerUserInlineAdmin]
 
     def _ip(self, obj):

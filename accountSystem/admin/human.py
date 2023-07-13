@@ -11,7 +11,6 @@ from django.forms import ModelForm
 from django.utils.safestring import mark_safe
 
 from izBasar.admin import LIST_DISPLAY
-from lib import imageHelper,weiboHelper
 from ..models import Human, Account
 from ..models import Tel
 
@@ -31,10 +30,11 @@ class TelInlineAdmin(admin.TabularInline):
 
 @admin.register(Human)
 class HumanAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ["name", 'idCardNum', 'sex', 'birthday', 'zodiac', 'ethnic', '_tels', 'collage',
+    list_display = LIST_DISPLAY + ["name", 'face', 'idCardNum', 'sex', 'birthday', 'zodiac', 'ethnic', '_tels',
+                                   'collage',
                                    'WB_ID',
                                    'douyin',
-                                   'license_plate_number', 'birthplace', '_count','info']
+                                   'license_plate_number', 'birthplace', '_count', 'info']
     search_fields = ['name', 'idCardNum', 'license_plate_number', 'WB_ID', 'DY_ID', 'DY_home', 'birthplace']
     list_filter = ['sex', 'birthday', 'zodiac', 'ethnic', 'collage']
     list_per_page = 14
@@ -165,4 +165,15 @@ class HumanAdmin(admin.ModelAdmin):
             'width': '1000px',
             'align': 'left'
         },
+        'face':{
+            'width': '130px',
+            'align': 'center'
+        }
     }
+
+    def formatter(self, obj, field_name, value):
+        if field_name == "face":
+            if value:
+                return f'''<img src="{value}" style="width:100px;height:100px;">'''
+        # 这里可以对value的值进行判断，比如日期格式化等
+        return value

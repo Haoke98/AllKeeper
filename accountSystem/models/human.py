@@ -1,6 +1,7 @@
 import datetime
 
 from django.db import models
+from simplepro.components import fields
 
 from izBasar.models import BaseModel
 from lib import zodiacHelper
@@ -25,6 +26,7 @@ class Human(BaseModel):
     DY_ID = models.CharField(max_length=50, verbose_name="抖音ID", null=True, blank=True, unique=True)
     license_plate_number = models.CharField(max_length=50, verbose_name="车牌号", help_text="可以通过人人查中查询到车主信息", null=True,
                                             blank=True, unique=True)
+    face = fields.ImageField(drag=True, verbose_name='图片上传', max_length=128, null=True, blank=True)
 
     class Meta:
         verbose_name = "人"
