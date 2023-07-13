@@ -109,15 +109,15 @@ class HumanAdmin(admin.ModelAdmin):
     fields_options = {
         'id': {
             'fixed': 'left',
-            'width': '50px',
+            'width': '40px',
             'align': 'center'
         },
         'createdAt': {
-            'width': '200px',
+            'width': '180px',
             'align': 'left'
         },
         'updatedAt': {
-            'width': '200px',
+            'width': '180px',
             'align': 'left'
         },
         'name': {

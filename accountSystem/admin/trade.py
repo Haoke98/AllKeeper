@@ -67,6 +67,82 @@ class CapitalAccountAdmin(admin.ModelAdmin):
 
     toBeReturn.short_description = "待还"
 
+    # 动态统计，Simple Pro独有功能
+    def get_summaries(self, request, queryset):
+        # 自定义统计，可以根据request的页面 来统计当前页的数据，queryset 为深拷贝对象，如果传入的话 可能会影响列表的数据
+        # 返回的数据 为数组，对应列表的每一列
+        # 不支持html
+
+        # 如果想根据人员权限来动态展示，可以直接返回不同的数组，或者返回为None，为None的时候，不显示统计列
+
+        # 如果想统计满足当前搜索条件的数据的话 ，可以直接使用queryset.来进行统计
+        if request.POST.get('current_page') == '2':
+            return None
+        else:
+            # 需要有空字符串占位
+            return ('合计', '321', '1213123', '123123', '', '', '', '测试')
+    fields_options = {
+        'id': {
+            'fixed': 'left',
+            'width': '40px',
+            'align': 'center'
+        },
+        'createdAt': {
+            'width': '180px',
+            'align': 'left'
+        },
+        'updatedAt': {
+            'width': '180px',
+            'align': 'left'
+        },
+        'owner_natural_person': {
+            'width': '160px',
+            'align': 'left'
+        },
+        'owner_market_subject': {
+            'width': '240px',
+            'align': 'left'
+        },
+        'name': {
+            'width': '160px',
+            'align': 'left'
+        },
+        '_tels': {
+            'width': '120px',
+            'align': 'left'
+        },
+        'collage':{
+            'width': '120px',
+            'align': 'left'
+        },
+        
+        'DY_ID':{
+            'width': '120px',
+            'align': 'left'
+        },
+        'WB_ID':{
+            'width': '120px',
+            'align': 'left'
+        },
+        'douyin':{
+            'width': '120px',
+            'align': 'left'
+        },
+        'license_plate_number':{
+            'width': '120px',
+            'align': 'left'
+        },
+        'birthplace':{
+            'width': '400px',
+            'align': 'left'
+        },
+        'info':{
+            'width': '1000px',
+            'align': 'left'
+        },
+    }
+
+
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
