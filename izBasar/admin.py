@@ -3,7 +3,7 @@ from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
 LIST_DISPLAY = ['id', 'updatedAt', 'createdAt']
-
+SIMPLE_PRO = True
 
 def showUrl(url):
     if url:
@@ -25,38 +25,47 @@ class BaseAdmin(admin.ModelAdmin):
 
     @staticmethod
     def username(obj):
-        tag = mark_safe(
-            '''<div class="ui left labeled button" tabindex="0">
-                    <a class="ui basic right pointing label" style="width:10em;">
-                    %s
-                    </a>
-                    <div class="ui vertical animated button blue" onclick="copyStr('%s')" >
-                        <div class="hidden content" style="color:white;" >复制</div>
-                        <div class="visible content">
-                                <i class="copy icon"></i>
+        if SIMPLE_PRO:
+            return '''<button onclick="copyStr('%s')">
+                                        <a class="ui basic right pointing label" style="width:10em;">%s</a>
+                                      </button>
+                                   ''' % (obj, obj)
+        else:
+            tag = mark_safe(
+                '''<div class="ui left labeled button" tabindex="0">
+                        <a class="ui basic right pointing label" style="width:10em;">
+                        %s
+                        </a>
+                        <div class="ui vertical animated button blue" onclick="copyStr('%s')" >
+                            <div class="hidden content" style="color:white;" >复制</div>
+                            <div class="visible content">
+                                    <i class="copy icon"></i>
+                            </div>
                         </div>
-                    </div>
-                </div>''' % (obj, obj))
-        return tag
+                    </div>''' % (obj, obj))
+            return tag
 
     @staticmethod
     def password(obj):
-        tag = mark_safe(
-            '''<div class="ui left labeled button" tabindex="0">
-                    <div class="ui button">
-                        <i class="eye icon"></i>
-                    </div>
-                    <a class="ui basic left pointing label">
-                    ******
-                    </a>
-                    <div class="ui vertical animated button blue" onclick="copyStr('%s')" >
-                        <div class="hidden content" style="color:white;" >复制</div>
-                        <div class="visible content">
-                                <i class="copy icon"></i>
+        if SIMPLE_PRO:
+            return f'''<button onclick="copyStr('{obj}')" ><a class="ui basic left pointing label">******</a></button>'''
+        else:
+            tag = mark_safe(
+                '''<div class="ui left labeled button" tabindex="0">
+                        <div class="ui button">
+                            <i class="eye icon"></i>
                         </div>
-                    </div>
-                </div>''' % obj)
-        return tag
+                        <a class="ui basic left pointing label">
+                        ******
+                        </a>
+                        <div class="ui vertical animated button blue" onclick="copyStr('%s')" >
+                            <div class="hidden content" style="color:white;" >复制</div>
+                            <div class="visible content">
+                                    <i class="copy icon"></i>
+                            </div>
+                        </div>
+                    </div>''' % obj)
+            return tag
 
     @staticmethod
     def shwoUrl(url: str):

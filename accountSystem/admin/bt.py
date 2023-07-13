@@ -16,40 +16,25 @@ class BtAdmin(BaseAdmin):
     actions = ['test1', 'make_copy', 'custom_button']
 
     def _username(self, obj):
-        # return BaseAdmin.username(obj.username)
-        return '''<button onclick="copyStr('%s')">
-                            <a class="ui basic right pointing label" style="width:10em;">%s</a>
-                          </button>
-                       ''' % (obj.username, obj.username)
+        return BaseAdmin.username(obj.username)
 
     _username.short_description = "用户名"
 
     def _password(self, obj):
-        # return BaseAdmin.password(obj.pwd)
-        return f'''<button onclick="copyStr('{obj.pwd}')" ><a class="ui basic left pointing label">
-                                    ******
-                                    </a></button>'''
+        return BaseAdmin.password(obj.pwd)
 
     _password.short_description = "密码"
 
     def _basicAuthUsername(self, obj):
         if obj.basicAuthUsername is None:
             return None
-        # return BaseAdmin.username(obj.basicAuthUsername)
-        return '''<button onclick="copyStr('%s')">
-                    <a class="ui basic right pointing label" style="width:10em;">%s</a>
-                  </button>
-               ''' % (obj.basicAuthUsername, obj.basicAuthUsername)
-
+        return BaseAdmin.username(obj.basicAuthUsername)
     _basicAuthUsername.short_description = "BA用户名"
 
     def _basicAuthPassword(self, obj):
         if obj.basicAuthPwd is None:
             return None
-        # return BaseAdmin.password(obj.basicAuthPwd)
-        return f'''<button onclick="copyStr('{obj.basicAuthPwd}')" ><a class="ui basic left pointing label">
-                            ******
-                            </a></button>'''
+        return BaseAdmin.password(obj.basicAuthPwd)
 
     _basicAuthPassword.short_description = "BA密码"
 
