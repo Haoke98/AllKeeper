@@ -1,3 +1,4 @@
+import os
 import platform
 
 from .secret import ES_URI, ES_USERNAME, ES_PASSWORD
@@ -8,6 +9,7 @@ WINDOWS = 'Windows'
 LINUX = 'Linux'
 MacOS = 'Darwin'
 CURRENT_SYSTEM = platform.system()
+print("CWD:", os.getcwd())
 
 if CURRENT_SYSTEM == WINDOWS:
     _DEBUG = True
