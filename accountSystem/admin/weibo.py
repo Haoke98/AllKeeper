@@ -23,11 +23,11 @@ class WeiboAdmin(admin.ModelAdmin):
                    'mbtype', 'pcNew', 'registeredAt', 'sunshineCredit']
     list_per_page = 14
     inlines = []
-    actions = ['collect_data', 'update']
+    actions = ['collect_data', 'update', 'clear_avatar_url']
 
     def save_model(self, request: Any, obj: Any, form: Any, change: Any) -> None:
         if not change:
-            pass
+            obj.collect()
         else:
             pass
         return super().save_model(request, obj, form, change)
@@ -120,10 +120,26 @@ class WeiboAdmin(admin.ModelAdmin):
 
     update.short_description = "更新数据"
 
+    def clear_avatar_url(self, request, queryset):
+        for qs in queryset:
+            if qs.avatar:
+                fn = str(qs.avatar).split("/")[-1]
+                if fn.endswith(".png"):
+                    qs.collect()
+                    qs.save()
+                else:
+                    newUri = f"/weibo_avatar/{fn}"
+                    print(qs.avatar, fn, newUri)
+                    qs.avatar = newUri
+                    qs.save()
+            else:
+                qs.collect()
+                qs.save()
+
     def formatter(self, obj, field_name, value):
-        if field_name == "avatar":
-            if value:
-                url = f"https://weibo.com/u/{obj.id}"
-                return f'''<a href="{url}" target="blank"><img src="{value}" title="{obj.name}"></a>'''
+        # if field_name == "avatar":
+        #     if value:
+        #         url = f"https://weibo.com/u/{obj.id}"
+        #         return f'''<a href="{url}" target="blank"><img src="{value}" title="{obj.name}"></a>'''
         # 这里可以对value的值进行判断，比如日期格式化等
         return value

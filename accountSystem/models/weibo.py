@@ -3,7 +3,6 @@ import uuid
 
 import requests
 from django.db import models
-from simplepro.components import fields
 
 from izBasar.models import BaseModel
 from izBasar.settings import MEDIA_ROOT
@@ -32,7 +31,8 @@ class Weibo(BaseModel):
     isSVIP = models.BooleanField(verbose_name="是否为SVIP", default=False)
     pcNew = models.IntegerField(null=True, blank=True)
     labels = models.CharField(max_length=255, null=True, blank=True, verbose_name="标签")
-    avatar = fields.ImageField(drag=True, verbose_name='头像', max_length=128, null=True)
+    AVATAR_UPLOAD_TO = "weibo_avatar"
+    avatar = models.ImageField(upload_to=AVATAR_UPLOAD_TO, verbose_name='头像', max_length=128, null=True, blank=True)
 
     class Meta:
         verbose_name = "微博账户"
@@ -43,56 +43,62 @@ class Weibo(BaseModel):
             return f"{self.name}({self.id})"
         return f"微博账户({self.id})"
 
+    def set_online_avatar(self, uri):
+        avatarResp = requests.get(uri)
+        contentType = avatarResp.headers['Content-Type']
+        if 'jpeg' in contentType:
+            ext = "jpeg"
+        elif "gif" in contentType:
+            ext = "gif"
+        else:
+            raise Exception(f"{contentType} is Unknown")
+        avatar_fn = f"{uuid.uuid4().hex}.{ext}"
+        avatar_fp = os.path.join(MEDIA_ROOT, os.path.join(self.AVATAR_UPLOAD_TO, avatar_fn))
+        avatar_uri = f"/{self.AVATAR_UPLOAD_TO}/{avatar_fn}"
+        print("保存头像：", avatar_fp)
+        print("可访问URL：", avatar_uri)
+        with open(avatar_fp, 'wb') as f:
+            f.write(avatarResp.content)
+        self.avatar = avatar_uri
+
     def collect(self):
-            isOk,infoResp = weiboHelper.info(self.id)
-            if isOk:
-                detailResp = weiboHelper.detail(self.id)
-                userInfo = infoResp['user']
-                print("==========================" * 4)
-                print(userInfo)
-                print("^^^^^^^^^^^^^^^^^^^^^^^^^^" * 4)
-                self.name = userInfo['screen_name']
-                avatarResp = requests.get(userInfo['profile_image_url'])
-                contentType = avatarResp.headers['Content-Type']
-                ext = "png"
-                if 'jpeg' in contentType:
-                    ext = "jpeg"
-                avatar_fn = f"{uuid.uuid4().hex}.{ext}"
-                avatar_fp = os.path.join(MEDIA_ROOT, avatar_fn)
-                avatar_uri = f"/media/{avatar_fn}"
-                print("保存头像：", avatar_fp)
-                print("可访问URL：", avatar_uri)
-                with open(avatar_fp, 'wb') as f:
-                    f.write(avatarResp.content)
-                self.avatar = avatar_uri
-                self.description = userInfo['description']
-                self.location = userInfo['location']
-                self.gender = userInfo['gender']
-                self.followersCount = userInfo['followers_count']
-                self.friendsCount = userInfo['friends_count']
-                self.statusesCount = userInfo['statuses_count']
-                if userInfo['svip'] == 1:
-                    self.isSVIP = True
-                self.userType = userInfo['user_type']
-                self.mbrank = userInfo['mbrank']
-                self.mbtype = userInfo['mbtype']
-                self.pcNew = userInfo['pc_new']
-                self.registeredAt = detailResp['created_at']
-                self.ipLocation = detailResp['ip_location']
-                if "-" in detailResp['birthday']:
-                    self.birthday,self.zodiac = detailResp['birthday'].split(' ')
-                else:
-                    self.zodiac = detailResp['birthday']
-                self.sunshineCredit = detailResp['sunshine_credit']['level']
-                if detailResp.keys().__contains__('education'):
-                    self.school = detailResp['education']['school']
-                labels = []
-                for label in detailResp['label_desc']:
-                    labels.append(label['name'])
-                self.labels = '|'.join(labels)
-                return True
+        isOk, infoResp = weiboHelper.info(self.id)
+        if isOk:
+            detailResp = weiboHelper.detail(self.id)
+            userInfo = infoResp['user']
+            print("==========================" * 4)
+            print(userInfo)
+            print("^^^^^^^^^^^^^^^^^^^^^^^^^^" * 4)
+            self.name = userInfo['screen_name']
+            self.set_online_avatar(userInfo['profile_image_url'])
+            self.description = userInfo['description']
+            self.location = userInfo['location']
+            self.gender = userInfo['gender']
+            self.followersCount = userInfo['followers_count']
+            self.friendsCount = userInfo['friends_count']
+            self.statusesCount = userInfo['statuses_count']
+            if userInfo['svip'] == 1:
+                self.isSVIP = True
+            self.userType = userInfo['user_type']
+            self.mbrank = userInfo['mbrank']
+            self.mbtype = userInfo['mbtype']
+            self.pcNew = userInfo['pc_new']
+            self.registeredAt = detailResp['created_at']
+            self.ipLocation = detailResp['ip_location']
+            if "-" in detailResp['birthday']:
+                self.birthday, self.zodiac = detailResp['birthday'].split(' ')
             else:
-                 return False
+                self.zodiac = detailResp['birthday']
+            self.sunshineCredit = detailResp['sunshine_credit']['level']
+            if detailResp.keys().__contains__('education'):
+                self.school = detailResp['education']['school']
+            labels = []
+            for label in detailResp['label_desc']:
+                labels.append(label['name'])
+            self.labels = '|'.join(labels)
+            return True
+        else:
+            return False
 
     def save(self, *args, **kwargs):
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
