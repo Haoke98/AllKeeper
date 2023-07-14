@@ -32,25 +32,61 @@ class WeiboAdmin(admin.ModelAdmin):
             pass
         return super().save_model(request, obj, form, change)
 
-    # 显示在列表顶部的一些自定义html，可以是vue组件，会被vue渲染
-    top_html = ' <el-alert title="这是顶部的" type="success"></el-alert>'
-
-    # 也可以是方法的形式来返回html
-
-    def get_top_html(self, request):
-        return self.top_html
-
     fields_options = {
         'id': {
             'fixed': 'left',
-            'width': '80px',
+            'width': '120px',
             'align': 'center'
         },
-        'create_time': {
-            'fixed': 'right',
+        'createdAt': {
+            'width': '180px',
+            'align': 'left'
+        },
+        'updatedAt': {
+            'width': '180px',
+            'align': 'left'
+        },
+        'name': {
             'width': '200px',
             'align': 'left'
-        }
+        },
+        'idCardNum': {
+            'width': '200px',
+            'align': 'left'
+        },
+        'birthday': {
+            'width': '110px',
+            'align': 'left'
+        },
+        'registeredAt': {
+            'width': '180px',
+            'align': 'left'
+        },
+        'collage':{
+            'width': '120px',
+            'align': 'left'
+        },
+
+        'description':{
+            'width': '200px',
+            'align': 'left'
+        },
+        'WB_ID':{
+            'width': '120px',
+            'align': 'left'
+        },
+        'douyin':{
+            'width': '120px',
+            'align': 'left'
+        },
+        'license_plate_number':{
+            'width': '120px',
+            'align': 'left'
+        },
+        'labels':{
+            'width': '400px',
+            'align': 'left'
+        },
     }
 
     def collect_data(self, request, queryset):

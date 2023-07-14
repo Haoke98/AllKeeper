@@ -8,7 +8,6 @@ from lib import zodiacHelper
 
 
 # Create your models here.
-
 class Human(BaseModel):
     name = models.CharField(max_length=50, verbose_name="姓名", default="未知组")
     idCardNum = models.CharField(max_length=18, verbose_name="身份证号", null=True, blank=True)
@@ -27,6 +26,10 @@ class Human(BaseModel):
     license_plate_number = models.CharField(max_length=50, verbose_name="车牌号", help_text="可以通过人人查中查询到车主信息", null=True,
                                             blank=True, unique=True)
     face = fields.ImageField(drag=True, verbose_name='图片上传', max_length=128, null=True, blank=True)
+    id_card_front = models.ImageField(verbose_name='身份证正面', upload_to='id_card',
+                                      max_length=128, null=True, blank=True)
+    id_card_back = models.ImageField(verbose_name='身份证反面', upload_to='id_card',
+                                     max_length=128, null=True, blank=True)
 
     class Meta:
         verbose_name = "人"
@@ -50,17 +53,16 @@ class Human(BaseModel):
                 if "*" not in birthday_str:
                     self.birthday = datetime.datetime.strptime(birthday_str, "%Y%m%d").date()
                     self.zodiac = zodiacHelper.get_zodiac_sign(self.birthday.strftime("%Y/%m/%d"))
-            if self.idCardNum[14] == "*":
-                if self.sex:
-                    self.idCardNum = self.idCardNum[0:14] + str(['女', '男'].index(self.sex)) + self.idCardNum[15:]
+            if self.idCardNum[16] == "*":
+                pass
             else:
-                if int(self.idCardNum[16])%2==0:
-                    self.sex = '女'#偶数
+                if int(self.idCardNum[16]) % 2 == 0:
+                    self.sex = '女'  # 偶数
                 else:
-                    self.sex = '男'#奇数
+                    self.sex = '男'  # 奇数
         else:
             if self.birthday:
-                self.idCardNum = self.birthday.strftime("******%Y%m%d****")    
+                self.idCardNum = self.birthday.strftime("******%Y%m%d****")
             else:
                 pass
         super().save(*args, **kwargs)

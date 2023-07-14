@@ -6,17 +6,7 @@
 @Software: PyCharm
 @disc:
 ======================================="""
-import io
-
 import requests
-import matplotlib.pyplot as plt
-import urllib.request
-
-from PIL import Image
-
-
-
-
 
 if __name__ == '__main__':
     # cap = cv2.VideoCapture('/Users/shadikesadamu/Documents/001.mp4')
@@ -25,14 +15,14 @@ if __name__ == '__main__':
     #     thumbnail = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     #     thumbnail.thumbnail((200, 200))
     #     thumbnail.show()
-    resp = requests.get(
-        "https://tvax4.sinaimg.cn/crop.0.0.1080.1080.180/007l7TJEly8h28dlo82muj30u00u077m.jpg?KID=imgbed,tva&Expires=1688620922&ssig=zAZm5C9ajZ",
-        headers={
-            "referer": "https://weibo.com/"
-        }
-    )
-    with open("test1.jpg", 'wb') as f:
-        f.write(resp.content)
+    # resp = requests.get(
+    #     "https://tvax4.sinaimg.cn/crop.0.0.1080.1080.180/007l7TJEly8h28dlo82muj30u00u077m.jpg?KID=imgbed,tva&Expires=1688620922&ssig=zAZm5C9ajZ",
+    #     headers={
+    #         "referer": "https://weibo.com/"
+    #     }
+    # )
+    # with open("test1.jpg", 'wb') as f:
+    #     f.write(resp.content)
     resp = requests.get(
         "https://www.douyin.com/user/MS4wLjABAAAAce0znIM0dAXCkfi2sb40HUoRHTKn620uv1-TfvoJyrW_eZ8UFAWrJAECXzZ4-Wpx",
         headers={

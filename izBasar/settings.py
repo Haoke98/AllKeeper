@@ -189,7 +189,8 @@ INSTALLED_APPS = [
     'accountSystem',
     'DebtManagerSystem',
     'photologue',
-    'sortedm2m'
+    'sortedm2m',
+    'django_crontab',
 ]
 SITE_ID = 1
 CACHES = {

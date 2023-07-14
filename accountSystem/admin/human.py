@@ -34,7 +34,8 @@ class HumanAdmin(admin.ModelAdmin):
                                    'collage',
                                    'WB_ID',
                                    'douyin',
-                                   'license_plate_number', 'birthplace', '_count', 'info']
+                                   'license_plate_number', 'birthplace', 'id_card_front', 'id_card_back', '_count',
+                                   'info']
     search_fields = ['name', 'idCardNum', 'license_plate_number', 'WB_ID', 'DY_ID', 'DY_home', 'birthplace']
     list_filter = ['sex', 'birthday', 'zodiac', 'ethnic', 'collage']
     list_per_page = 14
@@ -96,15 +97,6 @@ class HumanAdmin(admin.ModelAdmin):
             return mark_safe(f'''
             <a href="{url}" target="blank">{txt}</a>
             ''')
-
-
-
-    # 显示在列表顶部的一些自定义html，可以是vue组件，会被vue渲染
-    top_html = ' <el-alert title="这是顶部的" type="success"></el-alert>'
-    # 也可以是方法的形式来返回html
-
-    def get_top_html(self, request):
-        return self.top_html
     
     fields_options = {
         'id': {
@@ -167,6 +159,14 @@ class HumanAdmin(admin.ModelAdmin):
         },
         'face':{
             'width': '130px',
+            'align': 'center'
+        },
+        'id_card_front':{
+            'width': '140px',
+            'align': 'center'
+        },
+        'id_card_back': {
+            'width': '140px',
             'align': 'center'
         }
     }
