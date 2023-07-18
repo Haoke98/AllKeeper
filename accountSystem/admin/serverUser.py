@@ -24,6 +24,51 @@ class ServerUserAdmin(BaseAdmin):
     def _ip(self, obj):
         return BaseAdmin.username(obj.server.ip)
 
+    fields_options = {
+        'id': {
+            'fixed': 'left',
+            'width': '40px',
+            'align': 'center'
+        },
+        'createdAt': {
+            'width': '180px',
+            'align': 'left'
+        },
+        'updatedAt': {
+            'width': '180px',
+            'align': 'left'
+        },
+        '_ip': {
+            'width': '140px',
+            'align': 'center'
+        },
+        'ssh': {
+            'width': '120px',
+            'align': 'center'
+        },
+        'hoster': {
+            'width': '320px',
+            'align': 'left'
+        },
+        'group': {
+            'width': '220px',
+            'align': 'left'
+        },
+        '_password': {
+            'width': '80px',
+            'align': 'center'
+        },
+        'remark': {
+            'width': '200px',
+            'align': 'left'
+        },
+
+        '_biosPassword': {
+            'width': '100',
+            'align': 'center'
+        }
+    }
+
 
 class ServerUserInlineAdmin(admin.TabularInline):
     model = ServerUser

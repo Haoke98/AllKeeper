@@ -172,8 +172,8 @@ class HumanAdmin(admin.ModelAdmin):
     }
 
     def formatter(self, obj, field_name, value):
-        if field_name == "face":
-            if value:
-                return f'''<img src="{value}" style="width:100px;height:100px;">'''
+        # if field_name == "face":
+        #     if value:
+        #         return f'''<img src="{value}" style="width:100px;height:100px;">'''
         # 这里可以对value的值进行判断，比如日期格式化等
         return value
