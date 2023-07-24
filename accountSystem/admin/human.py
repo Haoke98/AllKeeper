@@ -32,11 +32,12 @@ class TelInlineAdmin(admin.TabularInline):
 class HumanAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY + ["name", 'face', 'idCardNum', 'sex', 'birthday', 'zodiac', 'ethnic', '_tels',
                                    'collage',
-                                   'WB_ID',
                                    'douyin',
+                                   'WB',
                                    'license_plate_number', 'birthplace', 'id_card_front', 'id_card_back', '_count',
                                    'info']
-    search_fields = ['name', 'idCardNum', 'license_plate_number', 'WB_ID', 'DY_ID', 'DY_home', 'birthplace']
+    search_fields = ['name', 'idCardNum', 'license_plate_number', 'DY_ID', 'DY_home', 'birthplace']
+    autocomplete_fields = ['WB', ]
     list_filter = ['sex', 'birthday', 'zodiac', 'ethnic', 'collage']
     list_per_page = 14
     inlines = [TelInlineAdmin]
