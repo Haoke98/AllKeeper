@@ -17,6 +17,12 @@ class Server(BaseModel):
         (4, '新疆丝路融创网络科技有限公司（局域网）')
     )
     hoster = models.PositiveSmallIntegerField(choices=hosterOptions, null=True, blank=False, verbose_name="托管方")
+    systemOpts = (
+        ('CentOS7', 'CentOS7'),
+        ('Ubuntu', 'Ubuntu'),
+        ('WindowsServer2016', 'WindowsServer2016')
+    )
+    system = models.CharField(max_length=50, verbose_name="操作系统", default="CentOS7", choices=systemOpts)
     bios = models.CharField(verbose_name="BIOS", max_length=32, null=True, blank=True)
     ssh = models.IntegerField(verbose_name="SSH端口", default=22, blank=True)
     mac = models.CharField(max_length=17, verbose_name="MAC地址", blank=True, null=True)

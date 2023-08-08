@@ -7,11 +7,12 @@ from ..models import Server
 
 @admin.register(Server)
 class ServerAdmin(BaseAdmin):
-    list_display = ["id", "_ip", '_password', 'ssh', '_biosPassword',  'group', 'hoster','remark', "createdAt",
+    list_display = ["id", "_ip", 'system', '_password', 'ssh', '_biosPassword', 'group', 'hoster', 'remark',
+                    "createdAt",
                     "updatedAt",
                     "deletedAt", ]
     list_display_links = ['id', 'remark', 'group', 'hoster']
-    list_filter = ['group', 'hoster', 'ssh']
+    list_filter = ['group', 'hoster', 'ssh', 'system']
     date_hierarchy = 'updatedAt'
     search_fields = ['ip', 'remark']
     search_help_text = ['你好，这是搜索帮助语句！']
@@ -61,6 +62,10 @@ class ServerAdmin(BaseAdmin):
         },
         '_ip': {
             'width': '140px',
+            'align': 'center'
+        },
+        'system': {
+            'width': '160px',
             'align': 'center'
         },
         'ssh': {

@@ -1,5 +1,5 @@
 # SIMPLE UI config.
-SIMPLEUI_DEFAULT_THEME = 'orange.css'
+SIMPLEUI_DEFAULT_THEME = 'x-green.css'
 
 SIMPLEUI_ICON = {
     '所有手机号': 'fas fa-phone-square',

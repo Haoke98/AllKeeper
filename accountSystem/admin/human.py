@@ -138,7 +138,7 @@ class HumanAdmin(admin.ModelAdmin):
             'width': '120px',
             'align': 'left'
         },
-        'WB_ID':{
+        'WB':{
             'width': '120px',
             'align': 'left'
         },
