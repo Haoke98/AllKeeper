@@ -18,3 +18,4 @@ from .breath import BreathInfo
 from .trade import CapitalAccount,Transaction
 from .marketsubject import MarketSubject
 from .weibo import Weibo
+from .icloud import IMedia

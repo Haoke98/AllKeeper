@@ -302,7 +302,7 @@ LANGUAGE_CODE = 'zh-Hans'
 TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 USE_L10N = False
-USE_TZ = False
+USE_TZ = True
 
 DATETIME_FORMAT = 'Y/m/d H:i:s'
 

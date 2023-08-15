@@ -16,3 +16,5 @@ django-revproxy~=0.10.0
 opencv-python
 django-crontab
 simplepro==6.5.2
+pyicloud==1.0.0
+piexif==1.1.3

@@ -36,16 +36,6 @@ class ServerAdmin(BaseAdmin):
 
     _biosPassword.short_description = "BIOS密码"
 
-    class Media:
-
-        def __init__(self):
-            pass
-
-        css = {
-        }
-        js = [
-        ]
-
     fields_options = {
         'id': {
             'fixed': 'left',
