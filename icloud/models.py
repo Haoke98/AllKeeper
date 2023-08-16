@@ -20,6 +20,34 @@ class Album(BaseModel):
     synced = models.BooleanField(default=False, verbose_name='同步完毕')
     size = models.PositiveBigIntegerField(default=0, verbose_name="大小")
 
+    query_fieldName = models.CharField(max_length=50, null=True, verbose_name="过滤字段")
+    query_comparator = models.CharField(max_length=50, null=True, verbose_name="过滤操作")
+    query_fieldValue_type = models.CharField(max_length=50, null=True, verbose_name="过滤值数据类型")
+    query_fieldValue_value = models.CharField(max_length=50, null=True, verbose_name="过滤值")
+
+    def set_query(self, qs):
+        """
+        解析相册的QueryFilter信息
+        None
+        [{'fieldName': 'smartAlbum', 'comparator': 'EQUALS', 'fieldValue': {'type': 'STRING', 'value': 'VIDEO'}}]
+        [{'fieldName': 'smartAlbum', 'comparator': 'EQUALS', 'fieldValue': {'type': 'STRING', 'value': 'SLOMO'}}]
+        [{'fieldName': 'smartAlbum', 'comparator': 'EQUALS', 'fieldValue': {'type': 'STRING', 'value': 'FAVORITE'}}]
+        [{'fieldName': 'parentId', 'comparator': 'EQUALS', 'fieldValue': {'type': 'STRING', 'value': 'D5167F7B-F0A6-4957-B2AC-6523F47CEE7B'}}]
+
+        :param qs:
+        :return:
+        """
+        if qs:
+            if len(qs) > 1:
+                raise Exception(f"相册[{self.name}]出现了多个QueryFilter信息")
+            else:
+                q = qs[0]
+                self.query_fieldName = q['fieldName']
+                self.query_comparator = q['comparator']
+                fieldValue = q['fieldValue']
+                self.query_fieldValue_type = fieldValue['type']
+                self.query_fieldValue_value = fieldValue['value']
+
     def __str__(self):
         return self.name
 

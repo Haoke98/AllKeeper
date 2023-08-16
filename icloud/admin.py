@@ -17,9 +17,9 @@ from django.contrib import admin
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
 
-from .models import IMedia, Album
 from izBasar.secret import ICLOUD_USERNAME, ICLOUD_PASSWORD
 from lib import icloud, human_readable_bytes
+from .models import IMedia, Album
 
 iService = icloud.IcloudService(ICLOUD_USERNAME, ICLOUD_PASSWORD, True)
 
@@ -75,10 +75,12 @@ def collect_all_medias(albums: list):
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ['createdAt', 'updatedAt', 'name', 'total', 'count', 'synced', 'size']
-    list_filter = ['synced', 'createdAt', 'updatedAt']
+    list_display = ['createdAt', 'updatedAt', 'name', 'total', 'count', 'synced', 'size', 'query_fieldName',
+                    'query_comparator', 'query_fieldValue_type', 'query_fieldValue_value']
+    list_filter = ['synced', 'createdAt', 'updatedAt', 'query_fieldName',
+                   'query_comparator', 'query_fieldValue_type']
     actions = ['sync', 'collect']
-    search_fields = ['name']
+    search_fields = ['name', 'query_fieldValue_value']
 
     def has_change_permission(self, request, obj=None):
         return False
@@ -87,7 +89,7 @@ class AlbumAdmin(admin.ModelAdmin):
         return False
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
@@ -101,8 +103,11 @@ class AlbumAdmin(admin.ModelAdmin):
         for i, album_name in enumerate(iService.photos.albums):
             album = iService.photos.albums[album_name]
             total = len(album)
-            print(i, album_name, total)
-            obj = Album(name=album_name, total=total)
+            print(i, album_name, total, album.query_filter)
+            obj, _ = Album.objects.get_or_create(name=album_name)
+            obj.total = total
+            obj.agg()
+            obj.set_query(album.query_filter)
             obj.save()
         return {
             'state': True,
@@ -118,6 +123,58 @@ class AlbumAdmin(admin.ModelAdmin):
             'state': True,
             'msg': f'采集程序已经启动'
         }
+
+    fields_options = {
+        'id': {
+            'fixed': 'left',
+            'width': '280px',
+            'align': 'center'
+        },
+        'createdAt': {
+            'width': '180px',
+            'align': 'left'
+        },
+        'updatedAt': {
+            'width': '180px',
+            'align': 'left'
+        },
+        'name': {
+            'width': '180px',
+            'align': 'center'
+        },
+        'total': {
+            'width': '100px',
+            'align': 'center'
+        },
+        'count': {
+            'width': '120px',
+            'align': 'center'
+        },
+        'synced': {
+            'width': '70px',
+            'align': 'left'
+        },
+        'size': {
+            'width': '100px',
+            'align': 'left'
+        },
+        'query_fieldName': {
+            'width': '100px',
+            'align': 'center'
+        },
+        'query_comparator': {
+            'width': '100px',
+            'align': 'center'
+        },
+        'query_fieldValue_type': {
+            'width': '140px',
+            'align': 'center'
+        },
+        'query_fieldValue_value': {
+            'width': '340px',
+            'align': 'center'
+        },
+    }
 
 
 @admin.register(IMedia)
