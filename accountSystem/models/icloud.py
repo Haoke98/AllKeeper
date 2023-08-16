@@ -7,6 +7,7 @@
 @disc:
 ======================================="""
 from django.db import models
+from django.db.models import Count, Sum
 from simplepro.components import fields
 
 from izBasar.models import BaseModel
@@ -26,6 +27,15 @@ class Album(BaseModel):
         self.synced = self.count == self.total
         super().save(force_insert=False, force_update=False, using=None,
                      update_fields=None)
+
+    def agg(self):
+        imedia_count = self.imedia_set.aggregate(Count('id'))['id__count']
+        total_size = self.imedia_set.aggregate(total=Sum('size'))['total']
+        print(f"{self.name}: aggs:[{imedia_count},{total_size}]")
+        self.count = imedia_count
+        if total_size is not None:
+            self.size = total_size
+        # if len(photos) == 0 or :
 
     class Meta:
         verbose_name = "iCloud相册"
