@@ -9,8 +9,10 @@
 import json
 import os.path
 import threading
+import time
 
 from django.contrib import admin
+from django.db.models import Count, Sum
 from simplepro.decorators import button
 
 from izBasar.secret import ICLOUD_USERNAME, ICLOUD_PASSWORD
@@ -20,31 +22,65 @@ from ..models import IMedia, Album
 iService = icloud.IcloudService(ICLOUD_USERNAME, ICLOUD_PASSWORD, True)
 
 
-def collect_all_medias():
-    all_photos = iService.photos.all
-    total = len(all_photos)
-    for i, p in enumerate(all_photos):
-        fn, ext = os.path.splitext(p.filename)
-        ext = str(ext).upper()
-        obj = IMedia(id=p.id, filename=p.filename, ext=ext, size=p.size, dimensionX=p.dimensions[0],
-                     dimensionY=p.dimensions[1], asset_date=p.asset_date, added_date=p.added_date,
-                     versions=json.dumps(p.versions, indent=4, ensure_ascii=False))
-        if ext in ['.MOV', '.MP4']:
-            obj.video = p.versions['thumb']["url"]
-        else:
-            obj.img = p.versions['thumb']["url"]
-        obj.save()
-        print(f"{i / total * 100:.2f}%({i}/{total})", p.id)
-        if p.created != p.asset_date:
-            raise Exception("异常数据")
+def collect_all_medias(albums: list):
+    for album in albums:
+        photos = iService.photos.albums[album.name]
+        total = len(photos)
+        while True:
+            for i, p in enumerate(photos):
+                fn, ext = os.path.splitext(p.filename)
+                ext = str(ext).upper()
+                obj = IMedia(id=p.id, filename=p.filename, ext=ext, size=p.size, dimensionX=p.dimensions[0],
+                             dimensionY=p.dimensions[1], asset_date=p.asset_date, added_date=p.added_date,
+                             versions=json.dumps(p.versions, indent=4, ensure_ascii=False))
+                obj.albums.add(album)
+                # if ext in ['.MOV', '.MP4']:
+                #     obj.video = p.versions['thumb']["url"]
+                # else:
+                #     obj.img = p.versions['thumb']["url"]
+                obj.save()
+                print(f"{album.name}: {(i + 1) / total * 100:.2f}%({i + 1}/{total})", obj)
+                if p.created != p.asset_date:
+                    raise Exception("异常数据")
+            imedia_count = album.imedia_set.aggregate(Count('id'))['id__count']
+            total_size = album.imedia_set.aggregate(total=Sum('size'))['total']
+            print(f"{album.name}: aggs:[{imedia_count},{total_size}]")
+            if imedia_count == len(photos):
+                album.count = imedia_count
+                if len(photos) == 0:
+                    album.size = 0
+                else:
+                    album.size = total_size
+                album.save()
+                break
+            else:
+                time.sleep(2)
+
         # messages.add_message(request, messages.ERROR, '操作成功123123123123')
 
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ['createdAt', 'updatedAt', 'name', 'total']
-    list_filter = ['createdAt', 'updatedAt']
+    list_display = ['createdAt', 'updatedAt', 'name', 'total', 'count', 'synced', 'size']
+    list_filter = ['synced', 'createdAt', 'updatedAt']
     actions = ['sync', 'collect']
+    search_fields = ['name']
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def formatter(self, obj, field_name, value):
+        # 这里可以对value的值进行判断，比如日期格式化等
+        if field_name == "size":
+            if value:
+                return f"""<span title="{value}">{human_readable_bytes(value)}</span>"""
+        return value
 
     @button(type='danger', short_description='从icloud中同步相册列表', enable=True, confirm="您确定要生成吗？")
     def sync(self, request, queryset):
@@ -61,10 +97,8 @@ class AlbumAdmin(admin.ModelAdmin):
 
     @button(type='warning', short_description='同步媒体', enable=True, confirm="您确定要生成吗？")
     def collect(self, request, queryset):
-        for i, qs in enumerate(queryset):
-            print(i, qs)
-        # th = threading.Thread(target=collect_all_medias)
-        # th.start()
+        th = threading.Thread(target=collect_all_medias, args=(queryset,))
+        th.start()
         return {
             'state': True,
             'msg': f'采集程序已经启动'
@@ -73,11 +107,12 @@ class AlbumAdmin(admin.ModelAdmin):
 
 @admin.register(IMedia)
 class IMediaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'filename', 'ext', 'size', 'dimensionX', 'dimensionY', 'video', 'img', 'asset_date',
+    list_display = ['id', 'filename', 'ext', 'size', 'dimensionX', 'dimensionY', 'asset_date',
                     'added_date',
                     'createdAt', 'updatedAt']
-    list_filter = ['ext', 'dimensionX', 'dimensionY', 'asset_date', 'added_date', 'createdAt', 'updatedAt']
+    list_filter = ['albums', 'ext', 'dimensionX', 'dimensionY', 'asset_date', 'added_date', 'createdAt', 'updatedAt']
     # list_filter_multiples = ('ext', 'dimensionX', 'dimensionY',)
+    search_fields = ['id', 'filename']
     actions = ['collect', 'migrate']
 
     @button(type='danger', short_description='从icloud中获取数据', enable=True, confirm="您确定要生成吗？")

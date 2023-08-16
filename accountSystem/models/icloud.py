@@ -14,7 +14,18 @@ from izBasar.models import BaseModel
 
 class Album(BaseModel):
     name = models.CharField(max_length=50, verbose_name="标题", primary_key=True)
-    total = models.PositiveIntegerField(default=0, verbose_name="媒体数量")
+    total = models.PositiveIntegerField(default=0, verbose_name="iCloud上的数量")
+    count = models.PositiveIntegerField(default=0, verbose_name="已经采集到的数量")
+    synced = models.BooleanField(default=False, verbose_name='同步完毕')
+    size = models.PositiveBigIntegerField(default=0, verbose_name="大小")
+
+    def __str__(self):
+        return self.name
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.synced = self.count == self.total
+        super().save(force_insert=False, force_update=False, using=None,
+                     update_fields=None)
 
     class Meta:
         verbose_name = "iCloud相册"
@@ -30,8 +41,7 @@ class IMedia(BaseModel):
     asset_date = models.DateTimeField(verbose_name="生成时间")
     added_date = models.DateTimeField(verbose_name="加入icloud的时间")
     versions = models.TextField()
-    video = fields.VideoField(max_length=600, verbose_name='播放', null=True, blank=True, help_text='视频播放组件')
-    img = fields.ImageField(drag=False, accept=".png", verbose_name='预览', max_length=600, null=True, blank=True)
+    albums = fields.ManyToManyField(to=Album, verbose_name="相册")
 
     class Meta:
         verbose_name = "iCloud媒体"
