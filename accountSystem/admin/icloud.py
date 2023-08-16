@@ -15,6 +15,7 @@ import traceback
 
 from django.contrib import admin
 from simplepro.decorators import button
+from simplepro.dialog import MultipleCellDialog, ModalDialog
 
 from izBasar.secret import ICLOUD_USERNAME, ICLOUD_PASSWORD
 from lib import icloud, human_readable_bytes
@@ -121,13 +122,23 @@ class AlbumAdmin(admin.ModelAdmin):
 
 @admin.register(IMedia)
 class IMediaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'filename', 'ext', 'size', 'dimensionX', 'dimensionY', 'asset_date',
+    list_display = ['id', 'filename', 'ext', 'size', 'dimensionX', 'dimensionY', 'dialog_lists'
+        , 'asset_date',
                     'added_date',
                     'createdAt', 'updatedAt']
     list_filter = ['albums', 'ext', 'dimensionX', 'dimensionY', 'asset_date', 'added_date', 'createdAt', 'updatedAt']
     # list_filter_multiples = ('ext', 'dimensionX', 'dimensionY',)
     search_fields = ['id', 'filename']
     actions = ['collect', 'migrate']
+
+    def dialog_lists(self, model):
+        return MultipleCellDialog([
+            ModalDialog(url='https://simpleui.72wo.com/docs/simplepro', title=model.filename,
+                        cell='<el-link type="primary">预览</el-link>', width="800px", height="500px"),
+        ])
+
+    # 这个是列头显示的文本
+    dialog_lists.short_description = "预览"
 
     @button(type='danger', short_description='从icloud中获取数据', enable=True, confirm="您确定要生成吗？")
     def collect(self, request, queryset):
