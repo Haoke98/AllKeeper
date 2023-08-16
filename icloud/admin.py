@@ -17,9 +17,9 @@ from django.contrib import admin
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
 
+from .models import IMedia, Album
 from izBasar.secret import ICLOUD_USERNAME, ICLOUD_PASSWORD
 from lib import icloud, human_readable_bytes
-from ..models import IMedia, Album
 
 iService = icloud.IcloudService(ICLOUD_USERNAME, ICLOUD_PASSWORD, True)
 
@@ -130,6 +130,7 @@ class IMediaAdmin(admin.ModelAdmin):
     # list_filter_multiples = ('ext', 'dimensionX', 'dimensionY',)
     search_fields = ['id', 'filename']
     actions = ['collect', 'migrate']
+    list_per_page = 20
 
     def dialog_lists(self, model):
         return MultipleCellDialog([
@@ -139,6 +140,15 @@ class IMediaAdmin(admin.ModelAdmin):
 
     # 这个是列头显示的文本
     dialog_lists.short_description = "预览"
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
     @button(type='danger', short_description='从icloud中获取数据', enable=True, confirm="您确定要生成吗？")
     def collect(self, request, queryset):

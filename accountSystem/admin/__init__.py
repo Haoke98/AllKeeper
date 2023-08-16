@@ -14,7 +14,6 @@ from .dbServiceUser import DbServiceUserAdmin
 from .email import EmailAdmin
 from .es import ElasticSearchAdmin
 from .human import HumanAdmin
-from .icloud import IMediaAdmin, AlbumAdmin
 from .market_subject import MarketSubjectAdmin
 from .scripts import ScriptAdmin
 from .server import ServerAdmin
