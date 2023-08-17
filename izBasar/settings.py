@@ -191,7 +191,8 @@ INSTALLED_APPS = [
     'photologue',
     'sortedm2m',
     'django_crontab',
-    'icloud'
+    'icloud',
+    'logAnalyser'
 ]
 SITE_ID = 1
 CACHES = {
@@ -267,7 +268,8 @@ DATABASE_APPS_MAPPING = {
     'sites': 'default',
     'accountSystem': 'default',
     'DebtManagerSystem': 'default',
-    'icloud': 'default'
+    'icloud': 'default',
+    'logAnalyser': 'default'
 }
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
