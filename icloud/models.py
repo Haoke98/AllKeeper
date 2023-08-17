@@ -80,6 +80,9 @@ class IMedia(BaseModel):
     added_date = models.DateTimeField(verbose_name="加入icloud的时间")
     versions = models.TextField()
     albums = fields.ManyToManyField(to=Album, verbose_name="相册")
+    thumb = models.ImageField(verbose_name="缩略图", upload_to="icloud/thumb", null=True)
+    prv_file = models.FileField(verbose_name="可预览文件", null=True, upload_to="icloud/prv_file", help_text="图片和视频都包括")
 
     class Meta:
         verbose_name = "iCloud媒体"
+        ordering = ('-asset_date',)

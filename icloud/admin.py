@@ -10,35 +10,52 @@ import json
 import logging
 import os.path
 import threading
-import time
 import traceback
 
+import requests
 from django.contrib import admin
+from django.core.files.base import ContentFile
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
 
-from izBasar.secret import ICLOUD_USERNAME, ICLOUD_PASSWORD
-from lib import icloud, human_readable_bytes
+from lib import human_readable_bytes
+from . import iService
 from .models import IMedia, Album
 
-iService = icloud.IcloudService(ICLOUD_USERNAME, ICLOUD_PASSWORD, True)
 
-
-def collect(p, album):
+def collect(p, album, i, total):
     if p.created != p.asset_date:
         raise Exception("异常数据")
     try:
         fn, ext = os.path.splitext(p.filename)
         ext = str(ext).upper()
-        obj = IMedia(id=p.id, filename=p.filename, ext=ext, size=p.size, dimensionX=p.dimensions[0],
-                     dimensionY=p.dimensions[1], asset_date=p.asset_date, added_date=p.added_date,
-                     versions=json.dumps(p.versions, indent=4, ensure_ascii=False))
+        obj = IMedia.objects.get_or_create(id=p.id)
+        obj.filename = p.filename
+        obj.ext = ext
+        obj.size = p.size
+        obj.dimensionX = p.dimensions[0]
+        obj.dimensionY = p.dimensions[1]
+        obj.asset_date = p.asset_date
+        obj.added_date = p.added_date
+        obj.versions = json.dumps(p.versions, indent=4, ensure_ascii=False)
+
+        mr = p._master_record
+        fields = mr['fields']
+
+        resJPEGThumbRes = fields['resJPEGThumbRes']['value']
+        resJPEGThumbResValue = resJPEGThumbRes
+        resJPEGThumbURL = resJPEGThumbResValue['downloadURL']
+        thumbResp = requests.get(resJPEGThumbURL)
+        thumbCF = ContentFile(thumbResp.content, f"{p.filename}.JPG")
+        obj.thumb = thumbCF
+
+        prvResp = requests.get(p.versions["thumb"]["url"])
+        prvCF = ContentFile(prvResp.content, p.filename)
+        obj.prv_file = prvCF
+
         obj.albums.add(album)
-        # if ext in ['.MOV', '.MP4']:
-        #     obj.video = p.versions['thumb']["url"]
-        # else:
-        #     obj.img = p.versions['thumb']["url"]
         obj.save()
+        print(f"{album.name}: {(i + 1) / total * 100:.2f}%({i + 1}/{total}), {obj}")
         return obj
     except Exception as e:
         logging.error(f"异常：{e}: {traceback.format_exc()}")
@@ -52,23 +69,11 @@ def collect_all_medias(albums: list):
         if album.count == total:
             print(f"{album.name}: 无需同步跳过")
             continue
-        n = 0
-        while True:
-            for i, p in enumerate(photos):
-                obj = collect(p, album)
-                print(f"{album.name}: {(i + 1) / total * 100:.2f}%({i + 1}/{total}), {obj}")
-                if i % 20 == 0:
-                    album.agg()
-                album.save()
-            album.agg()
-            album.save()
-            if album.count == total:
-                break
-            else:
-                n += 1
-                if n == 3:
-                    break
-                time.sleep(2)
+        for i, p in enumerate(photos):
+            th = threading.Thread(target=collect, args=(p, album, i, total))
+            th.start()
+        album.agg()
+        album.save()
 
         # messages.add_message(request, messages.ERROR, '操作成功123123123123')
 
@@ -179,7 +184,7 @@ class AlbumAdmin(admin.ModelAdmin):
 
 @admin.register(IMedia)
 class IMediaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'filename', 'ext', 'size', 'dimensionX', 'dimensionY', 'dialog_lists'
+    list_display = ['id', 'filename', 'ext', 'size', 'dimensionX', 'dimensionY', 'thumb', 'dialog_lists'
         , 'asset_date',
                     'added_date',
                     'createdAt', 'updatedAt']
@@ -191,7 +196,7 @@ class IMediaAdmin(admin.ModelAdmin):
 
     def dialog_lists(self, model):
         return MultipleCellDialog([
-            ModalDialog(url='https://simpleui.72wo.com/docs/simplepro', title=model.filename,
+            ModalDialog(url=f'/icloud/detail?id={model.id}', title=model.filename,
                         cell='<el-link type="primary">预览</el-link>', width="800px", height="500px"),
         ])
 

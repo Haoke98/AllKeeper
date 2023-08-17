@@ -25,6 +25,7 @@ from photologue.sitemaps import GallerySitemap, PhotoSitemap
 from revproxy.views import ProxyView
 
 import accountSystem.urls
+import icloud.urls
 from izBasar import settings
 from . import _STATIC_URL
 from .secret import ADMIN_PATH
@@ -42,6 +43,7 @@ urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     re_path('^all-keeper/', include(accountSystem.urls)),
+    re_path('^icloud/', include(icloud.urls)),
     path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
     re_path(r'^static/(?P<path>.*)$', serve, ({'document_root': settings.STATIC_ROOT})),
     re_path(r'^media/(?P<path>.*)$', serve, ({'document_root': settings.MEDIA_ROOT})),

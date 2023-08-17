@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .center-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        video, img {
+            {#max-width: 100%;#}
+            {#max-height: 100%;#}
+        }
+    </style>
+</head>
+<body>
+<div class="center-content">
+    {#    <span>文件名：{{ filename }}</span>#}
+    <video width="320" height="240" codecs="avc1.42E01E, mp4a.40.2" autoplay controls loop>
+        <source src="{{ src }}" type="{{ vide_type }}">
+    </video>
+    {#    <span>DLT: {{ dlt }}</span>#}
+{#    <iframe src="//player.bilibili.com/player.html?aid=267790779&bvid=BV1QY411r7Vz&cid=1032598266&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>#}
+</div>
+</body>
+</html>
