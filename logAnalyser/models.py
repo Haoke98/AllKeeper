@@ -7,11 +7,13 @@ class NginxLog(models.Model):
     ip = models.GenericIPAddressField()
     time = models.DateTimeField()
     method = models.CharField(max_length=10)
-    url = models.CharField(max_length=255)
-    status = models.IntegerField()
+    status = models.IntegerField(verbose_name="状态码")
+    pv = models.CharField(max_length=10, verbose_name="协议版本", null=True)
     bytes = models.BigIntegerField(null=True)
-    unknown = models.CharField(max_length=255, null=True)
     tel = models.CharField(max_length=20, null=True)
+    unknown = models.CharField(max_length=255, null=True)
+    path = models.CharField(verbose_name="路径", max_length=255)
+    query = models.CharField(max_length=255, null=True)
     userAgent = models.CharField(max_length=520, null=True)
 
     class Meta:

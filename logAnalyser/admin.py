@@ -1,19 +1,40 @@
 import datetime
 import re
+import threading
+from urllib.parse import urlparse
 
 from django.contrib import admin
 from simplepro.decorators import button
 
-from .models import NginxLog
 from lib import human_readable_bytes
+from .models import NginxLog
+
+
+def load_nginx_log_file():
+    pattern = r'''(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - (.*?) \[(\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} \+\d{4})\] "(\w*)\s?(.*?)\s?((HTTP)?.*?)" (\d{3}) (\d+) "(.*?)" "(.*?)"'''
+    with open('/Users/shadikesadamu/Downloads/www.1.ink.log') as f:
+        for i, line in enumerate(f):
+            match = re.search(pattern, line)
+            if match is None:
+                raise Exception(f"异常记录：[{line}]")
+            else:
+                ip, tel, time_str, method, url, pv, status, bytes, unknown, ua = match.groups()
+                time_obj = datetime.datetime.strptime(time_str, '%d/%b/%Y:%H:%M:%S %z')
+                result = urlparse(url)
+                print(i, time_obj, ip, method, url, pv, status, bytes, tel, unknown, ua)
+                obj = NginxLog(line=i, ip=ip, tel=tel, time=time_obj, method=method, status=status,
+                               path=result.path, query=result.query, pv=pv,
+                               bytes=bytes,
+                               unknown=unknown, userAgent=ua)
+                obj.save()
 
 
 # Register your models here.
 @admin.register(NginxLog)
 class NginxLogAdmin(admin.ModelAdmin):
-    list_display = ['line', 'ip', 'time', 'method', 'status', 'bytes', 'tel', 'unknown', 'url',
+    list_display = ['line', 'ip', 'time', 'method', 'status', 'bytes', 'tel', 'pv', 'unknown', 'path', 'query',
                     'userAgent']
-    list_filter = ['time', 'ip', 'method', 'status', 'unknown', 'tel', 'userAgent', 'url']
+    list_filter = ['time', 'ip', 'method', 'status', 'unknown', 'tel', 'pv', 'userAgent', 'path']
     # list_filter_multiples = ('ext', 'dimensionX', 'dimensionY',)
     search_fields = ['id', 'filename']
     actions = ['load', 'migrate']
@@ -37,23 +58,11 @@ class NginxLogAdmin(admin.ModelAdmin):
 
     @button(type='danger', short_description='加载日志数据', enable=True, confirm="您确定要生成吗？")
     def load(self, request, queryset):
-        pattern = r'''(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - (.*?) \[(\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} \+\d{4})\] "(\w*)\s?(.*?)" (\d{3}) (\d+) "(.*?)" "(.*?)"'''
-        with open('/Users/shadikesadamu/Downloads/www.1.ink.log') as f:
-            for i, line in enumerate(f):
-                match = re.search(pattern, line)
-                if match is None:
-                    raise Exception(f"异常记录：[{line}]")
-                else:
-                    ip, tel, time_str, method, url, status, bytes, unknown, ua = match.groups()
-                    time_obj = datetime.datetime.strptime(time_str, '%d/%b/%Y:%H:%M:%S %z')
-                    print(i, time_obj, ip, method, url, status, bytes, tel, unknown, ua)
-                    obj = NginxLog(line=i, ip=ip, tel=tel, time=time_obj, method=method, status=status, url=url,
-                                   bytes=bytes,
-                                   unknown=unknown, userAgent=ua)
-                    obj.save()
+        th = threading.Thread(target=load_nginx_log_file)
+        th.start()
         return {
             'state': True,
-            'msg': f'日志信息加载已完成'
+            'msg': f'开始加载日志信息'
         }
 
     fields_options = {
@@ -83,21 +92,28 @@ class NginxLogAdmin(admin.ModelAdmin):
             'width': '100px',
             'align': 'center'
         },
-
         'tel': {
             'width': '140px',
             'align': 'center'
         },
-        'unknown': {
-            'width': '200px',
+        'pv': {
+            'width': '100px',
             'align': 'center'
         },
-        'url': {
+        'unknown': {
+            'width': '400px',
+            'align': 'center'
+        },
+        'path': {
+            'width': '400px',
+            'align': 'left'
+        },
+        'query': {
             'width': '400px',
             'align': 'left'
         },
         'userAgent': {
-            'width': '500px',
+            'width': '600px',
             'align': 'center'
         },
     }
