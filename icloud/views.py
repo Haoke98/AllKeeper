@@ -180,20 +180,25 @@ def detail(request):
     :return:
     TODO：得实现通过临时TOKEN来进行鉴权，否则出现详情页暴露，隐私泄漏等情况
     """
-    id = request.GET.get("id")
-    if id is None:
+    target_id = request.GET.get("id")
+    if target_id is None:
         return HttpResponse("请提供正确有效的ID")
-    targetObj = IMedia.objects.filter(id=id).first()
+    targetObj = IMedia.objects.filter(id=target_id).first()
     if targetObj is None:
-        return HttpResponse(f"找不到[ID:{id}]对应的媒体对象")
+        return HttpResponse(f"找不到[ID:{target_id}]对应的媒体对象")
     if targetObj.prv_file is None:
         return HttpResponse(f"资源的可预览文件不存在")
-    print(targetObj.prv_file.url)
+    # print(targetObj.prv_file.url)
+    # medias = iService.photos.all
+    # target_photo = None
+    # for i, photo in enumerate(medias):
+    #     print(i, photo)
+    #     if photo.id == target_id:
+    #         target_photo = photo
+    #         break
+    # print("target:", target_photo)
+    # download_url = iService.photos.download(target_id)
     # test()
     # test2(targetObj)
     context = {"filename": targetObj.filename, "src": targetObj.prv_file.url}
-    if targetObj.ext in [".MP4", ".MOV"]:
-        context["vide_type"] = VIDE_PLAYER_TYPE_MAP[targetObj.ext]
-    else:
-        pass
     return render(request, "icloud/detail.html", context=context)

@@ -17,42 +17,58 @@ from django.contrib import admin
 from django.core.files.base import ContentFile
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
-
+import urllib.parse
 from lib import human_readable_bytes
 from . import iService
 from .models import IMedia, Album
+
+
+def download_thumb(obj: IMedia, p):
+    fields = p._master_record['fields']
+    downloadURL = fields['resJPEGThumbRes']['value']['downloadURL']
+    thumbResp = requests.get(downloadURL)
+    thumbCF = ContentFile(thumbResp.content, f"{p.filename}.JPG")
+    obj.thumb = thumbCF
+    obj.save()
+
+
+def download_prv(obj: IMedia, p):
+    fields: dict = p._master_record['fields']
+    if fields.keys().__contains__("resVidSmallRes"):
+        downloadURL = fields['resVidSmallRes']['value']['downloadURL']
+        resp = requests.get(downloadURL)
+        cf = ContentFile(resp.content, f"{p.filename}.MP4")
+        obj.prv_file = cf
+        obj.save()
+    else:
+        # 由于图片的预览文件和Thumb缩略图一样，所以不用再重新下载
+        pass
+
+
+
+def insert_or_update_media(p):
+    fn, ext = os.path.splitext(p.filename)
+    ext = str(ext).upper()
+    obj, created = IMedia.objects.get_or_create(id=p.id)
+    obj.filename = p.filename
+    obj.ext = ext
+    obj.size = p.size
+    obj.dimensionX = p.dimensions[0]
+    obj.dimensionY = p.dimensions[1]
+    obj.asset_date = p.asset_date
+    obj.added_date = p.added_date
+    obj.versions = json.dumps(p.versions, indent=4, ensure_ascii=False)
+    download_thumb(obj, p)
+    threading.Thread(target=download_prv, args=(obj, p)).start()
+    obj.save()
+    return obj
 
 
 def collect(p, album, i, total):
     if p.created != p.asset_date:
         raise Exception("异常数据")
     try:
-        fn, ext = os.path.splitext(p.filename)
-        ext = str(ext).upper()
-        obj = IMedia.objects.get_or_create(id=p.id)
-        obj.filename = p.filename
-        obj.ext = ext
-        obj.size = p.size
-        obj.dimensionX = p.dimensions[0]
-        obj.dimensionY = p.dimensions[1]
-        obj.asset_date = p.asset_date
-        obj.added_date = p.added_date
-        obj.versions = json.dumps(p.versions, indent=4, ensure_ascii=False)
-
-        mr = p._master_record
-        fields = mr['fields']
-
-        resJPEGThumbRes = fields['resJPEGThumbRes']['value']
-        resJPEGThumbResValue = resJPEGThumbRes
-        resJPEGThumbURL = resJPEGThumbResValue['downloadURL']
-        thumbResp = requests.get(resJPEGThumbURL)
-        thumbCF = ContentFile(thumbResp.content, f"{p.filename}.JPG")
-        obj.thumb = thumbCF
-
-        prvResp = requests.get(p.versions["thumb"]["url"])
-        prvCF = ContentFile(prvResp.content, p.filename)
-        obj.prv_file = prvCF
-
+        obj = insert_or_update_media(p)
         obj.albums.add(album)
         obj.save()
         print(f"{album.name}: {(i + 1) / total * 100:.2f}%({i + 1}/{total}), {obj}")
@@ -62,20 +78,28 @@ def collect(p, album, i, total):
         return None
 
 
-def collect_all_medias(albums: list):
-    for album in albums:
-        photos = iService.photos.albums[album.name]
-        total = len(photos)
-        if album.count == total:
-            print(f"{album.name}: 无需同步跳过")
-            continue
-        for i, p in enumerate(photos):
-            th = threading.Thread(target=collect, args=(p, album, i, total))
-            th.start()
-        album.agg()
-        album.save()
-
-        # messages.add_message(request, messages.ERROR, '操作成功123123123123')
+def collect_all_medias():
+    # for album in albums:
+    #     photos = iService.photos.albums[album.name]
+    #     total = len(photos)
+    # if album.count == total:
+    #     print(f"{album.name}: 无需同步跳过")
+    #     continue
+    # for i, p in enumerate(photos):
+    #     th = threading.Thread(target=collect, args=(p, album, i, total))
+    #     th.start()
+    # album.agg()
+    # album.save()
+    medias = iService.photos.all
+    target_photo = None
+    total = len(medias)
+    for i, photo in enumerate(medias):
+        n = i + 1
+        progress = n / total * 100
+        # th = threading.Thread(target=insert_or_update_media, args=(photo,))
+        # th.start()
+        insert_or_update_media(photo)
+        print(f"{progress:.2f}% ({n}/{total})", photo)
 
 
 @admin.register(Album)
@@ -196,7 +220,7 @@ class IMediaAdmin(admin.ModelAdmin):
 
     def dialog_lists(self, model):
         return MultipleCellDialog([
-            ModalDialog(url=f'/icloud/detail?id={model.id}', title=model.filename,
+            ModalDialog(url=f'/icloud/detail?id={urllib.parse.quote(model.id)}', title=model.filename,
                         cell='<el-link type="primary">预览</el-link>', width="800px", height="500px"),
         ])
 
@@ -220,10 +244,6 @@ class IMediaAdmin(admin.ModelAdmin):
             'state': True,
             'msg': f'采集程序已经启动'
         }
-        #
-        # messages.add_message(request, messages.DEBUG, '操作成功123123123123')
-        # messages.add_message(request, messages.WARNING, '操作成功123123123123')
-        # messages.add_message(request, messages.INFO, '操作成功123123123123')
 
     @button(type='warning', short_description='数据调整', enable=True, confirm="您确定要生成吗？")
     def migrate(self, request, queryset):

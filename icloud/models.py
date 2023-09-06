@@ -71,17 +71,18 @@ class Album(BaseModel):
 
 class IMedia(BaseModel):
     id = models.CharField(max_length=50, primary_key=True)
-    filename = models.CharField(max_length=100, verbose_name="文件名")
+    filename = models.CharField(max_length=100, verbose_name="文件名", null=True)
     ext = models.CharField(max_length=10, verbose_name="扩展名")
-    size = models.BigIntegerField(verbose_name="大小")
-    dimensionX = models.IntegerField(verbose_name="DX")
-    dimensionY = models.IntegerField(verbose_name="DY")
-    asset_date = models.DateTimeField(verbose_name="生成时间")
-    added_date = models.DateTimeField(verbose_name="加入icloud的时间")
-    versions = models.TextField()
+    size = models.BigIntegerField(verbose_name="大小", null=True)
+    dimensionX = models.IntegerField(verbose_name="DX", null=True)
+    dimensionY = models.IntegerField(verbose_name="DY", null=True)
+    asset_date = models.DateTimeField(verbose_name="生成时间", null=True)
+    added_date = models.DateTimeField(verbose_name="加入icloud的时间", null=True)
+    versions = models.TextField(null=True)
     albums = fields.ManyToManyField(to=Album, verbose_name="相册")
     thumb = models.ImageField(verbose_name="缩略图", upload_to="icloud/thumb", null=True)
     prv_file = models.FileField(verbose_name="可预览文件", null=True, upload_to="icloud/prv_file", help_text="图片和视频都包括")
+    thumb_url = models.URLField(verbose_name="缩略图", null=True)
 
     class Meta:
         verbose_name = "iCloud媒体"
