@@ -45,7 +45,6 @@ def download_prv(obj: IMedia, p):
         pass
 
 
-
 def insert_or_update_media(p):
     fn, ext = os.path.splitext(p.filename)
     ext = str(ext).upper()
@@ -221,7 +220,7 @@ class IMediaAdmin(admin.ModelAdmin):
     def dialog_lists(self, model):
         return MultipleCellDialog([
             ModalDialog(url=f'/icloud/detail?id={urllib.parse.quote(model.id)}', title=model.filename,
-                        cell='<el-link type="primary">预览</el-link>', width="800px", height="500px"),
+                        cell='<el-link type="primary">预览</el-link>', width="840px", height="600px"),
         ])
 
     # 这个是列头显示的文本

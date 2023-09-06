@@ -1,6 +1,7 @@
 # Create your views here.
 import datetime
 import json
+import os.path
 from urllib.parse import urlencode
 
 from django.http import HttpResponse
@@ -186,8 +187,11 @@ def detail(request):
     targetObj = IMedia.objects.filter(id=target_id).first()
     if targetObj is None:
         return HttpResponse(f"找不到[ID:{target_id}]对应的媒体对象")
-    if targetObj.prv_file is None:
-        return HttpResponse(f"资源的可预览文件不存在")
+    context = {"filename": targetObj.filename}
+    if targetObj.thumb is not None and os.path.exists(targetObj.thumb.path):
+        context["thumb_src"] = targetObj.thumb.url
+    if targetObj.prv_file is not None and os.path.exists(targetObj.prv_file.path):
+        context["prv_src"] = targetObj.prv_file.url
     # print(targetObj.prv_file.url)
     # medias = iService.photos.all
     # target_photo = None
@@ -200,5 +204,4 @@ def detail(request):
     # download_url = iService.photos.download(target_id)
     # test()
     # test2(targetObj)
-    context = {"filename": targetObj.filename, "src": targetObj.prv_file.url}
     return render(request, "icloud/detail.html", context=context)
