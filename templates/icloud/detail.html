@@ -68,11 +68,11 @@
     <div class="content-container">
         <div class="media-container">
             {% if prv_src is not None %}
-                <video width="320" height="240" codecs="avc1.42E01E, mp4a.40.2" autoplay controls loop>
+                <video id="media" width="320" height="240" codecs="avc1.42E01E, mp4a.40.2" autoplay controls loop>
                     <source src="{{ prv_src }}" type="video/mp4">
                 </video>
             {% else %}
-                <img src="{{ thumb_src }}">
+                <img id="media" src="{{ thumb_src }}">
             {% endif %}
             {#    <span>文件名：{{ filename }}</span>#}
             {#    <span>DLT: {{ dlt }}</span>#}
@@ -80,20 +80,32 @@
         </div>
     </div>
     <div class="cmd-line">
-        <button onclick="rotate(true)">顺时针旋转90度</button>
-        <button onclick="rotate(false)">逆时针旋转90度</button>
+        <button onclick="rotateClockwise()">顺时针旋转90度</button>
+        <button onclick="rotateCounterclockwise()">逆时针旋转90度</button>
     </div>
 </div>
 </body>
 <script type="text/javascript">
-    function rotate(clockwise) {
-        var container = document.querySelector('.media-container');
-        if (clockwise) {
-            container.classList.toggle('clockwise');
-        } else {
-            container.classList.toggle('counterclockwise');
+    var rotationAngle = 0;
+
+        function rotateClockwise() {
+            rotationAngle += 90;
+            applyRotation();
         }
 
-    }
+        function rotateCounterclockwise() {
+            rotationAngle -= 90;
+            applyRotation();
+        }
+
+        function applyRotation() {
+            var mediaContainer = document.querySelector(".media-container");
+            {#var mediaContainer = document.getElementById("media");#}
+            console.log("media:",mediaContainer)
+            {#var controls = mediaContainer.querySelector('::-webkit-media-controls');#}
+            {#console.log("controls:",controls)#}
+            mediaContainer.style.transform = `rotate(${rotationAngle}deg)`;
+            {#controls.style.transform = `none`;#}
+        }
 </script>
 </html>
