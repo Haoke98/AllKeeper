@@ -26,10 +26,15 @@ from lib import human_readable_bytes
 from . import iService
 from .models import IMedia, Album
 
-STATUS = "STOPPING"
+STATUS_FINISHED = "FINISHED"
+STATUS_STOP = "STOPPING"
+STATUS_RUNNING = "Running"
+STATUS_EXCEPTION = "Exception"
+STATUS = STATUS_STOP
 PROGRESS = -1
 TOTAL = -1
 STARTED_AT = datetime.datetime.now()
+EXCEPTION_TRACE = None
 
 
 def download_thumb(obj: IMedia, p):
@@ -105,7 +110,7 @@ def collect(p, album, i, total):
 
 
 def collect_all_medias():
-    global STATUS, PROGRESS, TOTAL,STARTED_AT
+    global STATUS, PROGRESS, TOTAL, STARTED_AT, EXCEPTION_TRACE
     # for album in albums:
     #     photos = iService.photos.albums[album.name]
     #     total = len(photos)
@@ -118,7 +123,7 @@ def collect_all_medias():
     # album.agg()
     # album.save()
     # target_photo = None
-    STATUS = "Running."
+    STATUS = STATUS_RUNNING
     STARTED_AT = datetime.datetime.now()
     try:
         medias = iService.photos.all
@@ -129,9 +134,10 @@ def collect_all_medias():
             startedAt = time.time()
             insert_or_update_media(photo)
             print(f"{PROGRESS:.2f}% ({n}/{TOTAL}), {photo}, [Duration:{time.time() - startedAt} s]")
-        STATUS = "Finished."
+        STATUS = STATUS_FINISHED
     except Exception as e:
-        STATUS = f"Exception:{e}"
+        STATUS = STATUS_EXCEPTION
+        EXCEPTION_TRACE = str(e)
         print(traceback.format_exc())
 
 
@@ -262,19 +268,24 @@ class IMediaAdmin(admin.ModelAdmin):
 
     # 也可以是方法的形式来返回html
     def get_top_html(self, request):
-        _type = "success"
-        if "Except" in STATUS:
-            _type = "danger"
-        if "Stop" in STATUS:
+        _type = "info"
+        if STATUS == STATUS_STOP:
             _type = "warning"
-        dlt = datetime.datetime.now()-STARTED_AT
+        if STATUS == STATUS_EXCEPTION:
+            _type = "danger"
+        if STATUS == STATUS_FINISHED:
+            _type = "success"
+        dlt = datetime.datetime.now() - STARTED_AT
         finishedCount = math.ceil(TOTAL * PROGRESS / 100)
-        speed_in_second= finishedCount/dlt.total_seconds()
-        left = TOTAL-finishedCount
-        dlt_in_second = left/speed_in_second
+        speed_in_second = finishedCount / dlt.total_seconds()
+        left = TOTAL - finishedCount
+        dlt_in_second = left / speed_in_second
         dlt1 = datetime.timedelta(seconds=dlt_in_second)
-        willFinishedAt = datetime.datetime.now()+dlt1
-        return f'<el-alert title="状态：{STATUS}, 进度: {PROGRESS:.2f}% ({finishedCount}/{TOTAL}) 开始于：{STARTED_AT}, 运行了:{dlt}, 速率：{speed_in_second}, 剩余：{left}, 还需要：{dlt1}, 即将完成于：{willFinishedAt}" type="{_type}"></el-alert>'
+        willFinishedAt = datetime.datetime.now() + dlt1
+        return f'''
+        <el-alert title="状态：{STATUS}, 进度: {PROGRESS:.2f}% ({finishedCount}/{TOTAL}) 开始于：{STARTED_AT}, 运行了:{dlt}, 速率：{speed_in_second}, 剩余：{left}, 还需要：{dlt1}, 即将完成于：{willFinishedAt}, 异常信息:{EXCEPTION_TRACE}" type="{_type}">
+            <progress value="{finishedCount}" max="{TOTAL}"></progress>
+        </el-alert>'''
 
     def has_add_permission(self, request):
         return False
