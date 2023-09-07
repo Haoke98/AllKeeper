@@ -82,18 +82,18 @@ def insert_or_update_media(p):
             if obj.thumb or not os.path.exists(obj.thumb.path):
                 download_thumb(obj, p)
         except ValueError as e:
-            if str(e) == "The 'thumb' attribute has no file associated with it.":
+            if "The 'thumb' attribute has no file associated with it." in str(e):
                 download_thumb(obj, p)
             else:
-                raise e
+                raise ValueError(e)
         try:
             if obj.prv_file or not os.path.exists(obj.prv_file.path):
                 download_prv(obj, p)
         except ValueError as e:
-            if str(e) == "The 'prv_file' attribute has no file associated with it.":
+            if "The 'prv_file' attribute has no file associated with it." in str(e):
                 download_prv(obj, p)
             else:
-                raise e
+                raise ValueError(e)
     print(f"预处理[{obj.id}]成功！[Duration:{time.time() - startedAt2} s]")
     startedAt3 = time.time()
     obj.save()
@@ -143,7 +143,7 @@ def collect_all_medias():
         STATUS = STATUS_FINISHED
     except Exception as e:
         STATUS = STATUS_EXCEPTION
-        EXCEPTION_TRACE = str(e)
+        EXCEPTION_TRACE = str(e) + "\n" + traceback.format_exc()
         print(traceback.format_exc())
 
 
