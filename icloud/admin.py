@@ -6,21 +6,30 @@
 @Software: PyCharm
 @disc:
 ======================================="""
+import datetime
 import json
 import logging
+import math
 import os.path
 import threading
+import time
 import traceback
+import urllib.parse
 
 import requests
 from django.contrib import admin
 from django.core.files.base import ContentFile
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
-import urllib.parse
+
 from lib import human_readable_bytes
 from . import iService
 from .models import IMedia, Album
+
+STATUS = "STOPPING"
+PROGRESS = -1
+TOTAL = -1
+STARTED_AT = datetime.datetime.now()
 
 
 def download_thumb(obj: IMedia, p):
@@ -48,18 +57,36 @@ def download_prv(obj: IMedia, p):
 def insert_or_update_media(p):
     fn, ext = os.path.splitext(p.filename)
     ext = str(ext).upper()
+    startedAt1 = time.time()
     obj, created = IMedia.objects.get_or_create(id=p.id)
-    obj.filename = p.filename
-    obj.ext = ext
-    obj.size = p.size
-    obj.dimensionX = p.dimensions[0]
-    obj.dimensionY = p.dimensions[1]
-    obj.asset_date = p.asset_date
-    obj.added_date = p.added_date
-    obj.versions = json.dumps(p.versions, indent=4, ensure_ascii=False)
-    download_thumb(obj, p)
-    threading.Thread(target=download_prv, args=(obj, p)).start()
+    print(f"查询[{obj.id}]成功！[Created:{created},Duration:{time.time() - startedAt1} s]")
+    startedAt2 = time.time()
+    if created:
+        obj.filename = p.filename
+        obj.ext = ext
+        obj.size = p.size
+        obj.dimensionX = p.dimensions[0]
+        obj.dimensionY = p.dimensions[1]
+        obj.asset_date = p.asset_date
+        obj.added_date = p.added_date
+        download_thumb(obj, p)
+        download_prv(obj, p)
+    else:
+        obj.versions = json.dumps(p.versions, indent=4, ensure_ascii=False)
+        if obj.thumb or not os.path.exists(obj.thumb.path):
+            download_thumb(obj, p)
+        try:
+            if obj.prv_file or not os.path.exists(obj.prv_file.path):
+                download_prv(obj, p)
+        except ValueError as e:
+            if str(e) == "The 'prv_file' attribute has no file associated with it.":
+                download_prv(obj, p)
+            else:
+                raise e
+    print(f"预处理[{obj.id}]成功！[Duration:{time.time() - startedAt2} s]")
+    startedAt3 = time.time()
     obj.save()
+    print(f"保存[{obj.id}]成功！[Duration:{time.time() - startedAt3} s]")
     return obj
 
 
@@ -78,6 +105,7 @@ def collect(p, album, i, total):
 
 
 def collect_all_medias():
+    global STATUS, PROGRESS, TOTAL,STARTED_AT
     # for album in albums:
     #     photos = iService.photos.albums[album.name]
     #     total = len(photos)
@@ -89,16 +117,22 @@ def collect_all_medias():
     #     th.start()
     # album.agg()
     # album.save()
-    medias = iService.photos.all
-    target_photo = None
-    total = len(medias)
-    for i, photo in enumerate(medias):
-        n = i + 1
-        progress = n / total * 100
-        # th = threading.Thread(target=insert_or_update_media, args=(photo,))
-        # th.start()
-        insert_or_update_media(photo)
-        print(f"{progress:.2f}% ({n}/{total})", photo)
+    # target_photo = None
+    STATUS = "Running."
+    STARTED_AT = datetime.datetime.now()
+    try:
+        medias = iService.photos.all
+        TOTAL = len(medias)
+        for i, photo in enumerate(medias):
+            n = i + 1
+            PROGRESS = n / TOTAL * 100
+            startedAt = time.time()
+            insert_or_update_media(photo)
+            print(f"{PROGRESS:.2f}% ({n}/{TOTAL}), {photo}, [Duration:{time.time() - startedAt} s]")
+        STATUS = "Finished."
+    except Exception as e:
+        STATUS = f"Exception:{e}"
+        print(traceback.format_exc())
 
 
 @admin.register(Album)
@@ -225,6 +259,22 @@ class IMediaAdmin(admin.ModelAdmin):
 
     # 这个是列头显示的文本
     dialog_lists.short_description = "预览"
+
+    # 也可以是方法的形式来返回html
+    def get_top_html(self, request):
+        _type = "success"
+        if "Except" in STATUS:
+            _type = "danger"
+        if "Stop" in STATUS:
+            _type = "warning"
+        dlt = datetime.datetime.now()-STARTED_AT
+        finishedCount = math.ceil(TOTAL * PROGRESS / 100)
+        speed_in_second= finishedCount/dlt.total_seconds()
+        left = TOTAL-finishedCount
+        dlt_in_second = left/speed_in_second
+        dlt1 = datetime.timedelta(seconds=dlt_in_second)
+        willFinishedAt = datetime.datetime.now()+dlt1
+        return f'<el-alert title="状态：{STATUS}, 进度: {PROGRESS:.2f}% ({finishedCount}/{TOTAL}) 开始于：{STARTED_AT}, 运行了:{dlt}, 速率：{speed_in_second}, 剩余：{left}, 还需要：{dlt1}, 即将完成于：{willFinishedAt}" type="{_type}"></el-alert>'
 
     def has_add_permission(self, request):
         return False
