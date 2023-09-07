@@ -78,8 +78,14 @@ def insert_or_update_media(p):
         download_prv(obj, p)
     else:
         obj.versions = json.dumps(p.versions, indent=4, ensure_ascii=False)
-        if obj.thumb or not os.path.exists(obj.thumb.path):
-            download_thumb(obj, p)
+        try:
+            if obj.thumb or not os.path.exists(obj.thumb.path):
+                download_thumb(obj, p)
+        except ValueError as e:
+            if str(e) == "The 'thumb' attribute has no file associated with it.":
+                download_thumb(obj, p)
+            else:
+                raise e
         try:
             if obj.prv_file or not os.path.exists(obj.prv_file.path):
                 download_prv(obj, p)
@@ -272,7 +278,7 @@ class IMediaAdmin(admin.ModelAdmin):
         if STATUS == STATUS_STOP:
             _type = "warning"
         if STATUS == STATUS_EXCEPTION:
-            _type = "danger"
+            _type = "error"
         if STATUS == STATUS_FINISHED:
             _type = "success"
         dlt = datetime.datetime.now() - STARTED_AT
@@ -284,7 +290,7 @@ class IMediaAdmin(admin.ModelAdmin):
         willFinishedAt = datetime.datetime.now() + dlt1
         return f'''
         <el-alert title="状态：{STATUS}, 进度: {PROGRESS:.2f}% ({finishedCount}/{TOTAL}) 开始于：{STARTED_AT}, 运行了:{dlt}, 速率：{speed_in_second}, 剩余：{left}, 还需要：{dlt1}, 即将完成于：{willFinishedAt}, 异常信息:{EXCEPTION_TRACE}" type="{_type}">
-            <progress value="{finishedCount}" max="{TOTAL}"></progress>
+            <el-progress type="circle" percentage="{PROGRESS:.2f}" color="#5cb87a"></el-progress>
         </el-alert>'''
 
     def has_add_permission(self, request):
