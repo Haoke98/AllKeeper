@@ -6,6 +6,7 @@
 @Software: PyCharm
 @disc:
 ======================================="""
+import sys
 from io import BytesIO
 
 from PIL import Image
@@ -13,7 +14,7 @@ from django.core.files.base import ContentFile
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
 if __name__ == '__main__':
-    video = VideoFileClip('/Users/shadikesadamu/Downloads/AcBMw:TKEK50PmtxJ9KbXDB0YzKs.mov')
+    video = VideoFileClip(sys.argv[1])
     # 获取视频的第0秒（即开头）的帧，作为缩略图
     thumbnail = video.get_frame(0)
 
