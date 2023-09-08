@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 import datetime
+import logging
 import mimetypes
 import os
 import platform
@@ -35,7 +36,7 @@ if not os.path.exists(PUBLIC_ROOT):
 from . import _STATIC_URL
 
 STATIC_URL = _STATIC_URL
-print("STATIC_ROOT_URL:", STATIC_URL)
+logging.info(f"STATIC_URL:{STATIC_URL}")
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -52,6 +53,7 @@ STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'accountSystem/static'),
     os.path.join(BASE_DIR, 'common-static'),
+    os.path.join(BASE_DIR, 'icloud/static'),
 ]
 print("STATICFILES_DIR:", STATICFILES_DIRS)
 
@@ -149,6 +151,10 @@ LOGGING = {
 
         }
     },
+    'root': {
+        'handlers': ['console', 'file', 'mail_admins'],
+        'level': 'DEBUG',
+    },
     'loggers': {
         'django': {
             'handlers': ['console', 'file'],  # 这里使用上面的handler: console
@@ -160,9 +166,9 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False
         },
-        'project.app': {
+        'icloud': {
             'handlers': ['file', 'mail_admins'],
-            'level': 'ERROR',
+            'level': 'DEBUG',
             'propagate': True
         }
     }

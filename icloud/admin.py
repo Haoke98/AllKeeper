@@ -155,7 +155,7 @@ def collect_all_medias():
         STATUS = STATUS_EXCEPTION
         EXCEPTION_MSG = str(e)
         EXCEPTION_TRACE_BACK = traceback.format_exc()
-        print(traceback.format_exc())
+        logging.error("iCloud数据同步异常", exc_info=True)
 
 
 @admin.register(Album)
