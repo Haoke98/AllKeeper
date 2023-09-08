@@ -31,8 +31,9 @@ STATUS_STOP = "STOPPING"
 STATUS_RUNNING = "Running"
 STATUS_EXCEPTION = "Exception"
 STATUS = STATUS_STOP
-PROGRESS = -1
+
 TOTAL = -1
+FINISHED_COUNT = 0
 STARTED_AT = datetime.datetime.now()
 EXCEPTION_MSG = None
 EXCEPTION_TRACE_BACK = None
@@ -117,7 +118,7 @@ def collect(p, album, i, total):
 
 
 def collect_all_medias():
-    global STATUS, PROGRESS, TOTAL, STARTED_AT, EXCEPTION_MSG,EXCEPTION_TRACE_BACK
+    global STATUS, FINISHED_COUNT, TOTAL, STARTED_AT, EXCEPTION_MSG, EXCEPTION_TRACE_BACK
     # for album in albums:
     #     photos = iService.photos.albums[album.name]
     #     total = len(photos)
@@ -135,12 +136,20 @@ def collect_all_medias():
     try:
         medias = iService.photos.all
         TOTAL = len(medias)
+        FINISHED_COUNT = 0
         for i, photo in enumerate(medias):
-            n = i + 1
-            PROGRESS = n / TOTAL * 100
+            FINISHED_COUNT = i + 1
+            progress = FINISHED_COUNT / TOTAL * 100
+            dlt = datetime.datetime.now() - STARTED_AT
+            finishedCount = math.ceil(TOTAL * progress / 100)
+            speed_in_second = finishedCount / dlt.total_seconds()
+            left = TOTAL - finishedCount
+            dlt_in_second = left / speed_in_second
+            dlt1 = datetime.timedelta(seconds=dlt_in_second)
+            willFinishedAt = datetime.datetime.now() + dlt1
             startedAt = time.time()
             insert_or_update_media(photo)
-            print(f"{PROGRESS:.2f}% ({n}/{TOTAL}), {photo}, [Duration:{time.time() - startedAt} s]")
+            print(f"{progress:.2f}% ({FINISHED_COUNT}/{TOTAL}), {photo}, [Duration:{time.time() - startedAt} s]")
         STATUS = STATUS_FINISHED
     except Exception as e:
         STATUS = STATUS_EXCEPTION
@@ -276,31 +285,14 @@ class IMediaAdmin(admin.ModelAdmin):
 
     # 也可以是方法的形式来返回html
     def get_top_html(self, request):
-        _type = "info"
-        if STATUS == STATUS_STOP:
-            _type = "warning"
-        if STATUS == STATUS_EXCEPTION:
-            _type = "error"
-        if STATUS == STATUS_FINISHED:
-            _type = "success"
-        dlt = datetime.datetime.now() - STARTED_AT
-        finishedCount = math.ceil(TOTAL * PROGRESS / 100)
-        speed_in_second = finishedCount / dlt.total_seconds()
-        left = TOTAL - finishedCount
-        dlt_in_second = left / speed_in_second
-        dlt1 = datetime.timedelta(seconds=dlt_in_second)
-        willFinishedAt = datetime.datetime.now() + dlt1
         return f'''
-        <el-alert title="状态：{STATUS}, 进度: {PROGRESS:.2f}% ({finishedCount}/{TOTAL}) 开始于：{STARTED_AT}, 运行了:{dlt}, 速率：{speed_in_second}, 剩余：{left}, 还需要：{dlt1}, 即将完成于：{willFinishedAt}" type="{_type}">
-            <el-progress type="circle" percentage="{PROGRESS:.2f}" color="#5cb87a"></el-progress>
-        </el-alert>
         <el-collapse accordion>
-          <el-collapse-item>
-            <template slot="title">
-              异常： {EXCEPTION_MSG}<i class="header-icon el-icon-info"></i>
-            </template>
-            <pre>{EXCEPTION_TRACE_BACK}</pre>
-          </el-collapse-item>
+            <el-collapse-item>
+                <template slot="title">
+                    同步进度监控<i class="header-icon el-icon-info"></i>
+                </template>
+                <iframe style="width:100%;height:200px;" src="/static/iMedia_list_top.html"></iframe>
+            </el-collapse-item>
         </el-collapse>
         '''
 

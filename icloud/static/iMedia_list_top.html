@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="//unpkg.com/element-ui@2.15.14/lib/index.js"></script>
+    <style>
+        @import url("//unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css");
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-alert
+            :title="'状态：'+STATUS+' 进度：'+progress+'% ('+FINISHED_COUNT+'/'+TOTAL+') 剩余：' +left+', 开始于：'+ STARTED_AT+', 运行了:'+formatTime(dltOnSeconds)+'('+dltOnSeconds+'s) 速率：'+ speed+'/秒, 还需要：'+formatTime(needOnSeconds)+', 即将完成于：'+finishAt"
+            :type="alert_type">
+        <el-progress type="circle" :percentage="progress" :color="colors"></el-progress>
+    </el-alert>
+    <el-collapse v-if="EXCEPTION_MSG != null" accordion>
+        <el-collapse-item>
+            <template slot="title">
+                异常：{{ EXCEPTION_MSG }}<i class="header-icon el-icon-info"></i>
+            </template>
+            <pre>{{ EXCEPTION_TRACE_BACK }}</pre>
+        </el-collapse-item>
+    </el-collapse>
+</div>
+<script type="text/javascript">
+    new Vue(
+        {
+            data: {
+                STATUS: "RUNNING",
+                FINISHED_COUNT: 100,
+                TOTAL: 1000,
+                STARTED_AT: new Date(),
+                EXCEPTION_MSG: "ValueError",
+                EXCEPTION_TRACE_BACK: "还需要：{{ dlt1 }}, 即将完成于：{{ willFinishedAt }}",
+
+                colors: [
+                    {color: '#f56c6c', percentage: 20},
+                    {color: '#e6a23c', percentage: 40},
+                    {color: '#5cb87a', percentage: 60},
+                    {color: '#1989fa', percentage: 80},
+                    {color: '#6f7ad3', percentage: 100}
+                ],
+                dltOnSeconds: 0,
+            },
+            computed: {
+                // 计算属性的 getter
+                alert_type: function () {
+                    if (this.STATUS === "STOPPING") {
+                        return "warning"
+                    } else if (this.STATUS === "EXCEPTION") {
+                        return "error"
+                    } else if (this.STATUS === "FINISH") {
+                        return "success"
+                    } else if (this.STATUS === "RUNNING") {
+                        return "info"
+                    }
+                },
+                progress: function () {
+                    // `this` 指向 vm 实例
+                    return parseFloat((this.FINISHED_COUNT / this.TOTAL * 100).toFixed(2));
+                },
+                left: function () {
+                    return this.TOTAL - this.FINISHED_COUNT;
+                },
+                speed: function () {
+                    return this.FINISHED_COUNT / this.dltOnSeconds
+                },
+                needOnSeconds: function () {
+                    return this.left / this.speed
+                },
+                finishAt: function () {
+                    // 获取当前时间
+                    let currentTime = new Date();
+                    // 获取 n 秒后的时间
+                    let futureTime = new Date(currentTime.getTime() + this.needOnSeconds * 1000);
+
+                    // 将 futureTime 转换为字符串形式
+                    //let futureTimeString = futureTime.toISOString(); // 输出格式：YYYY-MM-DDTHH:mm:ss.sssZ
+                    //console.log(futureTimeString);
+                    return futureTime
+                }
+            },
+            watch: {
+                FINISHED_COUNT: function () {
+                    // 计算时间差（以秒为单位）
+                    let timeDiff = Math.abs(new Date().getTime() - this.STARTED_AT.getTime());
+                    this.dltOnSeconds = Math.ceil(timeDiff / 1000)
+                }
+            },
+            created: function () {
+                // `this` 指向 vm 实例
+                let _this = this;
+                setInterval(function () {
+                    fetch("/icloud/sync_progress", {
+                        method: "GET",
+                    }).then(resp => {
+                        console.log("resp:", resp.status, resp.statusText, resp.headers.get("Content-Type"))
+                        if (resp.headers.get("Content-Type") === "application/json") {
+                            resp.json().then(respJson => {
+                                console.log("Body:", respJson)
+                                _this.STATUS = respJson.STATUS
+                                _this.TOTAL = respJson.TOTAL
+                                _this.FINISHED_COUNT = respJson.FINISHED_COUNT
+                                _this.STARTED_AT = new Date(respJson.STARTED_AT);
+                                _this.EXCEPTION_MSG = respJson.EXCEPTION_MSG
+                                _this.EXCEPTION_TRACE_BACK = respJson.EXCEPTION_TRACE_BACK
+                                console.log("app:", _this)
+                            })
+                        }
+                    })
+                }, 1000)
+            },
+            methods: {
+                formatTime(seconds) {
+                    var days = Math.floor(seconds / (24 * 60 * 60));
+                    var hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
+                    var minutes = Math.floor((seconds % (60 * 60)) / 60);
+                    var remainingSeconds = seconds % 60;
+
+                    var formattedTime = "";
+                    if (days > 0) {
+                        formattedTime += days + "天 ";
+                    }
+                    if (hours > 0) {
+                        formattedTime += hours + "小时 ";
+                    }
+                    if (minutes > 0) {
+                        formattedTime += minutes + "分钟 ";
+                    }
+                    if (remainingSeconds > 0) {
+                        formattedTime += remainingSeconds + "秒";
+                    }
+
+                    return formattedTime;
+                }
+            }
+        }
+    ).$mount('#app')
+
+
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 from django.urls import re_path
 from rest_framework.routers import DefaultRouter
 
-from .views import detail
+from .views import detail,sync_progress
 
 router = DefaultRouter()
 # router.register(r'server', viewset=ServerViewSet)
@@ -15,7 +15,7 @@ router = DefaultRouter()
 # })
 urlpatterns = [
                   re_path('detail', detail),
-                  # re_path('^device/region$', DeviceRegionView.as_view()),
+                  re_path('sync_progress', sync_progress),
                   # # re_path('^server/(?P<pk>[0-9]+)$', server_detail),
                   # re_path('^login$', login),
                   # re_path('^system/menu$', getMenuList),

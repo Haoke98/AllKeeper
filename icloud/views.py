@@ -4,7 +4,7 @@ import json
 import os.path
 from urllib.parse import urlencode
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from pytz import UTC
 
@@ -205,3 +205,10 @@ def detail(request):
     # test()
     # test2(targetObj)
     return render(request, "icloud/detail.html", context=context)
+
+
+def sync_progress(request):
+    from .admin import STATUS, FINISHED_COUNT, TOTAL, STARTED_AT, EXCEPTION_MSG, EXCEPTION_TRACE_BACK
+    return JsonResponse(
+        data={"STATUS": STATUS, "FINISHED_COUNT": FINISHED_COUNT, "TOTAL": TOTAL, "STARTED_AT": STARTED_AT,
+              "EXCEPTION_MSG": EXCEPTION_MSG, "EXCEPTION_TRACE_BACK": EXCEPTION_TRACE_BACK})
