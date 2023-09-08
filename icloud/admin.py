@@ -15,10 +15,13 @@ import threading
 import time
 import traceback
 import urllib.parse
+from io import BytesIO
 
 import requests
+from PIL import Image
 from django.contrib import admin
 from django.core.files.base import ContentFile
+from moviepy.video.io.VideoFileClip import VideoFileClip
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
 
@@ -47,9 +50,33 @@ def download_thumb(obj: IMedia, p):
         thumbCF = ContentFile(thumbResp.content, f"{p.filename}.JPG")
         obj.thumb = thumbCF
         obj.save()
+    else:
+        downloadURL = fields['resJPEGThumbRes']['value']['downloadURL']
+        originResp = requests.get(downloadURL)
+        originCF = ContentFile(originResp.content, f"{p.filename}.JPG")
+        obj.origin = originCF
+        obj.save()
+        video = VideoFileClip(obj.origin.path)
+        # 获取视频的第0秒（即开头）的帧，作为缩略图
+        thumbnail = video.get_frame(0)
+        # 转换为PIL Image对象
+        image = Image.fromarray(thumbnail)
+        # 创建一个临时的二进制数据缓冲区
+        buffer = BytesIO()
+        # 将图像保存到二进制缓冲区
+        image.save(buffer, format='JPEG')
+        # 创建ContentFile对象
+        thumbCF = ContentFile(buffer.getvalue())
+        # 关闭二进制缓冲区
+        buffer.close()
+        obj.thumb = thumbCF
+        obj.save()
 
 
 def download_prv(obj: IMedia, p):
+    """"
+    com.apple.quicktime-movie
+    """
     fields: dict = p._master_record['fields']
     if fields.keys().__contains__("resVidSmallRes"):
         downloadURL = fields['resVidSmallRes']['value']['downloadURL']
@@ -57,9 +84,11 @@ def download_prv(obj: IMedia, p):
         cf = ContentFile(resp.content, f"{p.filename}.MP4")
         obj.prv_file = cf
         obj.save()
-    else:
+    elif fields['resOriginalFileType']['value'] in ['public.jpeg', 'public.png']:
         # 由于图片的预览文件和Thumb缩略图一样，所以不用再重新下载
         pass
+    else:
+        raise Exception("iCloud预览数据异常")
 
 
 def insert_or_update_media(p):

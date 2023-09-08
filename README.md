@@ -6,6 +6,10 @@
   </p>
 </div>
 
+## 依赖
+### 1. ffmpeg
+为了实现icloud相关功能需要安装
+
 ## 🌱 运行项目命令
 先在izbasar目录下新建一个secret.py文件
 ```python
