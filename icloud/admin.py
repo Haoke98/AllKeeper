@@ -41,11 +41,12 @@ EXCEPTION_TRACE_BACK = None
 
 def download_thumb(obj: IMedia, p):
     fields = p._master_record['fields']
-    downloadURL = fields['resJPEGThumbRes']['value']['downloadURL']
-    thumbResp = requests.get(downloadURL)
-    thumbCF = ContentFile(thumbResp.content, f"{p.filename}.JPG")
-    obj.thumb = thumbCF
-    obj.save()
+    if fields.keys().__contains__("resJPEGThumbRes"):
+        downloadURL = fields['resJPEGThumbRes']['value']['downloadURL']
+        thumbResp = requests.get(downloadURL)
+        thumbCF = ContentFile(thumbResp.content, f"{p.filename}.JPG")
+        obj.thumb = thumbCF
+        obj.save()
 
 
 def download_prv(obj: IMedia, p):
