@@ -84,8 +84,9 @@ def download_prv(obj: IMedia, p):
         cf = ContentFile(resp.content, f"{p.filename}.MP4")
         obj.prv_file = cf
         obj.save()
-    elif fields['resOriginalFileType']['value'] in ['public.jpeg', 'public.png']:
+    elif fields['resOriginalFileType']['value'] in ['public.jpeg', 'public.png', 'public.heic']:
         # 由于图片的预览文件和Thumb缩略图一样，所以不用再重新下载
+        # HEIC图片有些是动图, 有些是实况图会有resVidSmallRes, 而有些不是实况图便就不会有视频属性
         pass
     else:
         raise Exception("iCloud预览数据异常")
