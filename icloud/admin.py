@@ -88,6 +88,13 @@ def download_prv(obj: IMedia, p):
         # 由于图片的预览文件和Thumb缩略图一样，所以不用再重新下载
         # HEIC图片有些是动图, 有些是实况图会有resVidSmallRes, 而有些不是实况图便就不会有视频属性
         pass
+    elif fields['resOriginalFileType']['value'] in ['com.compuserve.gif']:
+        # 有些GIF图片可能只有一贞， 其次，GIF图片是可以在网页上可浏览的，所以我们可以直接把它原始文件下下来当作其可预览文件。
+        downloadURL = fields['resJPEGThumbRes']['value']['downloadURL']
+        originResp = requests.get(downloadURL)
+        originCF = ContentFile(originResp.content, f"{p.filename}.JPG")
+        obj.origin = originCF
+        obj.save()
     else:
         raise Exception("iCloud预览数据异常")
 
