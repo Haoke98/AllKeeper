@@ -51,7 +51,7 @@ def download_thumb(obj: IMedia, p):
         obj.thumb = thumbCF
         obj.save()
     else:
-        downloadURL = fields['resJPEGThumbRes']['value']['downloadURL']
+        downloadURL = fields['resOriginalRes']['value']['downloadURL']
         originResp = requests.get(downloadURL)
         originCF = ContentFile(originResp.content, f"{p.filename}.JPG")
         obj.origin = originCF
