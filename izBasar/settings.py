@@ -297,22 +297,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
-
-# LANGUAGE_CODE = 'en-us'
-#
-# USE_TZ = False  # true时统一全球时间，不跨时区的应用可以设为False
-# # TIME_ZONE = 'UTC'
-# TIME_ZONE = 'Asia/Shanghai'
-#
-# USE_I18N = True
-#
-# USE_L10N = True
-
-LANGUAGE_CODE = 'zh-Hans'
-TIME_ZONE = 'Asia/Shanghai'
+LANGUAGE_CODE = 'zh-Hans'  # 'en-us'
+TIME_ZONE = 'Asia/Shanghai'  # 'UTC'
 USE_I18N = True
 USE_L10N = False
-USE_TZ = True
+USE_TZ = True  # true时统一全球时间，不跨时区的应用可以设为False
 
 DATETIME_FORMAT = 'Y/m/d H:i:s'
 

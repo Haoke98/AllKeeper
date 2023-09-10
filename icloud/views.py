@@ -190,9 +190,8 @@ def detail(request):
     context = {"filename": targetObj.filename}
     if targetObj.thumb is not None and os.path.exists(targetObj.thumb.path):
         context["thumb_src"] = targetObj.thumb.url
-    if targetObj.prv_file is not None and os.path.exists(targetObj.prv_file.path):
-        context["prv_src"] = targetObj.prv_file.url
-    # print(targetObj.prv_file.url)
+    if targetObj.prv is not None and os.path.exists(targetObj.prv.path):
+        context["prv_src"] = targetObj.prv.url
     # medias = iService.photos.all
     # target_photo = None
     # for i, photo in enumerate(medias):

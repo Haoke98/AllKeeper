@@ -81,8 +81,8 @@ class IMedia(BaseModel):
     versions = models.TextField(null=True)
     albums = fields.ManyToManyField(to=Album, verbose_name="相册")
     thumb = models.ImageField(verbose_name="缩略图", upload_to="icloud/thumb", null=True, help_text="视频和图像都会有，JPEG格式")
-    prv_file = models.FileField(verbose_name="可预览文件", null=True, upload_to="icloud/prv_file",
-                                help_text="HICH图片和PNG图片的可预览文件为JPEG图，MOV视频的可预览文件为MP4")
+    prv = models.FileField(verbose_name="可预览文件", null=True, upload_to="icloud/prv_file",
+                           help_text="HICH图片和PNG图片的可预览文件为JPEG图，MOV视频的可预览文件为MP4")
     origin = models.FileField(verbose_name="原始文件", null=True, upload_to="icloud/origin")
 
     class Meta:

@@ -82,7 +82,7 @@ def download_prv(obj: IMedia, p):
         downloadURL = fields['resVidSmallRes']['value']['downloadURL']
         resp = requests.get(downloadURL)
         cf = ContentFile(resp.content, f"{p.filename}.MP4")
-        obj.prv_file = cf
+        obj.prv = cf
         obj.save()
     elif fields['resOriginalFileType']['value'] in ['public.jpeg', 'public.png', 'public.heic']:
         # 由于图片的预览文件和Thumb缩略图一样，所以不用再重新下载
@@ -127,10 +127,10 @@ def insert_or_update_media(p):
             else:
                 raise ValueError(e)
         try:
-            if obj.prv_file or not os.path.exists(obj.prv_file.path):
+            if obj.prv or not os.path.exists(obj.prv.path):
                 download_prv(obj, p)
         except ValueError as e:
-            if "The 'prv_file' attribute has no file associated with it." in str(e):
+            if "The 'prv' attribute has no file associated with it." in str(e):
                 download_prv(obj, p)
             else:
                 raise ValueError(e)
@@ -300,13 +300,54 @@ class AlbumAdmin(admin.ModelAdmin):
     }
 
 
+class ThumbFilter(admin.SimpleListFilter):
+    title = '缩略图'  # 过滤器标题
+    parameter_name = 'thumb'  # URL中参数的名字
+
+    def lookups(self, request, model_admin):
+        # 返回要显示为过滤选项的值
+        a = IMedia.objects.filter(thumb__isnull=False).count()
+        b = IMedia.objects.filter(thumb__isnull=True).count()
+        return [(0, f"有({a})"), (1, f"无({b})")]
+
+    def queryset(self, request, queryset):
+        # 对查询集进行过滤
+        if self.value() == '0':
+            return queryset.filter(thumb__isnull=False)
+        elif self.value() == '1':
+            return queryset.filter(thumb__isnull=True)
+        else:
+            return queryset.filter()
+
+
+class PrvFilter(admin.SimpleListFilter):
+    title = '可预览文件'  # 过滤器标题
+    parameter_name = 'prv_f'  # URL中参数的名字
+
+    def lookups(self, request, model_admin):
+        # 返回要显示为过滤选项的值
+        a = IMedia.objects.filter(prv__isnull=False).count()
+        b = IMedia.objects.filter(prv__isnull=True).count()
+        return [(0, f"有({a})"), (1, f"无({b})")]
+
+    def queryset(self, request, queryset):
+        # 对查询集进行过滤
+        if self.value() == '0':
+            return queryset.filter(prv__isnull=False)
+        elif self.value() == '1':
+            return queryset.filter(prv__isnull=True)
+        else:
+            return queryset.filter()
+
+
 @admin.register(IMedia)
 class IMediaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'filename', 'ext', 'size', 'dimensionX', 'dimensionY', 'thumb', 'dialog_lists'
-        , 'asset_date',
+    list_display = ['id', 'filename', 'ext', 'size', 'dimensionX', 'dimensionY', 'thumb', 'dialog_lists', 'prvIsNull'
+        , 'prv', 'asset_date',
                     'added_date',
                     'createdAt', 'updatedAt']
-    list_filter = ['albums', 'ext', 'dimensionX', 'dimensionY', 'asset_date', 'added_date', 'createdAt', 'updatedAt']
+    list_filter = ['albums', 'ext', 'dimensionX', 'dimensionY', 'asset_date', 'added_date', 'createdAt', 'updatedAt',
+                   ThumbFilter, PrvFilter]
     # list_filter_multiples = ('ext', 'dimensionX', 'dimensionY',)
     search_fields = ['id', 'filename']
     actions = ['collect', 'migrate']
@@ -317,6 +358,11 @@ class IMediaAdmin(admin.ModelAdmin):
             ModalDialog(url=f'/icloud/detail?id={urllib.parse.quote(model.id)}', title=model.filename,
                         cell='<el-link type="primary">预览</el-link>', width="840px", height="600px"),
         ])
+
+    def prvIsNull(self, obj):
+        if obj.prv.name is None:
+            return True
+        return False
 
     # 这个是列头显示的文本
     dialog_lists.short_description = "预览"
@@ -379,7 +425,7 @@ class IMediaAdmin(admin.ModelAdmin):
 
     fields_options = {
         'id': {
-            'fixed': 'left',
+            # 'fixed': 'left',
             'width': '280px',
             'align': 'center'
         },

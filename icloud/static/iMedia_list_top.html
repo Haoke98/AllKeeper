@@ -17,14 +17,6 @@
             :type="alert_type">
         <el-progress type="circle" :percentage="progress" :color="colors"></el-progress>
     </el-alert>
-    <el-collapse v-if="EXCEPTION_MSG != null" accordion>
-        <el-collapse-item>
-            <template slot="title">
-                异常：{{ EXCEPTION_MSG }}<i class="header-icon el-icon-info"></i>
-            </template>
-            <pre>{{ EXCEPTION_TRACE_BACK }}</pre>
-        </el-collapse-item>
-    </el-collapse>
 </div>
 <script type="text/javascript">
     new Vue(
