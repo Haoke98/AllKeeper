@@ -341,16 +341,40 @@ class PrvFilter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         # 返回要显示为过滤选项的值
-        a = IMedia.objects.filter(prv__isnull=False).count()
-        b = IMedia.objects.filter(prv__isnull=True).count()
+        a = 0
+        b = 0
+        for i in IMedia.objects.all():
+            try:
+                if os.path.exists(i.prv.path):
+                    a += 1
+                else:
+                    b += 1
+            except ValueError as e:
+                if "The 'prv' attribute has no file associated with it." in str(e):
+                    b += 1
         return [(0, f"有({a})"), (1, f"无({b})")]
 
     def queryset(self, request, queryset):
         # 对查询集进行过滤
+        id_list = []
         if self.value() == '0':
-            return queryset.filter(prv__isnull=False)
+            for i in IMedia.objects.all():
+                try:
+                    if os.path.exists(i.prv.path):
+                        id_list.append(i.id)
+                except ValueError as e:
+                    if "The 'prv' attribute has no file associated with it." in str(e):
+                        pass
+            return queryset.filter(id__in=id_list)
         elif self.value() == '1':
-            return queryset.filter(prv__isnull=True)
+            for i in IMedia.objects.all():
+                try:
+                    if not os.path.exists(i.prv.path):
+                        id_list.append(i.id)
+                except ValueError as e:
+                    if "The 'prv' attribute has no file associated with it." in str(e):
+                        id_list.append(i.id)
+            return queryset.filter(id__in=id_list)
         else:
             return queryset.filter()
 
