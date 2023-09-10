@@ -17,6 +17,7 @@ import traceback
 import urllib.parse
 from io import BytesIO
 
+import ffmpeg
 import requests
 from PIL import Image
 from django.contrib import admin
@@ -90,10 +91,24 @@ def download_prv(obj: IMedia, p):
         pass
     elif fields['resOriginalFileType']['value'] in ['com.compuserve.gif']:
         # 有些GIF图片可能只有一贞， 其次，GIF图片是可以在网页上可浏览的，所以我们可以直接把它原始文件下下来当作其可预览文件。
-        downloadURL = fields['resJPEGThumbRes']['value']['downloadURL']
+        downloadURL = fields['resOriginalRes']['value']['downloadURL']
         originResp = requests.get(downloadURL)
-        originCF = ContentFile(originResp.content, f"{p.filename}.JPG")
+        originCF = ContentFile(originResp.content, f"{p.filename}.gif")
         obj.origin = originCF
+        obj.save()
+    elif fields['resOriginalFileType']['value'] in ['com.apple.quicktime-movie']:
+        downloadURL = fields['resOriginalRes']['value']['downloadURL']
+        originResp = requests.get(downloadURL)
+        originCF = ContentFile(originResp.content, f"{p.filename}.mov")
+        obj.origin = originCF
+        obj.save()
+        # 转换命令并将输出保存到 BytesIO 对象
+        output_stream = BytesIO()
+        ffmpeg.input(obj.origin.path).output(output_stream, format='mp4').run()
+        # 创建 ContentFile 对象
+        output_stream.seek(0)  # 将流定位到开头
+        content = ContentFile(output_stream.read(), name='output.mp4')
+        obj.prv = content
         obj.save()
     else:
         raise Exception("iCloud预览数据异常")
