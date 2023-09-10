@@ -6,6 +6,8 @@
 @Software: PyCharm
 @disc:
 ======================================="""
+import os.path
+
 from django.db import models
 from django.db.models import Count, Sum
 from simplepro.components import fields
@@ -69,6 +71,30 @@ class Album(BaseModel):
         verbose_name = "iCloud相册"
 
 
+def upload(instance, filename, dst_dir):
+    # 获取对象的ID
+    fn = instance.id.replace("/", "-")
+    # 获取文件扩展名
+    ext = filename.split('.')[-1]
+    # 返回新的文件路径，格式为 "ID.ext"
+    fne = f"{fn}.{ext}"
+    _dir = os.path.join("icloud", dst_dir)
+    fp = os.path.join(_dir, fne)
+    return fp
+
+
+def upload_thumb(instance, filename):
+    return upload(instance, filename, "thumb")
+
+
+def upload_prv(instance, filename):
+    return upload(instance, filename, "prv")
+
+
+def upload_origin(instance, filename):
+    return upload(instance, filename, "origin")
+
+
 class IMedia(BaseModel):
     id = models.CharField(max_length=50, primary_key=True)
     filename = models.CharField(max_length=100, verbose_name="文件名", null=True)
@@ -80,10 +106,10 @@ class IMedia(BaseModel):
     added_date = models.DateTimeField(verbose_name="加入icloud的时间", null=True)
     versions = models.TextField(null=True)
     albums = fields.ManyToManyField(to=Album, verbose_name="相册")
-    thumb = models.ImageField(verbose_name="缩略图", upload_to="icloud/thumb", null=True, help_text="视频和图像都会有，JPEG格式")
-    prv = models.FileField(verbose_name="可预览文件", null=True, upload_to="icloud/prv_file",
+    thumb = models.ImageField(verbose_name="缩略图", upload_to=upload_thumb, null=True, help_text="视频和图像都会有，JPEG格式")
+    prv = models.FileField(verbose_name="可预览文件", null=True, upload_to=upload_prv,
                            help_text="HICH图片和PNG图片的可预览文件为JPEG图，MOV视频的可预览文件为MP4")
-    origin = models.FileField(verbose_name="原始文件", null=True, upload_to="icloud/origin")
+    origin = models.FileField(verbose_name="原始文件", null=True, upload_to=upload_origin)
 
     class Meta:
         verbose_name = "iCloud媒体"

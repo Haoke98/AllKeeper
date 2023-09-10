@@ -386,7 +386,7 @@ class IMediaAdmin(admin.ModelAdmin):
                     'added_date',
                     'createdAt', 'updatedAt']
     list_filter = ['albums', 'ext', 'dimensionX', 'dimensionY', 'asset_date', 'added_date', 'createdAt', 'updatedAt',
-                   ThumbFilter, PrvFilter]
+                   ThumbFilter, PrvFilter]  # TODO:实现是否为实况图的过滤器，可以通过originalRes.ext和prv.ext来确认。
     # list_filter_multiples = ('ext', 'dimensionX', 'dimensionY',)
     search_fields = ['id', 'filename']
     actions = ['collect', 'migrate']
