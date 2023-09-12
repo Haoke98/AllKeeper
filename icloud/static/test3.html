@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="//unpkg.com/element-ui@2.15.14/lib/index.js"></script>
+    <style>
+        @import url("//unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css");
+
+        .waterfall-container {
+            column-count: 12; /* 调整列数 */
+            column-gap: 10px; /* 调整列间距 */
+            width: 100%; /* 设置容器宽度为100% */
+            margin-top: 10px;
+            padding-top: 10px;
+            background-color: grey;
+        }
+
+        .waterfall-column {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 10px; /* 调整图片间距 */
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <div style="margin: 20px;"></div>
+    <el-form :label-position="labelPosition" label-width="80px">
+        <el-form-item label="StartRank">
+            <el-input-number v-model="startRank" :min="-1"
+                             label="StartRank"></el-input-number>
+        </el-form-item>
+        <el-form-item label="EndRank">
+            <el-input-number v-model="endRank" :min="-1" label="EndRank"></el-input-number>
+        </el-form-item>
+        <el-form-item label="Limit">
+            <el-input-number v-model="pageSize" :min="1" label="Limit"></el-input-number>
+        </el-form-item>
+        <el-form-item label="Direction">
+            <el-select v-model="direction" placeholder="请选择">
+                <el-option
+                        v-for="item in directionOpts"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                </el-option>
+            </el-select>
+        </el-form-item>
+        <el-pagination
+                @size-change="handlePageSizeChange"
+                @current-change="handlePageChange"
+                :total="totalResp.batch[0].records[0].fields.itemCount.value"
+                :current-page.sync="page"
+                :page-size.sync="pageSize"
+                :page-sizes="[5, 10, 20, 40, 60, 80, 100, 200]"
+                background
+                layout="prev, pager, next,sizes,total"
+        >
+        </el-pagination>
+    </el-form>
+    <el-descriptions class="margin-top" title="详细信息列表" :column="5" size="mini" border>
+        <template slot="extra">
+            <el-button type="primary" size="small">操作</el-button>
+        </template>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-mobile-phone"></i>
+                StartRank
+            </template>
+            {{ startRank }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-mobile-phone"></i>
+                EndRank
+            </template>
+            {{ endRank }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                limit
+            </template>
+            {{ limit }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                direction
+            </template>
+            {{ direction }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-mobile-phone"></i>
+                范围
+            </template>
+            {{ startRank }} ~ {{ minIndex }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-user"></i>
+                数量：
+            </template>
+            {{ records.length }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-location-outline"></i>
+                CPLMaster
+            </template>
+            {{ CPLMaster.length }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-tickets"></i>
+                CPLAsset
+            </template>
+            {{ CPLAsset.length }}
+        </el-descriptions-item>
+    </el-descriptions>
+    <div class="waterfall-container">
+        <div class="waterfall-column" v-for="(record, index) in CPLMaster" :key="index">
+            <el-popover
+                    placement="right"
+                    width="400"
+                    trigger="hover">
+                <el-descriptions class="margin-top" title="带边框列表" :column="1" size="mini" border>
+                    <template slot="extra">
+                        <el-button type="primary" size="small">操作</el-button>
+                    </template>
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-user"></i>
+                            ID：
+                        </template>
+                        {{ record.recordName }}
+                    </el-descriptions-item>
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-mobile-phone"></i>
+                            recordType
+                        </template>
+                        {{ record.recordType }}
+                    </el-descriptions-item>
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-location-outline"></i>
+                            resOriginalFileType
+                        </template>
+                        <span v-if="record.fields.resOriginalFileType!=undefined">{{ record.fields.resOriginalFileType.value }}</span>
+                    </el-descriptions-item>
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-tickets"></i>
+                            索引
+                        </template>
+                        <el-tag size="small">i:{{ index }}</el-tag>
+                        <el-tag size="small">Rank:{{ getRank(index) }}</el-tag>
+                        <el-tag size="small">本页索引:{{ pageSize-index-1 }}</el-tag>
+                        <el-tag size="small">本页序号:{{ pageSize-index }}</el-tag>
+                    </el-descriptions-item>
+                    <el-descriptions-item>
+                        <template slot="label">
+                            <i class="el-icon-office-building"></i>
+                            创建时间
+                        </template>
+                        <span v-if="record.created !=undefined">{{ new Date(record.created.timestamp) }}</span>
+                    </el-descriptions-item>
+                </el-descriptions>
+                <el-image v-if="record.fields.resJPEGThumbRes!=undefined"
+                          style="width: 100px; height: 100px"
+                          :src="record.fields.resJPEGThumbRes.value.downloadURL"
+                          fit="cover"
+                          slot="reference"
+                ></el-image>
+                <el-image v-if="record.fields.resJPEGThumbRes==undefined"
+                          style="width: 100px; height: 100px"
+                          src=""
+                          fit="cover"
+                          slot="reference"
+                ></el-image>
+            </el-popover>
+            </el-tooltip>
+        </div>
+    </div>
+    <el-tabs type="card">
+        <el-tab-pane label="图片列表响应">
+                <pre style="background-color: #f4f4f4;
+                padding: 10px;
+                overflow-x: auto;">
+            {{ JSON.stringify(records, null, 4) }}
+        </pre>
+        </el-tab-pane>
+        <el-tab-pane label="总数相响应"><pre style="background-color: #f4f4f4;
+                padding: 10px;
+                overflow-x: auto;">
+            {{ JSON.stringify(totalResp, null, 4) }}
+        </pre>
+        </el-tab-pane>
+
+    </el-tabs>
+
+</div>
+<script type="text/javascript">
+    new Vue({
+        data: {
+            startRank: 0,
+            endRank: -1,
+            direction: 'ASCENDING',
+            limit: 20,
+
+            page: 1,
+            pageSize: 10,
+            total: 0,
+
+            totalResp: '',
+            records: [],
+
+            directionOpts: [{label: '正向', value: 'ASCENDING'}, {label: '反向', value: 'DESCENDING'}],
+            labelPosition: 'right',
+        },
+        watch: {
+            pageSize(newV, oldV) {
+                console.log("pageSize:", oldV, newV)
+                this.limit = newV * 2
+                this.startRank = (this.page - 1) * this.pageSize;
+            },
+            page(newV, oldV) {
+                this.startRank = (this.page - 1) * this.pageSize;
+            },
+            startRank(newV, oldV) {
+                this.getData();
+            },
+            limit(newV, oldV) {
+                this.getData();
+            },
+            direction(newV, oldV) {
+                this.getData();
+            }
+        },
+        computed: {
+            CPLMaster() {
+                let res = [];
+                for (const record of this.records) {
+                    if (record.recordType === "CPLMaster") {
+                        res.push(record)
+                    }
+                }
+                return res;
+            },
+            CPLAsset() {
+                let res = [];
+                for (const record of this.records) {
+                    if (record.recordType === "CPLAsset") {
+                        res.push(record)
+                    }
+                }
+                return res;
+            },
+            minIndex() {
+                return this.offset + 1 - Math.min(this.limit / 2, (this.offset + 1));
+            }
+        },
+        created() {
+            this.getTotal();
+            this.getData();
+        },
+        methods: {
+            handlePageSizeChange(val) {
+
+            },
+            handlePageChange(val) {
+
+            },
+            getRank(index) {
+                if (this.direction === "ASCENDING") {
+                    return this.startRank + index;
+                } else {
+                    return this.startRank - index;
+                }
+            },
+            getTotal() {
+                let _this = this;
+                const loading = this.$loading({
+                    lock: true,
+                    text: 'Loading',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                });
+                fetch('http://127.0.0.1:8001/icloud/total', {method: "GET",}).then(resp => {
+                    console.log("resp:", resp.status, resp.statusText, resp.headers.get("Content-Type"))
+                    resp.json().then(respJson => {
+                        _this.totalResp = respJson;
+                        loading.close();
+                    })
+                })
+            },
+            getData() {
+                let _this = this;
+                console.log(this.offset, this.limit)
+                let _url = `http://127.0.0.1:8001/icloud/test?limit=${this.limit}&startRank=${this.startRank}&endRank=${this.endRank}&direction=${this.direction}`;
+                const loading = this.$loading({
+                    lock: true,
+                    text: 'Loading',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                });
+                fetch(_url, {method: "GET",}).then(resp => {
+                    console.log("resp:", resp.status, resp.statusText, resp.headers.get("Content-Type"))
+                    resp.json().then(respJson => {
+                        _this.records = respJson.records;
+                        loading.close();
+                    })
+                })
+            }
+        }
+    }).$mount('#app')
+</script>
+</body>
+</html>

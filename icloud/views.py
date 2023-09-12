@@ -19,26 +19,44 @@ VIDE_PLAYER_TYPE_MAP = {
 }
 
 
-def test():
-    url = ("%s/records/query?" % iService.photos.service_endpoint) + urlencode(iService.photos.params)
-    print(url)
+def test(request):
+    """
+    OFFSET 结束的位置
+    :param request:
+    :return:
+    """
+    limit = int(request.GET.get("limit", 10))
+    startRank = int(request.GET.get("startRank", -1))
+    endRank = int(request.GET.get("endRank", -1))
+    direction = request.GET.get("direction", "ASCENDING")
+    recordType = request.GET.get("recordType", "CPLAssetAndMasterByAddedDate")
+    filterBy = []
+    if startRank != -1:
+        filterBy.append(
+            {
+                "fieldName": "startRank",
+                "fieldValue": {"type": "INT64", "value": startRank},
+                "comparator": "EQUALS",
+            }
+        )
+    if endRank != -1:
+        filterBy.append({
+            "fieldName": "endRank",
+            "fieldValue": {"type": "INT64", "value": endRank},
+            "comparator": "EQUALS",
+        })
+    if startRank != -1 or endRank != -1:
+        filterBy.append({
+            "fieldName": "direction",
+            "fieldValue": {"type": "STRING", "value": direction},
+            "comparator": "EQUALS",
+        })
     query = {
         "query": {
-            "filterBy": [
-                {
-                    "fieldName": "startRank",
-                    "fieldValue": {"type": "INT64", "value": 20},
-                    "comparator": "EQUALS",
-                },
-                {
-                    "fieldName": "direction",
-                    "fieldValue": {"type": "STRING", "value": "DESCENDING"},
-                    "comparator": "EQUALS",
-                }
-            ],
-            "recordType": "CPLAssetAndMasterByAddedDate",
+            "filterBy": filterBy,
+            "recordType": recordType,
         },
-        "resultsLimit": 2,
+        "resultsLimit": limit,
         "desiredKeys": [
             "resJPEGFullWidth",
             "resJPEGFullHeight",
@@ -140,9 +158,51 @@ def test():
         ],
         "zoneID": {"zoneName": "PrimarySync"},
     }
+    url = ("%s/records/query?" % iService.photos.service_endpoint) + urlencode(iService.photos.params)
+    print(url)
     request = iService.photos.session.post(url, data=json.dumps(query), headers={"Content-type": "text/plain"})
     response = request.json()
-    return response
+    return JsonResponse(response)
+
+
+def count(request):
+    url = "{}/internal/records/query/batch?{}".format(
+        iService.photos.service_endpoint,
+        urlencode(iService.photos.params),
+    )
+    resp = iService.photos.session.post(
+        url,
+        data=json.dumps(
+            {
+                "batch": [
+                    {
+                        "resultsLimit": 1,
+                        "query": {
+                            "filterBy": {
+                                "fieldName": "indexCountID",
+                                "fieldValue": {
+                                    "type": "STRING_LIST",
+                                    "value": ["CPLAssetByAddedDate"],
+                                },
+                                "comparator": "IN",
+                            },
+                            "recordType": "HyperionIndexCountLookup",
+                        },
+                        "zoneWide": True,
+                        "zoneID": {"zoneName": "PrimarySync"},
+                    }
+                ]
+            }
+        ),
+        headers={"Content-type": "text/plain"},
+    )
+    responseJson = resp.json()
+
+    _len = responseJson["batch"][0]["records"][0]["fields"]["itemCount"][
+        "value"
+    ]
+    print(_len)
+    return JsonResponse(responseJson)
 
 
 def test2(targetObj):
