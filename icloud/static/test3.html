@@ -54,6 +54,16 @@
                 </el-option>
             </el-select>
         </el-form-item>
+        <el-form-item label="RecordType">
+            <el-select v-model="smart" placeholder="请选择">
+                <el-option
+                        v-for="item in recordTypeOpts"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                </el-option>
+            </el-select>
+        </el-form-item>
         <el-pagination
                 @size-change="handlePageSizeChange"
                 @current-change="handlePageChange"
@@ -61,8 +71,9 @@
                 :current-page.sync="page"
                 :page-size.sync="pageSize"
                 :page-sizes="[5, 10, 20, 40, 60, 80, 100, 200]"
+                :hide-on-single-page="true"
                 background
-                layout="prev, pager, next,sizes,total"
+                layout="prev, pager, next,jumper,sizes,total"
         >
         </el-pagination>
     </el-form>
@@ -127,72 +138,76 @@
             {{ CPLAsset.length }}
         </el-descriptions-item>
     </el-descriptions>
-    <div class="waterfall-container">
-        <div class="waterfall-column" v-for="(record, index) in CPLMaster" :key="index">
-            <el-popover
-                    placement="right"
-                    width="400"
-                    trigger="hover">
-                <el-descriptions class="margin-top" title="带边框列表" :column="1" size="mini" border>
-                    <template slot="extra">
-                        <el-button type="primary" size="small">操作</el-button>
-                    </template>
-                    <el-descriptions-item>
-                        <template slot="label">
-                            <i class="el-icon-user"></i>
-                            ID：
-                        </template>
-                        {{ record.recordName }}
-                    </el-descriptions-item>
-                    <el-descriptions-item>
-                        <template slot="label">
-                            <i class="el-icon-mobile-phone"></i>
-                            recordType
-                        </template>
-                        {{ record.recordType }}
-                    </el-descriptions-item>
-                    <el-descriptions-item>
-                        <template slot="label">
-                            <i class="el-icon-location-outline"></i>
-                            resOriginalFileType
-                        </template>
-                        <span v-if="record.fields.resOriginalFileType!=undefined">{{ record.fields.resOriginalFileType.value }}</span>
-                    </el-descriptions-item>
-                    <el-descriptions-item>
-                        <template slot="label">
-                            <i class="el-icon-tickets"></i>
-                            索引
-                        </template>
-                        <el-tag size="small">i:{{ index }}</el-tag>
-                        <el-tag size="small">Rank:{{ getRank(index) }}</el-tag>
-                        <el-tag size="small">本页索引:{{ pageSize-index-1 }}</el-tag>
-                        <el-tag size="small">本页序号:{{ pageSize-index }}</el-tag>
-                    </el-descriptions-item>
-                    <el-descriptions-item>
-                        <template slot="label">
-                            <i class="el-icon-office-building"></i>
-                            创建时间
-                        </template>
-                        <span v-if="record.created !=undefined">{{ new Date(record.created.timestamp) }}</span>
-                    </el-descriptions-item>
-                </el-descriptions>
-                <el-image v-if="record.fields.resJPEGThumbRes!=undefined"
-                          style="width: 100px; height: 100px"
-                          :src="record.fields.resJPEGThumbRes.value.downloadURL"
-                          fit="cover"
-                          slot="reference"
-                ></el-image>
-                <el-image v-if="record.fields.resJPEGThumbRes==undefined"
-                          style="width: 100px; height: 100px"
-                          src=""
-                          fit="cover"
-                          slot="reference"
-                ></el-image>
-            </el-popover>
-            </el-tooltip>
-        </div>
-    </div>
     <el-tabs type="card">
+        <el-tab-pane label="预览">
+            <div class="waterfall-container">
+                <div class="waterfall-column" v-for="(record, index) in CPLMaster" :key="index">
+                    <el-popover
+                            placement="right"
+                            width="400"
+                            trigger="hover">
+                        <el-descriptions class="margin-top" title="带边框列表" :column="1" size="mini" border>
+                            <template slot="extra">
+                                <el-button type="primary" size="small">操作</el-button>
+                            </template>
+                            <el-descriptions-item>
+                                <template slot="label">
+                                    <i class="el-icon-user"></i>
+                                    ID：
+                                </template>
+                                {{ record.recordName }}
+                            </el-descriptions-item>
+                            <el-descriptions-item>
+                                <template slot="label">
+                                    <i class="el-icon-mobile-phone"></i>
+                                    recordType
+                                </template>
+                                {{ record.recordType }}
+                            </el-descriptions-item>
+                            <el-descriptions-item>
+                                <template slot="label">
+                                    <i class="el-icon-location-outline"></i>
+                                    resOriginalFileType
+                                </template>
+                                <span v-if="record.fields.resOriginalFileType!=undefined">{{ record.fields.resOriginalFileType.value
+                                    }}</span>
+                            </el-descriptions-item>
+                            <el-descriptions-item>
+                                <template slot="label">
+                                    <i class="el-icon-tickets"></i>
+                                    索引
+                                </template>
+                                <el-tag size="small">i:{{ index }}</el-tag>
+                                <el-tag size="small">Rank:{{ getRank(index) }}</el-tag>
+                                <el-tag size="small">本页索引:{{ pageSize - index - 1 }}</el-tag>
+                                <el-tag size="small">本页序号:{{ pageSize - index }}</el-tag>
+                            </el-descriptions-item>
+                            <el-descriptions-item>
+                                <template slot="label">
+                                    <i class="el-icon-office-building"></i>
+                                    创建时间
+                                </template>
+                                <span v-if="record.created !=undefined">{{ new Date(record.created.timestamp) }}</span>
+                            </el-descriptions-item>
+                        </el-descriptions>
+                        <el-image v-if="record.fields.resJPEGThumbRes!=undefined"
+                                  style="width: 100px; height: 100px"
+                                  :src="record.fields.resJPEGThumbRes.value.downloadURL"
+                                  fit="cover"
+                                  slot="reference"
+                                  v-on:click="show(record)"
+                        ></el-image>
+                        <el-image v-if="record.fields.resJPEGThumbRes==undefined"
+                                  style="width: 100px; height: 100px"
+                                  src=""
+                                  fit="cover"
+                                  slot="reference"
+                        ></el-image>
+                    </el-popover>
+                    </el-tooltip>
+                </div>
+            </div>
+        </el-tab-pane>
         <el-tab-pane label="图片列表响应">
                 <pre style="background-color: #f4f4f4;
                 padding: 10px;
@@ -206,8 +221,45 @@
             {{ JSON.stringify(totalResp, null, 4) }}
         </pre>
         </el-tab-pane>
-
+        <el-tab-pane label="当前MediaObj"><pre style="background-color: #f4f4f4;
+                padding: 10px;
+                overflow-x: auto;">
+            {{ JSON.stringify(currObj, null, 4) }}
+        </pre>
+        </el-tab-pane>
     </el-tabs>
+    <el-dialog :title="currObj.recordName+'|'+currObj.fields.resOriginalFileType.value" :visible.sync="preview" center>
+        <el-tabs type="card">
+            <el-tab-pane label="预览">
+                <div v-if="isImage(currObj)" style="background-color: black;display: flex;justify-content: center;">
+                    <el-image v-if="currObj.fields.resJPEGMedRes!==undefined"
+                              style="height: 60vh;"
+                              :src="currObj.fields.resJPEGMedRes.value.downloadURL"
+                              fit="cover"
+                              slot="reference"
+                    ></el-image>
+                    <el-image v-else-if="currObj.fields.resJPEGThumbRes!==undefined"
+                              style="height: 60vh;"
+                              :src="currObj.fields.resJPEGThumbRes.value.downloadURL"
+                              fit="cover"
+                              slot="reference"
+                    ></el-image>
+                </div>
+                <div v-else style="background-color: black">
+                    <video v-if="currObj.fields.resVidSmallRes!==undefined && preview" autoplay controls style="width: 100%;height: 50vh;"
+                           loop>
+                        <source :src="currObj.fields.resVidSmallRes.value.downloadURL" type="video/mp4">
+                    </video>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="当前MediaObj"><pre style="background-color: #f4f4f4;
+                padding: 10px;
+                overflow-x: auto;">
+            {{ JSON.stringify(currObj, null, 4) }}
+        </pre>
+            </el-tab-pane>
+        </el-tabs>
+    </el-dialog>
 
 </div>
 <script type="text/javascript">
@@ -217,6 +269,7 @@
             endRank: -1,
             direction: 'ASCENDING',
             limit: 20,
+            smart: "All Photos",
 
             page: 1,
             pageSize: 10,
@@ -225,7 +278,33 @@
             totalResp: '',
             records: [],
 
+            preview: false,
+            currObj: {
+                recordName: 'AUAAE2ARB3PQpVWZfq9IZeTEIJja',
+                recordType: "CPLMaster",
+                fields: {
+                    resOriginalFileType: {
+                        value: 'public.png'
+                    },
+                    resVidSmallRes: {
+                        value: {
+                            fileChecksum: "AeAAln07OmMFDhB9NKCPgT+HWqol",
+                            size: 325889,
+                            wrappingKey: "NEKnQ2TbYUFbxuS9xQBxBQ==",
+                            referenceChecksum: "AYhq0FlcezsDWkFqSz2VvC/2mkSe",
+                            downloadURL: "https://cvws.icloud-content.com.cn/B/AeAAln07OmMFDhB9NKCPgT-HWqolAYhq0FlcezsDWkFqSz2VvC_2mkSe/${f}?o=Aoa8AIkRQSbqPlpeRi3HBoFF8gBkYb-5ctM1EmAGW1Pf&v=1&x=3&a=CAogkIpMQ_yKh2oU-C46wIY7NjOODrGE9Y9ash_vFEgVJXQSbxCCkt7mqDEYgu-56KgxIgEAUgSHWqolWgT2mkSeaiee0bpVhaZtpnelYU1WuwCH4OovgFka3cfg2njHPkarhnfvw2p1p7pyJ1Prlq2ajBsNH_wAcL6vIlhRrd37W135U6qLWCjPf1RoTMlA7KSSqw&e=1694583650&fl=&r=e535cd07-6aca-4f99-97aa-a862cbdd9bb3-1&k=NEKnQ2TbYUFbxuS9xQBxBQ&ckc=com.apple.photos.cloud&ckz=PrimarySync&y=1&p=215&s=6CExeahUqn2x_q5JJE7OoMMWSVI"
+                        },
+                        type: "ASSETID"
+                    },
+                }
+            },
+
             directionOpts: [{label: '正向', value: 'ASCENDING'}, {label: '反向', value: 'DESCENDING'}],
+            recordTypeOpts: [
+                {label: 'All Photos', value: 'All Photos'},
+                {label: 'Time-lapse', value: 'Time-lapse'},
+                {label: 'Videos', value: 'Videos'},
+            ],
             labelPosition: 'right',
         },
         watch: {
@@ -244,6 +323,10 @@
                 this.getData();
             },
             direction(newV, oldV) {
+                this.getData();
+            },
+            smart(newV, oldV) {
+                this.getTotal();
                 this.getData();
             }
         },
@@ -275,6 +358,22 @@
             this.getData();
         },
         methods: {
+            show(record) {
+                console.log("clicked:", record,)
+                this.currObj = record;
+                this.preview = true;
+            },
+            isImage(record) {
+                let image_ext = ['public.jpeg', 'public.png'];
+                let res = image_ext.indexOf(record.fields.resOriginalFileType.value) !== -1;
+                console.log("isImage:", record, record.fields.resOriginalFileType.value, res)
+                try {
+                    console.log(currObj.fields.resVidSmallRes, currObj.fields.resVidSmallRes !== undefined)
+                } catch (e) {
+                    console.log("没有resVidSmallRes字段")
+                }
+                return res;
+            },
             handlePageSizeChange(val) {
 
             },
@@ -296,7 +395,7 @@
                     spinner: 'el-icon-loading',
                     background: 'rgba(0, 0, 0, 0.7)'
                 });
-                fetch('http://127.0.0.1:8001/icloud/total', {method: "GET",}).then(resp => {
+                fetch(`http://127.0.0.1:8001/icloud/total?smart=${this.smart}`, {method: "GET",}).then(resp => {
                     console.log("resp:", resp.status, resp.statusText, resp.headers.get("Content-Type"))
                     resp.json().then(respJson => {
                         _this.totalResp = respJson;
@@ -307,7 +406,7 @@
             getData() {
                 let _this = this;
                 console.log(this.offset, this.limit)
-                let _url = `http://127.0.0.1:8001/icloud/test?limit=${this.limit}&startRank=${this.startRank}&endRank=${this.endRank}&direction=${this.direction}`;
+                let _url = `http://127.0.0.1:8001/icloud/test?limit=${this.limit}&startRank=${this.startRank}&endRank=${this.endRank}&direction=${this.direction}&smart=${this.smart}`;
                 const loading = this.$loading({
                     lock: true,
                     text: 'Loading',

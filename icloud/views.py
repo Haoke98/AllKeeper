@@ -6,6 +6,7 @@ from urllib.parse import urlencode
 
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from pyicloud.services.photos import PhotosService
 from pytz import UTC
 
 from . import iService
@@ -29,8 +30,12 @@ def test(request):
     startRank = int(request.GET.get("startRank", -1))
     endRank = int(request.GET.get("endRank", -1))
     direction = request.GET.get("direction", "ASCENDING")
-    recordType = request.GET.get("recordType", "CPLAssetAndMasterByAddedDate")
+    smart = request.GET.get("smart", "All Photos")
+    smartAlbum = PhotosService.SMART_FOLDERS[smart]
+    recordType = smartAlbum["list_type"]
     filterBy = []
+    if smartAlbum["query_filter"] is not None:
+        filterBy = smartAlbum["query_filter"]
     if startRank != -1:
         filterBy.append(
             {
@@ -166,6 +171,8 @@ def test(request):
 
 
 def count(request):
+    smart = request.GET.get("smart", "All Photos")
+    objType = PhotosService.SMART_FOLDERS[smart]["obj_type"]
     url = "{}/internal/records/query/batch?{}".format(
         iService.photos.service_endpoint,
         urlencode(iService.photos.params),
@@ -182,7 +189,7 @@ def count(request):
                                 "fieldName": "indexCountID",
                                 "fieldValue": {
                                     "type": "STRING_LIST",
-                                    "value": ["CPLAssetByAddedDate"],
+                                    "value": [objType],
                                 },
                                 "comparator": "IN",
                             },
