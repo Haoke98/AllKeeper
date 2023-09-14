@@ -24,7 +24,7 @@ from pytz import UTC
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
 
-from lib import human_readable_bytes
+from lib import human_readable_bytes, human_readable_time
 from . import iService
 from .models import IMedia, Album, LocalMedia
 from .services import collect_all_medias
@@ -274,10 +274,19 @@ class PrvFilter(admin.SimpleListFilter):
 
 @admin.register(IMedia)
 class IMediaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'filename', 'ext', 'size', 'dimensionX', 'dimensionY', 'thumb', 'dialog_lists', 'asset_date',
-                    'added_date', 'createdAt', 'updatedAt', 'startRank']
+    list_display = ['id', 'startRank', 'filename', 'ext', 'size', 'duration', 'thumb', 'dialog_lists',
+                    'dimensionX', 'dimensionY',
+                    'isHidden', 'isFavorite', 'deleted',
+                    'asset_date', 'added_date', 'createdAt', 'updatedAt',
+                    'adjustmentRenderType', 'timeZoneOffset', 'burstFlags', 'recordChangeTag',
+                    'orientation',
+                    'createdDeviceID', 'createdUserRecordName', 'modifiedDeviceID', 'modifiedUserRecordName',
+                    'locationEnc']
     list_filter = ['albums', 'ext', 'dimensionX', 'dimensionY', 'asset_date', 'added_date', 'createdAt',
-                   'updatedAt']  # TODO:实现是否为实况图的过滤器，可以通过originalRes.ext和prv.ext来确认。
+                   'updatedAt', 'isHidden', 'isFavorite', 'deleted',
+                   'createdDeviceID', 'createdUserRecordName', 'modifiedDeviceID', 'modifiedUserRecordName',
+                   'adjustmentRenderType', 'timeZoneOffset', 'burstFlags', 'recordChangeTag',
+                   'orientation', ]  # TODO:实现是否为实况图的过滤器，可以通过originalRes.ext和prv.ext来确认。
     # list_filter_multiples = ('ext', 'dimensionX', 'dimensionY',)
     search_fields = ['id', 'filename']
     actions = ['collect', 'migrate']
@@ -379,6 +388,9 @@ class IMediaAdmin(admin.ModelAdmin):
         if field_name == 'img':
             if value:
                 return f"""<img src="{value}" style="height:100px;">"""
+        if field_name == "duration":
+            if value:
+                return f"""<span title="{value}">{human_readable_time(value)}</span>"""
         return value
 
     fields_options = {
@@ -426,6 +438,30 @@ class IMediaAdmin(admin.ModelAdmin):
         'thumb': {
             'width': '130px',
             'align': 'center'
+        },
+        'duration': {
+            'width': '130px',
+            'align': 'center'
+        },
+        'createdUserRecordName': {
+            'width': '300px',
+            'align': 'left'
+        },
+        'modifiedUserRecordName': {
+            'width': '300px',
+            'align': 'left'
+        },
+        'createdDeviceID': {
+            'width': '400px',
+            'align': 'left'
+        },
+        'modifiedDeviceID': {
+            'width': '400px',
+            'align': 'left'
+        },
+        'locationEnc': {
+            'width': '1000px',
+            'align': 'left'
         },
     }
 

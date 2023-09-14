@@ -17,3 +17,16 @@ def human_readable_bytes(num_bytes):
     p = math.pow(1024, i)
     s = round(num_bytes / p, 2)
     return "%s %s" % (s, size_name[i])
+def human_readable_time(milliseconds):
+    seconds = milliseconds // 1000
+    minutes = seconds // 60
+    hours = minutes // 60
+
+    if hours > 0:
+        return f"{hours}小时 {minutes % 60}分钟 {seconds % 60}秒 {milliseconds % 1000}毫秒"
+    elif minutes > 0:
+        return f"{minutes}分钟 {seconds % 60}秒 {milliseconds % 1000}毫秒"
+    elif seconds > 0:
+        return f"{seconds}秒 {milliseconds % 1000}毫秒"
+    else:
+        return f"{milliseconds}毫秒"

@@ -109,6 +109,28 @@ class IMedia(BaseModel):
     startRank = models.IntegerField(null=True)
     thumbURL = models.TextField(null=True)
 
+    isHidden = models.BooleanField(null=True, verbose_name="隐藏")
+    isFavorite = models.BooleanField(null=True, verbose_name="收藏")
+    deleted = models.BooleanField(null=True, verbose_name="已删除")
+
+    createdDeviceID = models.CharField(max_length=255, verbose_name="创建的设备ID", null=True)
+    createdUserRecordName = models.CharField(max_length=255, null=True,verbose_name="创建的用户ID")
+    modifiedDeviceID = models.CharField(max_length=255, verbose_name="更新的设备ID", null=True)
+    modifiedUserRecordName = models.CharField(max_length=255, verbose_name="更新的用户ID", null=True)
+
+    duration = models.PositiveIntegerField(null=True, verbose_name="时长")
+    adjustmentRenderType = models.IntegerField(null=True)
+    timeZoneOffset = models.IntegerField(null=True)
+    burstFlags = models.IntegerField(null=True)
+    recordChangeTag = models.CharField(max_length=50, null=True)
+    # orientationOpts = ((0, '横向'), (1, "纵向"))
+    orientation = models.IntegerField(null=True, verbose_name="方向")
+
+    locationEnc = models.TextField(null=True,verbose_name="地址信息(已加密)")
+
+    masterRecord = models.TextField(null=True)
+    assetRecord = models.TextField(null=True)
+
     class Meta:
         verbose_name = "iCloud媒体"
         ordering = ('-asset_date',)

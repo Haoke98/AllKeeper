@@ -52,16 +52,16 @@ def thumb(request):
                 print(obj.thumbURL)
                 return HttpResponseRedirect(obj.thumbURL)
         start = int(startRank) - 50
-        response = iService.query_medias(start, limit=100)
+        response = iService.query_medias(start, limit=200)
         records: list[dict] = response['records']
         update(records, start)
-        for record in records:
-            print(record["recordName"], _id, record["recordName"] == _id)
+        for i, record in enumerate(records):
+            print(i, record["recordName"], _id, record["recordName"] == _id)
             if record["recordName"] == _id:
                 _url = record["fields"]["resJPEGThumbRes"]["value"]["downloadURL"]
                 print(_url)
                 return HttpResponseRedirect(_url)
-        raise Http404("参数错误")
+        raise Http404(f"远程更新以后也没有找到对应的媒体资源，可能这个rank值={startRank}出现了问题，[{start}~{start + 100}]")
 
 
 def test2(targetObj):

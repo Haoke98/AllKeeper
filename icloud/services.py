@@ -15,11 +15,13 @@ import threading
 import time
 import traceback
 
+from pyicloud.services.photos import PhotoAsset
+
 from . import iService
 from .models import IMedia
 
 
-def insert_or_update_media(startRank: int, p):
+def insert_or_update_media(startRank: int, p: PhotoAsset):
     fn, ext = os.path.splitext(p.filename)
     ext = str(ext).upper()
     startedAt1 = time.time()
@@ -43,7 +45,29 @@ def insert_or_update_media(startRank: int, p):
         obj.thumbURL = fields['resJPEGThumbRes']['value']['downloadURL']
     else:
         obj.thumbURL = fields['resOriginalRes']['value']['downloadURL']
-    #     try:
+    assetFields: dict = p._asset_record["fields"]
+    obj.isHidden = assetFields['isHidden']["value"]
+    obj.isFavorite = assetFields['isFavorite']["value"]
+    obj.duration = assetFields['duration']["value"]
+    obj.orientation = assetFields['orientation']["value"]
+    obj.burstFlags = assetFields['burstFlags']["value"]
+    obj.adjustmentRenderType = assetFields['adjustmentRenderType']["value"]
+    if assetFields.keys().__contains__("timeZoneOffset"):
+        obj.timeZoneOffset = assetFields['timeZoneOffset']["value"]
+    if assetFields.keys().__contains__("locationEnc"):
+        obj.locationEnc = assetFields["locationEnc"]["value"]
+    obj.createdDeviceID = p._asset_record["created"]['deviceID']
+    obj.createdUserRecordName = p._asset_record["created"]['userRecordName']
+
+    obj.modifiedDeviceID = p._asset_record["modified"]['deviceID']
+    obj.modifiedUserRecordName = p._asset_record["modified"]['userRecordName']
+
+    obj.recordChangeTag = p._asset_record["recordChangeTag"]
+    obj.delete = p._asset_record["deleted"]
+
+    obj.masterRecord = json.dumps(p._master_record, ensure_ascii=False, indent=4)
+    obj.assetRecord = json.dumps(p._asset_record, ensure_ascii=False, indent=4)
+
     #         if obj.thumb or not os.path.exists(obj.thumb.path):
     #             download_thumb(obj, p)
     #     except ValueError as e:
