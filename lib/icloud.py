@@ -6,6 +6,7 @@
 @Software: PyCharm
 @disc:
 ======================================="""
+import json
 import logging
 import os
 import platform
@@ -14,9 +15,10 @@ import sys
 import traceback
 from concurrent.futures import ThreadPoolExecutor
 from subprocess import call
+from urllib.parse import urlencode
 
 from pyicloud import PyiCloudService as __iCloudService__
-from pyicloud.services.photos import PhotoAsset
+from pyicloud.services.photos import PhotoAsset, PhotosService
 
 from lib import jpeg
 
@@ -169,3 +171,182 @@ class IcloudService(__iCloudService__):
             handle(self.photos.all, recent)
         else:
             handle(self.photos.albums.get(transfer_album), recent)
+
+    def query_medias(self, startRank: int = 0, endRank: int = -1, direction: str = "ASCENDING", limit: int = 10,
+                     smart: str = "All Photos"):
+        smartAlbum = PhotosService.SMART_FOLDERS[smart]
+        recordType = smartAlbum["list_type"]
+        filterBy = []
+        if smartAlbum["query_filter"] is not None:
+            filterBy = smartAlbum["query_filter"]
+        if startRank != -1:
+            filterBy.append(
+                {
+                    "fieldName": "startRank",
+                    "fieldValue": {"type": "INT64", "value": startRank},
+                    "comparator": "EQUALS",
+                }
+            )
+        if endRank != -1:
+            filterBy.append({
+                "fieldName": "endRank",
+                "fieldValue": {"type": "INT64", "value": endRank},
+                "comparator": "EQUALS",
+            })
+        if startRank != -1 or endRank != -1:
+            filterBy.append({
+                "fieldName": "direction",
+                "fieldValue": {"type": "STRING", "value": direction},
+                "comparator": "EQUALS",
+            })
+        query = {
+            "query": {
+                "filterBy": filterBy,
+                "recordType": recordType,
+            },
+            "resultsLimit": limit,
+            "desiredKeys": [
+                "resJPEGFullWidth",
+                "resJPEGFullHeight",
+                "resJPEGFullFileType",
+                "resJPEGFullFingerprint",
+                "resJPEGFullRes",
+                "resJPEGLargeWidth",
+                "resJPEGLargeHeight",
+                "resJPEGLargeFileType",
+                "resJPEGLargeFingerprint",
+                "resJPEGLargeRes",
+                "resJPEGMedWidth",
+                "resJPEGMedHeight",
+                "resJPEGMedFileType",
+                "resJPEGMedFingerprint",
+                "resJPEGMedRes",
+                "resJPEGThumbWidth",
+                "resJPEGThumbHeight",
+                "resJPEGThumbFileType",
+                "resJPEGThumbFingerprint",
+                "resJPEGThumbRes",
+                "resVidFullWidth",
+                "resVidFullHeight",
+                "resVidFullFileType",
+                "resVidFullFingerprint",
+                "resVidFullRes",
+                "resVidMedWidth",
+                "resVidMedHeight",
+                "resVidMedFileType",
+                "resVidMedFingerprint",
+                "resVidMedRes",
+                "resVidSmallWidth",
+                "resVidSmallHeight",
+                "resVidSmallFileType",
+                "resVidSmallFingerprint",
+                "resVidSmallRes",
+                "resSidecarWidth",
+                "resSidecarHeight",
+                "resSidecarFileType",
+                "resSidecarFingerprint",
+                "resSidecarRes",
+                "itemType",
+                "dataClassType",
+                "filenameEnc",
+                "originalOrientation",
+                "resOriginalWidth",
+                "resOriginalHeight",
+                "resOriginalFileType",
+                "resOriginalFingerprint",
+                "resOriginalRes",
+                "resOriginalAltWidth",
+                "resOriginalAltHeight",
+                "resOriginalAltFileType",
+                "resOriginalAltFingerprint",
+                "resOriginalAltRes",
+                "resOriginalVidComplWidth",
+                "resOriginalVidComplHeight",
+                "resOriginalVidComplFileType",
+                "resOriginalVidComplFingerprint",
+                "resOriginalVidComplRes",
+                "isDeleted",
+                "isExpunged",
+                "dateExpunged",
+                "remappedRef",
+                "recordName",
+                "recordType",
+                "recordChangeTag",
+                "masterRef",
+                "adjustmentRenderType",
+                "assetDate",
+                "addedDate",
+                "isFavorite",
+                "isHidden",
+                "orientation",
+                "duration",
+                "assetSubtype",
+                "assetSubtypeV2",
+                "assetHDRType",
+                "burstFlags",
+                "burstFlagsExt",
+                "burstId",
+                "captionEnc",
+                "locationEnc",
+                "locationV2Enc",
+                "locationLatitude",
+                "locationLongitude",
+                "adjustmentType",
+                "timeZoneOffset",
+                "vidComplDurValue",
+                "vidComplDurScale",
+                "vidComplDispValue",
+                "vidComplDispScale",
+                "vidComplVisibilityState",
+                "customRenderedValue",
+                "containerId",
+                "itemId",
+                "position",
+                "isKeyAsset",
+            ],
+            "zoneID": {"zoneName": "PrimarySync"},
+        }
+        url = ("%s/records/query?" % self.photos.service_endpoint) + urlencode(self.photos.params)
+        print(url)
+        request = self.photos.session.post(url, data=json.dumps(query), headers={"Content-type": "text/plain"})
+        response = request.json()
+        return response
+
+    def media_total(self, smart: str = "All Photos"):
+        objType = PhotosService.SMART_FOLDERS[smart]["obj_type"]
+        url = "{}/internal/records/query/batch?{}".format(
+            self.photos.service_endpoint,
+            urlencode(self.photos.params),
+        )
+        resp = self.photos.session.post(
+            url,
+            data=json.dumps(
+                {
+                    "batch": [
+                        {
+                            "resultsLimit": 1,
+                            "query": {
+                                "filterBy": {
+                                    "fieldName": "indexCountID",
+                                    "fieldValue": {
+                                        "type": "STRING_LIST",
+                                        "value": [objType],
+                                    },
+                                    "comparator": "IN",
+                                },
+                                "recordType": "HyperionIndexCountLookup",
+                            },
+                            "zoneWide": True,
+                            "zoneID": {"zoneName": "PrimarySync"},
+                        }
+                    ]
+                }
+            ),
+            headers={"Content-type": "text/plain"},
+        )
+        responseJson = resp.json()
+
+        _len = responseJson["batch"][0]["records"][0]["fields"]["itemCount"][
+            "value"
+        ]
+        return responseJson, _len

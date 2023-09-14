@@ -1,12 +1,9 @@
 # Create your views here.
 import datetime
 import json
-import os.path
-from urllib.parse import urlencode
 
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from pyicloud.services.photos import PhotosService
 from pytz import UTC
 
 from . import iService
@@ -31,184 +28,13 @@ def test(request):
     endRank = int(request.GET.get("endRank", -1))
     direction = request.GET.get("direction", "ASCENDING")
     smart = request.GET.get("smart", "All Photos")
-    smartAlbum = PhotosService.SMART_FOLDERS[smart]
-    recordType = smartAlbum["list_type"]
-    filterBy = []
-    if smartAlbum["query_filter"] is not None:
-        filterBy = smartAlbum["query_filter"]
-    if startRank != -1:
-        filterBy.append(
-            {
-                "fieldName": "startRank",
-                "fieldValue": {"type": "INT64", "value": startRank},
-                "comparator": "EQUALS",
-            }
-        )
-    if endRank != -1:
-        filterBy.append({
-            "fieldName": "endRank",
-            "fieldValue": {"type": "INT64", "value": endRank},
-            "comparator": "EQUALS",
-        })
-    if startRank != -1 or endRank != -1:
-        filterBy.append({
-            "fieldName": "direction",
-            "fieldValue": {"type": "STRING", "value": direction},
-            "comparator": "EQUALS",
-        })
-    query = {
-        "query": {
-            "filterBy": filterBy,
-            "recordType": recordType,
-        },
-        "resultsLimit": limit,
-        "desiredKeys": [
-            "resJPEGFullWidth",
-            "resJPEGFullHeight",
-            "resJPEGFullFileType",
-            "resJPEGFullFingerprint",
-            "resJPEGFullRes",
-            "resJPEGLargeWidth",
-            "resJPEGLargeHeight",
-            "resJPEGLargeFileType",
-            "resJPEGLargeFingerprint",
-            "resJPEGLargeRes",
-            "resJPEGMedWidth",
-            "resJPEGMedHeight",
-            "resJPEGMedFileType",
-            "resJPEGMedFingerprint",
-            "resJPEGMedRes",
-            "resJPEGThumbWidth",
-            "resJPEGThumbHeight",
-            "resJPEGThumbFileType",
-            "resJPEGThumbFingerprint",
-            "resJPEGThumbRes",
-            "resVidFullWidth",
-            "resVidFullHeight",
-            "resVidFullFileType",
-            "resVidFullFingerprint",
-            "resVidFullRes",
-            "resVidMedWidth",
-            "resVidMedHeight",
-            "resVidMedFileType",
-            "resVidMedFingerprint",
-            "resVidMedRes",
-            "resVidSmallWidth",
-            "resVidSmallHeight",
-            "resVidSmallFileType",
-            "resVidSmallFingerprint",
-            "resVidSmallRes",
-            "resSidecarWidth",
-            "resSidecarHeight",
-            "resSidecarFileType",
-            "resSidecarFingerprint",
-            "resSidecarRes",
-            "itemType",
-            "dataClassType",
-            "filenameEnc",
-            "originalOrientation",
-            "resOriginalWidth",
-            "resOriginalHeight",
-            "resOriginalFileType",
-            "resOriginalFingerprint",
-            "resOriginalRes",
-            "resOriginalAltWidth",
-            "resOriginalAltHeight",
-            "resOriginalAltFileType",
-            "resOriginalAltFingerprint",
-            "resOriginalAltRes",
-            "resOriginalVidComplWidth",
-            "resOriginalVidComplHeight",
-            "resOriginalVidComplFileType",
-            "resOriginalVidComplFingerprint",
-            "resOriginalVidComplRes",
-            "isDeleted",
-            "isExpunged",
-            "dateExpunged",
-            "remappedRef",
-            "recordName",
-            "recordType",
-            "recordChangeTag",
-            "masterRef",
-            "adjustmentRenderType",
-            "assetDate",
-            "addedDate",
-            "isFavorite",
-            "isHidden",
-            "orientation",
-            "duration",
-            "assetSubtype",
-            "assetSubtypeV2",
-            "assetHDRType",
-            "burstFlags",
-            "burstFlagsExt",
-            "burstId",
-            "captionEnc",
-            "locationEnc",
-            "locationV2Enc",
-            "locationLatitude",
-            "locationLongitude",
-            "adjustmentType",
-            "timeZoneOffset",
-            "vidComplDurValue",
-            "vidComplDurScale",
-            "vidComplDispValue",
-            "vidComplDispScale",
-            "vidComplVisibilityState",
-            "customRenderedValue",
-            "containerId",
-            "itemId",
-            "position",
-            "isKeyAsset",
-        ],
-        "zoneID": {"zoneName": "PrimarySync"},
-    }
-    url = ("%s/records/query?" % iService.photos.service_endpoint) + urlencode(iService.photos.params)
-    print(url)
-    request = iService.photos.session.post(url, data=json.dumps(query), headers={"Content-type": "text/plain"})
-    response = request.json()
+    response = iService.query_medias(startRank, endRank, direction, limit, smart)
     return JsonResponse(response)
 
 
 def count(request):
     smart = request.GET.get("smart", "All Photos")
-    objType = PhotosService.SMART_FOLDERS[smart]["obj_type"]
-    url = "{}/internal/records/query/batch?{}".format(
-        iService.photos.service_endpoint,
-        urlencode(iService.photos.params),
-    )
-    resp = iService.photos.session.post(
-        url,
-        data=json.dumps(
-            {
-                "batch": [
-                    {
-                        "resultsLimit": 1,
-                        "query": {
-                            "filterBy": {
-                                "fieldName": "indexCountID",
-                                "fieldValue": {
-                                    "type": "STRING_LIST",
-                                    "value": [objType],
-                                },
-                                "comparator": "IN",
-                            },
-                            "recordType": "HyperionIndexCountLookup",
-                        },
-                        "zoneWide": True,
-                        "zoneID": {"zoneName": "PrimarySync"},
-                    }
-                ]
-            }
-        ),
-        headers={"Content-type": "text/plain"},
-    )
-    responseJson = resp.json()
-
-    _len = responseJson["batch"][0]["records"][0]["fields"]["itemCount"][
-        "value"
-    ]
-    print(_len)
+    responseJson, _ = iService.media_total(smart)
     return JsonResponse(responseJson)
 
 
@@ -254,22 +80,17 @@ def detail(request):
     targetObj = IMedia.objects.filter(id=target_id).first()
     if targetObj is None:
         return HttpResponse(f"找不到[ID:{target_id}]对应的媒体对象")
+    dlt = datetime.datetime.now(tz=UTC) - targetObj.updatedAt
+    if dlt > DLT:
+        return HttpResponse(f"媒体对象[ID:{target_id}]的部分属性已经失去了有效性[{dlt}]")
+    versions: dict = json.loads(targetObj.versions)
+    # if versions.keys().__contains__("thumb"):
+    prv_version = versions["thumb"]
     context = {"filename": targetObj.filename}
-    if targetObj.thumb is not None and os.path.exists(targetObj.thumb.path):
-        context["thumb_src"] = targetObj.thumb.url
-    if targetObj.prv is not None and os.path.exists(targetObj.prv.path):
-        context["prv_src"] = targetObj.prv.url
-    # medias = iService.photos.all
-    # target_photo = None
-    # for i, photo in enumerate(medias):
-    #     print(i, photo)
-    #     if photo.id == target_id:
-    #         target_photo = photo
-    #         break
-    # print("target:", target_photo)
-    # download_url = iService.photos.download(target_id)
-    # test()
-    # test2(targetObj)
+    if prv_version["type"] in ["public.mpeg-4"]:
+        context["prv_src"] = prv_version['url']
+    else:
+        context["thumb_src"] = prv_version['url']
     return render(request, "icloud/detail.html", context=context)
 
 

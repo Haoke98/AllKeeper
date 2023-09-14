@@ -153,7 +153,7 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console', 'file', 'mail_admins'],
-        'level': 'DEBUG',
+        'level': 'INFO',
     },
     'loggers': {
         'django': {
