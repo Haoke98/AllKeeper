@@ -16,8 +16,7 @@ from ..models import Transaction, CapitalAccount
 @admin.register(CapitalAccount)
 class CapitalAccountAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY + ['owner_natural_person', 'owner_market_subject', 'name', 'isCredit', 'balance',
-                                   'consumptionLimit', 'withdrawalLimit',
-                                   'temporaryLimit',
+                                   'consumptionLimit', 'withdrawalLimit', 'temporaryLimit',
                                    'left', 'toBeReturn', 'repaymentAt']
     list_filter = ['owner_natural_person', 'owner_market_subject', 'isCredit', 'repaymentAt']
     autocomplete_fields = ['owner_natural_person', 'owner_market_subject']
@@ -80,7 +79,8 @@ class CapitalAccountAdmin(admin.ModelAdmin):
             return None
         else:
             # 需要有空字符串占位
-            return ('合计', '321', '1213123', '123123', '', '', '', '测试')
+            return ('合计', '', '', '', '', '', '', '', '1', '12', '123', '1234', '12345', '123456', '')
+
     fields_options = {
         'id': {
             'fixed': 'left',
@@ -107,41 +107,35 @@ class CapitalAccountAdmin(admin.ModelAdmin):
             'width': '160px',
             'align': 'left'
         },
-        '_tels': {
+        'isCredit': {
+            'width': '160px',
+            'align': 'left'
+        },
+        'consumptionLimit': {
             'width': '120px',
             'align': 'left'
         },
-        'collage':{
+        'withdrawalLimit': {
             'width': '120px',
             'align': 'left'
         },
-        
-        'DY_ID':{
+        'temporaryLimit': {
+            'width': '130px',
+            'align': 'left'
+        },
+        'douyin': {
             'width': '120px',
             'align': 'left'
         },
-        'WB_ID':{
+        'license_plate_number': {
             'width': '120px',
             'align': 'left'
         },
-        'douyin':{
-            'width': '120px',
+        'repaymentAt': {
+            'width': '180px',
             'align': 'left'
-        },
-        'license_plate_number':{
-            'width': '120px',
-            'align': 'left'
-        },
-        'birthplace':{
-            'width': '400px',
-            'align': 'left'
-        },
-        'info':{
-            'width': '1000px',
-            'align': 'left'
-        },
+        }
     }
-
 
 
 @admin.register(Transaction)
