@@ -23,6 +23,10 @@ from pyicloud.services.photos import PhotoAsset, PhotosService
 from lib import jpeg
 
 
+class IPhoto(PhotoAsset):
+    pass
+
+
 class IcloudService(__iCloudService__):
     COMPLETED_OF_DOWNLOAD_PHOTO = 0
 
@@ -350,3 +354,21 @@ class IcloudService(__iCloudService__):
             "value"
         ]
         return responseJson, _len
+
+    def record2iphoto(self, records):
+        asset_records = {}
+        master_records = []
+        iPhotos = []
+        for rec in records:
+            if rec["recordType"] == "CPLAsset":
+                master_id = rec["fields"]["masterRef"]["value"]["recordName"]
+                asset_records[master_id] = rec
+            elif rec["recordType"] == "CPLMaster":
+                master_records.append(rec)
+        master_records_len = len(master_records)
+        if master_records_len:
+            for master_record in master_records:
+                record_name = master_record["recordName"]
+                iphoto = IPhoto(self._photos, master_record, asset_records[record_name])
+                iPhotos.append(iphoto)
+        return iPhotos

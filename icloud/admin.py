@@ -8,14 +8,11 @@
 ======================================="""
 import datetime
 import json
-import logging
-import math
 import os.path
 import threading
-import time
-import traceback
 import urllib.parse
 from io import BytesIO
+from urllib.parse import urlencode
 
 import ffmpeg
 import requests
@@ -30,19 +27,8 @@ from simplepro.dialog import MultipleCellDialog, ModalDialog
 from lib import human_readable_bytes
 from . import iService
 from .models import IMedia, Album, LocalMedia
+from .services import collect_all_medias
 from .views import DLT
-
-STATUS_FINISHED = "FINISHED"
-STATUS_STOP = "STOPPING"
-STATUS_RUNNING = "Running"
-STATUS_EXCEPTION = "Exception"
-STATUS = STATUS_STOP
-
-TOTAL = -1
-FINISHED_COUNT = 0
-STARTED_AT = datetime.datetime.now()
-EXCEPTION_MSG = None
-EXCEPTION_TRACE_BACK = None
 
 
 def download_thumb(obj: IMedia, p):
@@ -116,97 +102,6 @@ def download_prv(obj: IMedia, p):
         raise Exception("iCloud预览数据异常")
 
 
-def insert_or_update_media(startRank: int, p):
-    fn, ext = os.path.splitext(p.filename)
-    ext = str(ext).upper()
-    startedAt1 = time.time()
-    obj, created = IMedia.objects.get_or_create(id=p.id)
-    print(f"查询[{obj.id}]成功！[Created:{created},Duration:{time.time() - startedAt1} s]")
-    startedAt2 = time.time()
-    if created:
-        obj.filename = p.filename
-        obj.ext = ext
-        obj.size = p.size
-        obj.dimensionX = p.dimensions[0]
-        obj.dimensionY = p.dimensions[1]
-        obj.asset_date = p.asset_date
-        obj.added_date = p.added_date
-        # download_thumb(obj, p)
-        # download_prv(obj, p)
-    obj.startRank = startRank  # 每次startRank都会变
-    obj.versions = json.dumps(p.versions, indent=4, ensure_ascii=False)
-    fields: dict = p._master_record['fields']
-    if fields.keys().__contains__("resJPEGThumbRes"):
-        obj.thumbURL = fields['resJPEGThumbRes']['value']['downloadURL']
-    else:
-        obj.thumbURL = fields['resOriginalRes']['value']['downloadURL']
-    #     try:
-    #         if obj.thumb or not os.path.exists(obj.thumb.path):
-    #             download_thumb(obj, p)
-    #     except ValueError as e:
-    #         if "The 'thumb' attribute has no file associated with it." in str(e):
-    #             download_thumb(obj, p)
-    #         else:
-    #             raise ValueError(e)
-    #     try:
-    #         if obj.prv or not os.path.exists(obj.prv.path):
-    #             download_prv(obj, p)
-    #     except ValueError as e:
-    #         if "The 'prv' attribute has no file associated with it." in str(e):
-    #             download_prv(obj, p)
-    #         else:
-    #             raise ValueError(e)
-    print(f"预处理[{obj.id}]成功！[Duration:{time.time() - startedAt2} s]")
-    startedAt3 = time.time()
-    obj.save()
-    print(f"保存[{obj.id}]成功！[Duration:{time.time() - startedAt3} s]")
-    return obj
-
-
-def collect(startRank: int):
-    resp = iService.query_medias(startRank=startRank)
-    pass
-
-
-def collect_all_medias():
-    global STATUS, FINISHED_COUNT, TOTAL, STARTED_AT, EXCEPTION_MSG, EXCEPTION_TRACE_BACK
-    # for album in albums:
-    #     photos = iService.photos.albums[album.name]
-    #     total = len(photos)
-    # if album.count == total:
-    #     print(f"{album.name}: 无需同步跳过")
-    #     continue
-    # for i, p in enumerate(photos):
-    #     th = threading.Thread(target=collect, args=(p, album, i, total))
-    #     th.start()
-    # album.agg()
-    # album.save()
-    # target_photo = None
-    STATUS = STATUS_RUNNING
-    STARTED_AT = datetime.datetime.now()
-    try:
-        _, TOTAL = iService.media_total()
-        medias = iService.photos.all
-        FINISHED_COUNT = 0
-        for i, photo in enumerate(medias):
-            FINISHED_COUNT = i + 1
-            progress = FINISHED_COUNT / TOTAL * 100
-            dlt = datetime.datetime.now() - STARTED_AT
-            finishedCount = math.ceil(TOTAL * progress / 100)
-            speed_in_second = finishedCount / dlt.total_seconds()
-            left = TOTAL - finishedCount
-            dlt_in_second = left / speed_in_second
-            dlt1 = datetime.timedelta(seconds=dlt_in_second)
-            willFinishedAt = datetime.datetime.now() + dlt1
-            startedAt = time.time()
-            insert_or_update_media(i, photo)
-            print(f"{progress:.2f}% ({FINISHED_COUNT}/{TOTAL}), {photo}, [Duration:{time.time() - startedAt} s]")
-        STATUS = STATUS_FINISHED
-    except Exception as e:
-        STATUS = STATUS_EXCEPTION
-        EXCEPTION_MSG = str(e)
-        EXCEPTION_TRACE_BACK = traceback.format_exc()
-        logging.error("iCloud数据同步异常", exc_info=True)
 
 
 @admin.register(Album)
@@ -389,10 +284,13 @@ class IMediaAdmin(admin.ModelAdmin):
     list_per_page = 20
 
     def thumb(self, obj):
+        thumb_url = obj.thumbURL
+        prv_url = "https://cvws.icloud-content.com.cn/B/AXsCTFGEAH5K_G8v5M550BKYQgrYAU3Llil8eeGq1YllzSOChTP8GzK8/$%7Bf%7D?o=AtJgOCoyIAwQaAoS4iNMm_t_66U9m_Cwk6V-Xc5u9itt&v=1&x=3&a=CAogEuXMIhmVlMSdUwyDPmMEeHBW4Pe8dlT5llye-A7y1KUSbxCh0t6dqTEYoa-6n6kxIgEAUgSYQgrYWgT8GzK8aicHbBtuls-GzfByFYWw_IFgUTD-mns3AcGQtUB2RN2ncMsWk2-ItNJyJ7ksv1IBrE1ycr9kwjX2z7yo1W7T6a5KGQ4z8-32UP5ONKX9XWGyHw&e=1694699001&fl=&r=65210c2f-4722-49e5-9724-3e53321d48d7-1&k=4uaX3YNtEyqLkhukOc7y5A&ckc=com.apple.photos.cloud&ckz=PrimarySync&y=1&p=215&s=bsmRo--bR8qyGg-VJt0rZnR_1XI"
         dlt = datetime.datetime.now(tz=UTC) - obj.updatedAt
         if dlt > DLT:
-            pass
-        return '<img style="width:100px;height:100px;" src="{}">'.format(obj.thumbURL)
+            thumb_url = f"/icloud/thumb?" + urlencode({"id": obj.id, "startRank": obj.startRank})
+        return '''<el-image style="width: 100px; height: 100px" src="{}" :preview-src-list="['{}']" lazy></el-image>'''.format(
+            thumb_url, thumb_url)
 
     thumb.short_description = "缩略图"
 
@@ -404,6 +302,28 @@ class IMediaAdmin(admin.ModelAdmin):
 
     # 这个是列头显示的文本
     dialog_lists.short_description = "预览"
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        # groupList = []
+        # start = queryset[0].startRank
+        # group = []
+        # n = 0
+        # for qs in queryset:
+        #     distance = qs.startRank - start
+        #     if distance < 100:
+        #         group.append(qs)
+        #     else:
+        #         groupList.append(group)
+        #         n += 1
+        #         print(n, group[0].startRank, "~", group[-1].startRank, len(group))
+        #         group = [qs]
+        #         start = qs.startRank
+        return queryset
+
+    def get_paginator(self, request, queryset, per_page, orphans=0, allow_empty_first_page=True):
+        res = super().get_paginator(request, queryset, per_page, orphans, allow_empty_first_page)
+        return res
 
     # 也可以是方法的形式来返回html
     def get_top_html(self, request):
@@ -503,8 +423,8 @@ class IMediaAdmin(admin.ModelAdmin):
             'width': '180px',
             'align': 'left'
         },
-        'img': {
-            'width': '220px',
+        'thumb': {
+            'width': '130px',
             'align': 'center'
         },
     }

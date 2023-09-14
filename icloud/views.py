@@ -2,12 +2,13 @@
 import datetime
 import json
 
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render
 from pytz import UTC
 
 from . import iService
 from .models import IMedia
+from .services import update
 
 DLT = datetime.timedelta(hours=1)
 
@@ -36,6 +37,31 @@ def count(request):
     smart = request.GET.get("smart", "All Photos")
     responseJson, _ = iService.media_total(smart)
     return JsonResponse(responseJson)
+
+
+def thumb(request):
+    _id = request.GET.get("id", None)
+    startRank = request.GET.get("startRank", None)
+    if _id is None or startRank is None:
+        raise Http404("参数错误")
+    else:
+        obj = IMedia.objects.filter(id=_id).first()
+        if obj is not None:
+            dlt = datetime.datetime.now(tz=UTC) - obj.updatedAt
+            if dlt < DLT:
+                print(obj.thumbURL)
+                return HttpResponseRedirect(obj.thumbURL)
+        start = int(startRank) - 50
+        response = iService.query_medias(start, limit=100)
+        records: list[dict] = response['records']
+        update(records, start)
+        for record in records:
+            print(record["recordName"], _id, record["recordName"] == _id)
+            if record["recordName"] == _id:
+                _url = record["fields"]["resJPEGThumbRes"]["value"]["downloadURL"]
+                print(_url)
+                return HttpResponseRedirect(_url)
+        raise Http404("参数错误")
 
 
 def test2(targetObj):
@@ -95,7 +121,7 @@ def detail(request):
 
 
 def sync_progress(request):
-    from .admin import STATUS, FINISHED_COUNT, TOTAL, STARTED_AT, EXCEPTION_MSG, EXCEPTION_TRACE_BACK
+    from .services import STATUS, FINISHED_COUNT, TOTAL, STARTED_AT, EXCEPTION_MSG, EXCEPTION_TRACE_BACK
     return JsonResponse(
         data={"STATUS": STATUS, "FINISHED_COUNT": FINISHED_COUNT, "TOTAL": TOTAL, "STARTED_AT": STARTED_AT,
               "EXCEPTION_MSG": EXCEPTION_MSG, "EXCEPTION_TRACE_BACK": EXCEPTION_TRACE_BACK})
