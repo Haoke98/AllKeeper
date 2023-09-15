@@ -24,6 +24,7 @@ from lib import jpeg
 
 
 class IPhoto(PhotoAsset):
+    # TODO: 复现isHidden, isFavorite等等出现在asset record上的属性
     pass
 
 
@@ -372,3 +373,37 @@ class IcloudService(__iCloudService__):
                 iphoto = IPhoto(self._photos, master_record, asset_records[record_name])
                 iPhotos.append(iphoto)
         return iPhotos
+
+    def delete(self, recordName: str, recordChangeTag: str, recordType: str = "CPLMaster"):
+        """Deletes the photo."""
+        json_data = (
+            '{"query":{"recordType":"CheckIndexingState"},'
+            '"zoneID":{"zoneName":"PrimarySync"}}'
+        )
+
+        json_data = (
+                '{"operations":[{'
+                '"operationType":"update",'
+                '"record":{'
+                '"recordName":"%s",'
+                '"recordType":"%s",'
+                '"recordChangeTag":"%s",'
+                '"fields":{"isDeleted":{"value":1}'
+                "}}}],"
+                '"zoneID":{'
+                '"zoneName":"PrimarySync"'
+                '},"atomic":true}'
+                % (
+                    recordName,
+                    recordType,
+                    recordChangeTag,
+                )
+        )
+
+        endpoint = self.photos.service_endpoint
+        params = urlencode(self.photos.params)
+        url = f"{endpoint}/records/modify?{params}"
+
+        return self.photos.session.post(
+            url, data=json_data, headers={"Content-type": "text/plain"}
+        )

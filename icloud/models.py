@@ -78,7 +78,7 @@ def upload(instance, filename, dst_dir):
     ext = filename.split('.')[-1]
     # 返回新的文件路径，格式为 "ID.ext"
     fne = f"{fn}.{ext}"
-    _dir = os.path.join("icloud", dst_dir)
+    _dir = os.path.join("LocalMedia", dst_dir)
     fp = os.path.join(_dir, fne)
     return fp
 
@@ -122,11 +122,16 @@ class IMedia(BaseModel):
     adjustmentRenderType = models.IntegerField(null=True)
     timeZoneOffset = models.IntegerField(null=True)
     burstFlags = models.IntegerField(null=True)
-    recordChangeTag = models.CharField(max_length=50, null=True)
     # orientationOpts = ((0, '横向'), (1, "纵向"))
     orientation = models.IntegerField(null=True, verbose_name="方向")
 
     locationEnc = models.TextField(null=True, verbose_name="地址信息(已加密)")
+
+    masterRecordChangeTag = models.CharField(max_length=50, null=True)
+    assetRecordChangeTag = models.CharField(max_length=50, null=True)
+
+    masterRecordType = models.CharField(max_length=50, null=True)
+    assetRecordType = models.CharField(max_length=50, null=True)
 
     masterRecord = models.TextField(null=True)
     assetRecord = models.TextField(null=True)

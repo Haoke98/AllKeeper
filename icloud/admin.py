@@ -201,15 +201,20 @@ class IMediaAdmin(admin.ModelAdmin):
                     'dimensionX', 'dimensionY',
                     'isHidden', 'isFavorite', 'deleted',
                     'asset_date', 'added_date', 'createdAt', 'updatedAt',
-                    'adjustmentRenderType', 'timeZoneOffset', 'burstFlags', 'recordChangeTag',
+                    'adjustmentRenderType', 'timeZoneOffset', 'burstFlags',
                     'orientation',
+                    'masterRecordType', 'assetRecordType',
+                    'masterRecordChangeTag', 'assetRecordChangeTag',
                     'createdDeviceID', 'createdUserRecordName', 'modifiedDeviceID', 'modifiedUserRecordName',
                     'locationEnc']
     list_filter = ['albums', 'ext', 'dimensionX', 'dimensionY', 'asset_date', 'added_date', 'createdAt',
                    'updatedAt', 'isHidden', 'isFavorite', 'deleted',
                    'createdDeviceID', 'createdUserRecordName', 'modifiedDeviceID', 'modifiedUserRecordName',
-                   'adjustmentRenderType', 'timeZoneOffset', 'burstFlags', 'recordChangeTag',
-                   'orientation', ]  # TODO:实现是否为实况图的过滤器，可以通过originalRes.ext和prv.ext来确认。
+                   'adjustmentRenderType', 'timeZoneOffset', 'burstFlags',
+                   'orientation',
+                   'masterRecordChangeTag', 'assetRecordChangeTag',
+                   'masterRecordType', 'assetRecordType'
+                   ]  # TODO:实现是否为实况图的过滤器，可以通过originalRes.ext和prv.ext来确认。
     # list_filter_multiples = ('ext', 'dimensionX', 'dimensionY',)
     search_fields = ['id', 'filename']
     actions = ['collect', 'migrate']
@@ -328,6 +333,15 @@ class IMediaAdmin(admin.ModelAdmin):
         return {
             'state': True,
             'msg': f'迁移成功！'
+        }
+
+    @button(type='error', short_description='从iCloud中删除', enable=False, confirm="您确定从icloud迁移到本地吗？")
+    def delete(self, request, queryset):
+        for qs in queryset:
+            resp = iService.delete(qs.id, qs.recordType)
+        return {
+            'state': True,
+            'msg': f'删除成功！'
         }
 
     def formatter(self, obj, field_name, value):

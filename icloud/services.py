@@ -68,7 +68,12 @@ def insert_or_update_media(startRank: int, p: PhotoAsset):
     obj.modifiedDeviceID = p._asset_record["modified"]['deviceID']
     obj.modifiedUserRecordName = p._asset_record["modified"]['userRecordName']
 
-    obj.recordChangeTag = p._asset_record["recordChangeTag"]
+    obj.masterRecordChangeTag = p._master_record["recordChangeTag"]
+    obj.assetRecordChangeTag = p._asset_record["recordChangeTag"]
+
+    obj.masterRecordType = p._master_record["recordType"]
+    obj.assetRecordType = p._asset_record["recordType"]
+
     obj.delete = p._asset_record["deleted"]
 
     obj.masterRecord = json.dumps(p._master_record, ensure_ascii=False, indent=4)
