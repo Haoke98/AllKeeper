@@ -279,10 +279,10 @@ class IMediaAdmin(admin.ModelAdmin):
         return False
 
     def has_change_permission(self, request, obj=None):
-        return False
+        return True
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True
 
     @button(type='danger', short_description='从icloud中获取数据', enable=True, confirm="您确定要生成吗？")
     def collect(self, request, queryset):
