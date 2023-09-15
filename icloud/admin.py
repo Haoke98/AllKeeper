@@ -307,7 +307,9 @@ class IMediaAdmin(admin.ModelAdmin):
             lm.adjustmentRenderType = qs.adjustmentRenderType
             lm.timeZoneOffset = qs.timeZoneOffset
             lm.burstFlags = qs.burstFlags
-            lm.recordChangeTag = qs.recordChangeTag
+
+            lm.masterRecordChangeTag = qs.masterRecordChangeTag
+            lm.assetRecordChangeTag = qs.assetRecordChangeTag
 
             lm.added_date = qs.added_date
             lm.asset_date = qs.asset_date

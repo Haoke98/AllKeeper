@@ -154,7 +154,10 @@ class LocalMedia(BaseModel):
     adjustmentRenderType = models.IntegerField(null=True)
     timeZoneOffset = models.IntegerField(null=True)
     burstFlags = models.IntegerField(null=True)
-    recordChangeTag = models.CharField(max_length=50, null=True)
+
+    masterRecordChangeTag = models.CharField(max_length=50, null=True)
+    assetRecordChangeTag = models.CharField(max_length=50, null=True)
+
 
     asset_date = models.DateTimeField(verbose_name="生成时间", null=True)
     added_date = models.DateTimeField(verbose_name="加入icloud的时间", null=True)
