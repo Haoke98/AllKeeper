@@ -160,7 +160,7 @@ class LocalMedia(BaseModel):
     added_date = models.DateTimeField(verbose_name="加入icloud的时间", null=True)
     detach_icloud_date = models.DateTimeField(verbose_name="从icloud中移除时间", null=True)
 
-    locationEnc = models.TextField(null=True, verbose_name="地址信息(已加密)")
+    locationEnc = models.TextField(null=True, verbose_name="地址信息(已加密)",blank=True)
 
     thumb = models.ImageField(verbose_name="缩略图", upload_to=upload_thumb, null=True, help_text="视频和图像都会有，JPEG格式")
     prv = models.FileField(verbose_name="可预览文件", null=True, upload_to=upload_prv,
@@ -170,3 +170,4 @@ class LocalMedia(BaseModel):
     versions = models.TextField(null=True)
     masterRecord = models.TextField(null=True)
     assetRecord = models.TextField(null=True)
+    assetRecordAfterDelete = models.TextField(null=True)

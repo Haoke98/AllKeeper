@@ -9,7 +9,8 @@
 import base64
 
 if __name__ == '__main__':
-    encrypted_str = "YnBsaXN0MDDYAQIDBAUGBwgJCQkKCQsMDVZjb3Vyc2VVc3BlZWRTYWx0U2xvbld2ZXJ0QWNjU2xhdFl0aW1lc3RhbXBXaG9yekFjYyMAAAAAAAAAACNAVecImgJ1JSNAReVP3ztkWjNBxUN9UAAAACNAQYAAAAAAAAgZICYqLjY6RExVXmdwAAAAAAAAAQEAAAAAAAAADgAAAAAAAAAAAAAAAAAAAHk="
+    # encrypted_str = "YnBsaXN0MDDYAQIDBAUGBwgJCQkKCQsMDVZjb3Vyc2VVc3BlZWRTYWx0U2xvbld2ZXJ0QWNjU2xhdFl0aW1lc3RhbXBXaG9yekFjYyMAAAAAAAAAACNAVecImgJ1JSNAReVP3ztkWjNBxUN9UAAAACNAQYAAAAAAAAgZICYqLjY6RExVXmdwAAAAAAAAAQEAAAAAAAAADgAAAAAAAAAAAAAAAAAAAHk="
+    encrypted_str = "YnBsaXN0MDCgCAAAAAAAAAEBAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAJ"
     content_byte = base64.b64decode(encrypted_str)
-    content_str = content_byte.decode("utf-8", errors="ignore")
+    content_str = content_byte.decode("macroman")
     print(content_str)

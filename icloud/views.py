@@ -30,6 +30,8 @@ def test(request):
     direction = request.GET.get("direction", "ASCENDING")
     smart = request.GET.get("smart", "All Photos")
     response = iService.query_medias(startRank, endRank, direction, limit, smart)
+    records = response['records']
+    update(records, startRank)
     return JsonResponse(response)
 
 

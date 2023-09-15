@@ -245,3 +245,16 @@ def download_origin(source: IMedia, dest: LocalMedia):
     originCF = ContentFile(originResp.content, f"{source.filename}.{source.ext}")
     dest.origin = originCF
     dest.save()
+
+
+def delete_from_icloud(qs, lm):
+    resp = iService.delete(json.loads(qs.assetRecord)['recordName'], qs.assetRecordType,
+                           qs.masterRecordChangeTag)
+    print(resp.text)
+    respJson = resp.json()
+    if respJson["record"]["fields"]["isDeleted"]["value"] == 1:
+        lm.assetRecordAfterDelete = resp.text
+        lm.detach_icloud_date = datetime.datetime.now()
+        lm.save()
+        qs.delete()
+    return resp

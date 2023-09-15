@@ -374,7 +374,7 @@ class IcloudService(__iCloudService__):
                 iPhotos.append(iphoto)
         return iPhotos
 
-    def delete(self, recordName: str, recordChangeTag: str, recordType: str = "CPLMaster"):
+    def delete(self, assetRecordName: str, assetRecordType: str, masterRecordChangeTag: str):
         """Deletes the photo."""
         json_data = (
             '{"query":{"recordType":"CheckIndexingState"},'
@@ -394,9 +394,9 @@ class IcloudService(__iCloudService__):
                 '"zoneName":"PrimarySync"'
                 '},"atomic":true}'
                 % (
-                    recordName,
-                    recordType,
-                    recordChangeTag,
+                    assetRecordName,
+                    assetRecordType,
+                    masterRecordChangeTag,
                 )
         )
 

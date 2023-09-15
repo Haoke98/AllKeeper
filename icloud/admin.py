@@ -23,7 +23,7 @@ from simplepro.dialog import MultipleCellDialog, ModalDialog
 from lib import human_readable_bytes, human_readable_time
 from . import iService
 from .models import IMedia, Album, LocalMedia
-from .services import collect_all_medias, download_prv, download_origin
+from .services import collect_all_medias, download_prv, download_origin, delete_from_icloud
 from .views import DLT
 
 
@@ -217,7 +217,7 @@ class IMediaAdmin(admin.ModelAdmin):
                    ]  # TODO:实现是否为实况图的过滤器，可以通过originalRes.ext和prv.ext来确认。
     # list_filter_multiples = ('ext', 'dimensionX', 'dimensionY',)
     search_fields = ['id', 'filename']
-    actions = ['collect', 'migrate']
+    actions = ['collect', 'migrate', 'delete']
     list_per_page = 20
 
     def thumb(self, obj):
@@ -323,13 +323,7 @@ class IMediaAdmin(admin.ModelAdmin):
             lm.save()
             download_prv(qs, lm)
             download_origin(qs, lm)
-            # versions = json.loads(qs.versions)
-            # print(i, qs, versions)
-            # if qs.ext in ['.MOV', '.MP4']:
-            #     qs.video = versions['thumb']["url"]
-            # else:
-            #     qs.img = versions['thumb']["url"]
-            # qs.save()
+            resp = delete_from_icloud(qs, lm)
         return {
             'state': True,
             'msg': f'迁移成功！'
@@ -338,11 +332,12 @@ class IMediaAdmin(admin.ModelAdmin):
     @button(type='error', short_description='从iCloud中删除', enable=False, confirm="您确定从icloud迁移到本地吗？")
     def delete(self, request, queryset):
         for qs in queryset:
-            resp = iService.delete(qs.id, qs.recordType)
-        return {
-            'state': True,
-            'msg': f'删除成功！'
-        }
+            lm = LocalMedia.objects.filter(id=qs.id).first()
+            resp = delete_from_icloud(qs, lm)
+            return {
+                'state': True,
+                'msg': resp.text
+            }
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
