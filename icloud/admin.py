@@ -11,15 +11,11 @@ import json
 import os.path
 import threading
 import urllib.parse
-from io import BytesIO
 from urllib.parse import urlencode
 
-import ffmpeg
 import requests
-from PIL import Image
 from django.contrib import admin
 from django.core.files.base import ContentFile
-from moviepy.video.io.VideoFileClip import VideoFileClip
 from pytz import UTC
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
@@ -27,81 +23,8 @@ from simplepro.dialog import MultipleCellDialog, ModalDialog
 from lib import human_readable_bytes, human_readable_time
 from . import iService
 from .models import IMedia, Album, LocalMedia
-from .services import collect_all_medias
+from .services import collect_all_medias, download_prv, download_origin
 from .views import DLT
-
-
-def download_thumb(obj: IMedia, p):
-    fields = p._master_record['fields']
-    if fields.keys().__contains__("resJPEGThumbRes"):
-        downloadURL = fields['resJPEGThumbRes']['value']['downloadURL']
-        thumbResp = requests.get(downloadURL)
-        thumbCF = ContentFile(thumbResp.content, f"{p.filename}.JPG")
-        obj.thumb = thumbCF
-        obj.save()
-    else:
-        downloadURL = fields['resOriginalRes']['value']['downloadURL']
-        originResp = requests.get(downloadURL)
-        originCF = ContentFile(originResp.content, f"{p.filename}.JPG")
-        obj.origin = originCF
-        obj.save()
-        video = VideoFileClip(obj.origin.path)
-        # 获取视频的第0秒（即开头）的帧，作为缩略图
-        thumbnail = video.get_frame(0)
-        # 转换为PIL Image对象
-        image = Image.fromarray(thumbnail)
-        # 创建一个临时的二进制数据缓冲区
-        buffer = BytesIO()
-        # 将图像保存到二进制缓冲区
-        image.save(buffer, format='JPEG')
-        # 创建ContentFile对象
-        thumbCF = ContentFile(buffer.getvalue())
-        # 关闭二进制缓冲区
-        buffer.close()
-        obj.thumb = thumbCF
-        obj.save()
-
-
-def download_prv(obj: IMedia, p):
-    """"
-    com.apple.quicktime-movie
-    """
-    fields: dict = p._master_record['fields']
-    if fields.keys().__contains__("resVidSmallRes"):
-        downloadURL = fields['resVidSmallRes']['value']['downloadURL']
-        resp = requests.get(downloadURL)
-        cf = ContentFile(resp.content, f"{p.filename}.MP4")
-        obj.prv = cf
-        obj.save()
-    elif fields['resOriginalFileType']['value'] in ['public.jpeg', 'public.png', 'public.heic']:
-        # 由于图片的预览文件和Thumb缩略图一样，所以不用再重新下载
-        # HEIC图片有些是动图, 有些是实况图会有resVidSmallRes, 而有些不是实况图便就不会有视频属性
-        pass
-    elif fields['resOriginalFileType']['value'] in ['com.compuserve.gif']:
-        # 有些GIF图片可能只有一贞， 其次，GIF图片是可以在网页上可浏览的，所以我们可以直接把它原始文件下下来当作其可预览文件。
-        downloadURL = fields['resOriginalRes']['value']['downloadURL']
-        originResp = requests.get(downloadURL)
-        originCF = ContentFile(originResp.content, f"{p.filename}.gif")
-        obj.origin = originCF
-        obj.save()
-    elif fields['resOriginalFileType']['value'] in ['com.apple.quicktime-movie']:
-        downloadURL = fields['resOriginalRes']['value']['downloadURL']
-        originResp = requests.get(downloadURL)
-        originCF = ContentFile(originResp.content, f"{p.filename}.mov")
-        obj.origin = originCF
-        obj.save()
-        # 转换命令并将输出保存到 BytesIO 对象
-        output_stream = BytesIO()
-        ffmpeg.input(obj.origin.path).output(output_stream, format='mp4').run()
-        # 创建 ContentFile 对象
-        output_stream.seek(0)  # 将流定位到开头
-        content = ContentFile(output_stream.read(), name='output.mp4')
-        obj.prv = content
-        obj.save()
-    else:
-        raise Exception("iCloud预览数据异常")
-
-
 
 
 @admin.register(Album)
@@ -305,7 +228,7 @@ class IMediaAdmin(admin.ModelAdmin):
 
     def dialog_lists(self, model):
         return MultipleCellDialog([
-            ModalDialog(url=f'/icloud/detail?id={urllib.parse.quote(model.id)}', title=model.filename,
+            ModalDialog(url=f'/icloud/detail?id={urllib.parse.quote(model.id)}&source=IMedia', title=model.filename,
                         cell='<el-link type="primary">预览</el-link>', width="840px", height="600px"),
         ])
 
@@ -365,19 +288,46 @@ class IMediaAdmin(admin.ModelAdmin):
             'msg': f'采集程序已经启动'
         }
 
-    @button(type='warning', short_description='数据调整', enable=True, confirm="您确定要生成吗？")
+    @button(type='warning', short_description='数据迁移', enable=False, confirm="您确定从icloud迁移到本地吗？")
     def migrate(self, request, queryset):
         for i, qs in enumerate(queryset):
-            versions = json.loads(qs.versions)
-            print(i, qs, versions)
-            if qs.ext in ['.MOV', '.MP4']:
-                qs.video = versions['thumb']["url"]
-            else:
-                qs.img = versions['thumb']["url"]
-            qs.save()
+            lm, created = LocalMedia.objects.get_or_create(id=qs.id)
+            lm.filename = qs.filename
+            lm.ext = qs.ext
+            lm.size = qs.size
+            lm.duration = qs.duration
+            lm.orientation = qs.orientation
+            lm.dimensionX = qs.dimensionX
+            lm.dimensionY = qs.dimensionY
+            lm.adjustmentRenderType = qs.adjustmentRenderType
+            lm.timeZoneOffset = qs.timeZoneOffset
+            lm.burstFlags = qs.burstFlags
+            lm.recordChangeTag = qs.recordChangeTag
+
+            lm.added_date = qs.added_date
+            lm.asset_date = qs.asset_date
+
+            lm.versions = qs.versions
+            lm.masterRecord = qs.masterRecord
+            lm.assetRecord = qs.assetRecord
+
+            thumbResp = requests.get(qs.thumbURL)
+            thumbCF = ContentFile(thumbResp.content, f"{qs.filename}.JPG")
+            lm.thumb = thumbCF
+
+            lm.save()
+            download_prv(qs, lm)
+            download_origin(qs, lm)
+            # versions = json.loads(qs.versions)
+            # print(i, qs, versions)
+            # if qs.ext in ['.MOV', '.MP4']:
+            #     qs.video = versions['thumb']["url"]
+            # else:
+            #     qs.img = versions['thumb']["url"]
+            # qs.save()
         return {
             'state': True,
-            'msg': f'调整成功！'
+            'msg': f'迁移成功！'
         }
 
     def formatter(self, obj, field_name, value):
@@ -607,11 +557,10 @@ class IMediaAdmin(admin.ModelAdmin):
 
 
 @admin.register(LocalMedia)
-class IMediaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'filename', 'ext', 'size', 'dimensionX', 'dimensionY', 'dialog_lists', 'prvIsNull'
-        , 'asset_date',
-                    'added_date',
-                    'createdAt', 'updatedAt']
+class LocalMediaAdmin(admin.ModelAdmin):
+    list_display = ['id', 'filename', 'ext', 'size', 'thumb', 'dialog_lists', 'dimensionX', 'dimensionY',
+                    'asset_date', 'added_date', 'createdAt', 'updatedAt'
+                    ]
     list_filter = ['ext', 'dimensionX', 'dimensionY', 'asset_date', 'added_date', 'createdAt', 'updatedAt',
                    ThumbFilter, PrvFilter]  # TODO:实现是否为实况图的过滤器，可以通过originalRes.ext和prv.ext来确认。
     # list_filter_multiples = ('ext', 'dimensionX', 'dimensionY',)
@@ -621,11 +570,11 @@ class IMediaAdmin(admin.ModelAdmin):
 
     def dialog_lists(self, model):
         return MultipleCellDialog([
-            ModalDialog(url=f'/icloud/detail?id={urllib.parse.quote(model.id)}', title=model.filename,
+            ModalDialog(url=f'/icloud/detail?id={urllib.parse.quote(model.id)}&source=LocalMedia', title=model.filename,
                         cell='<el-link type="primary">预览</el-link>', width="840px", height="600px"),
         ])
 
-    def prvIsNull(self, obj):
+    def _thumb(self, obj):
         if obj.prv.name is None:
             return True
         return False
@@ -647,10 +596,10 @@ class IMediaAdmin(admin.ModelAdmin):
         '''
 
     def has_add_permission(self, request):
-        return False
+        return True
 
     def has_change_permission(self, request, obj=None):
-        return False
+        return True
 
     def has_delete_permission(self, request, obj=None):
         return False
@@ -731,8 +680,8 @@ class IMediaAdmin(admin.ModelAdmin):
             'width': '180px',
             'align': 'left'
         },
-        'img': {
-            'width': '220px',
+        'thumb': {
+            'width': '120px',
             'align': 'center'
         },
     }

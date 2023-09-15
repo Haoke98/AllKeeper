@@ -14,11 +14,17 @@ import os
 import threading
 import time
 import traceback
+from io import BytesIO
 
+import ffmpeg
+import requests
+from PIL import Image
+from django.core.files.base import ContentFile
+from moviepy.video.io.VideoFileClip import VideoFileClip
 from pyicloud.services.photos import PhotoAsset
 
 from . import iService
-from .models import IMedia
+from .models import IMedia, LocalMedia
 
 
 def insert_or_update_media(startRank: int, p: PhotoAsset):
@@ -158,3 +164,79 @@ def collect_all_medias():
         EXCEPTION_MSG = str(e)
         EXCEPTION_TRACE_BACK = traceback.format_exc()
         logging.error("iCloud数据同步异常", exc_info=True)
+
+
+def download_thumb(obj: IMedia, p):
+    fields = p._master_record['fields']
+    if fields.keys().__contains__("resJPEGThumbRes"):
+        downloadURL = fields['resJPEGThumbRes']['value']['downloadURL']
+        thumbResp = requests.get(downloadURL)
+        thumbCF = ContentFile(thumbResp.content, f"{p.filename}.JPG")
+        obj.thumb = thumbCF
+        obj.save()
+    else:
+        downloadURL = fields['resOriginalRes']['value']['downloadURL']
+        originResp = requests.get(downloadURL)
+        originCF = ContentFile(originResp.content, f"{p.filename}.JPG")
+        obj.origin = originCF
+        obj.save()
+        video = VideoFileClip(obj.origin.path)
+        # 获取视频的第0秒（即开头）的帧，作为缩略图
+        thumbnail = video.get_frame(0)
+        # 转换为PIL Image对象
+        image = Image.fromarray(thumbnail)
+        # 创建一个临时的二进制数据缓冲区
+        buffer = BytesIO()
+        # 将图像保存到二进制缓冲区
+        image.save(buffer, format='JPEG')
+        # 创建ContentFile对象
+        thumbCF = ContentFile(buffer.getvalue())
+        # 关闭二进制缓冲区
+        buffer.close()
+        obj.thumb = thumbCF
+        obj.save()
+
+
+def download_prv(source: IMedia, dest: LocalMedia):
+    """"
+    com.apple.quicktime-movie
+    """
+    fields: dict = json.loads(source.masterRecord)['fields']
+    originalFileType = fields['resOriginalFileType']['value']
+    if fields.keys().__contains__("resVidSmallRes"):
+        downloadURL = fields['resVidSmallRes']['value']['downloadURL']
+        resp = requests.get(downloadURL)
+        cf = ContentFile(resp.content, f"{source.filename}.MP4")
+        dest.prv = cf
+        dest.save()
+    elif originalFileType in ['public.jpeg', 'public.png', 'public.heic']:
+        # 由于图片的预览文件和Thumb缩略图一样，所以不用再重新下载
+        # HEIC图片有些是动图, 有些是实况图会有resVidSmallRes, 而有些不是实况图便就不会有视频属性
+        pass
+    elif originalFileType in ['com.compuserve.gif']:
+        # 有些GIF图片可能只有一贞， 其次，GIF图片是可以在网页上可浏览的，所以我们可以直接把它原始文件下下来当作其可预览文件。
+        download_origin(source, dest)
+    elif originalFileType in ['com.apple.quicktime-movie']:
+        download_origin(source, dest)
+        # 转换命令并将输出保存到 BytesIO 对象
+        output_stream = BytesIO()
+        ffmpeg.input(dest.origin.path).output(output_stream, format='mp4').run()
+        # 创建 ContentFile 对象
+        output_stream.seek(0)  # 将流定位到开头
+        content = ContentFile(output_stream.read(), name='output.mp4')
+        dest.prv = content
+        dest.save()
+    else:
+        raise Exception("iCloud预览数据异常")
+
+
+def download_origin(source: IMedia, dest: LocalMedia):
+    """"
+    com.apple.quicktime-movie
+    """
+    fields: dict = json.loads(source.masterRecord)['fields']
+    downloadURL = fields['resOriginalRes']['value']['downloadURL']
+    originResp = requests.get(downloadURL)
+    originCF = ContentFile(originResp.content, f"{source.filename}.{source.ext}")
+    dest.origin = originCF
+    dest.save()

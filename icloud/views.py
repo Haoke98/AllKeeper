@@ -7,7 +7,7 @@ from django.shortcuts import render
 from pytz import UTC
 
 from . import iService
-from .models import IMedia
+from .models import IMedia, LocalMedia
 from .services import update
 
 DLT = datetime.timedelta(hours=1)
@@ -51,7 +51,7 @@ def thumb(request):
             if dlt < DLT:
                 print(obj.thumbURL)
                 return HttpResponseRedirect(obj.thumbURL)
-        start = int(startRank) - 50
+        start = max(int(startRank) - 50, 0)
         response = iService.query_medias(start, limit=200)
         records: list[dict] = response['records']
         update(records, start)
@@ -100,23 +100,34 @@ def detail(request):
     :return:
     TODO：得实现通过临时TOKEN来进行鉴权，否则出现详情页暴露，隐私泄漏等情况
     """
+    source = request.GET.get("source")
     target_id = request.GET.get("id")
-    if target_id is None:
-        return HttpResponse("请提供正确有效的ID")
-    targetObj = IMedia.objects.filter(id=target_id).first()
-    if targetObj is None:
-        return HttpResponse(f"找不到[ID:{target_id}]对应的媒体对象")
-    dlt = datetime.datetime.now(tz=UTC) - targetObj.updatedAt
-    if dlt > DLT:
-        return HttpResponse(f"媒体对象[ID:{target_id}]的部分属性已经失去了有效性[{dlt}]")
-    versions: dict = json.loads(targetObj.versions)
-    # if versions.keys().__contains__("thumb"):
-    prv_version = versions["thumb"]
-    context = {"filename": targetObj.filename}
-    if prv_version["type"] in ["public.mpeg-4"]:
-        context["prv_src"] = prv_version['url']
+    if target_id is None or source is None:
+        return HttpResponse(f"参数错误[source:{source},target_id:{target_id}]")
+    context = {"filename": "", "prv_src": "", "thumb_src": ""}
+    if source == "IMedia":
+        targetObj = IMedia.objects.filter(id=target_id).first()
+        if targetObj is None:
+            return HttpResponse(f"找不到[ID:{target_id}]对应的IMedia对象")
+        dlt = datetime.datetime.now(tz=UTC) - targetObj.updatedAt
+        if dlt > DLT:
+            return HttpResponse(f"媒体对象[ID:{target_id}]的部分属性已经失去了有效性[{dlt}]")
+        versions: dict = json.loads(targetObj.versions)
+        # if versions.keys().__contains__("thumb"):
+        prv_version = versions["thumb"]
+        context["filename"] = targetObj.filename
+        if prv_version["type"] in ["public.mpeg-4"]:
+            context["prv_src"] = prv_version['url']
+        else:
+            context["thumb_src"] = prv_version['url']
+    elif source == "LocalMedia":
+        targetObj = LocalMedia.objects.filter(id=target_id).first()
+        if targetObj is None:
+            return HttpResponse(f"找不到[ID:{target_id}]对应的LocalMedia对象")
+        context["filename"] = targetObj.filename
+        context["prv_src"] = targetObj.prv.url
     else:
-        context["thumb_src"] = prv_version['url']
+        return HttpResponse(f"未知source[{source}]")
     return render(request, "icloud/detail.html", context=context)
 
 

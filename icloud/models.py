@@ -114,7 +114,7 @@ class IMedia(BaseModel):
     deleted = models.BooleanField(null=True, verbose_name="已删除")
 
     createdDeviceID = models.CharField(max_length=255, verbose_name="创建的设备ID", null=True)
-    createdUserRecordName = models.CharField(max_length=255, null=True,verbose_name="创建的用户ID")
+    createdUserRecordName = models.CharField(max_length=255, null=True, verbose_name="创建的用户ID")
     modifiedDeviceID = models.CharField(max_length=255, verbose_name="更新的设备ID", null=True)
     modifiedUserRecordName = models.CharField(max_length=255, verbose_name="更新的用户ID", null=True)
 
@@ -126,7 +126,7 @@ class IMedia(BaseModel):
     # orientationOpts = ((0, '横向'), (1, "纵向"))
     orientation = models.IntegerField(null=True, verbose_name="方向")
 
-    locationEnc = models.TextField(null=True,verbose_name="地址信息(已加密)")
+    locationEnc = models.TextField(null=True, verbose_name="地址信息(已加密)")
 
     masterRecord = models.TextField(null=True)
     assetRecord = models.TextField(null=True)
@@ -138,15 +138,30 @@ class IMedia(BaseModel):
 
 class LocalMedia(BaseModel):
     id = models.CharField(max_length=50, primary_key=True)
+
     filename = models.CharField(max_length=100, verbose_name="文件名", null=True)
     ext = models.CharField(max_length=10, verbose_name="扩展名", null=True)
     size = models.BigIntegerField(verbose_name="大小", null=True)
+    duration = models.PositiveIntegerField(null=True, verbose_name="时长")
     dimensionX = models.IntegerField(verbose_name="DX", null=True)
     dimensionY = models.IntegerField(verbose_name="DY", null=True)
+    orientation = models.IntegerField(null=True, verbose_name="方向")
+    adjustmentRenderType = models.IntegerField(null=True)
+    timeZoneOffset = models.IntegerField(null=True)
+    burstFlags = models.IntegerField(null=True)
+    recordChangeTag = models.CharField(max_length=50, null=True)
+
     asset_date = models.DateTimeField(verbose_name="生成时间", null=True)
     added_date = models.DateTimeField(verbose_name="加入icloud的时间", null=True)
-    versions = models.TextField(null=True)
+    detach_icloud_date = models.DateTimeField(verbose_name="从icloud中移除时间", null=True)
+
+    locationEnc = models.TextField(null=True, verbose_name="地址信息(已加密)")
+
     thumb = models.ImageField(verbose_name="缩略图", upload_to=upload_thumb, null=True, help_text="视频和图像都会有，JPEG格式")
     prv = models.FileField(verbose_name="可预览文件", null=True, upload_to=upload_prv,
                            help_text="HICH图片和PNG图片的可预览文件为JPEG图，MOV视频的可预览文件为MP4")
     origin = models.FileField(verbose_name="原始文件", null=True, upload_to=upload_origin)
+
+    versions = models.TextField(null=True)
+    masterRecord = models.TextField(null=True)
+    assetRecord = models.TextField(null=True)
