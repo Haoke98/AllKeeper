@@ -13,9 +13,7 @@ import threading
 import urllib.parse
 from urllib.parse import urlencode
 
-import requests
 from django.contrib import admin
-from django.core.files.base import ContentFile
 from pytz import UTC
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
@@ -23,7 +21,7 @@ from simplepro.dialog import MultipleCellDialog, ModalDialog
 from lib import human_readable_bytes, human_readable_time
 from . import iService
 from .models import IMedia, Album, LocalMedia
-from .services import collect_all_medias, download_prv, download_origin, delete_from_icloud
+from .services import collect_all_medias, delete_from_icloud, migrateIcloudToLocal
 from .views import DLT
 
 
@@ -296,39 +294,10 @@ class IMediaAdmin(admin.ModelAdmin):
     @button(type='warning', short_description='数据迁移', enable=False, confirm="您确定从icloud迁移到本地吗？")
     def migrate(self, request, queryset):
         for i, qs in enumerate(queryset):
-            lm, created = LocalMedia.objects.get_or_create(id=qs.id)
-            lm.filename = qs.filename
-            lm.ext = qs.ext
-            lm.size = qs.size
-            lm.duration = qs.duration
-            lm.orientation = qs.orientation
-            lm.dimensionX = qs.dimensionX
-            lm.dimensionY = qs.dimensionY
-            lm.adjustmentRenderType = qs.adjustmentRenderType
-            lm.timeZoneOffset = qs.timeZoneOffset
-            lm.burstFlags = qs.burstFlags
-
-            lm.masterRecordChangeTag = qs.masterRecordChangeTag
-            lm.assetRecordChangeTag = qs.assetRecordChangeTag
-
-            lm.added_date = qs.added_date
-            lm.asset_date = qs.asset_date
-
-            lm.versions = qs.versions
-            lm.masterRecord = qs.masterRecord
-            lm.assetRecord = qs.assetRecord
-
-            thumbResp = requests.get(qs.thumbURL)
-            thumbCF = ContentFile(thumbResp.content, f"{qs.filename}.JPG")
-            lm.thumb = thumbCF
-
-            lm.save()
-            download_prv(qs, lm)
-            download_origin(qs, lm)
-            resp = delete_from_icloud(qs, lm)
+            migrateIcloudToLocal(qs)
         return {
             'state': True,
-            'msg': f'迁移成功！'
+            'msg': f'迁移开始！'
         }
 
     @button(type='error', short_description='从iCloud中删除', enable=False, confirm="您确定从icloud迁移到本地吗？")
