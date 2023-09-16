@@ -24,12 +24,17 @@ class BaseAdmin(admin.ModelAdmin):
     date_hierarchy = 'updatedAt'
 
     @staticmethod
-    def username(obj):
+    def username(value):
         if SIMPLE_PRO:
-            return '''<button onclick="copyStr('%s')">
-                                        <a class="ui basic right pointing label" style="width:10em;">%s</a>
-                                      </button>
-                                   ''' % (obj, obj)
+            return f'''<div style="display:flex;">
+                            <el-input value="{value}" :disabled="false">
+                                <template slot="append">
+                                    <el-button style="color:white;" type="primary" icon="el-icon-copy-document" onclick="copyStr('{value}')">
+                                        复制
+                                    </el-button>
+                                </template>
+                            </el-input>
+                        </div>'''
         else:
             tag = mark_safe(
                 '''<div class="ui left labeled button" tabindex="0">
@@ -42,13 +47,22 @@ class BaseAdmin(admin.ModelAdmin):
                                     <i class="copy icon"></i>
                             </div>
                         </div>
-                    </div>''' % (obj, obj))
+                    </div>''' % (value, value))
             return tag
 
     @staticmethod
-    def password(obj):
+    def password(value):
         if SIMPLE_PRO:
-            return f'''<button onclick="copyStr('{obj}')" ><a class="ui basic left pointing label">******</a></button>'''
+            return f'''<div style="display:flex;">
+                                        <el-input value="********" :disabled="false">
+                                            <template slot="append">
+                                                <el-button style="color:white;" type="primary" icon="el-icon-copy-document" onclick="copyStr('{value}')">
+                                                    复制
+                                                </el-button>
+                                            </template>
+                                        </el-input>
+                        </div>'''
+            # return f'''<button onclick="copyStr('{obj}')" ><a class="ui basic left pointing label"></a></button>'''
         else:
             tag = mark_safe(
                 '''<div class="ui left labeled button" tabindex="0">
@@ -64,7 +78,7 @@ class BaseAdmin(admin.ModelAdmin):
                                     <i class="copy icon"></i>
                             </div>
                         </div>
-                    </div>''' % obj)
+                    </div>''' % value)
             return tag
 
     @staticmethod
