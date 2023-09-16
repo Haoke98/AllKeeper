@@ -262,36 +262,38 @@ def delete_from_icloud(qs, lm):
 
 def migrateIcloudToLocal(qs):
     def _migrate(qs):
-        lm, created = LocalMedia.objects.get_or_create(id=qs.id)
-        lm.filename = qs.filename
-        lm.ext = qs.ext
-        lm.size = qs.size
-        lm.duration = qs.duration
-        lm.orientation = qs.orientation
-        lm.dimensionX = qs.dimensionX
-        lm.dimensionY = qs.dimensionY
-        lm.adjustmentRenderType = qs.adjustmentRenderType
-        lm.timeZoneOffset = qs.timeZoneOffset
-        lm.burstFlags = qs.burstFlags
+        try:
+            lm, created = LocalMedia.objects.get_or_create(id=qs.id)
+            lm.filename = qs.filename
+            lm.ext = qs.ext
+            lm.size = qs.size
+            lm.duration = qs.duration
+            lm.orientation = qs.orientation
+            lm.dimensionX = qs.dimensionX
+            lm.dimensionY = qs.dimensionY
+            lm.adjustmentRenderType = qs.adjustmentRenderType
+            lm.timeZoneOffset = qs.timeZoneOffset
+            lm.burstFlags = qs.burstFlags
 
-        lm.masterRecordChangeTag = qs.masterRecordChangeTag
-        lm.assetRecordChangeTag = qs.assetRecordChangeTag
+            lm.masterRecordChangeTag = qs.masterRecordChangeTag
+            lm.assetRecordChangeTag = qs.assetRecordChangeTag
 
-        lm.added_date = qs.added_date
-        lm.asset_date = qs.asset_date
+            lm.added_date = qs.added_date
+            lm.asset_date = qs.asset_date
 
-        lm.versions = qs.versions
-        lm.masterRecord = qs.masterRecord
-        lm.assetRecord = qs.assetRecord
+            lm.versions = qs.versions
+            lm.masterRecord = qs.masterRecord
+            lm.assetRecord = qs.assetRecord
 
-        thumbResp = requests.get(qs.thumbURL)
-        thumbCF = ContentFile(thumbResp.content, f"{qs.filename}.JPG")
-        lm.thumb = thumbCF
+            thumbResp = requests.get(qs.thumbURL)
+            thumbCF = ContentFile(thumbResp.content, f"{qs.filename}.JPG")
+            lm.thumb = thumbCF
 
-        lm.save()
-        download_prv(qs, lm)
-        download_origin(qs, lm)
-        resp = delete_from_icloud(qs, lm)
-
+            lm.save()
+            download_prv(qs, lm)
+            download_origin(qs, lm)
+            resp = delete_from_icloud(qs, lm)
+        except Exception as e:
+            logging.error("媒体资源迁移失败！", exc_info=True)
     th = threading.Thread(target=_migrate, args=(qs,))
     th.start()
