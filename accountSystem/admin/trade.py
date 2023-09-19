@@ -20,9 +20,10 @@ class CapitalAccountAdmin(admin.ModelAdmin):
                                    'consumptionLimit', 'withdrawalLimit', 'temporaryLimit',
                                    'left', 'toBeReturn', 'repaymentAt']
     list_filter = ['owner_natural_person', 'owner_market_subject', 'isCredit', 'repaymentAt']
+    show_selection = True
     autocomplete_fields = ['owner_natural_person', 'owner_market_subject']
     date_hierarchy = 'createdAt'
-    search_fields = ['name', ]
+    search_fields = ['name', 'owner_market_subject__name', 'owner_market_subject__ucc', 'owner_natural_person__name']
     ordering = ('repaymentAt',)
 
     def balance(self, obj):
@@ -164,3 +165,63 @@ class TransactionAdmin(admin.ModelAdmin):
     list_filter = ['to', 'remark']
     date_hierarchy = 'createdAt'
     ordering = ('-at',)
+
+    fields_options = {
+        'id': {
+            # 'fixed': 'left',
+            'width': '80px',
+            'align': 'center'
+        },
+        'at': {
+            'width': '180px',
+            'align': 'left'
+        },
+        '_from': {
+            'width': '280px',
+            'align': 'center'
+        },
+        'to': {
+            'width': '280px',
+            'align': 'center'
+        },
+        'value': {
+            'width': '160px',
+            'align': 'center'
+        },
+        'remark': {
+            'width': '100px',
+            'align': 'left'
+        },
+        'info': {
+            'width': '200px',
+            'align': 'left'
+        },
+        'asset_date': {
+            'width': '180px',
+            'align': 'center'
+        },
+        'added_date': {
+            'width': '180px',
+            'align': 'center'
+        },
+        'thumb': {
+            'width': '120px',
+            'align': 'center'
+        },
+        'origin': {
+            'width': '200px',
+            'align': 'center'
+        },
+        'detach_icloud_date': {
+            'width': '180px',
+            'align': 'center'
+        },
+        'createdAt': {
+            'width': '180px',
+            'align': 'left'
+        },
+        'updatedAt': {
+            'width': '180px',
+            'align': 'left'
+        }
+    }
