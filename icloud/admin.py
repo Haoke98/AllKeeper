@@ -616,6 +616,9 @@ class LocalMediaAdmin(admin.ModelAdmin):
         if field_name == 'img':
             if value:
                 return f"""<img src="{value}" style="height:100px;">"""
+        if field_name == "duration":
+            if value:
+                return f"""<span title="{value}">{human_readable_time(value)}</span>"""
         return value
 
     fields_options = {
