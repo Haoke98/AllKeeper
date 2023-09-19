@@ -7,7 +7,6 @@
 @disc:
 ======================================="""
 import datetime
-import json
 import os.path
 import threading
 import urllib.parse
@@ -539,13 +538,13 @@ class IMediaAdmin(admin.ModelAdmin):
 @admin.register(LocalMedia)
 class LocalMediaAdmin(admin.ModelAdmin):
     list_display = ['id', 'filename', 'ext', 'size', 'thumb', 'dialog_lists', 'dimensionX', 'dimensionY',
-                    'asset_date', 'added_date', 'createdAt', 'updatedAt'
+                    'asset_date', 'added_date', 'createdAt', 'updatedAt', 'origin'
                     ]
     list_filter = ['ext', 'dimensionX', 'dimensionY', 'asset_date', 'added_date', 'createdAt', 'updatedAt',
                    ThumbFilter, PrvFilter]  # TODO:实现是否为实况图的过滤器，可以通过originalRes.ext和prv.ext来确认。
     # list_filter_multiples = ('ext', 'dimensionX', 'dimensionY',)
     search_fields = ['id', 'filename']
-    actions = ['collect', 'migrate']
+    actions = []
     list_per_page = 20
 
     def dialog_lists(self, model):
@@ -562,19 +561,6 @@ class LocalMediaAdmin(admin.ModelAdmin):
     # 这个是列头显示的文本
     dialog_lists.short_description = "预览"
 
-    # 也可以是方法的形式来返回html
-    def get_top_html(self, request):
-        return f'''
-        <el-collapse accordion>
-            <el-collapse-item>
-                <template slot="title">
-                    同步进度监控<i class="header-icon el-icon-info"></i>
-                </template>
-                <iframe style="width:100%;height:200px;" src="/static/iMedia_list_top.html"></iframe>
-            </el-collapse-item>
-        </el-collapse>
-        '''
-
     def has_add_permission(self, request):
         return True
 
@@ -583,30 +569,6 @@ class LocalMediaAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
-
-    @button(type='danger', short_description='从icloud中获取数据', enable=True, confirm="您确定要生成吗？")
-    def collect(self, request, queryset):
-        th = threading.Thread(target=collect_all_medias)
-        th.start()
-        return {
-            'state': True,
-            'msg': f'采集程序已经启动'
-        }
-
-    @button(type='warning', short_description='数据调整', enable=True, confirm="您确定要生成吗？")
-    def migrate(self, request, queryset):
-        for i, qs in enumerate(queryset):
-            versions = json.loads(qs.versions)
-            print(i, qs, versions)
-            if qs.ext in ['.MOV', '.MP4']:
-                qs.video = versions['thumb']["url"]
-            else:
-                qs.img = versions['thumb']["url"]
-            qs.save()
-        return {
-            'state': True,
-            'msg': f'调整成功！'
-        }
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
