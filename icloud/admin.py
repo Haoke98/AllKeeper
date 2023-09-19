@@ -538,7 +538,7 @@ class IMediaAdmin(admin.ModelAdmin):
 @admin.register(LocalMedia)
 class LocalMediaAdmin(admin.ModelAdmin):
     list_display = ['id', 'filename', 'ext', 'size', 'thumb', 'dialog_lists', 'dimensionX', 'dimensionY',
-                    'asset_date', 'added_date', 'createdAt', 'updatedAt', 'origin'
+                    'asset_date', 'added_date', 'detach_icloud_date', 'createdAt', 'updatedAt', 'origin'
                     ]
     list_filter = ['ext', 'dimensionX', 'dimensionY', 'asset_date', 'added_date', 'createdAt', 'updatedAt',
                    ThumbFilter, PrvFilter]  # TODO:实现是否为实况图的过滤器，可以通过originalRes.ext和prv.ext来确认。
@@ -581,6 +581,9 @@ class LocalMediaAdmin(admin.ModelAdmin):
         if field_name == "duration":
             if value:
                 return f"""<span title="{value}">{human_readable_time(value)}</span>"""
+        if field_name == "origin":
+            if value:
+                return f""" <el-link type="primary" href="/media/{value}" target="_blank">点击浏览源文件</el-link>"""
         return value
 
     fields_options = {
@@ -619,16 +622,24 @@ class LocalMediaAdmin(admin.ModelAdmin):
         },
         'asset_date': {
             'width': '180px',
-            'align': 'left'
+            'align': 'center'
         },
         'added_date': {
             'width': '180px',
-            'align': 'left'
+            'align': 'center'
         },
         'thumb': {
             'width': '120px',
             'align': 'center'
         },
+        'origin': {
+            'width': '200px',
+            'align': 'center'
+        },
+        'detach_icloud_date': {
+            'width': '180px',
+            'align': 'center'
+        }
     }
 
     def layer_input(self, request, queryset):
