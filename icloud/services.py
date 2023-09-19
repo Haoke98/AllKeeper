@@ -19,12 +19,15 @@ from io import BytesIO
 import ffmpeg
 import requests
 from PIL import Image
-from django.core.files.base import ContentFile
+from django.core.files.base import ContentFile, File
+from django.core.files.temp import NamedTemporaryFile
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from pyicloud.services.photos import PhotoAsset
 
 from . import iService
 from .models import IMedia, LocalMedia
+
+CHUNK_SIZE = 1024 * 1024  # 每个文件块的大小（字节）1M
 
 
 def insert_or_update_media(startRank: int, p: PhotoAsset):
@@ -241,9 +244,14 @@ def download_origin(source: IMedia, dest: LocalMedia):
     """
     fields: dict = json.loads(source.masterRecord)['fields']
     downloadURL = fields['resOriginalRes']['value']['downloadURL']
-    originResp = requests.get(downloadURL)
-    originCF = ContentFile(originResp.content, f"{source.filename}.{source.ext}")
-    dest.origin = originCF
+    originResp = requests.get(downloadURL, stream=True)
+    temp_file = NamedTemporaryFile(delete=True)
+    for chunk in originResp.iter_content(chunk_size=CHUNK_SIZE):
+        if chunk:
+            temp_file.write(chunk)
+    temp_file.seek(0)
+    file_obj = File(temp_file, name=f"{source.filename}.{source.ext}")
+    dest.origin = file_obj
     dest.save()
 
 
@@ -297,5 +305,6 @@ def migrateIcloudToLocal(qs):
             resp = delete_from_icloud(qs, lm)
         except Exception as e:
             logging.error("媒体资源迁移失败！", exc_info=True)
+
     th = threading.Thread(target=_migrate, args=(qs,))
     th.start()
