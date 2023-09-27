@@ -1,3 +1,5 @@
+from urllib.parse import urlparse
+
 from django.contrib import admin
 
 # Register your admin models here.
@@ -29,7 +31,7 @@ from .weibo import WeiboAdmin
 
 @admin.register(Type)
 class GroupAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ["name", 'icon', 'url', '_count']
+    list_display = LIST_DISPLAY + ["name", 'icon', 'url', 'hostname', 'path', '_count']
     search_fields = ['name', 'url']
     list_per_page = 14
 
@@ -38,11 +40,33 @@ class GroupAdmin(admin.ModelAdmin):
 
     _count.short_description = "关联账号的数量"
 
+    # TODO: 把这个改成模型属性
+    def hostname(self, obj):
+        if obj.url:
+            res = urlparse(obj.url)
+            return res.hostname
+
+    # TODO: 把这个动态解析改成模型属性
+    def path(self, obj):
+        if obj.url:
+            res = urlparse(obj.url)
+            return res.path
+
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
         if field_name == "url":
             if value:
                 return f"""<a href="{value}" target="_blank">点击跳转</a>"""
+        if field_name == "icon":
+            if value:
+                return '''<el-image style="width: 100px; height: 100px" src="{}" :preview-src-list="['{}']" lazy></el-image>'''.format(
+                    value, value)
+            else:
+                if obj.url:
+                    res = urlparse(obj.url)
+                    icon_url = f"{res.scheme}://{res.hostname}/favicon.ico"
+                    return '''<el-image style="width: 100px; height: 100px" src="{}" :preview-src-list="['{}']" lazy></el-image>'''.format(
+                        icon_url, icon_url)
         return value
 
     fields_options = {
@@ -78,5 +102,13 @@ class GroupAdmin(admin.ModelAdmin):
         '_count': {
             'min_width': '120px',
             'align': 'center'
+        },
+        'hostname': {
+            'min_width': '200px',
+            'align': 'left'
+        },
+        'path': {
+            'min_width': '220px',
+            'align': 'left'
         }
     }
