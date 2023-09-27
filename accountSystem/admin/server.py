@@ -33,13 +33,6 @@ class ServerAdmin(BaseAdmin):
         if field_name == "bios":
             if value:
                 return BaseAdmin.password(obj.bios)
-        if field_name == "url":
-            if value:
-                return f"""<a href="{value}" target="_blank">点击跳转</a>"""
-        if field_name == "name":
-            if value:
-                return f'''<el-button type="info" onclick="goToDetail(this)" round>{value}</el-button>'''
-        return value
 
     fields_options = {
         'id': {
