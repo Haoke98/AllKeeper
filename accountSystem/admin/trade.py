@@ -11,23 +11,33 @@ from django.contrib import admin
 from django.db.models import Sum
 
 from izBasar.admin import LIST_DISPLAY
-from ..models import Transaction, CapitalAccount
+from ..models import Transaction, CapitalAccount, CapitalAccountType
+
+
+@admin.register(CapitalAccountType)
+class CapitalAccountTypeAdmin(admin.ModelAdmin):
+    list_display = LIST_DISPLAY + ['name', 'isCredit']
+    search_fields = ['name']
 
 
 @admin.register(CapitalAccount)
 class CapitalAccountAdmin(admin.ModelAdmin):
-    list_display = LIST_DISPLAY + ['owner_natural_person', 'owner_market_subject', 'name', 'isCredit', 'balance',
+    list_display = LIST_DISPLAY + ['owner_natural_person', 'owner_market_subject', 'name', 'ttype',
+                                   'balance',
                                    'consumptionLimit', 'withdrawalLimit', 'temporaryLimit',
-                                   'left', 'toBeReturn', 'repaymentDate', 'billingDate']
-    list_filter = ['owner_natural_person', 'owner_market_subject', 'isCredit', 'repaymentDate']
+                                   'left',
+                                   'repayment_pending', 'unbilled_repayment_pending', 'total_repayment_pending',
+                                   'repaymentDate', 'billingDate'
+                                   ]
+    list_filter = ['owner_natural_person', 'owner_market_subject', 'ttype', 'ttype__isCredit', 'repaymentDate']
     show_selection = True
-    autocomplete_fields = ['owner_natural_person', 'owner_market_subject']
+    autocomplete_fields = ['owner_natural_person', 'owner_market_subject', 'ttype']
     date_hierarchy = 'createdAt'
     search_fields = ['name', 'owner_market_subject__name', 'owner_market_subject__ucc', 'owner_natural_person__name']
     ordering = ('repaymentDate',)
 
     def balance(self, obj):
-        if obj.isCredit:
+        if obj.ttype and obj.ttype.isCredit:
             return ""
         else:
             result = 0
@@ -40,7 +50,7 @@ class CapitalAccountAdmin(admin.ModelAdmin):
     balance.short_description = "余额"
 
     def left(self, obj):
-        if obj.isCredit:
+        if obj.ttype and obj.ttype.isCredit:
             result1 = obj.temporaryLimit
             for i1 in Transaction.objects.filter(_from=obj).all():
                 result1 = result1 - i1.value
@@ -52,8 +62,8 @@ class CapitalAccountAdmin(admin.ModelAdmin):
 
     left.short_description = "可用额度"
 
-    def toBeReturn(self, obj):
-        if obj.isCredit:
+    def repayment_pending(self, obj):
+        if obj.ttype and obj.ttype.isCredit:
             result = 0
             print(obj.name, result)
             for i1 in Transaction.objects.filter(_from=obj).all():
@@ -66,7 +76,28 @@ class CapitalAccountAdmin(admin.ModelAdmin):
         else:
             return ""
 
-    toBeReturn.short_description = "待还"
+    repayment_pending.short_description = "待还"
+
+    def unbilled_repayment_pending(self, obj):
+        return 0
+
+    unbilled_repayment_pending.short_description = "未出账"
+
+    def total_repayment_pending(self, obj):
+        if obj.ttype and obj.ttype.isCredit:
+            result = 0
+            print(obj.name, result)
+            for i1 in Transaction.objects.filter(_from=obj).all():
+                result = result + i1.value
+                print("          借了", i1.value, result)
+            for i2 in Transaction.objects.filter(to=obj).all():
+                result = result - i2.value
+                print("          还了", i2.value, result)
+            return result
+        else:
+            return ""
+
+    total_repayment_pending.short_description = "总待还"
 
     # 动态统计，Simple Pro独有功能
     def get_summaries(self, request, queryset):
@@ -88,7 +119,7 @@ class CapitalAccountAdmin(admin.ModelAdmin):
                 b = self.left(qs)
                 if b != "":
                     left_total += b
-                c = self.toBeReturn(qs)
+                c = self.repayment_pending(qs)
                 if c != "":
                     toBeReturn_total += c
             consumptionLimit_total = queryset.aggregate(total=Sum('consumptionLimit'))['total']
@@ -104,13 +135,14 @@ class CapitalAccountAdmin(admin.ModelAdmin):
 
     def formatter(self, obj, field_name, value):
         if field_name == 'balance':
-            if value is not None and not obj.isCredit:
+            if value is not None and obj.ttype and not obj.ttype.isCredit:
                 return "%0.2f" % value
             else:
                 return ""
-        if field_name in ["consumptionLimit", "withdrawalLimit", "temporaryLimit", 'left', 'toBeReturn',
+        if field_name in ["consumptionLimit", "withdrawalLimit", "temporaryLimit", 'left',
+                          'repayment_pending', 'unbilled_repayment_pending', 'total_repayment_pending',
                           'repaymentDate', 'billingDate']:
-            if value is not None and obj.isCredit:
+            if value is not None and obj.ttype and obj.ttype.isCredit:
                 return value
             else:
                 return ""
@@ -142,7 +174,7 @@ class CapitalAccountAdmin(admin.ModelAdmin):
             'min_width': '180px',
             'align': 'left'
         },
-        'isCredit': {
+        'ttype': {
             'min_width': '120px',
             'align': 'center'
         },
@@ -166,7 +198,15 @@ class CapitalAccountAdmin(admin.ModelAdmin):
             'width': '120px',
             'align': 'right'
         },
-        'toBeReturn': {
+        'repayment_pending': {
+            'width': '100px',
+            'align': 'right'
+        },
+        'unbilled_repayment_pending': {
+            'width': '100px',
+            'align': 'right'
+        },
+        'total_repayment_pending': {
             'width': '100px',
             'align': 'right'
         },
@@ -192,24 +232,24 @@ class TransactionAdmin(admin.ModelAdmin):
     fields_options = {
         'id': {
             # 'fixed': 'left',
-            'width': '80px',
+            'min_width': '68px',
             'align': 'center'
         },
         'at': {
-            'width': '180px',
-            'align': 'left'
+            'min_width': '180px',
+            'align': 'center'
         },
         '_from': {
-            'width': '280px',
-            'align': 'center'
+            'min_width': '280px',
+            'align': 'left'
         },
         'to': {
-            'width': '280px',
-            'align': 'center'
+            'min_width': '280px',
+            'align': 'left'
         },
         'value': {
-            'width': '160px',
-            'align': 'center'
+            'min_width': '160px',
+            'align': 'right'
         },
         'remark': {
             'width': '100px',

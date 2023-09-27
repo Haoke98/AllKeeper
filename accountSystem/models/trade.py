@@ -5,6 +5,18 @@ from .human import Human
 from .marketsubject import MarketSubject
 
 
+class CapitalAccountType(BaseModel):
+    name = models.CharField(verbose_name="名称", max_length=100)
+    isCredit = models.BooleanField(default=False, verbose_name="信用账户", null=False, blank=False)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "资金账户类型"
+        verbose_name_plural = verbose_name
+
+
 # Create your models here.
 class CapitalAccount(BaseModel):
     owner_natural_person = models.ForeignKey(Human, on_delete=models.CASCADE, verbose_name="拥有者(自然人)", null=True,
@@ -13,21 +25,32 @@ class CapitalAccount(BaseModel):
     owner_market_subject = models.ForeignKey(MarketSubject, on_delete=models.CASCADE, verbose_name="拥有者(市场主题)",
                                              null=True, blank=True,
                                              related_name='owner_market_subject')
-    name = models.CharField(verbose_name="标题", max_length=100)
-    isCredit = models.BooleanField(default=False, verbose_name="信用账户")
+    name = models.CharField(verbose_name="账户标识", max_length=100, blank=True)
+    ttype = models.ForeignKey(verbose_name="类型", to=CapitalAccountType, on_delete=models.CASCADE, null=True,
+                              blank=False)
     # 信用账户属性
     consumptionLimit = models.FloatField(verbose_name="消费额度", default=0.0, blank=True)
     withdrawalLimit = models.FloatField(verbose_name="取现额度", default=0.0, blank=True)
     temporaryLimit = models.FloatField(verbose_name="临时消费额度", default=0.0, blank=True)
-    billingDate = models.DateField(verbose_name="账单日", null=True, blank=True)
-    repaymentDate = models.DateField(verbose_name="还款日", null=True, blank=True)
+    billingDate = models.PositiveIntegerField(verbose_name="账单日", null=True, blank=True)
+    repaymentDate = models.PositiveIntegerField(verbose_name="还款日", null=True, blank=True)
 
     def __str__(self):
-        if self.owner_natural_person:
-            return f"{self.owner_natural_person}---{self.name}"
-        if self.owner_market_subject:
-            return f"{self.owner_market_subject}---{self.name}"
-        return f"CapitalAccount({self.id})---{self.name}"
+        # if self.owner_natural_person:
+        #     return f"{self.owner_natural_person}---{self.name}"
+        # if self.owner_market_subject:
+        #     return f"{self.owner_market_subject}---{self.name}"
+        if self.ttype:
+            if self.name:
+                return f"{self.ttype.name}({self.name})"
+            else:
+                if self.owner_market_subject:
+                    return f"{self.ttype.name}({self.owner_market_subject})"
+                elif self.owner_natural_person:
+                    return f"{self.ttype.name}({self.owner_natural_person})"
+
+        else:
+            return f"{self.name}"
 
     class Meta:
         verbose_name = "资金账户"
