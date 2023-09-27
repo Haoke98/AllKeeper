@@ -14,7 +14,7 @@ class CapitalAccount(BaseModel):
                                              null=True, blank=True,
                                              related_name='owner_market_subject')
     name = models.CharField(verbose_name="标题", max_length=100)
-    isCredit = models.BooleanField(default=False, verbose_name="是否为信用账户")
+    isCredit = models.BooleanField(default=False, verbose_name="信用账户")
     # 信用账户属性
     consumptionLimit = models.FloatField(verbose_name="消费额度", default=0.0, blank=True)
     withdrawalLimit = models.FloatField(verbose_name="取现额度", default=0.0, blank=True)

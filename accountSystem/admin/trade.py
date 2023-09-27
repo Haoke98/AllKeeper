@@ -97,9 +97,24 @@ class CapitalAccountAdmin(admin.ModelAdmin):
 
             # 需要有空字符串占位
             return (
-                '合计', '', '', '', '', '', '', '', balance_total, consumptionLimit_total, withdrawalLimit_total,
+                '合计', '', '', '', '', '', '', '', "%0.2f" % balance_total, consumptionLimit_total,
+                withdrawalLimit_total,
                 temporaryLimit_total, left_total, toBeReturn_total,
                 '')
+
+    def formatter(self, obj, field_name, value):
+        if field_name == 'balance':
+            if value is not None and not obj.isCredit:
+                return "%0.2f" % value
+            else:
+                return ""
+        if field_name in ["consumptionLimit", "withdrawalLimit", "temporaryLimit", 'left', 'toBeReturn',
+                          'repaymentDate', 'billingDate']:
+            if value is not None and obj.isCredit:
+                return value
+            else:
+                return ""
+        return value
 
     fields_options = {
         'id': {
@@ -124,36 +139,44 @@ class CapitalAccountAdmin(admin.ModelAdmin):
             'align': 'left'
         },
         'name': {
-            'width': '160px',
+            'min_width': '180px',
             'align': 'left'
         },
         'isCredit': {
-            'width': '160px',
-            'align': 'left'
+            'min_width': '120px',
+            'align': 'center'
         },
         'consumptionLimit': {
             'width': '120px',
-            'align': 'left'
+            'align': 'right'
         },
         'withdrawalLimit': {
             'width': '120px',
-            'align': 'left'
+            'align': 'right'
         },
         'temporaryLimit': {
             'width': '130px',
-            'align': 'left'
+            'align': 'right'
         },
         'left': {
             'width': '100px',
-            'align': 'left'
+            'align': 'right'
+        },
+        'balance': {
+            'width': '120px',
+            'align': 'right'
         },
         'toBeReturn': {
             'width': '100px',
-            'align': 'left'
+            'align': 'right'
         },
         'repaymentDate': {
-            'width': '180px',
-            'align': 'left'
+            'min_width': '120px',
+            'align': 'center'
+        },
+        'billingDate': {
+            'min_width': '120px',
+            'align': 'center'
         }
     }
 
