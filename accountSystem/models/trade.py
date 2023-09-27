@@ -29,9 +29,9 @@ class CapitalAccount(BaseModel):
     ttype = models.ForeignKey(verbose_name="类型", to=CapitalAccountType, on_delete=models.CASCADE, null=True,
                               blank=False)
     # 信用账户属性
-    consumptionLimit = models.FloatField(verbose_name="消费额度", default=0.0, blank=True)
-    withdrawalLimit = models.FloatField(verbose_name="取现额度", default=0.0, blank=True)
-    temporaryLimit = models.FloatField(verbose_name="临时消费额度", default=0.0, blank=True)
+    fixedLimit = models.FloatField(verbose_name="固定额度", default=0.0, blank=True)
+    temporaryLimit = models.FloatField(verbose_name="临时额度", default=0.0, blank=True)
+    withdrawalLimit = models.FloatField(verbose_name="最高可提现", default=0.0, blank=True)
     billingDate = models.PositiveIntegerField(verbose_name="账单日", null=True, blank=True)
     repaymentDate = models.PositiveIntegerField(verbose_name="还款日", null=True, blank=True)
 
