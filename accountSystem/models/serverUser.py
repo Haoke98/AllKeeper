@@ -11,7 +11,7 @@ class ServerUser(BaseModel):
                                blank=False)
     username = models.CharField(max_length=32, null=True, blank=False, verbose_name="用户名")
     pwd = models.CharField(max_length=32, verbose_name="密码", null=True, blank=False)
-    hasRootPriority = models.BooleanField(default=False, verbose_name="拥有root权限", blank=True)
+    hasRootPriority = models.BooleanField(default=False, verbose_name="root权限", blank=True)
 
     class Meta:
         verbose_name = "服务器用户"
