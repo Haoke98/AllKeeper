@@ -7,7 +7,7 @@ from ..models import Server
 
 @admin.register(Server)
 class ServerAdmin(BaseAdmin):
-    list_display = ["id", "_ip", 'system', '_password', 'ssh', '_biosPassword', 'group', 'hoster', 'remark',
+    list_display = ["id", "ip", 'system', 'rootPassword', 'ssh', 'bios', 'group', 'hoster', 'remark',
                     "createdAt",
                     "updatedAt",
                     "deletedAt", ]
@@ -19,68 +19,77 @@ class ServerAdmin(BaseAdmin):
     autocomplete_fields = ['group']
     form = ServerForm
     list_per_page = 10
+
     # inlines = [ServerUserInlineAdmin]
 
-    def _ip(self, obj):
-        return BaseAdmin.username(obj.ip)
-
-    _ip.short_description = "IP地址"
-
-    def _password(self, obj):
-        return BaseAdmin.password(obj.rootPassword)
-
-    _password.short_description = "root密码"
-
-    def _biosPassword(self, obj):
-        return BaseAdmin.password(obj.bios)
-
-    _biosPassword.short_description = "BIOS密码"
+    def formatter(self, obj, field_name, value):
+        # 这里可以对value的值进行判断，比如日期格式化等
+        if field_name == "ip":
+            if value:
+                return BaseAdmin.username(obj.ip)
+        if field_name == 'rootPassword':
+            if value:
+                return BaseAdmin.password(obj.rootPassword)
+        if field_name == "bios":
+            if value:
+                return BaseAdmin.password(obj.bios)
+        if field_name == "url":
+            if value:
+                return f"""<a href="{value}" target="_blank">点击跳转</a>"""
+        if field_name == "name":
+            if value:
+                return f'''<el-button type="info" onclick="goToDetail(this)" round>{value}</el-button>'''
+        return value
 
     fields_options = {
         'id': {
             'fixed': 'left',
-            'width': '40px',
+            'min_width': '80px',
             'align': 'center'
         },
         'createdAt': {
-            'width': '180px',
+            'min_width': '180px',
             'align': 'left'
         },
         'updatedAt': {
-            'width': '180px',
+            'min_width': '180px',
             'align': 'left'
         },
-        '_ip': {
-            'width': '140px',
+        'deletedAt': {
+            'min_width': '180px',
+            'align': 'left'
+        },
+        'ip': {
+            'min_width': '248px',
             'align': 'center'
         },
         'system': {
-            'width': '160px',
+            'min_width': '160px',
+            'align': 'center'
+        },
+        'rootPassword': {
+            'min_width': '180px',
             'align': 'center'
         },
         'ssh': {
-            'width': '120px',
+            'min_width': '120px',
             'align': 'center'
         },
         'hoster': {
-            'width': '320px',
+            'min_width': '320px',
             'align': 'left'
         },
         'group': {
-            'width': '220px',
+            'min_width': '220px',
             'align': 'left'
         },
-        '_password': {
-            'width': '80px',
-            'align': 'center'
-        },
         'remark': {
-            'width': '200px',
+            'min_width': '200px',
             'align': 'left'
         },
 
-        '_biosPassword': {
-            'width': '100',
+        'bios': {
+            'min_width': '180',
             'align': 'center'
         }
     }
