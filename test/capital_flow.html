@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CapitalFlow</title>
+    <script src="https://unpkg.com/echarts@5.4.3/dist/echarts.js"></script>
+</head>
+<body>
+<div id="chart-container" style="width: 98vw;height: 98vh;border: #0f0f0f solid 1px;"></div>
+</body>
+<script type="text/javascript">
+    // 获取容器元素
+    var container = document.getElementById('chart-container');
+
+    // 创建图表实例
+    var myChart = echarts.init(container);
+    var option;
+
+    myChart.showLoading();
+    fetch('les-miserables.json', {
+        method: "GET",
+
+    }).then(response => {
+        response.json().then(respJson => {
+            myChart.hideLoading();
+            option = {
+                tooltip: {},
+                legend: [
+                    {
+                        data: respJson.categories.map(function (a) {
+                            return a.name;
+                        })
+                    }
+                ],
+                series: [
+                    {
+                        name: 'Les Miserables',
+                        type: 'graph',
+                        layout: 'none',
+                        data: respJson.nodes,
+                        links: respJson.links,
+                        categories: respJson.categories,
+                        roam: true,
+                        label: {
+                            show: true,
+                            position: 'right',
+                            formatter: '{b}'
+                        },
+                        labelLayout: {
+                            hideOverlap: true
+                        },
+                        scaleLimit: {
+                            min: 0.4,
+                            max: 2
+                        },
+                        lineStyle: {
+                            color: 'source',
+                            curveness: 0.3
+                        }
+                    }
+                ]
+            };
+            myChart.setOption(option);
+        })
+    })
+
+
+    option && myChart.setOption(option);
+
+</script>
+</html>
