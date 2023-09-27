@@ -18,13 +18,13 @@ from ..models import Transaction, CapitalAccount
 class CapitalAccountAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY + ['owner_natural_person', 'owner_market_subject', 'name', 'isCredit', 'balance',
                                    'consumptionLimit', 'withdrawalLimit', 'temporaryLimit',
-                                   'left', 'toBeReturn', 'repaymentAt']
-    list_filter = ['owner_natural_person', 'owner_market_subject', 'isCredit', 'repaymentAt']
+                                   'left', 'toBeReturn', 'repaymentDate', 'billingDate']
+    list_filter = ['owner_natural_person', 'owner_market_subject', 'isCredit', 'repaymentDate']
     show_selection = True
     autocomplete_fields = ['owner_natural_person', 'owner_market_subject']
     date_hierarchy = 'createdAt'
     search_fields = ['name', 'owner_market_subject__name', 'owner_market_subject__ucc', 'owner_natural_person__name']
-    ordering = ('repaymentAt',)
+    ordering = ('repaymentDate',)
 
     def balance(self, obj):
         if obj.isCredit:
@@ -104,7 +104,7 @@ class CapitalAccountAdmin(admin.ModelAdmin):
     fields_options = {
         'id': {
             'fixed': 'left',
-            'width': '40px',
+            'min_width': '68px',
             'align': 'center'
         },
         'createdAt': {
@@ -151,7 +151,7 @@ class CapitalAccountAdmin(admin.ModelAdmin):
             'width': '100px',
             'align': 'left'
         },
-        'repaymentAt': {
+        'repaymentDate': {
             'width': '180px',
             'align': 'left'
         }

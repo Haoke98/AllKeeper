@@ -15,10 +15,12 @@ class CapitalAccount(BaseModel):
                                              related_name='owner_market_subject')
     name = models.CharField(verbose_name="标题", max_length=100)
     isCredit = models.BooleanField(default=False, verbose_name="是否为信用账户")
+    # 信用账户属性
     consumptionLimit = models.FloatField(verbose_name="消费额度", default=0.0, blank=True)
     withdrawalLimit = models.FloatField(verbose_name="取现额度", default=0.0, blank=True)
     temporaryLimit = models.FloatField(verbose_name="临时消费额度", default=0.0, blank=True)
-    repaymentAt = models.DateField(verbose_name="还款日", null=True, blank=True)
+    billingDate = models.DateField(verbose_name="账单日", null=True, blank=True)
+    repaymentDate = models.DateField(verbose_name="还款日", null=True, blank=True)
 
     def __str__(self):
         if self.owner_natural_person:
@@ -29,7 +31,7 @@ class CapitalAccount(BaseModel):
 
     class Meta:
         verbose_name = "资金账户"
-        verbose_name_plural = "所有" + verbose_name
+        verbose_name_plural = verbose_name
 
 
 class Transaction(BaseModel):
@@ -40,8 +42,8 @@ class Transaction(BaseModel):
     remark = models.CharField(verbose_name="备注", max_length=50, null=True, blank=False)
 
     def __str__(self):
-        return f"资金流动（{self.id}"
+        return f"流动资金（{self.id}"
 
     class Meta:
-        verbose_name = "资金流动"
-        verbose_name_plural = "所有" + verbose_name
+        verbose_name = "流动资金"
+        verbose_name_plural = verbose_name

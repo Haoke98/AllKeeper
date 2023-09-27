@@ -19,3 +19,7 @@ class MarketSubject(BaseModel):
         if self.ucc:
             return f"{self.name}({self.ucc})"
         return self.name
+
+    class Meta:
+        verbose_name = "市场主体"
+        verbose_name_plural = verbose_name
