@@ -9,8 +9,7 @@ from ..models import DbService
 @admin.register(DbService)
 class DbServiceAdmin(BaseAdmin):
     form = DbServiceForm
-    list_display = LIST_DISPLAY + ['server',
-                                   'port', '_username', '_password', 'ttype', 'remark', ]
+    list_display = LIST_DISPLAY + ['server', 'port', '_username', 'pwd', 'ttype', 'remark', ]
     list_display_links = ['createdAt', 'updatedAt', 'server', 'port', 'ttype']
     list_filter = ['server', 'port', 'ttype']
     date_hierarchy = 'updatedAt'
@@ -20,11 +19,6 @@ class DbServiceAdmin(BaseAdmin):
     autocomplete_fields = ['server']
     inlines = [DbServiceUserInlineAdmin]
 
-    def _password(self, obj):
-        return BaseAdmin.password(obj.pwd)
-
-    _password.short_description = "root密码"
-
     def _username(self, obj):
         username = 'root'
         if obj.ttype == 1:
@@ -32,3 +26,49 @@ class DbServiceAdmin(BaseAdmin):
         return BaseAdmin.username(username)
 
     _username.short_description = "用户名"
+
+    def formatter(self, obj, field_name, value):
+        if field_name == 'pwd':
+            if value:
+                return BaseAdmin.password(obj.pwd)
+        return value
+
+    fields_options = {
+        'id': {
+            'fixed': 'left',
+            'min_width': '80px',
+            'align': 'center'
+        },
+        'createdAt': {
+            'min_width': '180px',
+            'align': 'left'
+        },
+        'updatedAt': {
+            'min_width': '180px',
+            'align': 'left'
+        },
+        'server': {
+            'min_width': '320px',
+            'align': 'center'
+        },
+        'port': {
+            'min_width': '140px',
+            'align': 'center'
+        },
+        '_username': {
+            'min_width': '200px',
+            'align': 'left'
+        },
+        'pwd': {
+            'min_width': '180px',
+            'align': 'center'
+        },
+        'ttype': {
+            'min_width': '178px',
+            'align': 'center'
+        },
+        'remark': {
+            'width': '200px',
+            'align': 'left'
+        }
+    }
