@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 from django.contrib import admin
 
 # Register your admin models here.
-from accountSystem.models.type import Type
+from accountSystem.models.type import Platform
 from izBasar.admin import LIST_DISPLAY
 from .account import AccountAdmin, Account
 from .breath import BreathInfoAdmin
@@ -29,7 +29,7 @@ from .wechat import WechatAdmin
 from .weibo import WeiboAdmin
 
 
-@admin.register(Type)
+@admin.register(Platform)
 class GroupAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY + ["name", 'icon', 'url', 'hostname', 'path', '_count']
     search_fields = ['name', 'url']

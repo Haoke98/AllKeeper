@@ -11,7 +11,7 @@ from .region import Country, City
 from .server import Server
 from .serverUser import ServerUser
 from .tel import Tel
-from .type import Type
+from .type import Platform
 from .wechat import Wechat
 from .scripts import Script
 from .breath import BreathInfo

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 
 from accountSystem.forms import AccountForm
-from accountSystem.models import Account, Tel, Email, Type
+from accountSystem.models import Account, Tel, Email
 from izBasar.admin import BaseAdmin
 
 
@@ -96,30 +96,6 @@ class AccountAdmin(BaseAdmin):
                             </div>
                         </div>
                 ''' % email.username
-        return mark_safe(item)
-
-    def _types(self, obj: Account):
-        items: str = ""
-        types = obj.types.all()
-        for item in types:
-            items += self._getTypeItem(item)
-        result = '''
-                        <div class="ui list">
-                            %s              
-                        </div>
-                ''' % items
-        return mark_safe(result)
-
-    def _getTypeItem(self, email: Type):
-        item = '''
-                        <div class="item">
-                            <i class="paper plane icon"></i>
-                            <div class="content">
-                              <a class="header">%s</a>
-
-                            </div>
-                        </div>
-                ''' % email.name
         return mark_safe(item)
 
     fields_options = {
