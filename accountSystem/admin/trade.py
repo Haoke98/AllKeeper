@@ -238,7 +238,7 @@ class CapitalAccountAdmin(admin.ModelAdmin):
                           'repayment_pending', 'unbilled_repayment_pending', 'total_repayment_pending',
                           'repaymentDate', 'billingDate']:
             if value is not None and obj.ttype and obj.ttype.isCredit:
-                return value
+                return "%0.2f" % value
             else:
                 return ""
         if field_name == "used_limit_percent":

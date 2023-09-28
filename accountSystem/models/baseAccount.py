@@ -17,5 +17,6 @@ class BaseAccount(BaseModel):
     username = models.CharField(max_length=40, verbose_name="用户名", null=True)
     pwd = models.CharField(max_length=32, verbose_name="密码", null=True, blank=False)
 
+    # TODO: 增加密码审计，实现密码强弱成都的筛选并标注
     class Meta:
         abstract = True
