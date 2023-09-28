@@ -9,7 +9,7 @@ class SdmPasswordField(CharField):
     lenMax: int
     encryptByMd5: bool
 
-    def __init__(self, widget=SdmPasswordInput, encryptByMd5: bool = True, lenMin: int = 8, lenMax: int = 16,
+    def __init__(self, widget=SdmPasswordInput, encryptByMd5: bool = True, lenMin: int = 8, lenMax: int = 100,
                  pattern: str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-$%&@+!", *args,
                  **kwargs):
         self.pattern = pattern
