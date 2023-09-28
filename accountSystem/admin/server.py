@@ -33,6 +33,7 @@ class ServerAdmin(BaseAdmin):
         if field_name == "bios":
             if value:
                 return BaseAdmin.password(obj.bios)
+        return value
 
     fields_options = {
         'id': {
