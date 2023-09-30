@@ -292,7 +292,9 @@ class IMediaAdmin(admin.ModelAdmin):
 
     @button(type='warning', short_description='数据迁移', enable=False, confirm="您确定从icloud迁移到本地吗？")
     def migrate(self, request, queryset):
-        for i, qs in enumerate(queryset):
+        ids = request.POST.get('ids').replace(" ", "+").split(",")
+        objs = IMedia.objects.filter(id__in=ids).all()
+        for i, qs in enumerate(objs):
             migrateIcloudToLocal(qs)
         return {
             'state': True,
