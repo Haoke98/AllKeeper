@@ -25,6 +25,7 @@ from photologue.sitemaps import GallerySitemap, PhotoSitemap
 from revproxy.views import ProxyView
 
 import accountSystem.urls
+import eynek.urls
 import icloud.urls
 from izBasar import settings
 from . import _STATIC_URL
@@ -48,7 +49,8 @@ urlpatterns = [
     re_path(r'^static/(?P<path>.*)$', serve, ({'document_root': settings.STATIC_ROOT})),
     re_path(r'^media/(?P<path>.*)$', serve, ({'document_root': settings.MEDIA_ROOT})),
     re_path(r'^photologue/', include('photologue.urls', namespace='photologue')),
-    re_path(r'^new_req/(?P<path>.*)$', TestProxyView.as_view())
+    re_path(r'^new_req/(?P<path>.*)$', TestProxyView.as_view()),
+    re_path('^eynek/', include(eynek.urls))
 ]
 sitemaps = {
     'photologue_galleries': GallerySitemap,

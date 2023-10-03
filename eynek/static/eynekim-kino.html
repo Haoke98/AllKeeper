@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="//unpkg.com/element-ui@2.15.14/lib/index.js"></script>
+    <style>
+        @import url("//unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css");
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-input v-model="query"></el-input>
+    <div class="demo-image">
+        <div class="block" v-for="item in results.data" :key="item.id">
+            <span class="demonstration">{{item.title}}</span>
+            <el-image
+                    style="width: 100px; height: 100px"
+                    :src="item.cover_image_preview"
+                    fit="fill"></el-image>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    new Vue(
+        {
+            data: {
+                query: "",
+                results: [],
+            },
+            computed: {
+                // 计算属性的 getter
+                alert_type: function () {
+                    if (this.STATUS === "STOPPING") {
+                        return "warning"
+                    } else if (this.STATUS === "EXCEPTION") {
+                        return "error"
+                    } else if (this.STATUS === "FINISH") {
+                        return "success"
+                    } else if (this.STATUS === "RUNNING") {
+                        return "info"
+                    }
+                },
+                progress: function () {
+                    // `this` 指向 vm 实例
+                    return parseFloat((this.FINISHED_COUNT / this.TOTAL * 100).toFixed(2));
+                },
+                left: function () {
+                    return this.TOTAL - this.FINISHED_COUNT;
+                },
+                speed: function () {
+                    return this.FINISHED_COUNT / this.dltOnSeconds
+                },
+                needOnSeconds: function () {
+                    return this.left / this.speed
+                },
+                finishAt: function () {
+                    // 获取当前时间
+                    let currentTime = new Date();
+                    // 获取 n 秒后的时间
+                    let futureTime = new Date(currentTime.getTime() + this.needOnSeconds * 1000);
+
+                    // 将 futureTime 转换为字符串形式
+                    //let futureTimeString = futureTime.toISOString(); // 输出格式：YYYY-MM-DDTHH:mm:ss.sssZ
+                    //console.log(futureTimeString);
+                    return futureTime
+                }
+            },
+            watch: {
+                query: function (newV, oldV) {
+                    console.log("检索结果:", oldV, newV)
+                    this.search(newV)
+                }
+            },
+            created: function () {
+            },
+            methods: {
+                formatTime(seconds) {
+                    var days = Math.floor(seconds / (24 * 60 * 60));
+                    var hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
+                    var minutes = Math.floor((seconds % (60 * 60)) / 60);
+                    var remainingSeconds = seconds % 60;
+
+                    var formattedTime = "";
+                    if (days > 0) {
+                        formattedTime += days + "天 ";
+                    }
+                    if (hours > 0) {
+                        formattedTime += hours + "小时 ";
+                    }
+                    if (minutes > 0) {
+                        formattedTime += minutes + "分钟 ";
+                    }
+                    if (remainingSeconds > 0) {
+                        formattedTime += remainingSeconds + "秒";
+                    }
+
+                    return formattedTime;
+                },
+                search(query) {
+                    let _url = `http://127.0.0.1:8001/eynek/proxy/api/v3/mp/films/search?t=${query}&r=undefined&c=undefined&f=undefined&page=1`
+                    console.log("url:", _url)
+                    fetch(_url, {
+                        method: "GET",
+                        headers: {
+                            authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYXBpLWV5bmVrLnF1eHJheS5jblwvYXBpXC92M1wvbXBcL2F1dGhvcml6YXRpb25zXC9mb3ItY29kZSIsImlhdCI6MTY5NTk5MzMyNCwiZXhwIjoxNjk2MDExMzI0LCJuYmYiOjE2OTU5OTMzMjQsImp0aSI6InQ3ZlJTbnZvQVJTQ3JMRjEiLCJzdWIiOjExMzQ5LCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.l4eB_297kdgBGcGVY7hfIUR5dAPs4-F4L4n2UvWyxtc",
+                            authority: "api-eynek.quxray.cn",
+                            xweb_xhr: "1",
+                            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF XWEB/30817",
+                            Referer: "https://servicewechat.com/wx0508041dfba144aa/19/page-frame.html"
+                        }
+                    }).then(response=>{
+                        response.json().then(respJson=>{
+                            this.results=respJson.resp;
+                        })
+                    })
+                }
+            }
+        }
+    ).$mount('#app')
+
+
+</script>
+</body>
+</html>

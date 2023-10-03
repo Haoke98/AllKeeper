@@ -54,6 +54,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'accountSystem/static'),
     os.path.join(BASE_DIR, 'common-static'),
     os.path.join(BASE_DIR, 'icloud/static'),
+    os.path.join(BASE_DIR, 'eynek/static'),
 ]
 print("STATICFILES_DIR:", STATICFILES_DIRS)
 
@@ -198,7 +199,8 @@ INSTALLED_APPS = [
     'sortedm2m',
     'django_crontab',
     'icloud',
-    'logAnalyser'
+    'logAnalyser',
+    'eynek'
 ]
 SITE_ID = 1
 CACHES = {
