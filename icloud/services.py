@@ -263,9 +263,10 @@ def delete_from_icloud(qs, lm):
     records = respJson["records"]
     record = records[0]
     if record["fields"]["isDeleted"]["value"] == 1:
-        lm.assetRecordAfterDelete = resp.text
-        lm.detach_icloud_date = datetime.datetime.now()
-        lm.save()
+        if lm is not None:
+            lm.assetRecordAfterDelete = resp.text
+            lm.detach_icloud_date = datetime.datetime.now()
+            lm.save()
         qs.delete()
     return resp
 

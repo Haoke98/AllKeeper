@@ -303,7 +303,9 @@ class IMediaAdmin(admin.ModelAdmin):
 
     @button(type='error', short_description='从iCloud中删除', enable=False, confirm="您确定从icloud迁移到本地吗？")
     def delete(self, request, queryset):
-        for qs in queryset:
+        ids = request.POST.get('ids').replace(" ", "+").split(",")
+        objs = IMedia.objects.filter(id__in=ids).all()
+        for qs in objs:
             lm = LocalMedia.objects.filter(id=qs.id).first()
             resp = delete_from_icloud(qs, lm)
             return {
