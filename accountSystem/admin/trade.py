@@ -209,8 +209,8 @@ class CapitalAccountAdmin(admin.ModelAdmin):
             totalLimit_total = fixedLimit_total + temporaryLimit_total
             # 需要有空字符串占位
             return (
-                '合计',  # 勾选框
-                '',  # ID
+                '',  # 勾选框
+                '合计',  # ID
                 '',  # 账户标识
                 '',  # 户主
                 '',  # createdAt

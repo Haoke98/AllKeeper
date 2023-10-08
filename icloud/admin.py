@@ -230,7 +230,7 @@ class IMediaAdmin(admin.ModelAdmin):
 
     def dialog_lists(self, model):
         return MultipleCellDialog([
-            ModalDialog(url=f'/icloud/detail?id={urllib.parse.quote(model.id)}&source=IMedia', title=model.filename,
+            ModalDialog(url=f'/static/preview.html?id={urllib.parse.quote(model.id)}&source=IMedia', title=model.filename,
                         cell='<el-link type="primary">预览</el-link>', width="840px", height="600px"),
         ])
 
