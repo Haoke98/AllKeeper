@@ -1,20 +1,22 @@
 from django.contrib import admin
 
-from izBasar.admin import LIST_DISPLAY, BaseAdmin
+from izBasar.admin import BaseAdmin
 from ..forms import ServerUserForm
 from ..models import ServerUser
 
 
 @admin.register(ServerUser)
 class ServerUserAdmin(BaseAdmin):
-    list_display = LIST_DISPLAY + ['username', 'pwd', 'hasRootPriority', '_ip', 'owner']
+    list_display = ['id', '_ip', 'username', 'pwd', 'group', 'owner', 'updatedAt', 'createdAt']
     autocomplete_fields = ['server', 'owner']
-    list_filter = ['hasRootPriority', 'server', 'owner']
+    list_filter = ['hasRootPriority', 'server', 'owner', 'group']
     list_select_related = autocomplete_fields
     form = ServerUserForm
 
     def _ip(self, obj):
         return BaseAdmin.username(obj.server.ip)
+
+    _ip.short_description = "服务器"
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
@@ -50,7 +52,7 @@ class ServerUserAdmin(BaseAdmin):
             'align': 'left'
         },
         '_ip': {
-            'min_width': '220px',
+            'min_width': '280px',
             'align': 'center'
         },
         'username': {
@@ -58,24 +60,15 @@ class ServerUserAdmin(BaseAdmin):
             'align': 'center'
         },
         'pwd': {
-            'min_width': '180px',
+            'min_width': '200px',
             'align': 'left'
         },
-        'hasRootPriority': {
-            'min_width': '100px',
+        'group': {
+            'min_width': '200px',
             'align': 'center'
         },
         'owner': {
             'min_width': '280px',
-            'align': 'center'
-        },
-        'remark': {
-            'width': '200px',
-            'align': 'left'
-        },
-
-        '_biosPassword': {
-            'width': '100',
             'align': 'center'
         }
     }

@@ -22,7 +22,7 @@ def avatar(url):
 class BaseAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY
     date_hierarchy = 'updatedAt'
-
+    # TODO：改成simplepro组件
     @staticmethod
     def username(value):
         return f'''<div style="display:flex;">
@@ -35,6 +35,7 @@ class BaseAdmin(admin.ModelAdmin):
                             </el-input>
                         </div>'''
 
+    # TODO：改成simplepro组件
     @staticmethod
     def password(value):
         return f'''<div style="display:flex;">

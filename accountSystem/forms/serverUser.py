@@ -9,4 +9,4 @@ class ServerUserForm(ModelForm):
 
     class Meta:
         model = ServerUser
-        fields = ['owner', 'server', 'username', 'pwd', 'hasRootPriority']
+        fields = ['owner', 'server', 'username', 'pwd', 'group', 'f3']
