@@ -1,4 +1,5 @@
 from django.db import models
+from simplepro.editor import fields
 
 
 class BaseModel(models.Model):
@@ -7,7 +8,7 @@ class BaseModel(models.Model):
                                      editable=False, db_index=True)
     updatedAt = models.DateTimeField(auto_now=True, verbose_name="最近更新时间", null=True, editable=False, db_index=True)
     deletedAt = models.DateTimeField(verbose_name="被删除时间", null=True, editable=False, db_index=True)
-    info = models.TextField(verbose_name="说明", null=True, blank=True)
+    info = fields.UETextField(verbose_name='说明', null=True, blank=True)
 
     class Meta:
         abstract = True
