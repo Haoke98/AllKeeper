@@ -40,6 +40,8 @@ class HumanAdmin(admin.ModelAdmin):
     autocomplete_fields = ['WB', ]
     list_filter = ['sex', 'birthday', 'zodiac', 'ethnic', 'collage']
     list_per_page = 14
+    fields = ['name', 'idCardNum', 'sex', 'ethnic', 'birthday', 'zodiac', 'birthplace', 'collage', 'WB', 'DY_home',
+              'DY_ID', 'license_plate_number', 'face', 'id_card_front', 'id_card_back', 'info']
     inlines = [TelInlineAdmin]
 
     def _count(self, obj):
