@@ -31,6 +31,10 @@ from izBasar import settings
 from . import _STATIC_URL
 from .secret import ADMIN_PATH
 
+admin.site.site_title = "AllKeeper"
+# 网站名称：显示在登录页和首页
+admin.site.site_header = 'AllKeeper'
+
 
 class TestProxyView(ProxyView):
     upstream = "http://localhost:3000"
