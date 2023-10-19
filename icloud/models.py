@@ -15,6 +15,13 @@ from simplepro.components import fields
 from izBasar.models import BaseModel
 
 
+class Account(BaseModel):
+    appleId = models.CharField(verbose_name="AppleID", max_length=100)
+    passwd = fields.CharField(verbose_name='测试字段（非必填）', placeholder='请输入密码', max_length=128, show_password=True,
+                              null=True,
+                              blank=True, show_word_limit=True, slot='prepend', slot_text='密码')
+
+
 class Album(BaseModel):
     name = models.CharField(max_length=50, verbose_name="标题", primary_key=True)
     total = models.PositiveIntegerField(default=0, verbose_name="iCloud上的数量")
@@ -144,35 +151,36 @@ class IMedia(BaseModel):
 class LocalMedia(BaseModel):
     id = models.CharField(max_length=50, primary_key=True)
 
-    filename = models.CharField(max_length=100, verbose_name="文件名", null=True)
-    ext = models.CharField(max_length=10, verbose_name="扩展名", null=True)
-    size = models.BigIntegerField(verbose_name="大小", null=True)
-    duration = models.PositiveIntegerField(null=True, verbose_name="时长")
-    dimensionX = models.IntegerField(verbose_name="DX", null=True)
-    dimensionY = models.IntegerField(verbose_name="DY", null=True)
-    orientation = models.IntegerField(null=True, verbose_name="方向")
-    adjustmentRenderType = models.IntegerField(null=True)
-    timeZoneOffset = models.IntegerField(null=True)
-    burstFlags = models.IntegerField(null=True)
+    filename = models.CharField(max_length=100, verbose_name="文件名", null=True, blank=True)
+    ext = models.CharField(max_length=10, verbose_name="扩展名", null=True, blank=True)
+    size = models.BigIntegerField(verbose_name="大小", null=True, blank=True)
+    duration = models.PositiveIntegerField(null=True, verbose_name="时长", blank=True)
+    dimensionX = models.IntegerField(verbose_name="DX", null=True, blank=True)
+    dimensionY = models.IntegerField(verbose_name="DY", null=True, blank=True)
+    orientation = models.IntegerField(null=True, verbose_name="方向", blank=True)
+    adjustmentRenderType = models.IntegerField(null=True, blank=True)
+    timeZoneOffset = models.IntegerField(null=True, blank=True)
+    burstFlags = models.IntegerField(null=True, blank=True)
 
-    masterRecordChangeTag = models.CharField(max_length=50, null=True)
-    assetRecordChangeTag = models.CharField(max_length=50, null=True)
+    masterRecordChangeTag = models.CharField(max_length=50, null=True, blank=True)
+    assetRecordChangeTag = models.CharField(max_length=50, null=True, blank=True)
 
-    asset_date = models.DateTimeField(verbose_name="生成时间", null=True)
-    added_date = models.DateTimeField(verbose_name="加入icloud的时间", null=True)
-    detach_icloud_date = models.DateTimeField(verbose_name="从icloud中移除时间", null=True)
+    asset_date = models.DateTimeField(verbose_name="生成时间", null=True, blank=True)
+    added_date = models.DateTimeField(verbose_name="加入icloud的时间", null=True, blank=True)
+    detach_icloud_date = models.DateTimeField(verbose_name="从icloud中移除时间", null=True, blank=True)
 
     locationEnc = models.TextField(null=True, verbose_name="地址信息(已加密)", blank=True)
 
-    thumb = models.ImageField(verbose_name="缩略图", upload_to=upload_thumb, null=True, help_text="视频和图像都会有，JPEG格式")
+    thumb = models.ImageField(verbose_name="缩略图", upload_to=upload_thumb, null=True, help_text="视频和图像都会有，JPEG格式",
+                              blank=True)
     prv = models.FileField(verbose_name="可预览文件", null=True, upload_to=upload_prv,
-                           help_text="HICH图片和PNG图片的可预览文件为JPEG图，MOV视频的可预览文件为MP4")
-    origin = models.FileField(verbose_name="原始文件", null=True, upload_to=upload_origin)
+                           help_text="HICH图片和PNG图片的可预览文件为JPEG图，MOV视频的可预览文件为MP4", blank=True)
+    origin = models.FileField(verbose_name="原始文件", null=True, upload_to=upload_origin, blank=True)
 
-    versions = models.TextField(null=True)
-    masterRecord = models.TextField(null=True)
-    assetRecord = models.TextField(null=True)
-    assetRecordAfterDelete = models.TextField(null=True)
+    versions = models.TextField(null=True, blank=True)
+    masterRecord = models.TextField(null=True, blank=True)
+    assetRecord = models.TextField(null=True, blank=True)
+    assetRecordAfterDelete = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name = "本地资源"
