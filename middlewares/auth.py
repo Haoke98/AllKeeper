@@ -18,6 +18,8 @@ class AuthCheck(MiddlewareMixin):
                 if str(request.path).startswith("/all-keeper/images/thumbnail"):
                     token = request.GET.get('token')
                 else:
+                    if not request.headers.keys().__contains__('Authorization'):
+                        return RestResponse(1200, "请提供身份认证Token")
                     token = request.headers['Authorization'].replace("Bearer ", "")
                 try:
                     payload_data = jwt.decode(token, JWT_SIGNATURE, algorithms=['HS256'])
