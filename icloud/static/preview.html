@@ -462,7 +462,7 @@
                         spinner: 'el-icon-loading',
                         background: 'rgba(0, 0, 0, 0.7)'
                     });
-                    fetch(`http://127.0.0.1:8001/icloud/total?smart=${this.smart}`, {method: "GET",}).then(resp => {
+                    fetch(`/icloud/total?smart=${this.smart}`, {method: "GET",}).then(resp => {
                         console.log("resp:", resp.status, resp.statusText, resp.headers.get("Content-Type"))
                         resp.json().then(respJson => {
                             _this.totalResp = respJson;
@@ -477,7 +477,7 @@
                     console.log("id:", this.id);
                     console.log("encode:", x);
                     console.log("decode:", y);
-                    let _url = `http://127.0.0.1:8001/icloud/detail?id=${y}&source=IMedia`;
+                    let _url = `/icloud/detail?id=${y}&source=IMedia`;
                     const loading = this.$loading({
                         lock: true,
                         text: 'Loading',
