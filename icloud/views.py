@@ -151,7 +151,10 @@ def detail(request):
             return JsonResponse({
                 "code": 200,
                 "msg": "ok",
-                "data": serializer.data
+                "data": {
+                    "masterRecord": json.loads(targetObj.masterRecord),
+                    "assetRecord": json.loads(targetObj.assetRecord)
+                }
             })
     elif source == "LocalMedia":
         targetObj = LocalMedia.objects.filter(id=target_id).first()
