@@ -30,7 +30,7 @@ import icloud.urls
 from izBasar import settings
 from . import _STATIC_URL
 from .secret import ADMIN_PATH
-
+# 网站标签页名称
 admin.site.site_title = "AllKeeper"
 # 网站名称：显示在登录页和首页
 admin.site.site_header = 'AllKeeper'

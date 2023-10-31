@@ -1,7 +1,7 @@
 from django.urls import re_path
 from rest_framework.routers import DefaultRouter
 
-from .views import detail, sync_progress, test, count, thumb
+from .views import preview, sync_progress, test, count, thumb, detail
 
 router = DefaultRouter()
 # router.register(r'server', viewset=ServerViewSet)
@@ -15,6 +15,7 @@ router = DefaultRouter()
 # })
 urlpatterns = [
                   re_path('detail', detail),
+                  re_path('preview', preview),
                   re_path('sync_progress', sync_progress),
                   re_path('test', test),
                   re_path('total', count),

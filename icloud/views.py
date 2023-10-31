@@ -8,6 +8,7 @@ from pytz import UTC
 
 from . import iService
 from .models import IMedia, LocalMedia
+from .serializers import IMediaSerializer, LocalMediaSerializer
 from .services import update
 
 DLT = datetime.timedelta(hours=1)
@@ -95,7 +96,7 @@ def test2(targetObj):
     return context
 
 
-def detail(request):
+def preview(request):
     """
     预览页面，包括视频播放和图片的展示
     :param request:
@@ -106,22 +107,12 @@ def detail(request):
     target_id = request.GET.get("id")
     if target_id is None or source is None:
         return HttpResponse(f"参数错误[source:{source},target_id:{target_id}]")
+    target_id = target_id.replace(" ", "+")
     context = {"filename": "", "prv_src": "", "thumb_src": ""}
     if source == "IMedia":
         targetObj = IMedia.objects.filter(id=target_id).first()
         if targetObj is None:
             return HttpResponse(f"找不到[ID:{target_id}]对应的IMedia对象")
-        dlt = datetime.datetime.now(tz=UTC) - targetObj.updatedAt
-        if dlt > DLT:
-            return HttpResponse(f"媒体对象[ID:{target_id}]的部分属性已经失去了有效性[{dlt}]")
-        versions: dict = json.loads(targetObj.versions)
-        # if versions.keys().__contains__("thumb"):
-        prv_version = versions["thumb"]
-        context["filename"] = targetObj.filename
-        if prv_version["type"] in ["public.mpeg-4"]:
-            context["prv_src"] = prv_version['url']
-        else:
-            context["thumb_src"] = prv_version['url']
     elif source == "LocalMedia":
         targetObj = LocalMedia.objects.filter(id=target_id).first()
         if targetObj is None:
@@ -131,6 +122,56 @@ def detail(request):
     else:
         return HttpResponse(f"未知source[{source}]")
     return render(request, "icloud/detail.html", context=context)
+
+
+def detail(request):
+    """
+    预览页面，包括视频播放和图片的展示
+    :param request:
+    :return:
+    TODO：得实现通过临时TOKEN来进行鉴权，否则出现详情页暴露，隐私泄漏等情况
+    """
+    source = request.GET.get("source")
+    target_id = request.GET.get("id")
+    if target_id is None or source is None:
+        return JsonResponse({
+            "code": 501,
+            "msg": f"参数错误[source:{source},target_id:{target_id}]"
+        })
+    target_id = target_id.replace(" ", "+")
+    if source == "IMedia":
+        targetObj = IMedia.objects.filter(id=target_id).first()
+        if targetObj is None:
+            return JsonResponse({
+                "code": 404,
+                "msg": f"找不到[ID:{target_id}]对应的IMedia对象"
+            })
+        else:
+            serializer = IMediaSerializer(targetObj)
+            return JsonResponse({
+                "code": 200,
+                "msg": "ok",
+                "data": serializer.data
+            })
+    elif source == "LocalMedia":
+        targetObj = LocalMedia.objects.filter(id=target_id).first()
+        if targetObj is None:
+            return JsonResponse({
+                "code": 404,
+                "msg": f"找不到[ID:{target_id}]对应的LocalMedia对象"
+            })
+        else:
+            serializer = LocalMediaSerializer(targetObj)
+            return JsonResponse({
+                "code": 200,
+                "msg": "ok",
+                "data": serializer.data
+            })
+    else:
+        return JsonResponse({
+            "code": 501,
+            "msg": f"未知source[{source}]"
+        })
 
 
 def sync_progress(request):
