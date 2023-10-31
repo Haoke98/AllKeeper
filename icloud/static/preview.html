@@ -16,184 +16,486 @@
     </div>
     <el-tabs type="card">
         <el-tab-pane label="预览">
-            <div v-if="isImage(currObj)" style="background-color: black;display: flex;justify-content: center;">
-                <el-image v-if="currObj.fields.resJPEGMedRes!==undefined"
+            <div v-if="isImage(currObj.masterRecord)" style="background-color: black;display: flex;justify-content: center;">
+                <el-image v-if="currObj.masterRecord.fields.resJPEGMedRes!==undefined"
                           style="height: 60vh;"
-                          :src="currObj.fields.resJPEGMedRes.value.downloadURL"
+                          :src="currObj.masterRecord.fields.resJPEGMedRes.value.downloadURL"
                           fit="cover"
                           slot="reference"
                 ></el-image>
-                <el-image v-else-if="currObj.fields.resJPEGThumbRes!==undefined"
+                <el-image v-else-if="currObj.masterRecord.fields.resJPEGThumbRes!==undefined"
                           style="height: 60vh;"
-                          :src="currObj.fields.resJPEGThumbRes.value.downloadURL"
+                          :src="currObj.fields.masterRecord.resJPEGThumbRes.value.downloadURL"
                           fit="cover"
                           slot="reference"
                 ></el-image>
             </div>
             <div v-else style="background-color: black">
-                <video v-if="currObj.fields.resVidSmallRes!==undefined && preview" autoplay controls
+                <video v-if="currObj.masterRecord.fields.resVidSmallRes!==undefined && preview" autoplay controls
                        style="width: 100%;height: 50vh;"
                        loop>
-                    <source :src="currObj.fields.resVidSmallRes.value.downloadURL" type="video/mp4">
+                    <source :src="currObj.masterRecord.fields.resVidSmallRes.value.downloadURL" type="video/mp4">
                 </video>
             </div>
         </el-tab-pane>
         <el-tab-pane label="当前MediaObj"><pre style="background-color: #f4f4f4;
                 padding: 10px;
                 overflow-x: auto;">
-            {{ JSON.stringify(currObj, null, 4) }}
+            {{ currObjJsonString }}
         </pre>
         </el-tab-pane>
     </el-tabs>
 </div>
 <script type="text/javascript">
-    new Vue({
+    const app = new Vue({
         data: {
             id: 0,
             preview: false,
+            currObjJsonString:"",
             currObj: {
-                recordName: 'AUAAE2ARB3PQpVWZfq9IZeTEIJja',
-                recordType: "CPLMaster",
-                fields: {
-                    resOriginalFileType: {
-                        value: 'public.png'
-                    },
-                    resVidSmallRes: {
-                        value: {
-                            fileChecksum: "AeAAln07OmMFDhB9NKCPgT+HWqol",
-                            size: 325889,
-                            wrappingKey: "NEKnQ2TbYUFbxuS9xQBxBQ==",
-                            referenceChecksum: "AYhq0FlcezsDWkFqSz2VvC/2mkSe",
-                            downloadURL: "https://cvws.icloud-content.com.cn/B/AeAAln07OmMFDhB9NKCPgT-HWqolAYhq0FlcezsDWkFqSz2VvC_2mkSe/${f}?o=Aoa8AIkRQSbqPlpeRi3HBoFF8gBkYb-5ctM1EmAGW1Pf&v=1&x=3&a=CAogkIpMQ_yKh2oU-C46wIY7NjOODrGE9Y9ash_vFEgVJXQSbxCCkt7mqDEYgu-56KgxIgEAUgSHWqolWgT2mkSeaiee0bpVhaZtpnelYU1WuwCH4OovgFka3cfg2njHPkarhnfvw2p1p7pyJ1Prlq2ajBsNH_wAcL6vIlhRrd37W135U6qLWCjPf1RoTMlA7KSSqw&e=1694583650&fl=&r=e535cd07-6aca-4f99-97aa-a862cbdd9bb3-1&k=NEKnQ2TbYUFbxuS9xQBxBQ&ckc=com.apple.photos.cloud&ckz=PrimarySync&y=1&p=215&s=6CExeahUqn2x_q5JJE7OoMMWSVI"
+                "masterRecord": {
+                    "recordName": "AQyTkrS+WNlQNWEHCGKRhB/HqZd9",
+                    "recordType": "CPLMaster",
+                    "fields": {
+                        "itemType": {
+                            "value": "public.jpeg",
+                            "type": "STRING"
                         },
-                        type: "ASSETID"
+                        "resJPEGThumbFingerprint": {
+                            "value": "ASASscokRYqis7KrJb3oFtwh+oXK",
+                            "type": "STRING"
+                        },
+                        "filenameEnc": {
+                            "value": "SU1HXzY0OTYuSlBH",
+                            "type": "ENCRYPTED_BYTES"
+                        },
+                        "resJPEGMedRes": {
+                            "value": {
+                                "fileChecksum": "AVFnqjbTtZH1kTcxSB+MlWbdn31d",
+                                "size": 604959,
+                                "wrappingKey": "HMp9QWV96nTWSsyYKj9LTw==",
+                                "referenceChecksum": "Ab+kmEXhu59dJ8bFUHclvM0xWSr2",
+                                "downloadURL": "https://cvws.icloud-content.com.cn/B/AVFnqjbTtZH1kTcxSB-MlWbdn31dAb-kmEXhu59dJ8bFUHclvM0xWSr2/${f}?o=AiZxAXacjzbNzZA8S3j2KzjLpxh8nr_yS6HlWdgReKW9&v=1&x=3&a=CAogpTOSnNMuAyRVSaS3F0EtLyYEQ6KxDJgP-XfCSFgJNd0SbxDei7SmuDEY3uiPqLgxIgEAUgTdn31dWgQxWSr2aicY8prhravrjucPaLFo_1NeNTPg73pgXmXUssms_MU3bvepFdSl8L9yJ1ifUsZz8Sv1pnh81rEZ9m65-6pr2L1zHn-DeB-D8Yip7eqGlL2Z2Q&e=1698743710&fl=&r=e9fe5609-dfc2-45a7-aebe-738fcf036777-1&k=HMp9QWV96nTWSsyYKj9LTw&ckc=com.apple.photos.cloud&ckz=PrimarySync&y=1&p=215&s=p8Swibjk3S1Ccww-uvwz6ApVmhY"
+                            },
+                            "type": "ASSETID"
+                        },
+                        "originalOrientation": {
+                            "value": 6,
+                            "type": "INT64"
+                        },
+                        "resJPEGMedHeight": {
+                            "value": 2048,
+                            "type": "INT64"
+                        },
+                        "resOriginalRes": {
+                            "value": {
+                                "fileChecksum": "AQyTkrS+WNlQNWEHCGKRhB/HqZd9",
+                                "size": 2214104,
+                                "wrappingKey": "MZIuhlHuCuaKCMjMffQptg==",
+                                "referenceChecksum": "Aazed/JweL/1++kxAPRc7RePh3ID",
+                                "downloadURL": "https://cvws.icloud-content.com.cn/B/AQyTkrS-WNlQNWEHCGKRhB_HqZd9Aazed_JweL_1--kxAPRc7RePh3ID/${f}?o=ArMhI-iuFwE5Kc9WsQcIeFu871apUwm_477b5_h1rxFY&v=1&x=3&a=CAogn9CR-JTJCz5Eud06oSHwwabT_p4fxbjCRCKesR9_o5MSbxDei7SmuDEY3uiPqLgxIgEAUgTHqZd9WgSPh3IDaif7iO3YuYYVP1QFWhh-6icgb0hRifE-wsXNVpZ-xze8caoK4VW6mkFyJ1t8V_-IDGbUbL6WIica8E0LoEG4ewbxftYgoZw_7bM32mcup0q_pA&e=1698743710&fl=&r=e9fe5609-dfc2-45a7-aebe-738fcf036777-1&k=MZIuhlHuCuaKCMjMffQptg&ckc=com.apple.photos.cloud&ckz=PrimarySync&y=1&p=215&s=9g-t0ukyBguVuJH-MjEBJ4uOFGQ"
+                            },
+                            "type": "ASSETID"
+                        },
+                        "resJPEGMedFileType": {
+                            "value": "public.jpeg",
+                            "type": "STRING"
+                        },
+                        "resJPEGThumbHeight": {
+                            "value": 480,
+                            "type": "INT64"
+                        },
+                        "resJPEGThumbWidth": {
+                            "value": 360,
+                            "type": "INT64"
+                        },
+                        "resOriginalWidth": {
+                            "value": 4032,
+                            "type": "INT64"
+                        },
+                        "resJPEGThumbFileType": {
+                            "value": "public.jpeg",
+                            "type": "STRING"
+                        },
+                        "dataClassType": {
+                            "value": 1,
+                            "type": "INT64"
+                        },
+                        "resOriginalFingerprint": {
+                            "value": "AQyTkrS+WNlQNWEHCGKRhB/HqZd9",
+                            "type": "STRING"
+                        },
+                        "resJPEGMedWidth": {
+                            "value": 1536,
+                            "type": "INT64"
+                        },
+                        "resJPEGThumbRes": {
+                            "value": {
+                                "fileChecksum": "ASASscokRYqis7KrJb3oFtwh+oXK",
+                                "size": 49451,
+                                "wrappingKey": "THm6yi40Ta8IEqFC1kRDtw==",
+                                "referenceChecksum": "AdQfMck3/5ZHWeuYBO1xDWD95WRz",
+                                "downloadURL": "https://cvws.icloud-content.com.cn/B/ASASscokRYqis7KrJb3oFtwh-oXKAdQfMck3_5ZHWeuYBO1xDWD95WRz/${f}?o=AoehgL12VrmbiS36BRKtOC75XMzctzVFHKvIg8cNsTqJ&v=1&x=3&a=CAogObKdQkXAer25vdZ7hQZJG1wK20QUQcX3eGiCHSAaFmUSbxDei7SmuDEY3uiPqLgxIgEAUgQh-oXKWgT95WRzaiewEPqxxxEPJg5MikK0V_GIp9Sv98mBmGDtnTJvD4JqJrjY0RwvECJyJ-KJyEFnGvxYWFM-qahwfhcREwPtBnT5SVt_x7nxBmsS6OR2I1MSZA&e=1698743710&fl=&r=e9fe5609-dfc2-45a7-aebe-738fcf036777-1&k=THm6yi40Ta8IEqFC1kRDtw&ckc=com.apple.photos.cloud&ckz=PrimarySync&y=1&p=215&s=BQsVmCY_cmshbdyVGO-4RY9IDD0"
+                            },
+                            "type": "ASSETID"
+                        },
+                        "resOriginalFileType": {
+                            "value": "public.jpeg",
+                            "type": "STRING"
+                        },
+                        "resOriginalHeight": {
+                            "value": 3024,
+                            "type": "INT64"
+                        },
+                        "resJPEGMedFingerprint": {
+                            "value": "AVFnqjbTtZH1kTcxSB+MlWbdn31d",
+                            "type": "STRING"
+                        }
                     },
-                }
-            },
-            labelPosition: 'right',
-        },
-        watch: {
-            pageSize(newV, oldV) {
-                console.log("pageSize:", oldV, newV)
-                this.limit = newV * 2
-                this.startRank = (this.page - 1) * this.pageSize;
-            },
-            page(newV, oldV) {
-                this.startRank = (this.page - 1) * this.pageSize;
-            },
-            startRank(newV, oldV) {
-                this.getData();
-            },
-            limit(newV, oldV) {
-                this.getData();
-            },
-            direction(newV, oldV) {
-                this.getData();
-            },
-            smart(newV, oldV) {
-                this.getTotal();
-                this.getData();
-            }
-        },
-        computed: {
-            CPLMaster() {
-                let res = [];
-                for (const record of this.records) {
-                    if (record.recordType === "CPLMaster") {
-                        res.push(record)
+                    "pluginFields": {},
+                    "recordChangeTag": "44bq",
+                    "created": {
+                        "timestamp": 1697877612633,
+                        "userRecordName": "_986dc3307ee3802dba6a820f7329ab59",
+                        "deviceID": "94E82AED9607F66BA25042446B02BE6B21FC4F0C66BE9AD4E21AEBD56735B52C"
+                    },
+                    "modified": {
+                        "timestamp": 1697877612633,
+                        "userRecordName": "_986dc3307ee3802dba6a820f7329ab59",
+                        "deviceID": "94E82AED9607F66BA25042446B02BE6B21FC4F0C66BE9AD4E21AEBD56735B52C"
+                    },
+                    "deleted": false,
+                    "zoneID": {
+                        "zoneName": "PrimarySync",
+                        "ownerRecordName": "_986dc3307ee3802dba6a820f7329ab59",
+                        "zoneType": "REGULAR_CUSTOM_ZONE"
+                    }
+                },
+                "assetRecord": {
+                    "recordName": "EE0AA64B-A485-4621-B79B-254CBE45AB4B",
+                    "recordType": "CPLAsset",
+                    "fields": {
+                        "addedDate": {
+                            "value": 1697876108767,
+                            "type": "TIMESTAMP"
+                        },
+                        "resJPEGThumbFingerprint": {
+                            "value": "AQd4DMMTF2HCgwDBTqN8h0Y16Dy6",
+                            "type": "STRING"
+                        },
+                        "resJPEGFullFingerprint": {
+                            "value": "AVYkFZur3vTwov+CZgrBQoghvFW6",
+                            "type": "STRING"
+                        },
+                        "adjustmentType": {
+                            "value": "com.apple.photo",
+                            "type": "STRING"
+                        },
+                        "resJPEGFullHeight": {
+                            "value": 4032,
+                            "type": "INT64"
+                        },
+                        "assetSubtypeV2": {
+                            "value": 0,
+                            "type": "INT64"
+                        },
+                        "assetHDRType": {
+                            "value": 0,
+                            "type": "INT64"
+                        },
+                        "timeZoneOffset": {
+                            "value": 28800,
+                            "type": "INT64"
+                        },
+                        "masterRef": {
+                            "value": {
+                                "recordName": "AQyTkrS+WNlQNWEHCGKRhB/HqZd9",
+                                "action": "DELETE_SELF",
+                                "zoneID": {
+                                    "zoneName": "PrimarySync",
+                                    "ownerRecordName": "_986dc3307ee3802dba6a820f7329ab59",
+                                    "zoneType": "REGULAR_CUSTOM_ZONE"
+                                }
+                            },
+                            "type": "REFERENCE"
+                        },
+                        "locationEnc": {
+                            "value": "YnBsaXN0MDDYAQIDBAUGBwgJCgsMCg0OD1Zjb3Vyc2VVc3BlZWRTYWx0U2xvbld2ZXJ0QWNjU2xhdFl0aW1lc3RhbXBXaG9yekFjYyNAbukIYD9aTyMAAAAAAAAAACNAhryWMhCwOyNAVeXjABT4tiNARfITY0J94jNBxXIYRkFHriNASJwkvBMhDggZICYqLjY6RExVXmdweYIAAAAAAAABAQAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAiw==",
+                            "type": "ENCRYPTED_BYTES"
+                        },
+                        "adjustmentRenderType": {
+                            "value": 2560,
+                            "type": "INT64"
+                        },
+                        "resJPEGMedFileType": {
+                            "value": "public.jpeg",
+                            "type": "STRING"
+                        },
+                        "vidComplDispScale": {
+                            "value": 0,
+                            "type": "INT64"
+                        },
+                        "duration": {
+                            "value": 0,
+                            "type": "INT64"
+                        },
+                        "burstFlags": {
+                            "value": 0,
+                            "type": "INT64"
+                        },
+                        "assetSubtype": {
+                            "value": 0,
+                            "type": "INT64"
+                        },
+                        "resJPEGThumbWidth": {
+                            "value": 311,
+                            "type": "INT64"
+                        },
+                        "vidComplVisibilityState": {
+                            "value": 0,
+                            "type": "INT64"
+                        },
+                        "resJPEGFullWidth": {
+                            "value": 2268,
+                            "type": "INT64"
+                        },
+                        "resJPEGMedWidth": {
+                            "value": 1330,
+                            "type": "INT64"
+                        },
+                        "resJPEGFullRes": {
+                            "value": {
+                                "fileChecksum": "AVYkFZur3vTwov+CZgrBQoghvFW6",
+                                "size": 1772220,
+                                "wrappingKey": "LgHiKndzHRv+jKxNGQH5lg==",
+                                "referenceChecksum": "Ad7SW5U7MHyCNo3Yff9PUhEBRjHS",
+                                "downloadURL": "https://cvws.icloud-content.com.cn/B/AVYkFZur3vTwov-CZgrBQoghvFW6Ad7SW5U7MHyCNo3Yff9PUhEBRjHS/${f}?o=AhulbsMvrZCxkWqw5jy38fthSXyM3Cdqb_0iEhoHdc-k&v=1&x=3&a=CAoglPKJN7Ij9NryxLAPR7AoAdrpor2cnnKR-vgmwOpOUAgSbxDqlLSmuDEY6vGPqLgxIgEAUgQhvFW6WgQBRjHSaiddrumJQoD50FDjrwhKmbYrMLf_ysgYYKoIttj5JWc7kpPrapAGVOhyJw0rZ_QUVCl_wnniPwYX2PyTqGIM1M5PUgq1fy2GOIOQPEIvuRjtig&e=1698743711&fl=&r=e9fe5609-dfc2-45a7-aebe-738fcf036777-1&k=LgHiKndzHRv-jKxNGQH5lg&ckc=com.apple.photos.cloud&ckz=PrimarySync&y=1&p=215&s=PGUsq1WleO9si5zOqNUeuWCFVKc"
+                            },
+                            "type": "ASSETID"
+                        },
+                        "assetDate": {
+                            "value": 1697876108510,
+                            "type": "TIMESTAMP"
+                        },
+                        "resJPEGFullFileType": {
+                            "value": "public.jpeg",
+                            "type": "STRING"
+                        },
+                        "orientation": {
+                            "value": 1,
+                            "type": "INT64"
+                        },
+                        "resJPEGMedRes": {
+                            "value": {
+                                "fileChecksum": "ARB7CkJjE0TakpVk6t+PlTJHmp7z",
+                                "size": 595344,
+                                "wrappingKey": "sUVvkUWpYVNS/HfcWEzVqw==",
+                                "referenceChecksum": "AZNCOJGbik5RB9aLGIyT4A8jYzY5",
+                                "downloadURL": "https://cvws.icloud-content.com.cn/B/ARB7CkJjE0TakpVk6t-PlTJHmp7zAZNCOJGbik5RB9aLGIyT4A8jYzY5/${f}?o=AhoDHadAfuVPlDUkmBPQGhiYlnq7RAPWFla-rh4DwPj2&v=1&x=3&a=CAogb4EUEqmmuVko7RUtFckgFhkXfpbq8Erk9VBFLfjUMZMSbxDqlLSmuDEY6vGPqLgxIgEAUgRHmp7zWgQjYzY5aicdnc9VxjUbHIvx243l1u5N0Qx69tcWnXeZydsP2mBsL7Plw0vAAFdyJygWmxglS4nNznnP4t9zhBIT9NszBd4e8mIIf092_QedTCVz-xTKYA&e=1698743711&fl=&r=e9fe5609-dfc2-45a7-aebe-738fcf036777-1&k=sUVvkUWpYVNS_HfcWEzVqw&ckc=com.apple.photos.cloud&ckz=PrimarySync&y=1&p=215&s=W318awLtJgIMsC97nb7qo93pG3g"
+                            },
+                            "type": "ASSETID"
+                        },
+                        "resJPEGMedHeight": {
+                            "value": 2365,
+                            "type": "INT64"
+                        },
+                        "isHidden": {
+                            "value": 0,
+                            "type": "INT64"
+                        },
+                        "resJPEGThumbHeight": {
+                            "value": 553,
+                            "type": "INT64"
+                        },
+                        "vidComplDurScale": {
+                            "value": 0,
+                            "type": "INT64"
+                        },
+                        "vidComplDurValue": {
+                            "value": 0,
+                            "type": "INT64"
+                        },
+                        "resJPEGThumbFileType": {
+                            "value": "public.jpeg",
+                            "type": "STRING"
+                        },
+                        "resJPEGThumbRes": {
+                            "value": {
+                                "fileChecksum": "AQd4DMMTF2HCgwDBTqN8h0Y16Dy6",
+                                "size": 50287,
+                                "wrappingKey": "G7rHGOfd3A3A6sAW7u/Y+w==",
+                                "referenceChecksum": "Af6y7mcZnyeKZYZykJfVFXMIouri",
+                                "downloadURL": "https://cvws.icloud-content.com.cn/B/AQd4DMMTF2HCgwDBTqN8h0Y16Dy6Af6y7mcZnyeKZYZykJfVFXMIouri/${f}?o=AnUCYXIwDcMg27d-Bc_TOdEUoqFGzcsw7by7ajPWWlHz&v=1&x=3&a=CAogkU5GqNZOZeuh6IWc_ogibbstdGwkZVmDksZx-JLbwNsSbxDqlLSmuDEY6vGPqLgxIgEAUgQ16Dy6WgQIouriaieaXv9iUoeoEHb2KMU5xuQ7dGOd2PHpjXFr0I9iINj-VlXDejBoVVZyJ7hkGyyLwVN5jx3SLv1BtcTTxgiFnyomsKcyEDvq1_7pj3v7kyMYPQ&e=1698743711&fl=&r=e9fe5609-dfc2-45a7-aebe-738fcf036777-1&k=G7rHGOfd3A3A6sAW7u_Y-w&ckc=com.apple.photos.cloud&ckz=PrimarySync&y=1&p=215&s=2vvErgoIjCpfWNmCyIpijDT5WQM"
+                            },
+                            "type": "ASSETID"
+                        },
+                        "customRenderedValue": {
+                            "value": 10,
+                            "type": "INT64"
+                        },
+                        "isFavorite": {
+                            "value": 0,
+                            "type": "INT64"
+                        },
+                        "resJPEGMedFingerprint": {
+                            "value": "ARB7CkJjE0TakpVk6t+PlTJHmp7z",
+                            "type": "STRING"
+                        },
+                        "vidComplDispValue": {
+                            "value": 0,
+                            "type": "INT64"
+                        }
+                    },
+                    "pluginFields": {},
+                    "recordChangeTag": "44br",
+                    "created": {
+                        "timestamp": 1697877612639,
+                        "userRecordName": "_986dc3307ee3802dba6a820f7329ab59",
+                        "deviceID": "94E82AED9607F66BA25042446B02BE6B21FC4F0C66BE9AD4E21AEBD56735B52C"
+                    },
+                    "modified": {
+                        "timestamp": 1697877612639,
+                        "userRecordName": "_986dc3307ee3802dba6a820f7329ab59",
+                        "deviceID": "94E82AED9607F66BA25042446B02BE6B21FC4F0C66BE9AD4E21AEBD56735B52C"
+                    },
+                    "deleted": false,
+                    "zoneID": {
+                        "zoneName": "PrimarySync",
+                        "ownerRecordName": "_986dc3307ee3802dba6a820f7329ab59",
+                        "zoneType": "REGULAR_CUSTOM_ZONE"
                     }
                 }
-                return res;
             },
-            CPLAsset() {
-                let res = [];
-                for (const record of this.records) {
-                    if (record.recordType === "CPLAsset") {
-                        res.push(record)
+            watch: {
+                pageSize(newV, oldV) {
+                    console.log("pageSize:", oldV, newV)
+                    this.limit = newV * 2
+                    this.startRank = (this.page - 1) * this.pageSize;
+                },
+                page(newV, oldV) {
+                    this.startRank = (this.page - 1) * this.pageSize;
+                },
+                startRank(newV, oldV) {
+                    this.getData();
+                },
+                limit(newV, oldV) {
+                    this.getData();
+                },
+                direction(newV, oldV) {
+                    this.getData();
+                },
+                smart(newV, oldV) {
+                    this.getTotal();
+                    this.getData();
+                },
+                currObj(newV,odlV){
+                }
+            },
+            computed: {
+                CPLMaster() {
+                    let res = [];
+                    for (const record of this.records) {
+                        if (record.recordType === "CPLMaster") {
+                            res.push(record)
+                        }
                     }
+                    return res;
+                },
+                CPLAsset() {
+                    let res = [];
+                    for (const record of this.records) {
+                        if (record.recordType === "CPLAsset") {
+                            res.push(record)
+                        }
+                    }
+                    return res;
+                },
+                minIndex() {
+                    return this.offset + 1 - Math.min(this.limit / 2, (this.offset + 1));
                 }
-                return res;
-            },
-            minIndex() {
-                return this.offset + 1 - Math.min(this.limit / 2, (this.offset + 1));
             }
-        },
-        created() {
-            this.getTotal();
-            this.getData();
-        },
-        mounted() {
-            let queryString = window.location.search;
-            let params = new URLSearchParams(queryString);
-            this.id = params.get('id'); // 获取name参数的值，结果为"John"
-            console.log("iCloud Media ID:", this.id)
-        },
-        methods: {
-            show(record) {
-                console.log("clicked:", record,)
-                this.currObj = record;
-                this.preview = true;
             },
-            isImage(record) {
-                let image_ext = ['public.jpeg', 'public.png'];
-                let res = image_ext.indexOf(record.fields.resOriginalFileType.value) !== -1;
-                console.log("isImage:", record, record.fields.resOriginalFileType.value, res)
-                try {
-                    console.log(currObj.fields.resVidSmallRes, currObj.fields.resVidSmallRes !== undefined)
-                } catch (e) {
-                    console.log("没有resVidSmallRes字段")
-                }
-                return res;
+            created() {
             },
-            handlePageSizeChange(val) {
+            mounted() {
+                let queryString = window.location.search;
+                let params = new URLSearchParams(queryString);
+                this.id = params.get('id'); // 获取name参数的值，结果为"John"
+                console.log("iCloud Media ID:", this.id)
+                this.getDetail();
+            },
+            methods: {
+                show(record) {
+                    console.log("clicked:", record,)
+                    this.currObj = record;
+                    this.preview = true;
+                },
+                isImage(record) {
+                    let image_ext = ['public.jpeg', 'public.png'];
+                    let res = image_ext.indexOf(record.fields.resOriginalFileType.value) !== -1;
+                    console.log("isImage:", record, record.fields.resOriginalFileType.value, res)
+                    try {
+                        console.log(currObj.fields.resVidSmallRes, currObj.fields.resVidSmallRes !== undefined)
+                    } catch (e) {
+                        console.log("没有resVidSmallRes字段")
+                    }
+                    return res;
+                },
+                handlePageSizeChange(val) {
 
-            },
-            handlePageChange(val) {
+                },
+                handlePageChange(val) {
 
-            },
-            getRank(index) {
-                if (this.direction === "ASCENDING") {
-                    return this.startRank + index;
-                } else {
-                    return this.startRank - index;
+                },
+                getRank(index) {
+                    if (this.direction === "ASCENDING") {
+                        return this.startRank + index;
+                    } else {
+                        return this.startRank - index;
+                    }
+                },
+                getTotal() {
+                    let _this = this;
+                    const loading = this.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    fetch(`http://127.0.0.1:8001/icloud/total?smart=${this.smart}`, {method: "GET",}).then(resp => {
+                        console.log("resp:", resp.status, resp.statusText, resp.headers.get("Content-Type"))
+                        resp.json().then(respJson => {
+                            _this.totalResp = respJson;
+                            loading.close();
+                        })
+                    })
+                },
+                getDetail() {
+                    let _this = this;
+                    let x = encodeURI(this.id);
+                    let y = decodeURI(this.id);
+                    console.log("id:", this.id);
+                    console.log("encode:", x);
+                    console.log("decode:", y);
+                    let _url = `http://127.0.0.1:8001/icloud/detail?id=${y}&source=IMedia`;
+                    const loading = this.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    fetch(_url, {method: "GET",}).then(resp => {
+                        console.log("resp:", resp.status, resp.statusText, resp.headers.get("Content-Type"))
+                        resp.json().then(respJson => {
+                            _this.currObj = respJson.data;
+                            console.log("respJson:", respJson)
+                            console.log("currObj:", _this.currObj)
+                            loading.close();
+                        })
+                    })
                 }
-            },
-            getTotal() {
-                let _this = this;
-                const loading = this.$loading({
-                    lock: true,
-                    text: 'Loading',
-                    spinner: 'el-icon-loading',
-                    background: 'rgba(0, 0, 0, 0.7)'
-                });
-                fetch(`http://127.0.0.1:8001/icloud/total?smart=${this.smart}`, {method: "GET",}).then(resp => {
-                    console.log("resp:", resp.status, resp.statusText, resp.headers.get("Content-Type"))
-                    resp.json().then(respJson => {
-                        _this.totalResp = respJson;
-                        loading.close();
-                    })
-                })
-            },
-            getData() {
-                let _this = this;
-                console.log(this.offset, this.limit)
-                let _url = `http://127.0.0.1:8001/icloud/test?limit=${this.limit}&startRank=${this.startRank}&endRank=${this.endRank}&direction=${this.direction}&smart=${this.smart}`;
-                const loading = this.$loading({
-                    lock: true,
-                    text: 'Loading',
-                    spinner: 'el-icon-loading',
-                    background: 'rgba(0, 0, 0, 0.7)'
-                });
-                fetch(_url, {method: "GET",}).then(resp => {
-                    console.log("resp:", resp.status, resp.statusText, resp.headers.get("Content-Type"))
-                    resp.json().then(respJson => {
-                        _this.records = respJson.records;
-                        loading.close();
-                    })
-                })
             }
-        }
-    }).$mount('#app')
+        }).$mount('#app')
 
 </script>
 </body>
