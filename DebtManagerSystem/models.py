@@ -1,7 +1,7 @@
 from django.db import models
+from simplepro.models import BaseModel
 
 from accountSystem.models import Human
-from izBasar.models import BaseModel
 
 
 # Create your models here.

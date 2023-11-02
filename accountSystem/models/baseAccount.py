@@ -7,8 +7,8 @@
 @disc:
 ======================================="""
 from django.db import models
+from simplepro.models import BaseModel
 
-from izBasar.models import BaseModel
 from .human import Human
 
 

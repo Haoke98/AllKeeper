@@ -1,8 +1,8 @@
 import datetime
 
 from django.db import models
+from simplepro.models import BaseModel
 
-from izBasar.models import BaseModel
 from lib import zodiacHelper
 from .weibo import Weibo
 

@@ -11,8 +11,7 @@ import os.path
 from django.db import models
 from django.db.models import Count, Sum
 from simplepro.components import fields
-
-from izBasar.models import BaseModel
+from simplepro.models import BaseModel
 
 
 class Account(BaseModel):

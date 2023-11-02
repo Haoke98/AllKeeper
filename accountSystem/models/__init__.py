@@ -1,4 +1,3 @@
-from izBasar.models import BaseModel
 from .account import Account
 from .base import BaseServiceUserModel
 from .bt import BT

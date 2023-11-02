@@ -1,6 +1,5 @@
 from django.db import models
-
-from izBasar.models import BaseModel
+from simplepro.models import BaseModel
 
 
 class Platform(BaseModel):

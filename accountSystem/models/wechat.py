@@ -1,6 +1,6 @@
 from django.db import models
+from simplepro.models import BaseModel
 
-from izBasar.models import BaseModel
 from .email import Email
 from .human import Human
 from .tel import Tel

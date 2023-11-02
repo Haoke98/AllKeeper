@@ -1,7 +1,7 @@
 from django.db import models
 from simplepro.components import fields
+from simplepro.models import BaseModel
 
-from izBasar.models import BaseModel
 from .human import Human
 
 

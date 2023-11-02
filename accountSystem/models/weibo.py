@@ -3,8 +3,8 @@ import uuid
 
 import requests
 from django.db import models
+from simplepro.models import BaseModel
 
-from izBasar.models import BaseModel
 from izBasar.settings import MEDIA_ROOT
 from lib import weiboHelper
 
