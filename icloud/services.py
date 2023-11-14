@@ -24,7 +24,7 @@ from django.core.files.temp import NamedTemporaryFile
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from pyicloud.services.photos import PhotoAsset
 
-from . import iService
+
 from .models import IMedia, LocalMedia
 
 CHUNK_SIZE = 1024 * 1024  # 每个文件块的大小（字节）1M
@@ -105,6 +105,7 @@ def insert_or_update_media(startRank: int, p: PhotoAsset):
 
 
 def update(records, startRank):
+    from .admin import iService
     def do(_records, _startRank):
         iPhotos = iService.record2iphoto(_records)
         for i, iphoto in enumerate(iPhotos):
@@ -115,6 +116,7 @@ def update(records, startRank):
 
 
 def collect(startRank: int, _id):
+    from .admin import iService
     resp = iService.query_medias(startRank=startRank)
     records: list[dict] = resp['records']
     update(records, startRank)
@@ -134,6 +136,7 @@ EXCEPTION_TRACE_BACK = None
 
 
 def collect_all_medias():
+    from .admin import iService
     global STATUS, FINISHED_COUNT, TOTAL, STARTED_AT, EXCEPTION_MSG, EXCEPTION_TRACE_BACK
     # for album in albums:
     #     photos = iService.photos.albums[album.name]
@@ -256,6 +259,7 @@ def download_origin(source: IMedia, dest: LocalMedia):
 
 
 def delete_from_icloud(qs, lm):
+    from .admin import iService
     resp = iService.delete(json.loads(qs.assetRecord)['recordName'], qs.assetRecordType,
                            qs.masterRecordChangeTag)
     print(resp.text)

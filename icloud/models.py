@@ -6,6 +6,7 @@
 @Software: PyCharm
 @disc:
 ======================================="""
+import datetime
 import os.path
 
 from django.db import models
@@ -14,12 +15,41 @@ from simplepro.components import fields
 from simplepro.models import BaseModel
 
 
-class Account(BaseModel):
-    appleId = models.CharField(verbose_name="AppleID", max_length=100)
-    passwd = fields.CharField(verbose_name='测试字段（非必填）', placeholder='请输入密码', max_length=128, show_password=True,
-                              null=True,
-                              blank=True, show_word_limit=True, slot='prepend', slot_text='密码')
+class AppleId(BaseModel):
+    email = fields.CharField(verbose_name="绑定的邮箱", max_length=30, placeholder="请输入电子邮箱", null=True, unique=True,
+                             blank=True)
+    tel = fields.CharField(verbose_name="绑定的手机号", max_length=11, placeholder="请输入绑定的手机号", null=True, unique=True,
+                           blank=True, show_word_limit=True)
+    passwd = fields.CharField(verbose_name='密码', max_length=128, placeholder='请输入密码', null=True, blank=True,
+                              show_password=True, show_word_limit=True)
+    last2FactorAuthenticateAt = models.DateTimeField(verbose_name="上次两步验证时间", null=True, blank=True, editable=False)
+    lastConfirmedSessionValidityAt = models.DateTimeField(verbose_name="上次确认会话有效性时间", null=True, blank=True,
+                                                          editable=False)
+    maxSessionAge = models.DurationField(verbose_name="最长会话有效期", blank=True, editable=False,
+                                         default=datetime.timedelta(seconds=0))
 
+    @property
+    def username(self):
+        if self.email:
+            return self.email
+        return self.tel
+
+    def __str__(self):
+        return f"AppleID({self.username})"
+
+    @property
+    def last_2fa_time(self):
+        print("last2fa:", self.last2FactorAuthenticateAt, bool(self.last2FactorAuthenticateAt))
+        if self.last2FactorAuthenticateAt:
+            return datetime.datetime.now() - self.last2FactorAuthenticateAt
+        return ""
+
+    @property
+    def current_session_age(self):
+        if self.lastConfirmedSessionValidityAt and self.last2FactorAuthenticateAt:
+            return self.lastConfirmedSessionValidityAt - self.last2FactorAuthenticateAt
+        else:
+            return 0
 
 class Album(BaseModel):
     name = models.CharField(max_length=50, verbose_name="标题", primary_key=True)

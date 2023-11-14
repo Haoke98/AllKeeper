@@ -5,6 +5,19 @@ from django.utils.safestring import mark_safe
 LIST_DISPLAY = ['id', 'updatedAt', 'createdAt']
 
 
+class MinWidth:
+    DATE_TIME = "168px"
+    DURATION = "180px"
+    IP_ADDRESS = "140px"
+    PORT = "102px"
+    USER_AGENT = "440px"
+    HEADERS = "880px"
+    UUID = "300px"
+    EMAIL = "180px"
+    MOBILE = "140px"
+    PASSWORD = "140px"
+
+
 def showUrl(url):
     if url:
         tag = mark_safe('''<a href="%s" target="blank" class="button" title="%s">URL</a>''' % (url, url))
@@ -22,6 +35,7 @@ def avatar(url):
 class BaseAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY
     date_hierarchy = 'updatedAt'
+
     # TODO：改成simplepro组件
     @staticmethod
     def username(value):

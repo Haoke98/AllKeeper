@@ -6,7 +6,6 @@ from django.http import HttpResponse, JsonResponse, Http404, HttpResponseRedirec
 from django.shortcuts import render
 from pytz import UTC
 
-from . import iService
 from .models import IMedia, LocalMedia
 from .serializers import IMediaSerializer, LocalMediaSerializer
 from .services import update
@@ -25,6 +24,7 @@ def test(request):
     :param request:
     :return:
     """
+    from .admin import iService
     limit = int(request.GET.get("limit", 10))
     startRank = int(request.GET.get("startRank", -1))
     endRank = int(request.GET.get("endRank", -1))
@@ -37,12 +37,14 @@ def test(request):
 
 
 def count(request):
+    from .admin import iService
     smart = request.GET.get("smart", "All Photos")
     responseJson, _ = iService.media_total(smart)
     return JsonResponse(responseJson)
 
 
 def thumb(request):
+    from .admin import iService
     _id = request.GET.get("id", None)
     startRank = request.GET.get("startRank", None)
     if _id is None or startRank is None:
@@ -68,6 +70,7 @@ def thumb(request):
 
 
 def test2(targetObj):
+    from .admin import iService
     version = None
     dlt = datetime.datetime.now(tz=UTC) - targetObj.updatedAt
     context = {"filename": targetObj.filename, "dlt": dlt}

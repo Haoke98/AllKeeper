@@ -42,7 +42,6 @@ class IcloudService(__iCloudService__):
             self.HOME_ENDPOINT = "https://www.icloud.com.cn"
             self.SETUP_ENDPOINT = "https://setup.icloud.com.cn/setup/ws/1"
         super().__init__(apple_id, password, cookie_directory, verify, client_id, with_family)
-        self.two_factor_authenticate()
 
     def two_factor_authenticate(self):
         if self.requires_2fa:

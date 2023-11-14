@@ -154,7 +154,7 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console', 'file', 'mail_admins'],
-        'level': 'INFO',
+        'level': 'DEBUG',
     },
     'loggers': {
         'django': {
@@ -303,7 +303,7 @@ LANGUAGE_CODE = 'zh-Hans'  # 'en-us'
 TIME_ZONE = 'Asia/Shanghai'  # 'UTC'
 USE_I18N = True
 USE_L10N = False
-USE_TZ = True  # true时统一全球时间，不跨时区的应用可以设为False
+USE_TZ = False  # true时统一全球时间，不跨时区的应用可以设为False
 
 DATETIME_FORMAT = 'Y/m/d H:i:s'
 
