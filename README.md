@@ -1,5 +1,5 @@
 <div align="center">
-  <img height="320px" src="common-static/img/LOGO.png"/>
+  <img height="320px" src="docs/static/LOGO.png"/>
   <div>简体中文 | <a href="./README.en.md">English</a></div>
   <p>
     基于Django3.2.7+Vue2+ElementUI的相对比较自动化生成的后台管理系统。借助SimpleUI开源项目对Django原生的Admin后台管理页面进行了二次开发和优化改进而生成的比较现代化的后台管理系统。
