@@ -1,5 +1,5 @@
 <div align="center">
-  <img height="320px" src="common-static/img/LOGO.png"/>
+  <img height="320px" src="static/LOGO.png"/>
   <div>简体中文 | <a href="./README.en.md">English</a></div>
   <p>
     基于Django3.2.7+Vue2+ElementUI的相对比较自动化生成的后台管理系统。借助SimpleUI开源项目对Django原生的Admin后台管理页面进行了二次开发和优化改进而生成的比较现代化的后台管理系统。
@@ -15,7 +15,10 @@
 ### 1. 万能堡垒
 
 * 服务器管理
-* 宝塔管理
+* 服务管理
+  * SSH服务
+  * 数据库服务
+  * 宝塔管理
 * 内网穿透管理
 
 ### 2. 账号管理
@@ -28,10 +31,19 @@
 
 ### 4. 媒体库
 * 媒体存储媒体
+* 基于人脸识别的资源分类
 
 ### 5. 社工库
+* 基本自然人信息
+* 媒体账号信息
+  * 微博
+  * 抖音
 
 ### 6. 资金管理
+* 银行卡管理
+* 信用卡管理
+* 债务管理
+* 流水管理
 
 ## 依赖
 
