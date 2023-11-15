@@ -43,48 +43,6 @@ class IcloudService(__iCloudService__):
             self.SETUP_ENDPOINT = "https://setup.icloud.com.cn/setup/ws/1"
         super().__init__(apple_id, password, cookie_directory, verify, client_id, with_family)
 
-    def two_factor_authenticate(self):
-        if self.requires_2fa:
-            logging.warning("Two-factor authentication required.")
-            code = input("Enter the code you received of one of your approved devices: ")
-            result = self.validate_2fa_code(code)
-            logging.info("Code validation result: %s" % result)
-
-            if not result:
-                logging.error("Failed to verify security code")
-                sys.exit(1)
-
-            if not self.is_trusted_session:
-                logging.warning("Session is not trusted. Requesting trust...")
-                result = self.trust_session()
-                logging.info("Session trust result %s" % result)
-
-                if not result:
-                    logging.error(
-                        "Failed to request trust. You will likely be prompted for the code again in the coming weeks")
-        elif self.requires_2sa:
-            import click
-
-            logging.info("Two-step authentication required. Your trusted devices are:")
-
-            devices = self.trusted_devices
-            for i, device in enumerate(devices):
-                logging.info(
-                    "  %s: %s" % (i, device.get('deviceName',
-                                                "SMS to %s" % device.get('phoneNumber')))
-                )
-
-            device = click.prompt('Which device would you like to use?', default=0)
-            device = devices[device]
-            if not self.send_verification_code(device):
-                logging.error("Failed to send verification code")
-                sys.exit(1)
-
-            code = click.prompt('Please enter validation code')
-            if not self.validate_verification_code(device, code):
-                logging.info("Failed to verify verification code")
-                sys.exit(1)
-
     def handle(self, outputDir: str, recent: int, photo: PhotoAsset, modify_olds: bool, auto_delete: bool):
 
         def __modify_create_date__():
