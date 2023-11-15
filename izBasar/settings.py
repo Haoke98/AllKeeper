@@ -195,12 +195,12 @@ INSTALLED_APPS = [
     'docutils',
     'accountSystem',
     'DebtManagerSystem',
-    'photologue',
     'sortedm2m',
     'django_crontab',
     'icloud',
     'logAnalyser',
-    'eynek'
+    'eynek',
+    'jumpService'
 ]
 SITE_ID = 1
 CACHES = {
@@ -277,7 +277,8 @@ DATABASE_APPS_MAPPING = {
     'accountSystem': 'default',
     'DebtManagerSystem': 'default',
     'icloud': 'default',
-    'logAnalyser': 'default'
+    'logAnalyser': 'default',
+    'jumpService': 'default'
 }
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

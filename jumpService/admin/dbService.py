@@ -16,7 +16,7 @@ class DbServiceAdmin(BaseAdmin):
     search_fields = ['rootPwd.password',
                      'remark', ]
     search_help_text = ['你好，这是搜索帮助语句！']
-    autocomplete_fields = ['server']
+    autocomplete_fields = []
     inlines = [DbServiceUserInlineAdmin]
 
     def _username(self, obj):

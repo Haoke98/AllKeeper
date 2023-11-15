@@ -1,9 +1,9 @@
 from rest_framework import viewsets
 from rest_framework.views import APIView
 
+from accountSystem.pagination import StandardPagination
 from utils.http_helper import RestResponse
 from ..models import Server
-from ..pagination import StandardPagination
 from ..serializers import ServerSerializer
 
 

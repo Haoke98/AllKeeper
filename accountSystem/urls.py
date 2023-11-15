@@ -1,10 +1,9 @@
 from django.urls import re_path
 from rest_framework.routers import DefaultRouter
 
-from .views import ServerViewSet, login, getMenuList, DeviceView, DeviceRegionView, HumanViewSet, image, breath
+from .views import login, getMenuList, DeviceView, DeviceRegionView, HumanViewSet, image, breath
 
 router = DefaultRouter()
-router.register(r'server', viewset=ServerViewSet)
 router.register(r'human', viewset=HumanViewSet)
 # server_list = ServerViewSet.as_view({
 #     'get': 'list',

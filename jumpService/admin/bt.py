@@ -9,7 +9,7 @@ class BtAdmin(BaseAdmin):
     list_display = ['id', 'port', 'server', 'username', 'pwd', '_url', 'basicAuthUsername',
                     'basicAuthPwd', 'updatedAt',
                     'createdAt', 'deletedAt', ]
-    autocomplete_fields = ['server']
+    autocomplete_fields = []
     list_filter = ['server']
     list_display_links = ['port', 'server']
     actions = []

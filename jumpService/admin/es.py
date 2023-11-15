@@ -1,7 +1,8 @@
 from django.contrib import admin
 
+from accountSystem.admin.base import BaseServiceAdmin
 from izBasar.admin import BaseAdmin
-from .base import BaseServiceAdmin
+
 from ..models import ElasticSearch
 
 

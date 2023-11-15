@@ -21,7 +21,6 @@ from .auth import login
 from .device import DeviceView, DeviceRegionView
 from .human import HumanView, HumanViewSet
 from .menu import getMenuList
-from .server import ServerView, ServerViewSet
 
 
 @csrf_exempt

@@ -1,6 +1,6 @@
 from django.db import models
 
-from .base import BaseServiceModel
+from .baseService import BaseServiceModel
 
 
 class ElasticSearch(BaseServiceModel):
@@ -17,8 +17,3 @@ class ElasticSearch(BaseServiceModel):
                                 verbose_name='beats_system', null=True, blank=True)
     remoteMonitoringPwd = models.CharField(max_length=36,
                                            verbose_name='remote_monitoring_user', null=True, blank=True)
-
-
-"""
-curl -XGET "http://121.4.105.111:9200/company/_doc/GXwQRnsBoCEJ2sttvib4"
-"""

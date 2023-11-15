@@ -7,11 +7,11 @@ from ..models import DbServiceUser
 
 @admin.register(DbServiceUser)
 class DbServiceUserAdmin(BaseAdmin):
-    list_display = LIST_DISPLAY + ['username', 'password', 'hasRootPriority', 'server', 'owner']
-    autocomplete_fields = ['server', 'owner']
-    list_filter = ['hasRootPriority', 'server', 'owner']
+    list_display = LIST_DISPLAY + ['username', 'password', 'hasRootPriority', 'service', 'owner']
+    autocomplete_fields = ['service']
+    list_filter = ['hasRootPriority', 'service', 'owner']
     list_select_related = autocomplete_fields
-    raw_id_fields = ('owner', 'server')
+    raw_id_fields = ('service',)
     form = DbServiceUserForm
 
     def formatter(self, obj, field_name, value):
@@ -62,7 +62,7 @@ class DbServiceUserAdmin(BaseAdmin):
 
 class DbServiceUserInlineAdmin(admin.TabularInline):
     model = DbServiceUser
-    autocomplete_fields = ['server', 'owner']
+    autocomplete_fields = ['service']
     exclude = ('password',)
     min_num = 0
     extra = 0

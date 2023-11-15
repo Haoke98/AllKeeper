@@ -21,7 +21,6 @@ from django.urls import path, re_path
 # from django.contrib.staticfiles.views import serve
 from django.views.generic import RedirectView
 from django.views.static import serve
-from photologue.sitemaps import GallerySitemap, PhotoSitemap
 from revproxy.views import ProxyView
 
 import accountSystem.urls
@@ -52,11 +51,6 @@ urlpatterns = [
     path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
     re_path(r'^static/(?P<path>.*)$', serve, ({'document_root': settings.STATIC_ROOT})),
     re_path(r'^media/(?P<path>.*)$', serve, ({'document_root': settings.MEDIA_ROOT})),
-    re_path(r'^photologue/', include('photologue.urls', namespace='photologue')),
     re_path(r'^new_req/(?P<path>.*)$', TestProxyView.as_view()),
     re_path('^eynek/', include(eynek.urls))
 ]
-sitemaps = {
-    'photologue_galleries': GallerySitemap,
-    'photologue_photos': PhotoSitemap,
-}

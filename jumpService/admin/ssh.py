@@ -2,14 +2,22 @@ from django.contrib import admin
 
 from izBasar.admin import BaseAdmin
 from ..forms import ServerUserForm
-from ..models import ServerUser
+from ..models import SSHServiceUser, SSHService
 
 
-@admin.register(ServerUser)
-class ServerUserAdmin(BaseAdmin):
-    list_display = ['id', '_ip', 'username', 'pwd', 'group', 'owner', 'updatedAt', 'createdAt']
-    autocomplete_fields = ['server', 'owner']
-    list_filter = ['hasRootPriority', 'server', 'owner', 'group']
+@admin.register(SSHService)
+class SSHServiceAdmin(BaseAdmin):
+    list_display = ['id', 'server', 'port', 'updatedAt', 'createdAt']
+    list_filter = ['server', 'port']
+    autocomplete_fields = ['server']
+    search_fields = ['server__ip', 'port', 'remark']
+
+
+@admin.register(SSHServiceUser)
+class SSHUserAdmin(BaseAdmin):
+    list_display = ['id', '_ip', 'username', 'pwd', 'owner', 'updatedAt', 'createdAt']
+    autocomplete_fields = ['service']
+    list_filter = ['hasRootPriority', 'service', 'owner']
     list_select_related = autocomplete_fields
     form = ServerUserForm
 
@@ -75,7 +83,7 @@ class ServerUserAdmin(BaseAdmin):
 
 
 class ServerUserInlineAdmin(admin.TabularInline):
-    model = ServerUser
+    model = SSHServiceUser
     form = ServerUserForm
     autocomplete_fields = ['server', 'owner']
     min_num = 0
