@@ -441,7 +441,7 @@ class IMediaAdmin(admin.ModelAdmin):
     def thumb(self, obj):
         thumb_url = obj.thumbURL
         prv_url = "https://cvws.icloud-content.com.cn/B/AXsCTFGEAH5K_G8v5M550BKYQgrYAU3Llil8eeGq1YllzSOChTP8GzK8/$%7Bf%7D?o=AtJgOCoyIAwQaAoS4iNMm_t_66U9m_Cwk6V-Xc5u9itt&v=1&x=3&a=CAogEuXMIhmVlMSdUwyDPmMEeHBW4Pe8dlT5llye-A7y1KUSbxCh0t6dqTEYoa-6n6kxIgEAUgSYQgrYWgT8GzK8aicHbBtuls-GzfByFYWw_IFgUTD-mns3AcGQtUB2RN2ncMsWk2-ItNJyJ7ksv1IBrE1ycr9kwjX2z7yo1W7T6a5KGQ4z8-32UP5ONKX9XWGyHw&e=1694699001&fl=&r=65210c2f-4722-49e5-9724-3e53321d48d7-1&k=4uaX3YNtEyqLkhukOc7y5A&ckc=com.apple.photos.cloud&ckz=PrimarySync&y=1&p=215&s=bsmRo--bR8qyGg-VJt0rZnR_1XI"
-        dlt = datetime.datetime.now(tz=UTC) - obj.updatedAt
+        dlt = datetime.now() - obj.updatedAt
         if dlt > DLT:
             thumb_url = f"/icloud/thumb?" + urlencode({"id": obj.id, "startRank": obj.startRank})
         return '''<el-image style="width: 100px; height: 100px" src="{}" :preview-src-list="['{}']" lazy></el-image>'''.format(
