@@ -11,15 +11,69 @@
 ## 模块&功能
 
 本项目总共有六大模块组成.其分别是：
+<table>
+<tr>
+<td>主模块</td>
+<td>大模块</td>
+<td>子模块</td>
+<td>功能</td>
+<td>是否已实现</td>
+</tr>
 
-### 1. 万能堡垒
 
-* 服务器管理
-* 服务管理
-  * SSH服务
-  * 数据库服务
-  * 宝塔管理
-* 内网穿透管理
+<tr>
+<td rowspan="8">万能堡垒</td>
+<td rowspan="2">设备管理</td>
+<td>服务器管理</td>
+<td></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>路由器管理</td>
+<td></td>
+<td>☑️</td>
+</tr>
+
+<tr>
+<td rowspan="4">服务管理</td>
+<td>SSH服务</td>
+<td></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>数据库管理</td>
+<td></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>宝塔管理</td>
+<td></td>
+<td>✅</td>
+</tr>
+<tr>
+<td>ES管理</td>
+<td></td>
+<td>✅</td>
+</tr>
+
+
+<tr>
+<td>网段管理</td>
+<td></td>
+<td></td>
+<td>☑️</td>
+</tr>
+
+<tr>
+<td>穿透管理</td>
+<td></td>
+<td></td>
+<td>☑️</td>
+</tr>
+
+
+
+</table>
 
 ### 2. 账号管理
 
