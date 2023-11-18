@@ -29,6 +29,7 @@ import icloud.urls
 from izBasar import settings
 from . import _STATIC_URL
 from .secret import ADMIN_PATH
+
 # 网站标签页名称
 admin.site.site_title = "AllKeeper"
 # 网站名称：显示在登录页和首页
@@ -52,5 +53,6 @@ urlpatterns = [
     re_path(r'^static/(?P<path>.*)$', serve, ({'document_root': settings.STATIC_ROOT})),
     re_path(r'^media/(?P<path>.*)$', serve, ({'document_root': settings.MEDIA_ROOT})),
     re_path(r'^new_req/(?P<path>.*)$', TestProxyView.as_view()),
-    re_path('^eynek/', include(eynek.urls))
+    re_path('^eynek/', include(eynek.urls)),
+    path('sp/', include('simplepro.urls')),
 ]
