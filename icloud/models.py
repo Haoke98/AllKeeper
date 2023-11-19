@@ -12,6 +12,8 @@ import os.path
 from django.db import models
 from django.db.models import Count, Sum
 from simplepro.components import fields
+from simplepro.components.fields import PasswordInputField
+from simplepro.editor.fields import JsonTextField
 from simplepro.models import BaseModel
 
 
@@ -20,8 +22,8 @@ class AppleId(BaseModel):
                              blank=True)
     tel = fields.CharField(verbose_name="绑定的手机号", max_length=11, placeholder="请输入绑定的手机号", null=True, unique=True,
                            blank=True, show_word_limit=True)
-    passwd = fields.CharField(verbose_name='密码', max_length=128, placeholder='请输入密码', null=True, blank=True,
-                              show_password=True, show_word_limit=True)
+    passwd = PasswordInputField(verbose_name='密码', max_length=12, placeholder='请输入密码', null=True, blank=True,
+                                show_password=True, show_word_limit=True, pattern="0123456789", encrypt="md5")
     last2FactorAuthenticateAt = models.DateTimeField(verbose_name="上次两步验证时间", null=True, blank=True, editable=False)
     lastConfirmedSessionValidityAt = models.DateTimeField(verbose_name="上次确认会话有效性时间", null=True, blank=True,
                                                           editable=False)
@@ -50,6 +52,7 @@ class AppleId(BaseModel):
             return self.lastConfirmedSessionValidityAt - self.last2FactorAuthenticateAt
         else:
             return 0
+
 
 class Album(BaseModel):
     name = models.CharField(max_length=50, verbose_name="标题", primary_key=True)
@@ -206,10 +209,10 @@ class LocalMedia(BaseModel):
                            help_text="HICH图片和PNG图片的可预览文件为JPEG图，MOV视频的可预览文件为MP4", blank=True)
     origin = models.FileField(verbose_name="原始文件", null=True, upload_to=upload_origin, blank=True)
 
-    versions = models.TextField(null=True, blank=True)
-    masterRecord = models.TextField(null=True, blank=True)
-    assetRecord = models.TextField(null=True, blank=True)
-    assetRecordAfterDelete = models.TextField(null=True, blank=True)
+    versions = JsonTextField(null=True, blank=True)
+    masterRecord = JsonTextField(null=True, blank=True)
+    assetRecord = JsonTextField(null=True, blank=True)
+    assetRecordAfterDelete = JsonTextField(null=True, blank=True)
 
     class Meta:
         verbose_name = "本地资源"

@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 from izBasar.admin import BaseAdmin
-from ..forms import ServerUserForm
 from ..models import SSHServiceUser, SSHService
 
 
@@ -15,11 +14,11 @@ class SSHServiceAdmin(BaseAdmin):
 
 @admin.register(SSHServiceUser)
 class SSHUserAdmin(BaseAdmin):
-    list_display = ['id', '_ip', 'username', 'pwd', 'owner', 'updatedAt', 'createdAt']
+    list_display = ['id', '_ip', 'username', 'password', 'owner', 'updatedAt', 'createdAt']
     autocomplete_fields = ['service']
     list_filter = ['hasRootPriority', 'service', 'owner']
     list_select_related = autocomplete_fields
-    form = ServerUserForm
+    fields = ['owner', 'service', 'username', 'password', 'group', 'f3', 'info']
 
     def _ip(self, obj):
         return BaseAdmin.username(obj.server.ip)
@@ -84,7 +83,6 @@ class SSHUserAdmin(BaseAdmin):
 
 class ServerUserInlineAdmin(admin.TabularInline):
     model = SSHServiceUser
-    form = ServerUserForm
     autocomplete_fields = ['server', 'owner']
     min_num = 0
     extra = 0

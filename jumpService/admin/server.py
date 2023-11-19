@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 from izBasar.admin import BaseAdmin
-from ..forms import ServerForm
 from ..models import Server
 
 
@@ -17,8 +16,9 @@ class ServerAdmin(BaseAdmin):
     search_fields = ['ip', 'remark']
     search_help_text = ['你好，这是搜索帮助语句！']
     autocomplete_fields = []
-    form = ServerForm
     list_per_page = 10
+    fields = ['hoster', 'ip', 'system', 'rootUsername', 'rootPassword', 'bios', 'ssh', 'mac', 'remark',
+              'info']
 
     # inlines = [ServerUserInlineAdmin]
 

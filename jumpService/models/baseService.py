@@ -7,6 +7,7 @@
 @disc:
 ======================================="""
 from django.db import models
+from simplepro.components.fields import PasswordInputField, CharField
 from simplepro.models import BaseModel
 
 from .server import Server
@@ -35,8 +36,9 @@ class BaseServiceUserModel(BaseModel):
     owner = models.CharField(verbose_name="使用者", max_length=50, null=True, blank=True)
     service = models.ForeignKey(to=BaseServiceModel, on_delete=models.CASCADE, verbose_name="服务", null=True,
                                 blank=False)
-    username = models.CharField(max_length=32, null=True, blank=False, verbose_name="用户名")
-    password = models.CharField(max_length=32, null=True, blank=False, verbose_name="密码")
+    username = CharField(max_length=32, null=True, blank=False, verbose_name="用户名")
+    password = PasswordInputField(max_length=32, null=True, blank=False, verbose_name="密码", size="medium",
+                                  style="width:600px;", pattern="123456789,.asdfgzxcvbnm")
     hasRootPriority = models.BooleanField(default=False, verbose_name="拥有root权限", blank=True)
 
     class Meta:

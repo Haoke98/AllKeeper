@@ -1,4 +1,5 @@
 from django.db import models
+from simplepro.components.fields import PasswordInputField
 from simplepro.models import BaseModel
 
 
@@ -6,7 +7,7 @@ class Server(BaseModel):
     ip = models.GenericIPAddressField(verbose_name="IP地址", null=False, blank=False, unique=True,
                                       help_text="可以是IPV4/IPV6")
     rootUsername = models.CharField(max_length=32, verbose_name="root用户名", blank=False, default="root")
-    rootPassword = models.CharField(max_length=32, verbose_name="root密码", blank=False, null=True)
+    rootPassword = PasswordInputField(max_length=32, verbose_name="root密码", blank=False, null=True)
     hosterOptions = (
         (1, '阿里云'),
         (2, '腾讯云'),
@@ -20,7 +21,7 @@ class Server(BaseModel):
         ('WindowsServer2016', 'WindowsServer2016')
     )
     system = models.CharField(max_length=50, verbose_name="操作系统", default="CentOS7", choices=systemOpts)
-    bios = models.CharField(verbose_name="BIOS", max_length=32, null=True, blank=True)
+    bios = PasswordInputField(verbose_name="BIOS", max_length=32, null=True, blank=True)
     ssh = models.IntegerField(verbose_name="SSH端口", default=22, blank=True)
     mac = models.CharField(max_length=17, verbose_name="MAC地址", blank=True, null=True)
     remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True)

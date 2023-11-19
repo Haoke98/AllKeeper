@@ -42,15 +42,14 @@ class SSHServiceUser(BaseServiceUserModel):
         (17, "tape:x:33:"))
     group = fields.IntegerField(verbose_name='用户组', choices=userGroup, null=True, blank=True)
     username = models.CharField(max_length=32, null=True, blank=False, verbose_name="用户名")
-    pwd = models.CharField(max_length=32, verbose_name="密码", null=True, blank=False)
     hasRootPriority = models.BooleanField(default=False, verbose_name="root权限", blank=True)
     # 密码输入框
     f3 = fields.CharField(verbose_name='测试字段（非必填）', placeholder='请输入密码', max_length=128, show_password=True, null=True,
                           blank=True, show_word_limit=True, slot='prepend', slot_text='密码')
 
     class Meta:
-        verbose_name = "服务器用户"
-        verbose_name_plural = f"所有{verbose_name}"
+        verbose_name = "SSH账号"
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return f"用户（{self.server.ip},{self.owner}）"

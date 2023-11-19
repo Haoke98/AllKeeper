@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 from izBasar.admin import LIST_DISPLAY, BaseAdmin
-from ..forms import DbServiceUserForm, DbServiceUserFormBase
 from ..models import DbServiceUser
 
 
@@ -12,7 +11,6 @@ class DbServiceUserAdmin(BaseAdmin):
     list_filter = ['hasRootPriority', 'service', 'owner']
     list_select_related = autocomplete_fields
     raw_id_fields = ('service',)
-    form = DbServiceUserForm
 
     def formatter(self, obj, field_name, value):
         if field_name == 'username':
@@ -66,4 +64,3 @@ class DbServiceUserInlineAdmin(admin.TabularInline):
     exclude = ('password',)
     min_num = 0
     extra = 0
-    form = DbServiceUserFormBase
