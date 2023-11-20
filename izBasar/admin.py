@@ -45,9 +45,11 @@ class BaseAdmin(admin.ModelAdmin):
         # _get_form_for_get_fields() is implemented in subclasses.
         form = self._get_form_for_get_fields(request, obj)
         res = [*form.base_fields, *self.get_readonly_fields(request, obj)]
-        if "info" in res:
-            res.remove("info")
-        res.append("info")
+        x = ['remark', 'info']
+        for i in x:
+            if i in res:
+                res.remove(i)
+                res.append(i)
         return res
 
     # TODO：改成simplepro组件
