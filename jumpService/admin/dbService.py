@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from izBasar.admin import LIST_DISPLAY, BaseAdmin
+from izBasar.admin import BaseAdmin
 from .dbServiceUser import DbServiceUserInlineAdmin
 from ..forms import DbServiceForm
 from ..models import DbService
@@ -9,14 +9,13 @@ from ..models import DbService
 @admin.register(DbService)
 class DbServiceAdmin(BaseAdmin):
     form = DbServiceForm
-    list_display = LIST_DISPLAY + ['server', 'port', '_username', 'pwd', 'ttype', 'remark', ]
+    list_display = ['id', 'server', 'port', '_username', 'pwd', 'ttype', 'remark', 'updatedAt', 'createdAt']
     list_display_links = ['createdAt', 'updatedAt', 'server', 'port', 'ttype']
     list_filter = ['server', 'port', 'ttype']
     date_hierarchy = 'updatedAt'
-    search_fields = ['rootPwd.password',
-                     'remark', ]
+    search_fields = ['server__ip', 'port', 'ttype', 'remark', ]
     search_help_text = ['你好，这是搜索帮助语句！']
-    autocomplete_fields = []
+    autocomplete_fields = ['server']
     inlines = [DbServiceUserInlineAdmin]
 
     def _username(self, obj):
@@ -49,7 +48,7 @@ class DbServiceAdmin(BaseAdmin):
         },
         'server': {
             'min_width': '320px',
-            'align': 'center'
+            'align': 'left'
         },
         'port': {
             'min_width': '140px',

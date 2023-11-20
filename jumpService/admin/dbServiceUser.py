@@ -10,12 +10,11 @@ class DbServiceUserAdmin(BaseAdmin):
     autocomplete_fields = ['service']
     list_filter = ['hasRootPriority', 'service', 'owner']
     list_select_related = autocomplete_fields
-    raw_id_fields = ('service',)
 
     def formatter(self, obj, field_name, value):
         if field_name == 'username':
             if value:
-                return BaseAdmin.password(obj.username)
+                return BaseAdmin.username(obj.username)
         if field_name == 'password':
             if value:
                 return BaseAdmin.password(obj.password)
@@ -47,13 +46,13 @@ class DbServiceUserAdmin(BaseAdmin):
             'min_width': '140px',
             'align': 'center'
         },
-        'server': {
+        'service': {
             'min_width': '320px',
-            'align': 'center'
+            'align': 'left'
         },
         'owner': {
-            'min_width': '178px',
-            'align': 'center'
+            'min_width': '240px',
+            'align': 'left'
         }
     }
 

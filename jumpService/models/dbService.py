@@ -1,4 +1,5 @@
 from django.db import models
+from simplepro.components import fields
 
 from .baseService import BaseServiceModel, BaseServiceUserModel
 
@@ -17,11 +18,15 @@ class DbService(BaseServiceModel):
         verbose_name_plural = f"所有{verbose_name}"
 
     def __str__(self):
-        return f"数据{super().__str__()}"
+        ttype = ""
+        for a, b in self.typeOpts:
+            if self.ttype == a:
+                ttype = b
+        return f"{b}({self.server.ip}:{self.port}）"
 
 
 class DbServiceUser(BaseServiceUserModel):
-    service = models.ForeignKey(to=DbService, on_delete=models.CASCADE, verbose_name="服务器", null=True,
+    service = fields.ForeignKey(to=DbService, on_delete=models.CASCADE, verbose_name="数据服务", null=True,
                                 blank=False)
 
     class Meta:
@@ -29,4 +34,4 @@ class DbServiceUser(BaseServiceUserModel):
         verbose_name_plural = f"所有{verbose_name}"
 
     def __str__(self):
-        return f"用户（{self.server.server.ip},{self.owner}）"
+        return f"用户（{self.service.server.ip},{self.owner}）"

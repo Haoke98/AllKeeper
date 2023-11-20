@@ -19,7 +19,7 @@ class SSHService(BaseServiceModel):
 
 
 class SSHServiceUser(BaseServiceUserModel):
-    service = models.ForeignKey(to=SSHService, on_delete=models.CASCADE, verbose_name="所属服务", null=True,
+    service = fields.ForeignKey(to=SSHService, on_delete=models.CASCADE, verbose_name="所属服务", null=True,
                                 blank=False)
     userGroup = (
         (0, "root:x:0:"),
@@ -43,13 +43,10 @@ class SSHServiceUser(BaseServiceUserModel):
     group = fields.IntegerField(verbose_name='用户组', choices=userGroup, null=True, blank=True)
     username = models.CharField(max_length=32, null=True, blank=False, verbose_name="用户名")
     hasRootPriority = models.BooleanField(default=False, verbose_name="root权限", blank=True)
-    # 密码输入框
-    f3 = fields.CharField(verbose_name='测试字段（非必填）', placeholder='请输入密码', max_length=128, show_password=True, null=True,
-                          blank=True, show_word_limit=True, slot='prepend', slot_text='密码')
 
     class Meta:
         verbose_name = "SSH账号"
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return f"用户（{self.server.ip},{self.owner}）"
+        return f"用户（{self.service.server.ip},{self.owner}）"
