@@ -36,15 +36,27 @@ class BaseAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY
     date_hierarchy = 'updatedAt'
 
+    def get_fields(self, request, obj=None):
+        """
+                Hook for specifying fields.
+                """
+        if self.fields:
+            return self.fields
+        # _get_form_for_get_fields() is implemented in subclasses.
+        form = self._get_form_for_get_fields(request, obj)
+        res = [*form.base_fields, *self.get_readonly_fields(request, obj)]
+        if "info" in res:
+            res.remove("info")
+        res.append("info")
+        return res
+
     # TODO：改成simplepro组件
     @staticmethod
     def username(value):
         return f'''<div style="display:flex;">
                             <el-input value="{value}" :disabled="false">
                                 <template slot="append">
-                                    <el-button style="color:white;" type="primary" icon="el-icon-copy-document" onclick="copyStr('{value}')">
-                                        复制
-                                    </el-button>
+                                    <el-button style="color:white;border-radius: 0 4px 4px 0;width:40px;display: flex;justify-content: center;align-items: center;" type="primary" icon="el-icon-copy-document" onclick="copyStr('{value}')"></el-button>
                                 </template>
                             </el-input>
                         </div>'''
@@ -53,11 +65,9 @@ class BaseAdmin(admin.ModelAdmin):
     @staticmethod
     def password(value):
         return f'''<div style="display:flex;">
-                                        <el-input value="********" :disabled="false">
+                                        <el-input value="{value}" :disabled="false" :show-password="true" type="password">
                                             <template slot="append">
-                                                <el-button style="color:white;" type="primary" icon="el-icon-copy-document" onclick="copyStr('{value}')">
-                                                    复制
-                                                </el-button>
+                                                <el-button style="color:white;border-radius: 0 4px 4px 0;width:40px;display: flex;justify-content: center;align-items: center;" type="primary" icon="el-icon-copy-document" onclick="copyStr('{value}')"></el-button>
                                             </template>
                                         </el-input>
                         </div>'''

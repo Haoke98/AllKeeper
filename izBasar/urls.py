@@ -44,7 +44,7 @@ class TestProxyView(ProxyView):
 
 admin.autodiscover()
 urlpatterns = [
-    path(ADMIN_PATH, admin.site.urls),
+    path(f"{ADMIN_PATH}/", admin.site.urls),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     re_path('^all-keeper/', include(accountSystem.urls)),
