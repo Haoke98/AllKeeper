@@ -42,8 +42,8 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE_ROOT = os.path.abspath(os.path.join(SITE_ROOT, '../'))
 STATIC_ROOT = os.path.join(PUBLIC_ROOT, 'static')
-print("SITE_ROOT:", SITE_ROOT)
-print("STATIC_ROOT:", STATIC_ROOT)
+logging.info(f"SITE_ROOT:{SITE_ROOT}")
+logging.info(f"STATIC_ROOT:{STATIC_ROOT}")
 STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
                        "django.contrib.staticfiles.finders.AppDirectoriesFinder")
 # 静态资源目录列表
@@ -56,7 +56,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'icloud/static'),
     os.path.join(BASE_DIR, 'eynek/static'),
 ]
-print("STATICFILES_DIR:", STATICFILES_DIRS)
+logging.info(f"STATICFILES_DIR:{STATICFILES_DIRS}")
 
 if not os.path.exists(STATIC_ROOT):
     os.mkdir(STATIC_ROOT)
@@ -252,16 +252,14 @@ WSGI_APPLICATION = 'izBasar.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': secret.MYSQL_DATABASE,
-        'HOST': secret.MYSQL_HOST,
-        'PORT': secret.MYSQL_PORT,
-        'USER': secret.MYSQL_USERNAME,
-        'PASSWORD': secret.MYSQL_PASSWORD,
+        'ENGINE': secret.DB_BACKEND,
+        'NAME': secret.DB_DATABASE,
+        'HOST': secret.DB_HOST,
+        'PORT': secret.DB_PORT,
+        'USER': secret.DB_USERNAME,
+        'PASSWORD': secret.DB_PASSWORD,
         'CONN_MAX_AGE': 0,
         'OPTIONS': {
-            'charset': 'utf8mb4',
-            'use_unicode': True,
         },
     }
 }

@@ -6,6 +6,7 @@
 @Software: PyCharm
 @disc:
 ======================================="""
+import decimal
 import math
 
 
@@ -15,8 +16,11 @@ def human_readable_bytes(num_bytes):
     size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
     i = int(math.floor(math.log(num_bytes, 1024)))
     p = math.pow(1024, i)
-    s = round(num_bytes / p, 2)
+    p_decimal = decimal.Decimal(p)
+    s = round(num_bytes / p_decimal, 2)
     return "%s %s" % (s, size_name[i])
+
+
 def human_readable_time(milliseconds):
     seconds = milliseconds // 1000
     minutes = seconds // 60

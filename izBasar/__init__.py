@@ -1,3 +1,4 @@
+import logging
 import os
 import platform
 
@@ -9,7 +10,7 @@ WINDOWS = 'Windows'
 LINUX = 'Linux'
 MacOS = 'Darwin'
 CURRENT_SYSTEM = platform.system()
-print("CWD:", os.getcwd())
+logging.info(f"CWD:{os.getcwd()}")
 
 if CURRENT_SYSTEM == WINDOWS:
     _DEBUG = True
@@ -33,7 +34,7 @@ try:
     _DEBUG = secret._DEBUG
 except:
     pass
-print(f"this app is running on {CURRENT_SYSTEM},DEBUG:{_DEBUG}")
+logging.info(f"this app is running on {CURRENT_SYSTEM},DEBUG:{_DEBUG}")
 from elasticsearch import Elasticsearch
 
 esClient = Elasticsearch(hosts=ES_URI, http_auth=(ES_USERNAME, ES_PASSWORD),
