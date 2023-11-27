@@ -6,18 +6,20 @@ from ..models import Server
 
 @admin.register(Server)
 class ServerAdmin(BaseAdmin):
-    list_display = ["id", "ip", 'system', 'rootPassword', 'ssh', 'bios', 'hoster', 'remark',
-                    "createdAt",
+    list_display = ['code', 'net', "ip", 'system', 'rootPassword', 'ssh', 'status', 'remark', 'bios', 'hoster',
                     "updatedAt",
+                    "createdAt",
                     "deletedAt", ]
-    list_display_links = ['id', 'remark', 'hoster']
-    list_filter = ['hoster', 'ssh', 'system']
+    list_display_links = ['remark', 'hoster']
+    list_filter = ['hoster', 'ssh', 'system', 'net', 'status']
     date_hierarchy = 'updatedAt'
-    search_fields = ['ip', 'remark']
+    search_fields = ['ip', 'remark', 'code']
     search_help_text = ['你好，这是搜索帮助语句！']
-    autocomplete_fields = []
+    autocomplete_fields = ['net']
     list_per_page = 10
-    fields = ['hoster', 'ip', 'system', 'rootUsername', 'rootPassword', 'bios', 'ssh', 'mac', 'remark',
+    fields = ['code', 'hoster', 'net', 'ip', 'system', 'rootUsername', 'rootPassword', 'status', 'bios', 'ssh',
+              'mac',
+              'remark',
               'info']
 
     # inlines = [ServerUserInlineAdmin]
@@ -38,7 +40,12 @@ class ServerAdmin(BaseAdmin):
     fields_options = {
         'id': {
             'fixed': 'left',
-            'min_width': '80px',
+            'min_width': '88px',
+            'align': 'center'
+        },
+        'code': {
+            'fixed': 'left',
+            'min_width': '88px',
             'align': 'center'
         },
         'createdAt': {
@@ -54,7 +61,11 @@ class ServerAdmin(BaseAdmin):
             'align': 'left'
         },
         'ip': {
-            'min_width': '248px',
+            'min_width': '200px',
+            'align': 'center'
+        },
+        'net': {
+            'min_width': '180px',
             'align': 'center'
         },
         'system': {
@@ -75,6 +86,10 @@ class ServerAdmin(BaseAdmin):
         },
         'group': {
             'min_width': '220px',
+            'align': 'left'
+        },
+        'status': {
+            'min_width': '180px',
             'align': 'left'
         },
         'remark': {

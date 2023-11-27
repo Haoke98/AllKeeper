@@ -12,3 +12,4 @@ from .dbServiceUser import DbServiceUserAdmin
 from .es import ElasticSearchAdmin
 from .server import ServerAdmin
 from .ssh import SSHServiceAdmin, SSHUserAdmin
+from .net import NetAdmin
