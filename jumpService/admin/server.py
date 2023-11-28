@@ -1,7 +1,8 @@
 from django.contrib import admin
+from simplepro.decorators import button
 
 from izBasar.admin import BaseAdmin
-from ..models import Server, ServerNew
+from ..models import Server, ServerNew, IPAddress
 
 
 @admin.register(Server)
@@ -107,9 +108,9 @@ class ServerAdmin(BaseAdmin):
 @admin.register(ServerNew)
 class ServerNewAdmin(BaseAdmin):
     list_display = ['code', 'system', 'rootPassword', 'ssh', 'status', 'remark', 'bios', 'hoster',
-                    "updatedAt",
-                    "createdAt",
-                    "deletedAt", ]
+                    "mac",
+                    "updatedAt", "createdAt", "deletedAt", "id"
+                    ]
     list_display_links = ['remark', 'hoster']
     list_filter = ['hoster', 'ssh', 'system', 'status']
     date_hierarchy = 'updatedAt'
@@ -121,8 +122,36 @@ class ServerNewAdmin(BaseAdmin):
               'mac',
               'remark',
               'info']
+    actions = ['sync']
 
     # inlines = [ServerUserInlineAdmin]
+    @button(type='danger', short_description='新旧数据同步', enable=True, confirm="您确定要生成吗？")
+    def sync(self, request, queryset):
+        iService = None
+        for i, oldServer in enumerate(Server.objects.all()):
+            # net = Net.objects.get_or_create(content=)
+            obj = ServerNew(
+                id=oldServer.id,
+                code=oldServer.code,
+                rootUsername=oldServer.rootUsername,
+                rootPassword=oldServer.rootPassword,
+                hoster=oldServer.hoster,
+                system=oldServer.system,
+                status=oldServer.status,
+                bios=oldServer.bios,
+                ssh=oldServer.ssh,
+                mac=oldServer.mac,
+                remark=oldServer.remark
+            )
+            obj.save()
+            net = oldServer.net
+            ip = IPAddress(net=net, ip=oldServer.ip, device=obj)
+            ip.save()
+            print(i)
+        return {
+            'state': True,
+            'msg': f'同步成功'
+        }
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
@@ -139,7 +168,6 @@ class ServerNewAdmin(BaseAdmin):
 
     fields_options = {
         'id': {
-            'fixed': 'left',
             'min_width': '88px',
             'align': 'center'
         },
