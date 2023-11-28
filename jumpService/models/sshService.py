@@ -9,16 +9,16 @@
 from django.db import models
 from simplepro.components import fields
 
-from .baseService import BaseServiceModel, BaseServiceUserModel
+from .service import AbstractBaseServiceUserModel, AbstractBaseServiceModel
 
 
-class SSHService(BaseServiceModel):
+class SSHService(AbstractBaseServiceModel):
     class Meta:
         verbose_name = "SSH服务"
         verbose_name_plural = verbose_name
 
 
-class SSHServiceUser(BaseServiceUserModel):
+class SSHServiceUser(AbstractBaseServiceUserModel):
     service = fields.ForeignKey(to=SSHService, on_delete=models.CASCADE, verbose_name="所属服务", null=True,
                                 blank=False)
     userGroup = (
@@ -41,8 +41,6 @@ class SSHServiceUser(BaseServiceUserModel):
         (16, "games:x:20:"),
         (17, "tape:x:33:"))
     group = fields.IntegerField(verbose_name='用户组', choices=userGroup, null=True, blank=True)
-    username = models.CharField(max_length=32, null=True, blank=False, verbose_name="用户名")
-    hasRootPriority = models.BooleanField(default=False, verbose_name="root权限", blank=True)
 
     class Meta:
         verbose_name = "SSH账号"

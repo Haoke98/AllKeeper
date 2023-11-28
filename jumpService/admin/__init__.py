@@ -6,10 +6,12 @@
 @Software: PyCharm
 @disc:
 ======================================="""
+from .service import ServiceAdmin, ServiceUserAdmin
 from .bt import BtAdmin
 from .dbService import DbServiceAdmin
 from .dbServiceUser import DbServiceUserAdmin
 from .es import ElasticSearchAdmin
+from .net import NetAdmin
 from .server import ServerAdmin
 from .ssh import SSHServiceAdmin, SSHUserAdmin
-from .net import NetAdmin
+from .minio_admin import MinIOAdmin

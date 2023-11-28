@@ -1,9 +1,9 @@
 from django.db import models
 
-from .baseService import BaseServiceModel
+from .service import AbstractBaseServiceModel
 
 
-class ElasticSearch(BaseServiceModel):
+class ElasticSearch(AbstractBaseServiceModel):
     elasticPwd = models.CharField(max_length=36, verbose_name="elastic", null=True,
                                   blank=False)
     kibanaPwd = models.CharField(max_length=36, verbose_name="kibana_system", null=True,
@@ -17,3 +17,7 @@ class ElasticSearch(BaseServiceModel):
                                 verbose_name='beats_system', null=True, blank=True)
     remoteMonitoringPwd = models.CharField(max_length=36,
                                            verbose_name='remote_monitoring_user', null=True, blank=True)
+
+    class Meta:
+        verbose_name = "ElasticSearch弹性检索引擎"
+        verbose_name_plural = verbose_name

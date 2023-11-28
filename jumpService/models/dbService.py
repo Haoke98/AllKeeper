@@ -1,10 +1,9 @@
 from django.db import models
-from simplepro.components import fields
 
-from .baseService import BaseServiceModel, BaseServiceUserModel
+from .service import AbstractBaseServiceModel, AbstractBaseServiceUserModel
 
 
-class DbService(BaseServiceModel):
+class DbService(AbstractBaseServiceModel):
     pwd = models.CharField(verbose_name="root密码", max_length=48, null=True, blank=True)
     typeOpts = (
         (0, 'MySQL'),
@@ -25,8 +24,8 @@ class DbService(BaseServiceModel):
         return f"{b}({self.server.ip}:{self.port}）"
 
 
-class DbServiceUser(BaseServiceUserModel):
-    service = fields.ForeignKey(to=DbService, on_delete=models.CASCADE, verbose_name="数据服务", null=True,
+class DbServiceUser(AbstractBaseServiceUserModel):
+    service = models.ForeignKey(to=DbService, on_delete=models.CASCADE, verbose_name="服务", null=True,
                                 blank=False)
 
     class Meta:
