@@ -7,11 +7,33 @@
 @disc:
 ======================================="""
 from django.contrib import admin
+from django.forms import ModelForm
 
-from ..models import NetModel
+from ..models import Net, IPAddress, NetDevice
 
 
-@admin.register(NetModel)
+class IPAddressForm(ModelForm):
+    class Meta:
+        model = IPAddress
+        fields = ['device', 'net', 'ip']
+
+
+class IPAddressInlineAdmin(admin.TabularInline):
+    model = IPAddress
+    form = IPAddressForm
+    min_num = 0
+    extra = 0
+
+
+@admin.register(Net)
 class NetAdmin(admin.ModelAdmin):
     list_display = ['id', 'content', 'remark', 'createdAt', 'updatedAt', 'deletedAt']
     search_fields = ['content', 'remark']
+    inlines = [IPAddressInlineAdmin]
+
+
+@admin.register(NetDevice)
+class NetDeviceAdmin(admin.ModelAdmin):
+    list_display = ['id', 'status', 'remark', 'mac', 'createdAt', 'updatedAt', 'deletedAt']
+    search_fields = ['status', 'remark', 'net', 'mac']
+    inlines = [IPAddressInlineAdmin]
