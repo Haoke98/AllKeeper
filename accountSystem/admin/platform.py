@@ -58,8 +58,10 @@ class PlatformAdmin(admin.ModelAdmin):
     fields_options = {
         'id': {
             'fixed': 'left',
-            'min_width': '80px',
-            'align': 'center'
+            'min_width': "80",
+            'align': 'center',
+            "resizeable": True,
+            "show_overflow_tooltip": True
         },
         'createdAt': {
             'min_width': '180px',
