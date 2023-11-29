@@ -3,6 +3,7 @@ from simplepro.decorators import button
 
 from izBasar.admin import BaseAdmin
 from ..models import Server, ServerNew, IPAddress
+from .net import IPAddressInlineAdmin
 
 
 @admin.register(Server)
@@ -118,11 +119,12 @@ class ServerNewAdmin(BaseAdmin):
     search_help_text = ['你好，这是搜索帮助语句！']
     autocomplete_fields = []
     list_per_page = 10
-    fields = ['code', 'hoster', 'net', 'ip', 'system', 'rootUsername', 'rootPassword', 'status', 'bios', 'ssh',
+    fields = ['code', 'hoster', 'system', 'rootUsername', 'rootPassword', 'status', 'bios', 'ssh',
               'mac',
               'remark',
               'info']
     actions = ['sync']
+    inlines = [IPAddressInlineAdmin]
 
     # inlines = [ServerUserInlineAdmin]
     @button(type='danger', short_description='新旧数据同步', enable=True, confirm="您确定要生成吗？")

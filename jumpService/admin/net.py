@@ -37,3 +37,9 @@ class NetDeviceAdmin(admin.ModelAdmin):
     list_display = ['id', 'status', 'remark', 'mac', 'createdAt', 'updatedAt', 'deletedAt']
     search_fields = ['status', 'remark', 'net', 'mac']
     inlines = [IPAddressInlineAdmin]
+
+
+@admin.register(IPAddress)
+class IPAddressAdmin(admin.ModelAdmin):
+    list_display = ['id', 'net', 'ip', 'device', 'createdAt', 'updatedAt', 'deletedAt']
+    search_fields = ['net', 'ip', 'device']
