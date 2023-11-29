@@ -16,60 +16,79 @@
 <td>主模块</td>
 <td>大模块</td>
 <td>子模块</td>
+<td>微模块</td>
 <td>功能</td>
 <td>是否已实现</td>
 </tr>
 
 
 <tr>
-<td rowspan="8">万能堡垒</td>
-<td rowspan="2">设备管理</td>
+<td rowspan="10">万能堡垒</td>
+<td rowspan="3">设备管理</td>
+<td rowspan="3">网络设备管理</td>
 <td>服务器管理</td>
-<td></td>
+<td>········</td>
 <td>✅</td>
 </tr>
 <tr>
 <td>路由器管理</td>
-<td></td>
+<td>········</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>转换器管理</td>
+<td>········</td>
 <td>☑️</td>
 </tr>
+<tr>
+
+
+<td rowspan="3">网络管理</td>
+<td >网段管理</td>
+<td>········</td>
+<td>········</td>
+<td>✅️</td>
+</tr>
+<tr>
+<td>IP地址管理</td>
+<td>········</td>
+<td>········</td>
+<td>✅️</td>
+</tr>
+<tr>
+<td>穿透管理</td>
+<td>········</td>
+<td>········</td>
+<td>☑️</td>
+</tr>
+
 
 <tr>
 <td rowspan="4">服务管理</td>
 <td>SSH服务</td>
-<td></td>
+<td>········</td>
+<td>········</td>
 <td>✅</td>
 </tr>
 <tr>
 <td>数据库管理</td>
-<td></td>
+<td>········</td>
+<td>········</td>
 <td>✅</td>
 </tr>
 <tr>
 <td>宝塔管理</td>
-<td></td>
+<td>········</td>
+<td>········</td>
 <td>✅</td>
 </tr>
 <tr>
 <td>ES管理</td>
-<td></td>
+<td>········</td>
+<td>········</td>
 <td>✅</td>
 </tr>
 
-
-<tr>
-<td>网段管理</td>
-<td></td>
-<td></td>
-<td>☑️</td>
-</tr>
-
-<tr>
-<td>穿透管理</td>
-<td></td>
-<td></td>
-<td>☑️</td>
-</tr>
 
 
 
