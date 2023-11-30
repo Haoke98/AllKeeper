@@ -1,17 +1,57 @@
 [Unit]
 Description=AllKeeper Service
-#Documentation
+
+# Documentation
+
+# Before
+
 #After=lanproxy.service
-After=webssh.service
-#Before
-#Wants
-#Requires
+After=network.target
+
+# Requires:指定了当当前服务单元被启动时必须同时启动的其他的 systemd 服务单元。如果指定的其他服务单元启动失败，当前服务单元的启动将被停止。
+
+# Wants:似于 Requires 属性，但更加宽松。它指定了当当前服务单元被启动时应尽量启动的其他 systemd 服务单元，但不会导致当前服务单元被停止。也就是说，只是表示希望这些被依赖的服务单元也能够同时启动。
+Wants=webssh.service
+
+# Conflicts=：用于指定当前服务需要避免冲突的其他 systemd 服务单元。
+
+# PartOf=：用于指定当前服务是组的一个部分的 systemd 服务单元。
+
+# RequiredBy=：用于指定一个或多个其他 systemd 服务单元依赖于当前服务单元。它与 Requires= 属性相反，可以用于查找当前服务为其他服务提供的功能。
+
+# WantedBy=：用于指定在什么状态（如多用户模式或图形用户界面模式）下或在哪些条件（如挂载某个文件系统）下，应启动当前服务单元。
+
 
 [Service]
 Type=simple
+
+# User指定要启动服务的用户，第三方应用和服务都千万不要用root启动，否则稍有不慎，攻击者将利用其他漏洞很容易获取系统的最高权限
+User=nobody
+
+# ExecStartPre：指定在服务的主进程启动之前运行的额外命令。这些命令在服务主进程启动之前运行。多个命令可以通过添加多个 ExecStartPre= 配置来运行。
+
 ExecStart=/opt/pypy3.9-v7.3.11-linux64/bin/pypy3 /opt/AllKeeper/manage.py runserver 0:8001
-#ExecStop=
+
+# ExecStartPost=：指定在服务的主进程启动之后运行的额外命令。这些命令在服务主进程启动之后运行。多个命令可以通过添加多个 ExecStartPost= 配置来运行。
+
+# ExecStop：指定服务停止时必须运行的命令。它在服务主进程终止之前执行。多个命令可以通过添加多个 ExecStop= 配置来运行。
+
+
+
 RemainAfterExit=yes
+
+# Restart：用于指示服务停止或崩溃后的重新启动策略。
+Restart=on-failure
+
+# TimeoutStartSec：指定服务启动超时时长。如果服务在此时间内未启动，则服务启动失败。
+
+# RestartSec：指定重新启动的间隔时间。该选项定义了在服务发生崩溃时，系统应等待多长时间后尝试重新启动服务。
+
+# PIDFile：用于指示 PID 文件存储服务进程的 PID 值的位置。
+
+# KillMode：用于指定在停止服务时要使用的 kill 信号的类型。
+
+# LimitNOFILE：用于指定服务的进程可以打开的最大文件描述符数。
 
 [Install]
 WantedBy=multi-user.target
