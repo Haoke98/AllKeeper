@@ -102,7 +102,8 @@ class AccountAdmin(BaseAdmin):
         'id': {
             # 'fixed': 'left',
             'width': '80px',
-            'align': 'center'
+            'align': 'center',
+            'show_overflow_tooltip': True
         },
         'createdAt': {
             'width': '180px',

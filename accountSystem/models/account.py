@@ -1,6 +1,7 @@
 from django.db import models
 from simplepro.components import fields
 
+from lib import pkHelper
 from .baseAccount import BaseAccount
 from .email import Email
 from .tel import Tel
@@ -9,6 +10,7 @@ from .wechat import Wechat
 
 
 class Account(BaseAccount):
+    id = models.CharField(max_length=48, primary_key=True, default=pkHelper.uuid_generator())
     platform = fields.ForeignKey(verbose_name="所属平台", to=Platform, on_delete=models.CASCADE, related_name="platform",
                                  null=True, limit_choices_to=models.Q(url__isnull=False))
     tels = fields.ManyToManyField(verbose_name="所有绑定的手机号", to=Tel, related_name="tels", blank=True)
