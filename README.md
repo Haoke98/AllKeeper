@@ -200,6 +200,17 @@
 
 ### iCloud内容管理
 
+## 核心依赖
+
+### 1. Django集成式多功能后端框架
+
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Haoke98&repo=DjangoAsyncAdmin)](https://github.com/Haoke98/DjangoAsnycAdmin)
+
+### 2. FFmpeg
+
+为了实现icloud相关视频处理功能需要用到FFmpeg作为核心。
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=FFmpeg&repo=FFmpeg)](https://github.com/FFmpeg/FFmpeg)
+
 
 ## 🌱 使用教程
 
@@ -237,11 +248,6 @@ python manange.py runserver 7000
 # 后台运行
 nohup python manange.py runserver 7000 > app.log 2>&1 & echo $! > app.pid
 ```
-## 依赖
-
-### 1. ffmpeg
-
-为了实现icloud相关功能需要安装
 
 
 ### Nginx 配置实现媒体文件的缩略图功能
