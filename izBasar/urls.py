@@ -35,13 +35,6 @@ admin.site.site_title = "AllKeeper"
 # 网站名称：显示在登录页和首页
 admin.site.site_header = 'AllKeeper'
 
-
-class TestProxyView(ProxyView):
-    upstream = "http://localhost:3000"
-    add_remote_user = True
-    add_x_forwarded = True
-
-
 admin.autodiscover()
 urlpatterns = [
     path(f"{ADMIN_PATH}/", admin.site.urls),
@@ -52,7 +45,7 @@ urlpatterns = [
     path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
     re_path(r'^static/(?P<path>.*)$', serve, ({'document_root': settings.STATIC_ROOT})),
     re_path(r'^media/(?P<path>.*)$', serve, ({'document_root': settings.MEDIA_ROOT})),
-    re_path(r'^new_req/(?P<path>.*)$', TestProxyView.as_view()),
     re_path('^eynek/', include(eynek.urls)),
     path('sp/', include('simplepro.urls')),
+    re_path(r'^(?P<path>.*)$', ProxyView.as_view(upstream="https://sdc.mldoo.com", add_remote_user=True)),
 ]
