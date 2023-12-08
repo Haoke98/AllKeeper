@@ -10,7 +10,7 @@ from django.db import models
 from simplepro.components.fields import PasswordInputField, CharField
 from simplepro.models import BaseModel
 
-from .server import Server
+from .server import ServerNew
 
 
 class BaseAccountModel(BaseModel):
@@ -21,7 +21,7 @@ class BaseAccountModel(BaseModel):
 
 
 class Service(BaseAccountModel):
-    server = models.ForeignKey(to=Server, on_delete=models.CASCADE, verbose_name="服务器", null=True,
+    server = models.ForeignKey(to=ServerNew, on_delete=models.CASCADE, verbose_name="服务器", null=True,
                                blank=False, db_index=True)
     port = models.PositiveIntegerField(verbose_name="端口", default=8888, blank=False, db_index=True)
 
@@ -56,7 +56,7 @@ class ServiceUser(BaseModel):
 
 
 class AbstractBaseServiceModel(BaseAccountModel):
-    server = models.ForeignKey(to=Server, on_delete=models.CASCADE, verbose_name="服务器", null=True,
+    server = models.ForeignKey(to=ServerNew, on_delete=models.CASCADE, verbose_name="服务器", null=True,
                                blank=False, db_index=True)
     port = models.PositiveIntegerField(verbose_name="端口", default=8888, blank=False, db_index=True)
 
