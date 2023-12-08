@@ -10,7 +10,7 @@ from django.db import models
 from simplepro.components.fields import PasswordInputField, CharField
 from simplepro.models import BaseModel
 
-from .server import ServerNew
+from ..devices import ServerNew
 
 
 class BaseAccountModel(BaseModel):

@@ -2,7 +2,8 @@ from django.db import models
 from simplepro.components import fields
 from simplepro.models import BaseModel
 
-from .net import Net, NetDevice
+from ..net import Net
+from .net_device import NetDevice
 
 
 class Server(BaseModel):

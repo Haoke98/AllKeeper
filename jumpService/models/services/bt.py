@@ -2,7 +2,7 @@ from django.db import models
 from simplepro.components.fields import PasswordInputField
 from simplepro.models import BaseModel
 
-from .server import ServerNew
+from ..devices import ServerNew
 
 
 class BT(BaseModel):
