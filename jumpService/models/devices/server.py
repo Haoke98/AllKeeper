@@ -2,8 +2,34 @@ from django.db import models
 from simplepro.components import fields
 from simplepro.models import BaseModel
 
-from ..net import Net
 from .net_device import NetDevice
+from ..net import Net
+
+
+class ServerRoom(BaseModel):
+    code = fields.CharField(verbose_name="编号", max_length=50, null=True, unique=True, blank=False)
+
+    class Meta:
+        verbose_name = "机房"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return f"机房{self.code}"
+
+
+class ServerCabinet(BaseModel):
+    code = fields.CharField(verbose_name="编号", max_length=50, null=True, blank=False)
+    room = fields.ForeignKey(to=ServerRoom, on_delete=models.CASCADE, verbose_name="所属机房")
+
+    class Meta:
+        verbose_name = "机柜"
+        verbose_name_plural = verbose_name
+        constraints = [
+            models.UniqueConstraint(fields=['code', 'room'], name="server_cabinet_room_unique")
+        ]
+
+    def __str__(self):
+        return f"{self.room}-{self.code}"
 
 
 class Server(BaseModel):
@@ -29,6 +55,7 @@ class Server(BaseModel):
     bios = fields.PasswordInputField(verbose_name="BIOS", max_length=32, null=True, blank=True)
     ssh = models.IntegerField(verbose_name="SSH端口", default=22, blank=True)
     mac = models.CharField(max_length=17, verbose_name="MAC地址", blank=True, null=True)
+    cabinet = fields.ForeignKey(to=ServerCabinet, on_delete=models.CASCADE, null=True)
     remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True)
 
     class Meta:
@@ -76,6 +103,7 @@ class ServerNew(NetDevice):
     system = models.CharField(max_length=50, verbose_name="操作系统", default="CentOS7", choices=systemOpts, blank=True)
     bios = fields.PasswordInputField(verbose_name="BIOS", max_length=32, null=True, blank=True)
     ssh = models.IntegerField(verbose_name="SSH端口", default=22, blank=True)
+    cabinet = fields.ForeignKey(to=ServerCabinet, on_delete=models.CASCADE, verbose_name="机柜", null=True, blank=True)
 
     class Meta:
         verbose_name = "新的服务器模型"
