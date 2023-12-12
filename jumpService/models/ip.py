@@ -18,7 +18,7 @@ class IPAddress(BaseModel):
     ip = fields.CharField(verbose_name="IP地址", null=True, blank=False, slot_text="IPV4", slot="prepend",
                           max_length=15)
     device = models.ForeignKey(verbose_name="网络设备", to=NetDevice, on_delete=models.CASCADE, null=True, blank=False,
-                               help_text="是指占用当前地址的网络设备")
+                               help_text="是指占用当前地址的网络设备", related_name="ips")
 
     class Meta:
         constraints = [

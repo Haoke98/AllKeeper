@@ -37,19 +37,30 @@ class BtAdmin(BaseAdmin):
         return value
 
     def _url(self, obj):
-        uri = "http://"
-        if obj.basicAuthUsername and obj.basicAuthPwd:
-            uri += f"{obj.basicAuthUsername}:{obj.basicAuthPwd}@"
         if obj.domain:
+            uri = "http://"
+            if obj.basicAuthUsername and obj.basicAuthPwd:
+                uri += f"{obj.basicAuthUsername}:{obj.basicAuthPwd}@"
             uri += obj.domain
+            if obj.path:
+                uri += f"/{obj.path}"
+            return f"""<a target="_blank" href="{uri}" >点击进入</a>"""
         else:
-            uri += obj.server.ip
-        uri += f":{obj.port}"
-        if obj.path:
-            uri += f"/{obj.path}"
-
-        # return BaseAdmin.shwoUrl(uri)
-        return f"""<a target="_blank" href="{uri}" >点击进入</a>"""
+            res = ""
+            ips = obj.server.ips.all()
+            for i, ipObj in enumerate(ips):
+                print(obj.server, ipObj.ip)
+                uri = "http://"
+                if obj.basicAuthUsername and obj.basicAuthPwd:
+                    uri += f"{obj.basicAuthUsername}:{obj.basicAuthPwd}@"
+                uri += f"{ipObj.ip}:{obj.port}"
+                if obj.path:
+                    uri += f"/{obj.path}"
+                if len(ips) == 1:
+                    res += f"""<a target="_blank" href="{uri}" >入口</a>"""
+                else:
+                    res += f"""<a target="_blank" href="{uri}" >入口{i}</a></br>"""
+            return res
 
     _url.short_description = "入口"
 

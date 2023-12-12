@@ -17,3 +17,4 @@ from .router import RouterAdmin
 from .server import ServerAdmin
 from .service import ServiceAdmin, ServiceUserAdmin
 from .ssh import SSHServiceAdmin, SSHUserAdmin
+from .operation_system import OperationSystemAdmin

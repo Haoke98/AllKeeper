@@ -108,13 +108,13 @@ class ServerAdmin(BaseAdmin):
 
 @admin.register(ServerNew)
 class ServerNewAdmin(BaseAdmin):
-    list_display = ['code', 'system', 'rootPassword', 'ssh', 'status', 'remark', 'bios', 'cabinet', 'hoster',
+    list_display = ['code', 'ssh', 'status', 'remark', 'bios', 'cabinet', 'hoster',
                     "mac", "updatedAt", "createdAt", "deletedAt", "id"
                     ]
     list_display_links = ['remark', 'hoster']
-    list_filter = ['hoster', 'ssh', 'system', 'status', 'cabinet__room', 'cabinet']
+    list_filter = ['hoster', 'ssh', 'status', 'cabinet__room', 'cabinet']
     date_hierarchy = 'updatedAt'
-    search_fields = ['ip', 'remark', 'code']
+    search_fields = ['remark', 'code']
     search_help_text = ['你好，这是搜索帮助语句！']
     autocomplete_fields = []
     list_per_page = 10
