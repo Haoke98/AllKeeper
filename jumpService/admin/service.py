@@ -6,9 +6,13 @@
 @Software: PyCharm
 @disc:
 ======================================="""
-from django.contrib import admin
+import uuid
 
-from izBasar.admin import BaseAdmin
+from django.contrib import admin
+from django.db.models import QuerySet
+from simplepro.decorators import button
+
+from izBasar.admin import BaseAdmin, FieldOptions
 from ..models import Service, ServiceUser
 
 
@@ -18,6 +22,7 @@ class ServiceAdmin(admin.ModelAdmin):
                     'deletedAt']
     search_fields = ['system', 'port', 'remark']
     list_filter = ['system__image', 'system__server']
+    actions = ['migrate']
 
     def _url(self, obj):
         res = ""
@@ -50,35 +55,19 @@ class ServiceAdmin(admin.ModelAdmin):
         return value
 
     fields_options = {
-        'id': {
-            'min_width': '88px',
-            'align': 'center',
-            'fixed': 'left'
-        },
+        'id': FieldOptions.UUID,
         'code': {
             'min_width': '88px',
             'align': 'center'
         },
-        'createdAt': {
-            'min_width': '180px',
-            'align': 'left'
-        },
-        'updatedAt': {
-            'min_width': '180px',
-            'align': 'left'
-        },
-        'deletedAt': {
-            'min_width': '180px',
-            'align': 'left'
-        },
+        'createdAt': FieldOptions.DATE_TIME,
+        'updatedAt': FieldOptions.DATE_TIME,
+        'deletedAt': FieldOptions.DATE_TIME,
         'system': {
             'min_width': '320px',
             'align': 'center'
         },
-        'net': {
-            'min_width': '180px',
-            'align': 'center'
-        },
+        'net': FieldOptions.IP_ADDRESS,
         'image': {
             'min_width': '160px',
             'align': 'center'
@@ -107,11 +96,7 @@ class ServiceAdmin(admin.ModelAdmin):
             'min_width': '180px',
             'align': 'left'
         },
-        'remark': {
-            'min_width': '200px',
-            'align': 'left'
-        },
-
+        'remark': FieldOptions.REMARK,
         'bios': {
             'min_width': '180',
             'align': 'center'
@@ -120,11 +105,23 @@ class ServiceAdmin(admin.ModelAdmin):
             'min_width': '180',
             'align': 'center'
         },
-        'mac': {
-            'min_width': '220px',
-            'align': 'left'
-        }
+        'mac': FieldOptions.MAC_ADDRESS
     }
+
+    @button(type='danger', short_description='数据迁移', enable=True, confirm="您确定要生成吗？")
+    def migrate(self, request, queryset: QuerySet):
+        # es = ElasticSearch.objects.filter()
+        # for qs in queryset.all():
+        #     old_id = qs.id
+        #     qs.id = str(uuid.uuid4())
+        #     print(old_id, ">>>", qs.id)
+        #     qs.save()
+        #     Service.objects.filter(id=old_id).delete()
+            # qs.save()
+        return {
+            'state': True,
+            'msg': f'迁移完成'
+        }
 
 
 @admin.register(ServiceUser)

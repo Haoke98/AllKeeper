@@ -24,6 +24,7 @@ class BaseAccountModel(BaseModel):
 
 
 class Service(BaseAccountModel):
+    id = models.UUIDField(primary_key=True)
     system = fields.ForeignKey(to=OperationSystem, on_delete=models.CASCADE, verbose_name="操作系统", null=True, blank=False)
     port = models.PositiveIntegerField(verbose_name="端口", default=8888, blank=False, db_index=True)
 
@@ -71,7 +72,7 @@ class AbstractBaseServiceModel(BaseAccountModel):
         ]
 
     def __str__(self):
-        return f"服务({self.server.ip}:{self.port}）"
+        return f"服务({self.server}:{self.port}）"
 
 
 class AbstractBaseServiceUserModel(BaseModel):
