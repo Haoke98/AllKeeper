@@ -1,9 +1,10 @@
 from django.contrib import admin
+from django.db.models import QuerySet
 from simplepro.decorators import button
 
-from izBasar.admin import BaseAdmin
+from izBasar.admin import BaseAdmin, FieldOptions
 from .net import IPAddressInlineAdmin
-from ..models import Server, ServerNew, IPAddress, ServerCabinet, ServerRoom
+from ..models import Server, ServerNew, IPAddress, ServerCabinet, ServerRoom, OperationSystem, OperationSystemImage
 
 
 @admin.register(Server)
@@ -108,18 +109,18 @@ class ServerAdmin(BaseAdmin):
 
 @admin.register(ServerNew)
 class ServerNewAdmin(BaseAdmin):
-    list_display = ['code', 'ssh', 'system', 'status', 'bios', 'cabinet', 'remark', 'hoster',
-                    "mac", "updatedAt", "createdAt", "deletedAt", "id"
+    list_display = ["id", 'code', 'status', 'system_count', 'bios', 'cabinet', 'remark', 'hoster',
+                    "mac", "updatedAt", "createdAt", "deletedAt"
                     ]
     list_display_links = ['remark', 'hoster']
-    list_filter = ['hoster', 'ssh', 'status', 'cabinet__room', 'cabinet']
+    list_filter = ['hoster', 'status', 'cabinet__room', 'cabinet']
     date_hierarchy = 'updatedAt'
     search_fields = ['remark', 'code']
     search_help_text = ['你好，这是搜索帮助语句！']
     autocomplete_fields = []
     list_per_page = 10
     fields = ['code', 'cabinet', 'hoster', 'status', 'bios', 'mac', 'remark', 'info']
-    actions = ['sync']
+    actions = ['sync', 'migrate']
     inlines = [IPAddressInlineAdmin]
 
     # inlines = [ServerUserInlineAdmin]
@@ -151,6 +152,32 @@ class ServerNewAdmin(BaseAdmin):
             'msg': f'同步成功'
         }
 
+    @button(type='danger', short_description='数据迁移', enable=True, confirm="您确定要生成吗？")
+    def migrate(self, request, queryset: QuerySet):
+        qss = queryset.all()
+        for obj in qss:
+            server: ServerNew = obj
+            system = None
+            if not server.systems.exists():
+                system = OperationSystem()
+                if server.system == "WindowsServer2016":
+                    system_image = OperationSystemImage.objects.filter(name="Windows", version="Server2016").first()
+                elif server.system == "CentOS7":
+                    system_image = OperationSystemImage.objects.filter(name="CentOS", version="7").first()
+                elif server.system == "Ubuntu":
+                    system_image = OperationSystemImage.objects.filter(name="Ubuntu", version="18").first()
+                else:
+                    system_image = None
+                system.image = system_image
+                system.server = server
+                system.rootUsername = server.rootUsername
+                system.rootPassword = server.rootPassword
+                system.save()
+        return {
+            'state': True,
+            'msg': f'迁移完成'
+        }
+
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
         if field_name == "ip":
@@ -165,10 +192,7 @@ class ServerNewAdmin(BaseAdmin):
         return value
 
     fields_options = {
-        'id': {
-            'min_width': '88px',
-            'align': 'center'
-        },
+        'id': FieldOptions.UUID,
         'code': {
             'fixed': 'left',
             'min_width': '88px',
@@ -215,7 +239,7 @@ class ServerNewAdmin(BaseAdmin):
             'align': 'left'
         },
         'status': {
-            'min_width': '180px',
+            'min_width': '200px',
             'align': 'left'
         },
         'remark': {

@@ -95,15 +95,13 @@ class ServerNew(NetDevice):
         (4, '新疆丝路融创网络科技有限公司（局域网）')
     )
     hoster = models.PositiveSmallIntegerField(choices=hosterOptions, null=True, blank=True, verbose_name="托管方")
-    systemOpts = (
-        ('CentOS7', 'CentOS7'),
-        ('Ubuntu', 'Ubuntu'),
-        ('WindowsServer2016', 'WindowsServer2016')
-    )
-    system = models.CharField(max_length=50, verbose_name="操作系统", default="CentOS7", choices=systemOpts, blank=True)
     bios = fields.PasswordInputField(verbose_name="BIOS", max_length=32, null=True, blank=True)
-    ssh = models.IntegerField(verbose_name="SSH端口", default=22, blank=True)
     cabinet = fields.ForeignKey(to=ServerCabinet, on_delete=models.CASCADE, verbose_name="机柜", null=True, blank=True)
+
+    def system_count(self):
+        return self.systems.count()
+
+    system_count.short_description = "承载系统数量"
 
     class Meta:
         verbose_name = "新的服务器模型"

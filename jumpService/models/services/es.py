@@ -1,10 +1,9 @@
 from django.db import models
 
-from .service import AbstractBaseServiceModel
+from .service import Service
 
 
-class ElasticSearch(AbstractBaseServiceModel):
-    # id = models.UUIDField(primary_key=True)
+class ElasticSearch(Service):
     elasticPwd = models.CharField(max_length=36, verbose_name="elastic", null=True,
                                   blank=False)
     kibanaPwd = models.CharField(max_length=36, verbose_name="kibana_system", null=True,

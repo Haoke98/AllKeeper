@@ -7,26 +7,42 @@ LIST_DISPLAY = ['id', 'updatedAt', 'createdAt']
 
 class FieldOptions:
     IP_ADDRESS = {
-        'width': "140px",
+        'min_width': "140px",
         'align': 'left'
     }
     MAC_ADDRESS = {
-        'width': "180px",
+        'min_width': "180px",
         'align': 'left'
     }
     UUID = {
         'fixed': 'left',
-        'width': '80px',
+        'min_width': '80px',
         'align': 'center',
         "show_overflow_tooltip": True
     }
     REMARK = {
-        'width': '240px',
+        'min_width': '240px',
         'align': 'left'
     }
     DATE_TIME = {
-        'width': '180px',
+        'min_width': '180px',
         'align': 'left'
+    }
+    USER_NAME = {
+        'min_width': "148px",
+        'align': 'left'
+    }
+    PASSWORD = {
+        'min_width': "158px",
+        'align': 'left'
+    }
+    LINK = {
+        'min_width': "140px",
+        'align': 'center'
+    }
+    PORT = {
+        'min_width': "102px",
+        'align': 'center'
     }
 
 

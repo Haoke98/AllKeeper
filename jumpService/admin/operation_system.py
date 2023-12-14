@@ -8,7 +8,7 @@
 ======================================="""
 from django.contrib import admin
 
-from izBasar.admin import BaseAdmin
+from izBasar.admin import BaseAdmin, FieldOptions
 from ..models import OperationSystem, OperationSystemImage
 
 
@@ -37,30 +37,18 @@ class OperationSystemAdmin(admin.ModelAdmin):
         return value
 
     fields_options = {
-        'id': {
-            'min_width': '88px',
-            'align': 'center'
-        },
+        'id': FieldOptions.UUID,
         'code': {
             'fixed': 'left',
             'min_width': '88px',
             'align': 'center'
         },
-        'createdAt': {
-            'min_width': '180px',
+        'createdAt': FieldOptions.DATE_TIME,
+        'updatedAt': FieldOptions.DATE_TIME,
+        'deletedAt': FieldOptions.DATE_TIME,
+        'server': {
+            'min_width': '280px',
             'align': 'left'
-        },
-        'updatedAt': {
-            'min_width': '180px',
-            'align': 'left'
-        },
-        'deletedAt': {
-            'min_width': '180px',
-            'align': 'left'
-        },
-        'ip': {
-            'min_width': '200px',
-            'align': 'center'
         },
         'net': {
             'min_width': '180px',
@@ -68,26 +56,16 @@ class OperationSystemAdmin(admin.ModelAdmin):
         },
         'image': {
             'min_width': '160px',
-            'align': 'center'
+            'align': 'left'
         },
-        'rootUsername': {
-            'min_width': '180px',
-            'align': 'center'
-        },
-        'rootPassword': {
-            'min_width': '180px',
-            'align': 'center'
-        },
+        'rootUsername': FieldOptions.USER_NAME,
+        'rootPassword': FieldOptions.PASSWORD,
         'ssh': {
             'min_width': '120px',
             'align': 'center'
         },
         'hoster': {
             'min_width': '320px',
-            'align': 'left'
-        },
-        'server': {
-            'min_width': '220px',
             'align': 'left'
         },
         'status': {

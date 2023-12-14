@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from izBasar.admin import BaseAdmin
+from izBasar.admin import BaseAdmin, FieldOptions
 from ..models import SSHServiceUser, SSHService
 
 
@@ -9,21 +9,11 @@ class SSHServiceAdmin(BaseAdmin):
     list_display = ['id', 'server', 'port', 'updatedAt', 'createdAt']
     list_filter = ['server', 'port']
     autocomplete_fields = ['server']
-    search_fields = ['server__ip', 'port', 'remark']
+    search_fields = ['server', 'port', 'remark']
     fields_options = {
-        'id': {
-            'fixed': 'left',
-            'min_width': '80px',
-            'align': 'center'
-        },
-        'createdAt': {
-            'min_width': '180px',
-            'align': 'left'
-        },
-        'updatedAt': {
-            'min_width': '180px',
-            'align': 'left'
-        },
+        'id': FieldOptions.UUID,
+        'createdAt': FieldOptions.DATE_TIME,
+        'updatedAt': FieldOptions.DATE_TIME,
         'server': {
             'min_width': '280px',
             'align': 'left'
@@ -46,20 +36,14 @@ class SSHServiceAdmin(BaseAdmin):
         }
     }
 
+
 @admin.register(SSHServiceUser)
 class SSHUserAdmin(BaseAdmin):
-    list_display = ['id', '_ip', 'username', 'password', 'owner', 'updatedAt', 'createdAt']
+    list_display = ['id', 'service', 'username', 'password', 'group', 'owner', 'updatedAt', 'createdAt']
+    list_filter = ['hasRootPriority', 'service', 'owner', 'group']
     autocomplete_fields = ['service']
-    list_filter = ['hasRootPriority', 'service', 'owner']
     list_select_related = autocomplete_fields
     fields = ['owner', 'service', 'username', 'password', 'group', 'info']
-
-    def _ip(self, obj):
-        if obj.service:
-            ip = obj.service.server.ip
-            return BaseAdmin.username(ip)
-        return ""
-    _ip.short_description = "服务器"
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
@@ -81,22 +65,12 @@ class SSHUserAdmin(BaseAdmin):
         return value
 
     fields_options = {
-        'id': {
-            'fixed': 'left',
-            'min_width': '80px',
-            'align': 'center'
-        },
-        'createdAt': {
-            'min_width': '180px',
+        'id': FieldOptions.UUID,
+        'createdAt': FieldOptions.DATE_TIME,
+        'updatedAt': FieldOptions.DATE_TIME,
+        'service': {
+            'min_width': '300px',
             'align': 'left'
-        },
-        'updatedAt': {
-            'min_width': '180px',
-            'align': 'left'
-        },
-        '_ip': {
-            'min_width': '240px',
-            'align': 'center'
         },
         'username': {
             'min_width': '200px',

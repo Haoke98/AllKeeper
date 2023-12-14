@@ -7,9 +7,9 @@ from ..models import ElasticSearch
 
 @admin.register(ElasticSearch)
 class ElasticSearchAdmin(BaseServiceAdmin):
-    list_display = ['id', 'server', 'port', 'elasticPwd', '_url', 'kibanaPwd', 'apmPwd', 'logstashPwd', 'beatsPwd',
+    list_display = ['id', 'port', 'elasticPwd', '_url', 'kibanaPwd', 'apmPwd', 'logstashPwd', 'beatsPwd',
                     'remoteMonitoringPwd']
-    list_filter = ['server']
+    list_filter = []
 
     def _beats_system(self, obj):
         return BaseServiceAdmin.password(obj.apmPwd)

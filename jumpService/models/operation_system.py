@@ -31,7 +31,8 @@ class OperationSystemImage(BaseModel):
 class OperationSystem(BaseModel):
     image = fields.ForeignKey(to=OperationSystemImage, on_delete=models.CASCADE, null=True, blank=False,
                               verbose_name="系统镜像")
-    server = fields.ForeignKey(to=ServerNew, on_delete=models.CASCADE, null=True, blank=False, verbose_name="服务器")
+    server = fields.ForeignKey(to=ServerNew, on_delete=models.CASCADE, null=True, blank=False, verbose_name="服务器",
+                               related_name="systems")
     rootUsername = models.CharField(max_length=32, verbose_name="root用户名", blank=False, default="root")
     rootPassword = fields.PasswordInputField(max_length=32, verbose_name="root密码", blank=False, null=True)
 

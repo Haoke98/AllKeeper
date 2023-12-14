@@ -26,6 +26,8 @@ class BaseAccountModel(BaseModel):
 class ServiceType(BaseAccountModel):
     name = fields.CharField(max_length=50, verbose_name="名称")
     defaultPort = fields.IntegerField(verbose_name="默认端口", null=True, blank=True)
+    defaultSuperUsername = fields.CharField(max_length=50, verbose_name="默认超级用户名", null=True, blank=True)
+    defaultSuperUserPwd = fields.CharField(max_length=50, verbose_name="默认超级用户密码", null=True, blank=True)
     doc = fields.CharField(max_length=500, verbose_name="文档地址", null=True, blank=True)
     official = fields.CharField(max_length=500, verbose_name="官网地址", null=True, blank=True)
     code = fields.CharField(max_length=500, verbose_name="源代码仓库地址", placeholder="github/gitee/gitcode....等等开源代码仓库地址即可",
