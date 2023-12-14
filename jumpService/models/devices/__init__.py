@@ -6,7 +6,7 @@
 @Software: PyCharm
 @disc:
 ======================================="""
-from .server import Server, ServerNew, ServerCabinet, ServerRoom
+from .server import ServerNew, ServerCabinet, ServerRoom
 from .router import Router
 from .device import Device
 from .net_device import NetDevice

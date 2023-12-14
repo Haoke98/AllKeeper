@@ -33,7 +33,7 @@ class FieldOptions:
         'align': 'left'
     }
     PASSWORD = {
-        'min_width': "158px",
+        'min_width': "200px",
         'align': 'left'
     }
     LINK = {
