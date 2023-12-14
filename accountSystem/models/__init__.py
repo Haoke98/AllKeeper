@@ -3,7 +3,7 @@ from .email import Email
 from .human import Human
 from .region import Country, City
 from .tel import Tel
-from .type import Platform
+from .platform import Platform
 from .wechat import Wechat
 from .scripts import Script
 from .breath import BreathInfo

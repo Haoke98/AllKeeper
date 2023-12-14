@@ -13,7 +13,7 @@ from lib import pkHelper
 
 
 class Device(BaseModel):
-    id = fields.CharField(max_length=48, primary_key=True, default=pkHelper.uuid_generator())
+    id = fields.CharField(max_length=48, primary_key=True, default=pkHelper.uuid_generator)
     status = fields.CharField(verbose_name='状态', max_length=50, null=True, blank=True)
     remark = fields.CharField(verbose_name="备注", max_length=100, null=True, blank=True)
 

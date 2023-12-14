@@ -10,5 +10,5 @@ from .bt import BT
 from .db import DbService, DbServiceUser
 from .es import ElasticSearch
 from .minio import MinIO
-from .service import Service, ServiceUser
+from .service import Service, ServiceUser, ServiceType
 from .ssh import SSHServiceUser, SSHService

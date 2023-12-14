@@ -15,6 +15,6 @@ from .minio import MinIOAdmin
 from .net import NetWorkAdmin, NetDeviceAdmin, IPAddressAdmin
 from .router import RouterAdmin
 from .server import ServerAdmin
-from .service import ServiceAdmin, ServiceUserAdmin
+from .service import ServiceAdmin, ServiceUserAdmin, ServiceTypeAdmin
 from .ssh import SSHServiceAdmin, SSHUserAdmin
 from .operation_system import OperationSystemAdmin

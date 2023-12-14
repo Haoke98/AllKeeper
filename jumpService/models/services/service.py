@@ -16,16 +16,33 @@ from ..operation_system import OperationSystem
 
 
 class BaseAccountModel(BaseModel):
-    id = fields.CharField(max_length=48, primary_key=True, default=pkHelper.uuid_generator())
+    id = fields.CharField(max_length=48, primary_key=True, editable=False, default=pkHelper.uuid_generator)
     remark = models.CharField(verbose_name="备注", max_length=100, null=True, blank=True, db_index=True)
 
     class Meta:
         abstract = True
 
 
+class ServiceType(BaseAccountModel):
+    name = fields.CharField(max_length=50, verbose_name="名称")
+    defaultPort = fields.IntegerField(verbose_name="默认端口", null=True, blank=True)
+    doc = fields.CharField(max_length=500, verbose_name="文档地址", null=True, blank=True)
+    official = fields.CharField(max_length=500, verbose_name="官网地址", null=True, blank=True)
+    code = fields.CharField(max_length=500, verbose_name="源代码仓库地址", placeholder="github/gitee/gitcode....等等开源代码仓库地址即可",
+                            null=True, blank=True)
+
+    class Meta:
+        verbose_name = "服务类型"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return f"{self.name}"
+
+
 class Service(BaseAccountModel):
-    id = models.UUIDField(primary_key=True)
-    system = fields.ForeignKey(to=OperationSystem, on_delete=models.CASCADE, verbose_name="操作系统", null=True, blank=False)
+    _type = fields.ForeignKey(to=ServiceType, on_delete=models.CASCADE, verbose_name="服务类型", null=True, blank=False)
+    system = fields.ForeignKey(to=OperationSystem, on_delete=models.CASCADE, verbose_name="操作系统", null=True,
+                               blank=False)
     port = models.PositiveIntegerField(verbose_name="端口", default=8888, blank=False, db_index=True)
 
     class Meta:
