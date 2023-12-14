@@ -4,6 +4,7 @@ from .service import AbstractBaseServiceModel
 
 
 class ElasticSearch(AbstractBaseServiceModel):
+    # id = models.UUIDField(primary_key=True)
     elasticPwd = models.CharField(max_length=36, verbose_name="elastic", null=True,
                                   blank=False)
     kibanaPwd = models.CharField(max_length=36, verbose_name="kibana_system", null=True,

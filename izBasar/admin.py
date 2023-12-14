@@ -5,6 +5,31 @@ from django.utils.safestring import mark_safe
 LIST_DISPLAY = ['id', 'updatedAt', 'createdAt']
 
 
+class FieldOptions:
+    IP_ADDRESS = {
+        'width': "140px",
+        'align': 'left'
+    }
+    MAC_ADDRESS = {
+        'width': "180px",
+        'align': 'left'
+    }
+    UUID = {
+        'fixed': 'left',
+        'width': '80px',
+        'align': 'center',
+        "show_overflow_tooltip": True
+    }
+    REMARK = {
+        'width': '240px',
+        'align': 'left'
+    }
+    DATE_TIME = {
+        'width': '180px',
+        'align': 'left'
+    }
+
+
 class MinWidth:
     DATE_TIME = "168px"
     DURATION = "180px"

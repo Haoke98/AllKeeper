@@ -20,6 +20,8 @@ class OperationSystemImageAdmin(admin.ModelAdmin):
 @admin.register(OperationSystem)
 class OperationSystemAdmin(admin.ModelAdmin):
     list_display = ['id', 'createdAt', 'updatedAt', 'image', 'server', 'rootUsername', 'rootPassword', 'deletedAt']
+    list_filter = ['image', 'server']
+    search_fields = ['image', 'server']
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等

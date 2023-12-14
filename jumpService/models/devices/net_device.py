@@ -7,6 +7,7 @@
 @disc:
 ======================================="""
 from django.db import models
+
 from .device import Device
 
 
@@ -16,3 +17,9 @@ class NetDevice(Device):
     class Meta:
         verbose_name = "网络设备"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        if self.remark:
+            return f"网络设备({self.id},{self.remark})"
+        else:
+            return f"网络设备({self.id})"

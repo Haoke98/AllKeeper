@@ -108,7 +108,7 @@ class ServerAdmin(BaseAdmin):
 
 @admin.register(ServerNew)
 class ServerNewAdmin(BaseAdmin):
-    list_display = ['code', 'ssh', 'status', 'remark', 'bios', 'cabinet', 'hoster',
+    list_display = ['code', 'ssh', 'system', 'status', 'bios', 'cabinet', 'remark', 'hoster',
                     "mac", "updatedAt", "createdAt", "deletedAt", "id"
                     ]
     list_display_links = ['remark', 'hoster']
@@ -118,8 +118,7 @@ class ServerNewAdmin(BaseAdmin):
     search_help_text = ['你好，这是搜索帮助语句！']
     autocomplete_fields = []
     list_per_page = 10
-    fields = ['code', 'cabinet', 'hoster', 'system', 'rootUsername', 'rootPassword', 'status', 'bios', 'ssh',
-              'mac', 'remark', 'info']
+    fields = ['code', 'cabinet', 'hoster', 'status', 'bios', 'mac', 'remark', 'info']
     actions = ['sync']
     inlines = [IPAddressInlineAdmin]
 

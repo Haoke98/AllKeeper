@@ -13,4 +13,4 @@ from ..models import MinIO
 
 @admin.register(MinIO)
 class MinIOAdmin(admin.ModelAdmin):
-    list_display = ['id', 'server', 'port', 'console_port', 'updatedAt', 'createdAt', 'deletedAt']
+    list_display = ['id', 'system', 'port', 'console_port', 'updatedAt', 'createdAt', 'deletedAt']

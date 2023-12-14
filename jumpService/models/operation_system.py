@@ -40,4 +40,4 @@ class OperationSystem(BaseModel):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return f"操作系统-{self.server}-{self.image}"
+        return f"{self.image}-{self.server}"

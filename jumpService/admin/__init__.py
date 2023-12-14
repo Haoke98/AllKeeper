@@ -12,7 +12,7 @@ from .dbServiceUser import DbServiceUserAdmin
 from .device import DeviceAdmin
 from .es import ElasticSearchAdmin
 from .minio_admin import MinIOAdmin
-from .net import NetAdmin, NetDeviceAdmin, IPAddressAdmin
+from .net import NetWorkAdmin, NetDeviceAdmin, IPAddressAdmin
 from .router import RouterAdmin
 from .server import ServerAdmin
 from .service import ServiceAdmin, ServiceUserAdmin

@@ -2,21 +2,32 @@ from django.contrib import admin
 
 from accountSystem.admin.base import BaseServiceAdmin
 from izBasar.admin import BaseAdmin
-
 from ..models import ElasticSearch
 
 
 @admin.register(ElasticSearch)
 class ElasticSearchAdmin(BaseServiceAdmin):
-    list_display = ['id', 'ip', 'port', 'elasticPwd', 'kibanaPwd', 'apmPwd', 'logstashPwd', 'beatsPwd',
+    list_display = ['id', 'server', 'port', 'elasticPwd', '_url', 'kibanaPwd', 'apmPwd', 'logstashPwd', 'beatsPwd',
                     'remoteMonitoringPwd']
-    list_display_links = ['id']
+    list_filter = ['server']
 
     def _beats_system(self, obj):
         return BaseServiceAdmin.password(obj.apmPwd)
 
-    def ip(self, obj):
-        return BaseServiceAdmin.username(obj.server.ip)
+    def _url(self, obj):
+        res = ""
+        ips = obj.server.ips.all()
+        for i, ipObj in enumerate(ips):
+            print(obj.server, ipObj.ip)
+            uri = "http://"
+            uri += f"{ipObj.ip}:{obj.port}"
+            if len(ips) == 1:
+                res += f"""<a target="_blank" href="{uri}" >入口</a>"""
+            else:
+                res += f"""<a target="_blank" href="{uri}" >入口{i}</a></br>"""
+        return res
+
+    _url.short_description = "入口"
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
@@ -54,9 +65,9 @@ class ElasticSearchAdmin(BaseServiceAdmin):
             'width': '180px',
             'align': 'left'
         },
-        'ip': {
+        'server': {
             'width': '260px',
-            'align': 'center'
+            'align': 'left'
         },
         'port': {
             'width': '120px',
