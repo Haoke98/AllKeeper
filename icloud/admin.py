@@ -15,12 +15,11 @@ from urllib.parse import urlencode
 
 from django.contrib import admin
 from django.http import JsonResponse
-from pytz import UTC
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
 from simpleui.admin import AjaxAdmin
 
-from izBasar.admin import MinWidth
+from izBasar.admin import FieldOptions
 from lib import human_readable_bytes, human_readable_time, icloud
 from .models import IMedia, Album, LocalMedia, AppleId
 from .services import collect_all_medias, delete_from_icloud, migrateIcloudToLocal
@@ -209,34 +208,16 @@ class AccountAdmin(AjaxAdmin):
             'align': 'center',
             'fixed': 'right'
         },
-        'email': {
-            'width': MinWidth.EMAIL,
-            'align': 'center'
-        },
-        'tel': {
-            'width': MinWidth.MOBILE,
-            'align': 'center'
-        },
-        'last2FactorAuthenticateAt': {
-            'width': MinWidth.DATE_TIME,
-            'align': 'left'
-        },
-        'last_2fa_time': {
-            'width': MinWidth.DURATION,
-            'align': 'center'
-        },
-        'passwd': {
-            'width': MinWidth.PASSWORD,
-            'align': 'center'
-        },
+        'email': FieldOptions.EMAIL,
+        'tel': FieldOptions.MOBILE,
+        'last2FactorAuthenticateAt': FieldOptions.DATE_TIME,
+        'last_2fa_time': FieldOptions.DURATION,
+        'passwd': FieldOptions.DURATION,
         'lastConfirmedSessionValidityAt': {
             'width': "220px",
             'align': 'center'
         },
-        'maxSessionAge': {
-            'width': MinWidth.DURATION,
-            'align': 'center'
-        },
+        'maxSessionAge': FieldOptions.DURATION,
         'isActive': {
             'width': '160px',
             'align': 'center'

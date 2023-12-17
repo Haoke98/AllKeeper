@@ -3,7 +3,6 @@ from simplepro.components import fields
 from simplepro.models import BaseModel
 
 from .net_device import NetDevice
-from ..net import Net
 
 
 class ServerRoom(BaseModel):

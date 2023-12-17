@@ -28,6 +28,10 @@ class FieldOptions:
         'min_width': '180px',
         'align': 'left'
     }
+    DURATION = {
+        'min_width': '180px',
+        'align': 'left'
+    }
     USER_NAME = {
         'min_width': "148px",
         'align': 'left'
@@ -44,19 +48,14 @@ class FieldOptions:
         'min_width': "102px",
         'align': 'center'
     }
-
-
-class MinWidth:
-    DATE_TIME = "168px"
-    DURATION = "180px"
-    IP_ADDRESS = "140px"
-    PORT = "102px"
-    USER_AGENT = "440px"
-    HEADERS = "880px"
-    UUID = "300px"
-    EMAIL = "180px"
-    MOBILE = "140px"
-    PASSWORD = "140px"
+    EMAIL = {
+        'min_width': "180px",
+        'align': 'center'
+    }
+    MOBILE = {
+        'min_width': "140px",
+        'align': 'center'
+    }
 
 
 def showUrl(url):
@@ -93,7 +92,6 @@ class BaseAdmin(admin.ModelAdmin):
                 res.append(i)
         return res
 
-    # TODO：改成simplepro组件
     @staticmethod
     def username(value):
         return f'''<div style="display:flex;">
@@ -104,7 +102,6 @@ class BaseAdmin(admin.ModelAdmin):
                             </el-input>
                         </div>'''
 
-    # TODO：改成simplepro组件
     @staticmethod
     def password(value):
         return f'''<div style="display:flex;">
@@ -115,7 +112,6 @@ class BaseAdmin(admin.ModelAdmin):
                                         </el-input>
                         </div>'''
 
-    @staticmethod
     def shwoUrl(url: str):
         tag = mark_safe('''
                     <a class="ui circular icon red button" href="%s" target="blank">
