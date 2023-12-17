@@ -9,8 +9,8 @@
 from urllib.parse import urlparse
 
 from django.contrib import admin
+from simplepro.admin import LIST_DISPLAY
 
-from izBasar.admin import LIST_DISPLAY
 from ..models import Platform, Account
 
 

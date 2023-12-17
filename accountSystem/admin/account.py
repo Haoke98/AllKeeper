@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from simplepro.admin import BaseAdmin
 
 from accountSystem.forms import AccountForm
 from accountSystem.models import Account, Tel, Email
-from izBasar.admin import BaseAdmin
 
 
 @admin.register(Account)

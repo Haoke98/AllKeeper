@@ -1,6 +1,7 @@
 from django.contrib import admin
+from simplepro.admin import BaseAdmin
+
 from accountSystem.models import Wechat
-from izBasar.admin import LIST_DISPLAY, BaseAdmin
 
 
 @admin.register(Wechat)

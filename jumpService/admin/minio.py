@@ -7,8 +7,8 @@
 @disc:
 ======================================="""
 from django.contrib import admin
+from simplepro.admin import FieldOptions
 
-from izBasar.admin import FieldOptions
 from ..models import MinIO
 
 

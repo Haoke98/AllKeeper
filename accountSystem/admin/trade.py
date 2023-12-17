@@ -9,8 +9,8 @@
 
 from django.contrib import admin
 from django.db.models import Sum
+from simplepro.admin import LIST_DISPLAY
 
-from izBasar.admin import LIST_DISPLAY
 from ..models import Transaction, CapitalAccount, CapitalAccountType
 
 

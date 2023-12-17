@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.db.models import QuerySet
+from simplepro.admin import BaseAdmin, FieldOptions
 from simplepro.decorators import button
 
-from izBasar.admin import BaseAdmin, FieldOptions
 from .net import IPAddressInlineAdmin
 from ..models import ServerNew, IPAddress, ServerCabinet, ServerRoom, OperationSystem, OperationSystemImage
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
+from simplepro.admin import BaseAdmin
 
-from izBasar.admin import BaseAdmin
 from .dbServiceUser import DbServiceUserInlineAdmin
 from ..forms import DbServiceForm
 from ..models import DbService

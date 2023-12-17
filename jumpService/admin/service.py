@@ -9,9 +9,9 @@
 
 from django.contrib import admin
 from django.db.models import QuerySet
+from simplepro.admin import FieldOptions
 from simplepro.decorators import button
 
-from izBasar.admin import BaseAdmin, FieldOptions
 from ..models import Service, ServiceUser, ServiceType, ServerNew, OperationSystemImage, ElasticSearch
 
 

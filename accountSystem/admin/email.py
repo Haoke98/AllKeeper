@@ -1,7 +1,7 @@
 from django.contrib import admin
+from simplepro.admin import LIST_DISPLAY
 
 from accountSystem.models.email import Email
-from izBasar.admin import LIST_DISPLAY
 
 
 # Register your admin models here.

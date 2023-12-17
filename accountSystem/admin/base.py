@@ -1,4 +1,4 @@
-from izBasar.admin import BaseAdmin
+from simplepro.admin import BaseAdmin
 
 
 class BaseServiceAdmin(BaseAdmin):

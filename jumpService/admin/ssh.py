@@ -1,6 +1,6 @@
 from django.contrib import admin
+from simplepro.admin import BaseAdmin, FieldOptions
 
-from izBasar.admin import BaseAdmin, FieldOptions
 from ..models import SSHServiceUser, SSHService
 
 

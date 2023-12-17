@@ -1,4 +1,4 @@
-DjangoAsyncAdmin==6.10.0
+DjangoAsyncAdmin==6.11.0
 djangorestframework==3.14.0
 elasticsearch==8.4.3
 minio==7.1.11

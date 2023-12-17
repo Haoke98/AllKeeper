@@ -11,9 +11,9 @@ import ipaddress
 from django.contrib import admin
 from django.db.models import QuerySet
 from django.forms import ModelForm
+from simplepro.admin import FieldOptions
 from simplepro.components.fields.char_field import CharFormField
 
-from izBasar.admin import FieldOptions
 from ..models import Net, IPAddress, NetDevice
 
 

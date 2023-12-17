@@ -15,11 +15,11 @@ from urllib.parse import urlencode
 
 from django.contrib import admin
 from django.http import JsonResponse
+from simplepro.admin import FieldOptions
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
 from simpleui.admin import AjaxAdmin
 
-from izBasar.admin import FieldOptions
 from lib import human_readable_bytes, human_readable_time, icloud
 from .models import IMedia, Album, LocalMedia, AppleId
 from .services import collect_all_medias, delete_from_icloud, migrateIcloudToLocal

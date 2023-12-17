@@ -7,8 +7,8 @@
 @disc:
 ======================================="""
 from django.contrib import admin
+from simplepro.admin import FieldOptions, BaseAdmin
 
-from izBasar.admin import BaseAdmin, FieldOptions
 from ..models import OperationSystem, OperationSystemImage
 
 

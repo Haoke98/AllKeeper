@@ -1,6 +1,6 @@
 from django.contrib import admin
+from simplepro.admin import LIST_DISPLAY
 
-from izBasar.admin import LIST_DISPLAY
 from lib.phoneNumHelper import get_carrier
 from ..models import Tel
 

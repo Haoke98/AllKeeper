@@ -9,8 +9,8 @@
 from django.contrib import admin
 from django.forms import ModelForm
 from django.utils.safestring import mark_safe
+from simplepro.admin import LIST_DISPLAY
 
-from izBasar.admin import LIST_DISPLAY
 from ..models import Human, Account
 from ..models import Tel
 

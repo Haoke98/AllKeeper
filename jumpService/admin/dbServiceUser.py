@@ -1,6 +1,6 @@
 from django.contrib import admin
+from simplepro.admin import BaseAdmin, LIST_DISPLAY
 
-from izBasar.admin import LIST_DISPLAY, BaseAdmin
 from ..models import DbServiceUser
 
 
