@@ -1,4 +1,5 @@
 from django.db import models
+from simplepro.components import fields
 from simplepro.models import BaseModel
 
 from lib import pkHelper
@@ -18,3 +19,9 @@ class Platform(BaseModel):
 
     def __str__(self):
         return "%s" % self.name
+
+
+class URL(BaseModel):
+    content = models.URLField(unique=True)
+    domain = models.CharField(verbose_name="域名", max_length=50)
+    platform = fields.ForeignKey(to=Platform, on_delete=models.CASCADE, related_name="urls")
