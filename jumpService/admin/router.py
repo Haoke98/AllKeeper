@@ -7,23 +7,31 @@
 @disc:
 ======================================="""
 from django.contrib import admin
+from simplepro.admin import BaseAdmin, FieldOptions
 
 from .net import IPAddressInlineAdmin
 from ..models import Router
 
 
 @admin.register(Router)
-class RouterAdmin(admin.ModelAdmin):
+class RouterAdmin(BaseAdmin):
     list_display = ['code',
                     'adminAddress', 'adminPassword', 'status', 'remark', 'bios', 'hoster',
                     "updatedAt", "createdAt", "deletedAt", 'id']
     inlines = [IPAddressInlineAdmin]
+
+    def formatter(self, obj, field_name, value):
+        # 这里可以对value的值进行判断，比如日期格式化等
+        if field_name == "adminAddress":
+            if value:
+                return f"""<a href="{value}" target="_blank">点击跳转</a>"""
+        if field_name == "adminPassword":
+            if value:
+                return BaseAdmin.password(value)
+        return value
+
     fields_options = {
-        'id': {
-            'fixed': 'left',
-            'min_width': '88px',
-            'align': 'center'
-        },
+        'id': FieldOptions.UUID,
         'code': {
             'fixed': 'left',
             'min_width': '88px',

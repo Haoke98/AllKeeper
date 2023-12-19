@@ -61,7 +61,7 @@ class URLInlineAdmin(admin.TabularInline):
 # Register your admin models here.
 @admin.register(Platform)
 class PlatformAdmin(BaseAdmin):
-    list_display = LIST_DISPLAY + ["name", 'icon', 'url', 'hostname', 'path', '_count']
+    list_display = LIST_DISPLAY + ["name", 'icon', '_urls', 'hostname', 'path', '_count']
     search_fields = ['name', 'url']
     list_per_page = 14
     inlines = [URLInlineAdmin, ]
@@ -83,37 +83,41 @@ class PlatformAdmin(BaseAdmin):
             res = urlparse(obj.url)
             return res.path
 
-    def formatter(self, obj, field_name, value):
+    def _urls(self, obj: Platform):
+        res = ""
+        if obj.urls.exists():
+            _all = obj.urls.all()
+            if len(_all) == 1:
+                return f"""<a href="{_all[1].content}" target="_blank">入口</a>"""
+            for i, url in enumerate(_all):
+                res += f"""<a href="{url.content}" target="_blank">入口{i + 1}</a><br/>"""
+        return res
+
+    _urls.short_description = "入口"
+
+    def formatter(self, obj: Platform, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
-        if field_name == "url":
-            if value:
-                return f"""<a href="{value}" target="_blank">点击跳转</a>"""
         if field_name == "icon":
             if value:
                 return '''<el-image style="width: 100px; height: 100px" src="{}" :preview-src-list="['{}']" lazy></el-image>'''.format(
                     value, value)
             else:
-                if obj.url:
-                    res = urlparse(obj.url)
-                    icon_url = f"{res.scheme}://{res.hostname}/favicon.ico"
-                    return '''<el-image style="width: 100px; height: 100px" src="{}" :preview-src-list="['{}']" lazy></el-image>'''.format(
-                        icon_url, icon_url)
+                if obj.urls.exists():
+                    for url in obj.urls.all():
+                        res = urlparse(url.content)
+                        icon_url = f"{res.scheme}://{res.hostname}/favicon.ico"
+                        return '''<el-image style="width: 100px; height: 100px" src="{}" :preview-src-list="['{}']" lazy></el-image>'''.format(
+                            icon_url, icon_url)
         return value
 
     fields_options = {
-        'id': {
-            'fixed': 'left',
-            'min_width': "80",
-            'align': 'center',
-            "resizeable": True,
-            "show_overflow_tooltip": True
-        },
+        'id': FieldOptions.UUID,
         'createdAt': FieldOptions.DATE_TIME,
         'updatedAt': FieldOptions.DATE_TIME,
         'deletedAt': FieldOptions.DATE_TIME,
         'name': {
             'min_width': '300px',
-            'align': 'center'
+            'align': 'left'
         },
         'icon': {
             'min_width': '160px',

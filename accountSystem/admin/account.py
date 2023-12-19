@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from simplepro.admin import BaseAdmin
+from simplepro.admin import BaseAdmin, FieldOptions
 
 from accountSystem.forms import AccountForm
 from accountSystem.models import Account, Tel, Email
@@ -62,6 +62,8 @@ class AccountAdmin(BaseAdmin):
         ''' % items
         return mark_safe(finalList)
 
+    _tels.short_description = "手机号"
+
     def _getTelItem(self, tel: Tel):
         item = '''
                         <div class="item">
@@ -86,6 +88,8 @@ class AccountAdmin(BaseAdmin):
         ''' % items
         return mark_safe(finalList)
 
+    _emails.short_description = "电子邮箱"
+
     def _getEmailItem(self, email: Email):
         item = '''
                         <div class="item">
@@ -99,32 +103,15 @@ class AccountAdmin(BaseAdmin):
         return mark_safe(item)
 
     fields_options = {
-        'id': {
-            # 'fixed': 'left',
-            'width': '80px',
-            'align': 'center',
-            'show_overflow_tooltip': True
-        },
-        'createdAt': {
-            'width': '180px',
-            'align': 'left'
-        },
-        'updatedAt': {
-            'width': '180px',
-            'align': 'left'
-        },
+        'id': FieldOptions.UUID,
+        'createdAt': FieldOptions.DATE_TIME,
+        'updatedAt': FieldOptions.DATE_TIME,
         'platform': {
             'width': '200px',
             'align': 'left'
         },
-        'username': {
-            'width': '260px',
-            'align': 'left'
-        },
-        'pwd': {
-            'width': '200px',
-            'align': 'center'
-        },
+        'username': FieldOptions.USER_NAME,
+        'pwd': FieldOptions.PASSWORD,
         'url': {
             'width': '130px',
             'align': 'center'
