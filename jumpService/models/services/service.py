@@ -56,12 +56,12 @@ class Service(BaseAccountModel):
         ]
 
     def __str__(self):
-        return f"服务({self.system}:{self.port}）"
+        return f"{self._type.name}服务({self.system}:{self.port}）"
 
 
 class ServiceUser(BaseModel):
     owner = models.CharField(verbose_name="使用者", max_length=50, null=True, blank=True)
-    service = models.ForeignKey(to=Service, on_delete=models.CASCADE, verbose_name="服务", null=True,
+    service = fields.ForeignKey(to=Service, on_delete=models.CASCADE, verbose_name="服务", null=True,
                                 blank=False)
     username = fields.CharField(max_length=32, null=True, blank=False, verbose_name="用户名")
     password = fields.PasswordInputField(max_length=32, null=True, blank=False, verbose_name="密码", size="medium",
@@ -74,7 +74,7 @@ class ServiceUser(BaseModel):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return f"用户（{self.service.server.ip},{self.owner}）"
+        return f"用户（{self.service},{self.owner}）"
 
 
 class AbstractBaseServiceModel(BaseAccountModel):
@@ -95,6 +95,7 @@ class AbstractBaseServiceModel(BaseAccountModel):
 
 
 class AbstractBaseServiceUserModel(BaseModel):
+    id = models.CharField(max_length=48, primary_key=True, default=pkHelper.uuid_generator)
     owner = models.CharField(verbose_name="使用者", max_length=50, null=True, blank=True)
     service = models.ForeignKey(to=Service, on_delete=models.CASCADE, verbose_name="服务", null=True,
                                 blank=False)
@@ -109,4 +110,4 @@ class AbstractBaseServiceUserModel(BaseModel):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return f"用户（{self.service.server.ip},{self.owner}）"
+        return f"用户（{self.service},{self.owner}）"

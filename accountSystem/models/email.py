@@ -5,7 +5,7 @@ from .account import BaseAccount
 
 class Email(BaseAccount):
     # TODO:需要增加别名了
-    remark = models.CharField(max_length=100, null=True, blank=True, verbose_name="备注")
+    pass
 
     class Meta:
         verbose_name = "电子邮箱"

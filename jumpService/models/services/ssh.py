@@ -47,4 +47,4 @@ class SSHServiceUser(AbstractBaseServiceUserModel):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return f"用户（{self.service.server.ip},{self.owner}）"
+        return f"用户（{self.service.server},{self.owner}）"

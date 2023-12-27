@@ -9,14 +9,14 @@
 
 from django.contrib import admin
 from django.db.models import QuerySet
-from simplepro.admin import FieldOptions
+from simplepro.admin import FieldOptions, BaseAdmin
 from simplepro.decorators import button
 
 from ..models import Service, ServiceUser, ServiceType, ServerNew, OperationSystemImage, ElasticSearch
 
 
 @admin.register(ServiceType)
-class ServiceTypeAdmin(admin.ModelAdmin):
+class ServiceTypeAdmin(BaseAdmin):
     list_display = ['id', 'name', 'remark', 'defaultPort', 'defaultSuperUsername', 'defaultSuperUserPwd', 'official',
                     'code', 'doc', 'updatedAt', 'createdAt',
                     'deletedAt']
@@ -107,7 +107,7 @@ class ServiceTypeAdmin(admin.ModelAdmin):
 
 
 @admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
+class ServiceAdmin(BaseAdmin):
     list_display = ['id', '_type', 'system', 'port', '_url', 'remark', 'updatedAt', 'createdAt',
                     'deletedAt']
     search_fields = ['system', 'port', 'remark']
@@ -234,8 +234,9 @@ class ServiceAdmin(admin.ModelAdmin):
 
 
 @admin.register(ServiceUser)
-class ServiceUserAdmin(admin.ModelAdmin):
-    list_display = ['id', 'service', 'username']
+class ServiceUserAdmin(BaseAdmin):
+    list_display = ['id', 'service', 'username', 'password']
+    list_filter = ['service__system__server', 'service__system', 'service___type']
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
@@ -284,11 +285,11 @@ class ServiceUserAdmin(admin.ModelAdmin):
             'min_width': '160px',
             'align': 'center'
         },
-        'rootUsername': {
+        'username': {
             'min_width': '180px',
             'align': 'center'
         },
-        'rootPassword': {
+        'password': {
             'min_width': '180px',
             'align': 'center'
         },
@@ -300,7 +301,7 @@ class ServiceUserAdmin(admin.ModelAdmin):
             'min_width': '320px',
             'align': 'left'
         },
-        'server': {
+        'service': {
             'min_width': '220px',
             'align': 'left'
         },
