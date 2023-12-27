@@ -1,17 +1,25 @@
 from django.contrib import admin
 from simplepro.admin import LIST_DISPLAY, FieldOptions, BaseAdmin
 
-from accountSystem.models.email import Email
+from .base import BaseAccountAdmin
+from ..models import Email
 
 
 # Register your admin models here.
 @admin.register(Email)
-class EmailAdmin(BaseAdmin):
+class EmailAdmin(BaseAccountAdmin):
     list_display = LIST_DISPLAY + ['username', 'pwd', 'group', 'remark']
     list_display_links = ['username']
     list_filter = ['group']
     list_select_related = ['group']
     search_fields = ['username', 'remark', 'group__name']
+
+    def formatter(self, obj, field_name, value):
+        # 这里可以对value的值进行判断，比如日期格式化等
+        if field_name == "name":
+            if value:
+                return f'''<el-button type="info" onclick="goToDetail(this)" round>{value}</el-button>'''
+        return super(EmailAdmin, self).formatter(obj, field_name, value)
 
     fields_options = {
         'id': FieldOptions.UUID,

@@ -2,12 +2,13 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from simplepro.admin import BaseAdmin, FieldOptions
 
+from accountSystem.admin.base import BaseAccountAdmin
 from accountSystem.forms import AccountForm
 from accountSystem.models import Account, Tel, Email
 
 
 @admin.register(Account)
-class AccountAdmin(BaseAdmin):
+class AccountAdmin(BaseAccountAdmin):
     list_display = ['id', 'platform', 'username', 'pwd', 'url', '_tels', '_emails', 'wechat', '_info',
                     'name'
                     ]
@@ -23,12 +24,6 @@ class AccountAdmin(BaseAdmin):
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
-        if field_name == "username":
-            if value:
-                return BaseAdmin.username(obj.username)
-        if field_name == 'pwd':
-            if value:
-                return BaseAdmin.password(obj.pwd)
         if field_name == "platform":
             if value:
                 return f"""<a href="{obj.platform.url}" target="_blank">{value}</a>"""
@@ -38,7 +33,7 @@ class AccountAdmin(BaseAdmin):
         if field_name == "name":
             if value:
                 return f'''<el-button type="info" onclick="goToDetail(this)" round>{value}</el-button>'''
-        return value
+        return super(AccountAdmin, self).formatter(obj, field_name, value)
 
     def _info(self, obj):
         if obj.info:
