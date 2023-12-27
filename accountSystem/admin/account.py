@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from simplepro.admin import BaseAdmin, FieldOptions
+from simplepro.admin import FieldOptions
 
 from accountSystem.admin.base import BaseAccountAdmin
 from accountSystem.forms import AccountForm

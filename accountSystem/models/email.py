@@ -4,7 +4,8 @@ from .account import BaseAccount
 
 
 class Email(BaseAccount):
-    # TODO:需要增加别名了
+    # TODO: 需要增加别名了
+    # TODO: 增加电子邮箱的后缀字段
     pass
 
     class Meta:
