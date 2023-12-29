@@ -88,7 +88,7 @@ class PlatformAdmin(BaseAdmin):
         if obj.urls.exists():
             _all = obj.urls.all()
             if len(_all) == 1:
-                return f"""<a href="{_all[1].content}" target="_blank">入口</a>"""
+                return f"""<a href="{_all[0].content}" target="_blank">入口</a>"""
             for i, url in enumerate(_all):
                 res += f"""<a href="{url.content}" target="_blank">入口{i + 1}</a><br/>"""
         return res

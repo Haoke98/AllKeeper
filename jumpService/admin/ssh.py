@@ -44,6 +44,7 @@ class SSHUserAdmin(BaseAdmin):
     autocomplete_fields = ['service']
     list_select_related = autocomplete_fields
     fields = ['owner', 'service', 'username', 'password', 'group', 'info']
+    search_fields = ['username', 'password']
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
