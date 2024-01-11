@@ -1,29 +1,69 @@
+import errno
+import socket
+import threading
+
 from django.contrib import admin
 from django.db.models import QuerySet
 from simplepro.admin import BaseAdmin, FieldOptions
 from simplepro.decorators import button
 
 from .net import IPAddressInlineAdmin
-from ..models import ServerNew, IPAddress, ServerCabinet, ServerRoom, OperationSystem, OperationSystemImage
+from ..models import ServerNew, IPAddress, ServerCabinet, ServerRoom, OperationSystem, OperationSystemImage, \
+    DeviceStatus
+
+
+def sync_device_status():
+    port = 80
+    for i, obj in enumerate(ServerNew.objects.all()):
+        for ip in obj.ips.all():
+            try:
+                # 创建socket对象
+                sock = socket.create_connection((ip.ip, port), timeout=5)
+                print(f"服务器 {ip.ip}:{port} 已经启动.")
+                sock.close()
+                ds = DeviceStatus(content="✅", device=obj, ip=ip.ip)
+                ds.save()
+            except socket.error as e:
+                print(f"无法连接到服务器 {ip.ip}:{port}. 错误信息: {e}")
+                if e.errno == errno.ECONNREFUSED:
+                    ds = DeviceStatus(content="✅⚠️", device=obj, ip=ip.ip, errstr=str(e), errno=e.errno)
+                    ds.save()
+                else:
+                    ds = DeviceStatus("❌", device=obj, ip=ip.ip, errstr=str(e), errno=e.errno)
+                    ds.save()
 
 
 @admin.register(ServerNew)
 class ServerNewAdmin(BaseAdmin):
-    list_display = ["id", 'code', 'status', 'system_count', 'bios', 'cabinet', 'remark', 'hoster',
+    list_display = ["id", 'code', 'system_count', 'bios', 'cabinet', 'remark', 'hoster',
                     "mac", "updatedAt", "createdAt", "deletedAt"
                     ]
     list_display_links = ['remark', 'hoster']
-    list_filter = ['hoster', 'status', 'cabinet__room', 'cabinet']
+    list_filter = ['hoster', 'cabinet__room', 'cabinet']
     date_hierarchy = 'updatedAt'
     search_fields = ['remark', 'code']
     search_help_text = ['你好，这是搜索帮助语句！']
     autocomplete_fields = []
     list_per_page = 10
     fields = ['code', 'cabinet', 'hoster', 'status', 'bios', 'mac', 'remark', 'info']
-    actions = ['sync', 'migrate']
+    actions = ['sync', 'migrate', 'sync_status']
     inlines = [IPAddressInlineAdmin]
 
     # inlines = [ServerUserInlineAdmin]
+    @button(type='danger', short_description='同步状态', enable=True)
+    def sync_status(self, request, queryset):
+        """
+        同步状态
+        :param obj:
+        :return:
+        """
+        th = threading.Thread(target=sync_device_status, args=())
+        th.start()
+        return {
+            'state': True,
+            'msg': f'同步已开始'
+        }
+
     @button(type='danger', short_description='新旧数据同步', enable=True, confirm="您确定要生成吗？")
     def sync(self, request, queryset):
         iService = None

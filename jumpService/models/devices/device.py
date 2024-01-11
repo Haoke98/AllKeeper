@@ -8,13 +8,13 @@
 ======================================="""
 from simplepro.components import fields
 from simplepro.models import BaseModel
+from django.db import models
 
 from lib import pkHelper
 
 
 class Device(BaseModel):
     id = fields.CharField(max_length=48, primary_key=True, default=pkHelper.uuid_generator)
-    status = fields.CharField(verbose_name='状态', max_length=50, null=True, blank=True)
     remark = fields.CharField(verbose_name="备注", max_length=100, null=True, blank=True)
 
     class Meta:
@@ -26,3 +26,16 @@ class Device(BaseModel):
             return f"设备({self.id},{self.remark})"
         else:
             return f"设备({self.id})"
+
+
+class DeviceStatus(BaseModel):
+    id = fields.CharField(max_length=48, primary_key=True, default=pkHelper.uuid_generator)
+    content = models.CharField(max_length=100, verbose_name="状态内容")
+    device = models.ForeignKey(Device, on_delete=models.CASCADE, null=True, blank=True, verbose_name="所属设备")
+    ip = fields.CharField(verbose_name="IP地址", max_length=50, null=True, blank=True)
+    errno = fields.CharField(verbose_name="错误代码",max_length=50, null=True, blank=True)
+    errstr = models.TextField(verbose_name="详细内容", null=True, blank=True)
+
+    class Meta:
+        verbose_name = "设备状态"
+        verbose_name_plural = verbose_name

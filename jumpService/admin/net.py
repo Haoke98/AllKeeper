@@ -143,7 +143,7 @@ class NetWorkAdmin(admin.ModelAdmin):
 
 @admin.register(NetDevice)
 class NetDeviceAdmin(admin.ModelAdmin):
-    list_display = ['id', 'status', 'remark', 'mac', 'createdAt', 'updatedAt', 'deletedAt']
+    list_display = ['id', 'remark', 'mac', 'createdAt', 'updatedAt', 'deletedAt']
     search_fields = ['status', 'remark', 'net', 'mac']
     inlines = [IPAddressInlineAdmin]
     fields_options = {

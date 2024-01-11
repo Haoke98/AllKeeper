@@ -16,7 +16,7 @@ from ..models import Router
 @admin.register(Router)
 class RouterAdmin(BaseAdmin):
     list_display = ['code',
-                    'adminAddress', 'adminPassword', 'status', 'remark', 'bios', 'hoster',
+                    'adminAddress', 'adminPassword', 'remark', 'bios', 'hoster',
                     "updatedAt", "createdAt", "deletedAt", 'id']
     inlines = [IPAddressInlineAdmin]
 

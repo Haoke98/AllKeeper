@@ -8,10 +8,17 @@
 ======================================="""
 from django.contrib import admin
 
-from ..models import Device
+from ..models import Device, DeviceStatus
 
 
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
-    list_display = ['id', 'status', 'remark', 'createdAt', 'updatedAt', 'deletedAt']
+    list_display = ['id', 'remark', 'createdAt', 'updatedAt', 'deletedAt']
     search_fields = ['id', 'status', 'remark', ]
+
+
+@admin.register(DeviceStatus)
+class DeviceStatusAdmin(admin.ModelAdmin):
+    list_display = ['id', 'content', 'device', 'ip', 'errno', 'errstr', 'createdAt']
+    list_filter = ['content', 'device', 'ip', 'errno', 'createdAt']
+    search_fields = ['id', 'content', 'device', 'ip', 'errno', 'createdAt']
