@@ -9,7 +9,7 @@ from accountSystem.models import Account, Tel, Email
 
 @admin.register(Account)
 class AccountAdmin(BaseAccountAdmin):
-    list_display = ['id', 'platform', 'username', 'pwd', 'url', '_tels', '_emails', 'wechat', '_info',
+    list_display = ['id', 'group', 'platform', 'username', 'pwd', 'url', '_tels', '_emails', 'wechat', '_info',
                     'name'
                     ]
     date_hierarchy = 'updatedAt'
@@ -102,8 +102,10 @@ class AccountAdmin(BaseAccountAdmin):
         'createdAt': FieldOptions.DATE_TIME,
         'updatedAt': FieldOptions.DATE_TIME,
         'platform': {
-            'width': '200px',
-            'align': 'left'
+            'min_width': '160px',
+            'align': 'left',
+            "resizeable": True,
+            "show_overflow_tooltip": True
         },
         'username': FieldOptions.USER_NAME,
         'pwd': FieldOptions.PASSWORD,
@@ -112,21 +114,33 @@ class AccountAdmin(BaseAccountAdmin):
             'align': 'center'
         },
         '_tels': {
-            'width': '180px',
-            'align': 'left'
+            'min_width': '120px',
+            'align': 'left',
+            "resizeable": True,
+            "show_overflow_tooltip": True
         },
         '_emails': {
-            'width': '200px',
-            'align': 'left'
+            'min_width': '140px',
+            'align': 'left',
+            "resizeable": True,
+            "show_overflow_tooltip": True
         },
         'wechat': {
-            'width': '120px',
-            'align': 'left'
+            'min_width': '120px',
+            'align': 'left',
+            "resizeable": True,
+            "show_overflow_tooltip": True
         },
 
         'info': {
             'width': '180px',
             'align': 'left'
+        },
+        'group': {
+            'min_width': '140px',
+            'align': 'left',
+            "resizeable": True,
+            "show_overflow_tooltip": True
         },
         'name': {
             'width': '200px',
