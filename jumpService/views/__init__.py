@@ -6,4 +6,18 @@
 @Software: PyCharm
 @disc:
 ======================================="""
+import datetime
+import json
+
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
 from .server import ServerViewSet
+
+
+@csrf_exempt
+def collect(request, *args, **kwargs):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        print(datetime.datetime, "接受了数据:", data)
+        return HttpResponse("ok")
