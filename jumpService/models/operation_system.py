@@ -10,10 +10,12 @@ from django.db import models
 from simplepro.components import fields
 from simplepro.models import BaseModel
 
+from lib import pkHelper
 from .devices import ServerNew
 
 
 class OperationSystemImage(BaseModel):
+    id = fields.CharField(max_length=48, primary_key=True, editable=False, default=pkHelper.uuid_generator)
     name = fields.CharField(max_length=50, verbose_name="名称")
     version = fields.CharField(max_length=50, verbose_name="版本")
 
