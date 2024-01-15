@@ -9,12 +9,12 @@
 
 from rest_framework import serializers
 
-from ..models import Server
+from ..models import ServerNew
 
 
 class ServerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Server
+        model = ServerNew
         fields = (
             'id',
             'createdAt',

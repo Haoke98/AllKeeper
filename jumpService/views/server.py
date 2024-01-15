@@ -3,14 +3,14 @@ from rest_framework.views import APIView
 
 from accountSystem.pagination import StandardPagination
 from utils.http_helper import RestResponse
-from ..models import Server
+from ..models import ServerNew
 from ..serializers import ServerSerializer
 
 
 class ServerView(APIView):
 
     def get(self, request, format=True):
-        serverObjsQS = Server.objects.all()
+        serverObjsQS = ServerNew.objects.all()
         # return RestResponse(200, "OK", pagination.page(page))
         pagination = StandardPagination()
         # pagination = PageNumberPagination()
@@ -22,6 +22,6 @@ class ServerView(APIView):
 
 
 class ServerViewSet(viewsets.ModelViewSet):
-    queryset = Server.objects.all()
+    queryset = ServerNew.objects.all()
     serializer_class = ServerSerializer
     pagination_class = StandardPagination
