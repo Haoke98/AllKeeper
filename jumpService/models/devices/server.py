@@ -2,6 +2,7 @@ from django.db import models
 from simplepro.components import fields
 from simplepro.models import BaseModel
 
+from lib import pkHelper
 from .net_device import NetDevice
 
 
@@ -63,3 +64,16 @@ class ServerNew(NetDevice):
                 return f"服务器({self.id},{self.remark})"
             else:
                 return f"服务器({self.id})"
+
+
+class ServerStatus(BaseModel):
+    id = fields.CharField(max_length=48, primary_key=True, default=pkHelper.uuid_generator)
+    server = models.ForeignKey(ServerNew, on_delete=models.CASCADE, null=True, blank=True, verbose_name="所属设备")
+    ip = fields.CharField(verbose_name="IP地址", max_length=50, null=True, blank=True)
+    cpuUsage = fields.IntegerField(verbose_name="CPU使用率", null=True, blank=True)
+    memoryUsage = fields.IntegerField(verbose_name="内存使用率", null=True, blank=True)
+    diskUsage = fields.IntegerField(verbose_name="磁盘使用率", null=True, blank=True)
+
+    class Meta:
+        verbose_name = "服务器状态"
+        verbose_name_plural = verbose_name

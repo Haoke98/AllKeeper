@@ -6,18 +6,24 @@
 @Software: PyCharm
 @disc:
 ======================================="""
-import datetime
 import json
+import logging
 
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .server import ServerViewSet
+from ..models import ServerStatus
 
 
 @csrf_exempt
 def collect(request, *args, **kwargs):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        print(datetime.datetime, "接受了数据:", data)
+        authorization = request.headers.get('Authorization')
+        key = authorization.replace('Bearer ', '')
+        logging.info(f"key: {key}, 数据:{data}")
+        st = ServerStatus(server_id=key, cpuUsage=data['cpu_usage'], memoryUsage=data['memory_usage'],
+                          diskUsage=data['disk_usage'])
+        st.save()
         return HttpResponse("ok")

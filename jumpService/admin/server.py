@@ -9,7 +9,7 @@ from simplepro.decorators import button
 
 from .net import IPAddressInlineAdmin
 from ..models import ServerNew, IPAddress, ServerCabinet, ServerRoom, OperationSystem, OperationSystemImage, \
-    DeviceStatus
+    DeviceStatus,ServerStatus
 
 
 def sync_device_status():
@@ -33,8 +33,15 @@ def sync_device_status():
                     ds.save()
 
 
+@admin.register(ServerStatus)
+class ServerStatusAdmin(admin.ModelAdmin):
+    list_display = ['id', 'server', 'ip', 'cpuUsage', 'memoryUsage', 'diskUsage', 'createdAt']
+    list_filter = ['server', 'ip', 'createdAt']
+    search_fields = ['id', 'ip']
+
+
 @admin.register(ServerNew)
-class ServerNewAdmin(BaseAdmin):
+class ServerAdmin(BaseAdmin):
     list_display = ["id", 'code', 'system_count', 'bios', 'cabinet', 'remark', 'hoster',
                     "mac", "updatedAt", "createdAt", "deletedAt"
                     ]
