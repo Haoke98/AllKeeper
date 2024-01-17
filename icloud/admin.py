@@ -361,14 +361,17 @@ class PrvFilter(admin.SimpleListFilter):
         a = 0
         b = 0
         for i in LocalMedia.objects.all():
-            try:
-                if os.path.exists(i.prv.path):
-                    a += 1
-                else:
-                    b += 1
-            except ValueError as e:
-                if "The 'prv' attribute has no file associated with it." in str(e):
-                    b += 1
+            if i.prv:
+                try:
+                    if os.path.exists(i.prv.path):
+                        a += 1
+                    else:
+                        b += 1
+                except ValueError as e:
+                    if "The 'prv' attribute has no file associated with it." in str(e):
+                        b += 1
+            else:
+                pass
         return [(0, f"有({a})"), (1, f"无({b})")]
 
     def queryset(self, request, queryset):

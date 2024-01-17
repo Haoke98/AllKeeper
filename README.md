@@ -211,6 +211,11 @@
 为了实现icloud相关视频处理功能需要用到FFmpeg作为核心。
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=FFmpeg&repo=FFmpeg)](https://github.com/FFmpeg/FFmpeg)
 
+## 未来期望
+* 人脸识别
+
+  参考项目:
+    * [face-detect-api](https://github.com/urandu/face_detect_api)
 
 ## 🌱 使用教程
 
