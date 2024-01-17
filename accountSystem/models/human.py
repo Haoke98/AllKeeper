@@ -1,14 +1,16 @@
 import datetime
 
 from django.db import models
+from simplepro.components import fields
 from simplepro.models import BaseModel
 
-from lib import zodiacHelper
+from lib import zodiacHelper, pkHelper
 from .weibo import Weibo
 
 
 # Create your models here.
 class Human(BaseModel):
+    id = fields.CharField(max_length=48, primary_key=True, editable=False, default=pkHelper.uuid_generator)
     name = models.CharField(max_length=50, verbose_name="姓名", default="未知组")
     idCardNum = models.CharField(max_length=18, verbose_name="身份证号", null=True, blank=True)
     sex = models.CharField(max_length=1, choices=(("男", "男"), ("女", "女")),

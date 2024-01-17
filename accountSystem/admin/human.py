@@ -9,7 +9,7 @@
 from django.contrib import admin
 from django.forms import ModelForm
 from django.utils.safestring import mark_safe
-from simplepro.admin import LIST_DISPLAY
+from simplepro.admin import LIST_DISPLAY, FieldOptions
 
 from ..models import Human, Account
 from ..models import Tel
@@ -34,8 +34,7 @@ class HumanAdmin(admin.ModelAdmin):
                                    'collage',
                                    'douyin',
                                    'WB',
-                                   'license_plate_number', 'birthplace', 'id_card_front', 'id_card_back', '_count',
-                                   'info']
+                                   'license_plate_number', 'birthplace', 'id_card_front', 'id_card_back', '_count']
     search_fields = ['name', 'idCardNum', 'license_plate_number', 'DY_ID', 'DY_home', 'birthplace']
     autocomplete_fields = ['WB', ]
     list_filter = ['sex', 'birthday', 'zodiac', 'ethnic', 'collage']
@@ -87,11 +86,11 @@ class HumanAdmin(admin.ModelAdmin):
         #     <a href="{url}" target="blank"><img src="data:image/jpeg;base64,{profile_image_base64}" title="{screen_name}"></a>
         #     ''')
         # else:
-            return None
+        return None
 
     weibo_avatar.short_description = "微博头像"
 
-    def douyin(self,obj):
+    def douyin(self, obj):
         if obj.DY_home:
             txt = "抖音首页"
             url = f"https://www.douyin.com/user/{obj.DY_home}"
@@ -100,21 +99,11 @@ class HumanAdmin(admin.ModelAdmin):
             return mark_safe(f'''
             <a href="{url}" target="blank">{txt}</a>
             ''')
-    
+
     fields_options = {
-        'id': {
-            'fixed': 'left',
-            'width': '40px',
-            'align': 'center'
-        },
-        'createdAt': {
-            'width': '180px',
-            'align': 'left'
-        },
-        'updatedAt': {
-            'width': '180px',
-            'align': 'left'
-        },
+        'id': FieldOptions.UUID,
+        'createdAt': FieldOptions.DATE_TIME,
+        'updatedAt': FieldOptions.DATE_TIME,
         'name': {
             'width': '200px',
             'align': 'left'
@@ -131,40 +120,40 @@ class HumanAdmin(admin.ModelAdmin):
             'width': '120px',
             'align': 'left'
         },
-        'collage':{
+        'collage': {
             'width': '120px',
             'align': 'left'
         },
-        
-        'DY_ID':{
+
+        'DY_ID': {
             'width': '120px',
             'align': 'left'
         },
-        'WB':{
+        'WB': {
             'width': '120px',
             'align': 'left'
         },
-        'douyin':{
+        'douyin': {
             'width': '120px',
             'align': 'left'
         },
-        'license_plate_number':{
+        'license_plate_number': {
             'width': '120px',
             'align': 'left'
         },
-        'birthplace':{
+        'birthplace': {
             'width': '400px',
             'align': 'left'
         },
-        'info':{
+        'info': {
             'width': '1000px',
             'align': 'left'
         },
-        'face':{
+        'face': {
             'width': '130px',
             'align': 'center'
         },
-        'id_card_front':{
+        'id_card_front': {
             'width': '140px',
             'align': 'center'
         },
