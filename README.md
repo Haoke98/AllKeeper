@@ -200,6 +200,60 @@
 
 ### iCloud内容管理
 
+
+
+## 未来期望
+* 人脸识别
+
+  参考项目:
+    * [face-detect-api](https://github.com/urandu/face_detect_api)
+
+## 架构实现
+```mermaid
+graph LR
+  Client
+  MinIO
+  PostgreSQL
+  ElasticSearch
+  subgraph python
+    subgraph Django
+      STATICFILES_STORAGE
+      DEFAULT_FILE_STORAGE
+      subgraph django.db.backends 
+        postgresql_psycopg2
+      end
+    end
+    subgraph minio_storage.storage
+      MinioMediaStorage
+      MinioStaticStorage
+    end
+    ElasticSearchPyClient
+  end
+  
+  STATICFILES_STORAGE --> MinioStaticStorage
+  DEFAULT_FILE_STORAGE --> MinioMediaStorage
+  MinioMediaStorage --> MinIO
+  MinioStaticStorage--> MinIO
+  postgresql_psycopg2 --> PostgreSQL
+  MinIO -->|static files| Client
+  MinIO -->|media files| Client
+  Django -->|API| Client
+  Django -->|HTML| Client
+  Django -->ElasticSearchPyClient
+  ElasticSearchPyClient --> ElasticSearch
+```
+
+```mermaid
+sequenceDiagram
+   Client ->> Django: HTTP请求
+   Django ->> PostgreSQL: 请求数据
+   PostgreSQL ->> Django: 响应数据
+   Django ->> ElasticSearch: 请求数据
+   ElasticSearch ->> Django: 响应数据
+   Django ->> Client: 返回纯HTML✅ / 拒绝❌
+   Client ->> MinIO: 请求静态资源
+   MinIO ->> Client: 响应静态资源
+```
 ## 核心依赖
 
 ### 1. Django集成式多功能后端框架
@@ -209,13 +263,9 @@
 ### 2. FFmpeg
 
 为了实现icloud相关视频处理功能需要用到FFmpeg作为核心。
+
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=FFmpeg&repo=FFmpeg)](https://github.com/FFmpeg/FFmpeg)
 
-## 未来期望
-* 人脸识别
-
-  参考项目:
-    * [face-detect-api](https://github.com/urandu/face_detect_api)
 
 ## 🌱 使用教程
 
