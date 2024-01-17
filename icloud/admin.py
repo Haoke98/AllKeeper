@@ -356,11 +356,11 @@ class PrvFilter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         # 返回要显示为过滤选项的值
+        return [(0, f"有"), (1, f"无")]
+        # FIXME: 自从引入MinIO之后,此功能就无法正常使用了, 请尽快修复相关功能
         a = 0
         b = 0
         for i in LocalMedia.objects.all():
-            # print(i.prv.path)
-            continue
             try:
                 if os.path.exists(i.prv.path):
                     a += 1
