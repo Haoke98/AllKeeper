@@ -274,12 +274,21 @@ sequenceDiagram
 ```python
 _DEBUG = False
 
+DB_BACKEND = 'django.db.backends.postgresql_psycopg2'
+# DB_BACKEND = 'django.db.backends.mysql'
+DB_HOST = "127.0.0.1"
+DB_PORT = 5555
+DB_DATABASE = "allkeeper"
+DB_USERNAME = "usernage"
+DB_PASSWORD = "password"
+
+MINIO_STORAGE_ENDPOINT = '127.0.0.1:9000'
+MINIO_STORAGE_ACCESS_KEY = 'MINIO_STORAGE_ACCESS_KEY'
+MINIO_STORAGE_SECRET_KEY = 'MINIO_STORAGE_SECRET_KEY'
+
 SECRET_KEY = ''
 ADMIN_PATH = ''
-ADMIN_USERNAME = ""
-ADMIN_PASSWORD = ""
-JWT_SIGNATURE = SECRET_KEY
-JWT_ISSUER = ""
+
 
 ES_USERNAME = ""
 ES_PASSWORD = ""
@@ -289,7 +298,11 @@ ES_CA = "/usr/etc/http_ca.ctr"
 SMTP_EMAIL = ""
 SMTP_PASSWORD = ""
 
-MEDIA_ROOT = "/home/media"
+ADMIN_USERNAME = ""
+ADMIN_PASSWORD = ""
+JWT_SIGNATURE = SECRET_KEY
+JWT_ISSUER = ""
+
 ```
 再执行以下命令来产生数据库文件
 ```shell
