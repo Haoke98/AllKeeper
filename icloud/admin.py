@@ -359,6 +359,8 @@ class PrvFilter(admin.SimpleListFilter):
         a = 0
         b = 0
         for i in LocalMedia.objects.all():
+            # print(i.prv.path)
+            continue
             try:
                 if os.path.exists(i.prv.path):
                     a += 1
