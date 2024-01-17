@@ -77,3 +77,4 @@ class ServerStatus(BaseModel):
     class Meta:
         verbose_name = "服务器状态"
         verbose_name_plural = verbose_name
+        ordering = ('-createdAt',)
