@@ -1,10 +1,14 @@
 <div align="center">
   <img height="320px" src="docs/static/LOGO.png"/>
-  <div>简体中文 | <a href="./README.en.md">English</a></div>
+  
+  <div>简体中文 | <a href="./README.en.md">English</a> </div>
   <p>
     基于Django3.2.7+Vue2+ElementUI的相对比较自动化生成的后台管理系统。借助SimpleUI开源项目对Django原生的Admin后台管理页面进行了二次开发和优化改进而生成的比较现代化的后台管理系统。
   </p>
+  
 </div>
+
+![](https://komarev.com/ghpvc/?username=allkeeper)
 
 ![](https://pypi-camo.global.ssl.fastly.net/ecfc98443cb0f8b613316d9004fbcf6d09fb1481/68747470733a2f2f68616f6b6539382e6769746875622e696f2f446a616e676f4173796e6341646d696e2f7374617469632f6469676974616c5f776f726c645f62616e6e65722e706e67)
 
