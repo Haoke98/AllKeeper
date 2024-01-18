@@ -18,13 +18,16 @@ from simplepro.models import BaseModel
 
 
 class AppleId(BaseModel):
-    email = fields.CharField(verbose_name="绑定的邮箱", max_length=30, placeholder="请输入电子邮箱", null=True, unique=True,
+    email = fields.CharField(verbose_name="绑定的邮箱", max_length=30, placeholder="请输入电子邮箱", null=True,
+                             unique=True,
                              blank=True)
-    tel = fields.CharField(verbose_name="绑定的手机号", max_length=11, placeholder="请输入绑定的手机号", null=True, unique=True,
+    tel = fields.CharField(verbose_name="绑定的手机号", max_length=11, placeholder="请输入绑定的手机号", null=True,
+                           unique=True,
                            blank=True, show_word_limit=True)
     passwd = PasswordInputField(verbose_name='密码', max_length=12, placeholder='请输入密码', null=True, blank=True,
                                 show_password=True, show_word_limit=True, pattern="0123456789", encrypt="md5")
-    last2FactorAuthenticateAt = models.DateTimeField(verbose_name="上次两步验证时间", null=True, blank=True, editable=False)
+    last2FactorAuthenticateAt = models.DateTimeField(verbose_name="上次两步验证时间", null=True, blank=True,
+                                                     editable=False)
     lastConfirmedSessionValidityAt = models.DateTimeField(verbose_name="上次确认会话有效性时间", null=True, blank=True,
                                                           editable=False)
     maxSessionAge = models.DurationField(verbose_name="最长会话有效期", blank=True, editable=False,
@@ -202,12 +205,13 @@ class LocalMedia(BaseModel):
     detach_icloud_date = models.DateTimeField(verbose_name="从icloud中移除时间", null=True, blank=True)
 
     locationEnc = models.TextField(null=True, verbose_name="地址信息(已加密)", blank=True)
-
-    thumb = models.ImageField(verbose_name="缩略图", upload_to=upload_thumb, null=True, help_text="视频和图像都会有，JPEG格式",
-                              blank=True)
     prv = models.FileField(verbose_name="可预览文件", null=True, upload_to=upload_prv,
                            help_text="HICH图片和PNG图片的可预览文件为JPEG图，MOV视频的可预览文件为MP4", blank=True)
     origin = models.FileField(verbose_name="原始文件", null=True, upload_to=upload_origin, blank=True)
+    originTest = fields.VideoField(max_length=255, null=True, blank=True, verbose_name="视频原始文件(测试)",
+                                   help_text="")
+    thumb = fields.ImageField(max_length=255, null=True, blank=True, verbose_name="缩略图", help_text="",
+                              action="/icloud/upload?dir_path=LocalMedia/thumb")
 
     versions = JsonTextField(null=True, blank=True)
     masterRecord = JsonTextField(null=True, blank=True)

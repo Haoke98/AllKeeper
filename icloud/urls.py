@@ -1,7 +1,7 @@
 from django.urls import re_path
 from rest_framework.routers import DefaultRouter
 
-from .views import preview, sync_progress, test, count, thumb, detail
+from .views import preview, sync_progress, test, count, thumb, detail,upload_file
 
 router = DefaultRouter()
 # router.register(r'server', viewset=ServerViewSet)
@@ -20,7 +20,7 @@ urlpatterns = [
                   re_path('test', test),
                   re_path('total', count),
                   re_path('thumb', thumb),
-                  # re_path('^system/menu$', getMenuList),
+                  re_path('upload', upload_file),
                   # # re_path('^human$', HumanView.as_view()),
                   # re_path('^images/thumbnail', image.thumbnail, name='thumbnail'),
                   # re_path('^images', image.image_view),

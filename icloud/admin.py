@@ -15,6 +15,7 @@ from urllib.parse import urlencode
 
 from django.contrib import admin
 from django.http import JsonResponse
+from minio_storage.storage import get_setting
 from simplepro.admin import FieldOptions
 from simplepro.decorators import button
 from simplepro.dialog import MultipleCellDialog, ModalDialog
@@ -787,9 +788,13 @@ class LocalMediaAdmin(admin.ModelAdmin):
         if field_name == "size":
             if value:
                 return f"""<span title="{value}">{human_readable_bytes(value)}</span>"""
-        if field_name == 'img':
+        if field_name == 'thumb':
             if value:
-                return f"""<img src="{value}" style="height:100px;">"""
+                STORAGE_END_POINT = get_setting("MINIO_STORAGE_ENDPOINT")
+                BUCKET_NAME = get_setting("MINIO_STORAGE_MEDIA_BUCKET_NAME")
+                final_url = "http://" + STORAGE_END_POINT + '/' + BUCKET_NAME + '/' + value
+                print(STORAGE_END_POINT, print(final_url))
+                return f"""<img src="{final_url}" style="height:100px;">"""
         if field_name == "duration":
             if value:
                 return f"""<span title="{value}">{human_readable_time(value)}</span>"""

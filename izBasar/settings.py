@@ -327,11 +327,10 @@ REST_FRAMEWORK = {
 
 JWT_EXPIRED_DELTA = datetime.timedelta(hours=1)
 
+
 DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
 STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"
-
 from .secret import MINIO_STORAGE_ENDPOINT, MINIO_STORAGE_ACCESS_KEY, MINIO_STORAGE_SECRET_KEY
-
 MINIO_STORAGE_USE_HTTPS = False
 MINIO_STORAGE_MEDIA_OBJECT_METADATA = {"Cache-Control": "max-age=1000"}
 MINIO_STORAGE_MEDIA_BUCKET_NAME = 'allkeeper-media'

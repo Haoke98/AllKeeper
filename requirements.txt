@@ -1,7 +1,6 @@
 DjangoAsyncAdmin==6.11.0
 djangorestframework==3.14.0
 elasticsearch==8.4.3
-minio==7.1.11
 Pygments==2.11.2
 requests==2.28.1
 docutils==0.19

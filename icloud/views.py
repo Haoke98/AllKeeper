@@ -1,9 +1,14 @@
 # Create your views here.
 import datetime
 import json
+import os
+import tempfile
+import threading
 
+from django.core.files.storage import default_storage
 from django.http import HttpResponse, JsonResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from pytz import UTC
 
 from .models import IMedia, LocalMedia
@@ -66,7 +71,8 @@ def thumb(request):
                 _url = record["fields"]["resJPEGThumbRes"]["value"]["downloadURL"]
                 print(_url)
                 return HttpResponseRedirect(_url)
-        raise Http404(f"远程更新以后也没有找到对应的媒体资源，可能这个rank值={startRank}出现了问题，[{start}~{start + 100}]")
+        raise Http404(
+            f"远程更新以后也没有找到对应的媒体资源，可能这个rank值={startRank}出现了问题，[{start}~{start + 100}]")
 
 
 def test2(targetObj):
@@ -185,3 +191,33 @@ def sync_progress(request):
     return JsonResponse(
         data={"STATUS": STATUS, "FINISHED_COUNT": FINISHED_COUNT, "TOTAL": TOTAL, "STARTED_AT": STARTED_AT,
               "EXCEPTION_MSG": EXCEPTION_MSG, "EXCEPTION_TRACE_BACK": EXCEPTION_TRACE_BACK})
+
+
+def async_upload_to_s3(temp_file, s3_key):
+    # 通过 S3 存储后端将文件异步上传到 S3
+    default_storage.save(s3_key, temp_file)
+    temp_file.close()
+
+
+@csrf_exempt
+def upload_file(request):
+    if request.method == 'POST' and request.FILES.get('file'):
+        uploaded_file = request.FILES['file']
+        dir_path = request.GET.get('dir_path', None)
+        if dir_path:
+            relative_file_path = dir_path + '/' + uploaded_file.name
+        else:
+            relative_file_path = uploaded_file.name
+
+        # 保存文件到本地临时目录，可以根据实际情况修改路径
+        # 创建临时文件并返回文件对象
+
+        temp_file = tempfile.TemporaryFile(mode='w+b')
+        for chunk in uploaded_file.chunks():
+            temp_file.write(chunk)
+        # 异步任务：将文件上传到 S3
+        th = threading.Thread(target=async_upload_to_s3, args=(temp_file, relative_file_path))
+        th.start()
+
+        res = {"success": 1, "message": "上传成功!", "url": relative_file_path}
+        return JsonResponse(res)
