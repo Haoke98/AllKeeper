@@ -329,8 +329,10 @@ JWT_EXPIRED_DELTA = datetime.timedelta(hours=1)
 
 DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
 STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"
-from .secret import MINIO_STORAGE_ENDPOINT, MINIO_STORAGE_ACCESS_KEY, MINIO_STORAGE_SECRET_KEY, MINIO_STORAGE_USE_HTTPS
+from .secret import MINIO_STORAGE_ENDPOINT, MINIO_STORAGE_ACCESS_KEY, MINIO_STORAGE_SECRET_KEY
 
+# 因为MINIO中不光存储静态资源还会存储动态资源,相对比较铭感,必须强制加密通信
+MINIO_STORAGE_USE_HTTPS = True
 MINIO_STORAGE_MEDIA_OBJECT_METADATA = {"Cache-Control": "max-age=1000"}
 MINIO_STORAGE_MEDIA_BUCKET_NAME = 'allkeeper-media'
 MINIO_STORAGE_MEDIA_BACKUP_BUCKET = 'allkeeper-reycle-bin'
