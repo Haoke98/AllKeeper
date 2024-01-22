@@ -17,10 +17,10 @@ import platform
 from pathlib import Path
 
 from . import secret
-from .secret import MEDIA_ROOT
+from .secret import MEDIA_ROOT, CSRF_TRUSTED_ORIGINS, MINIO_STORAGE_ENDPOINT, MINIO_STORAGE_ACCESS_KEY, \
+    MINIO_STORAGE_SECRET_KEY
 from .simpleUISettings import *
 
-CSRF_TRUSTED_ORIGINS = ['http://keeper.sdm.net', 'http://kept.sdm.net']
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'none'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -329,8 +329,6 @@ JWT_EXPIRED_DELTA = datetime.timedelta(hours=1)
 
 DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
 STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"
-from .secret import MINIO_STORAGE_ENDPOINT, MINIO_STORAGE_ACCESS_KEY, MINIO_STORAGE_SECRET_KEY
-
 # 因为MINIO中不光存储静态资源还会存储动态资源,相对比较铭感,必须强制加密通信
 MINIO_STORAGE_USE_HTTPS = True
 MINIO_STORAGE_MEDIA_OBJECT_METADATA = {"Cache-Control": "max-age=1000"}

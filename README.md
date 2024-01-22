@@ -315,8 +315,16 @@ MINIO_STORAGE_ENDPOINT = '127.0.0.1:9000'
 MINIO_STORAGE_ACCESS_KEY = 'MINIO_STORAGE_ACCESS_KEY'
 MINIO_STORAGE_SECRET_KEY = 'MINIO_STORAGE_SECRET_KEY'
 
+
 SECRET_KEY = ''
 ADMIN_PATH = ''
+
+
+SMTP_EMAIL = ""
+SMTP_PASSWORD = ""
+
+
+CSRF_TRUSTED_ORIGINS = ['http://keeper.sdm.net', 'http://kept.sdm.net', "https://www.nyhc.top"]
 
 
 ES_USERNAME = ""
@@ -324,8 +332,6 @@ ES_PASSWORD = ""
 ES_URI = "https://127.0.0.1:9002"
 ES_CA = "/usr/etc/http_ca.ctr"
 
-SMTP_EMAIL = ""
-SMTP_PASSWORD = ""
 
 ADMIN_USERNAME = ""
 ADMIN_PASSWORD = ""
