@@ -6,10 +6,13 @@
 @Software: PyCharm
 @disc:
 ======================================="""
+import base64
+
 from django.contrib import admin
 from simplepro.admin import FieldOptions, BaseAdmin
+from simplepro.dialog import ModalDialog
 
-from ..models import OperationSystem, OperationSystemImage
+from ..models import OperationSystem, OperationSystemImage, SSHService
 
 
 @admin.register(OperationSystemImage)
@@ -19,9 +22,39 @@ class OperationSystemImageAdmin(admin.ModelAdmin):
 
 @admin.register(OperationSystem)
 class OperationSystemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'createdAt', 'updatedAt', 'image', 'server', 'rootUsername', 'rootPassword', 'deletedAt']
+    list_display = ['id', 'createdAt', 'updatedAt', 'image', 'server', 'rootUsername', 'rootPassword', 'open_webssh',
+                    'deletedAt']
     list_filter = ['image', 'server']
     search_fields = ['image', 'server']
+
+    def open_webssh(self, obj: OperationSystem):
+        modal = ModalDialog()
+        modal.width = "1200"
+        modal.height = "600"
+        ips = obj.server.ips.all()
+        ssh_services = obj.server.SSHServices.all()
+        print("ssh_services:", ssh_services)
+        ssh_port = 22
+        if ssh_services.__len__() > 0:
+            ssh_port = ssh_services[0].port
+        if len(ips) > 0:
+            # 这个是单元格显示的文本
+            modal.cell = '<el-link type="primary">开始</el-link>'
+            modal.title = "SSH安全远程链接"
+            # Base64编码
+            encoded_pwd = base64.b64encode(obj.rootPassword.encode('utf-8')).decode('utf-8')
+            # 这里的url可以写死，也可以用django的反向获取url，可以根据model的数据，传到url中
+            modal.url = "http://localhost:9080?hostname={}&port={}&username={}&password={}".format(ips[0].ip, ssh_port,
+                                                                                                   obj.rootUsername,
+                                                                                                   encoded_pwd)
+            print("正在连接SSH", modal.url)
+        else:
+            modal.cell = ""
+        # 是否显示取消按钮
+        modal.show_cancel = True
+        return modal
+
+    open_webssh.short_description = "远程桌面/SSH"
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
@@ -60,7 +93,7 @@ class OperationSystemAdmin(admin.ModelAdmin):
         },
         'rootUsername': FieldOptions.USER_NAME,
         'rootPassword': FieldOptions.PASSWORD,
-        'ssh': {
+        'open_webssh': {
             'min_width': '120px',
             'align': 'center'
         },

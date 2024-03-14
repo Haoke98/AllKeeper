@@ -10,9 +10,13 @@ from django.db import models
 from simplepro.components import fields
 
 from .service import AbstractBaseServiceUserModel, AbstractBaseServiceModel
+from .. import ServerNew
 
 
 class SSHService(AbstractBaseServiceModel):
+    server = models.ForeignKey(to=ServerNew, on_delete=models.CASCADE, verbose_name="服务器", null=True,
+                               blank=False, db_index=True, related_name="SSHServices")
+
     class Meta:
         verbose_name = "SSH服务"
         verbose_name_plural = verbose_name

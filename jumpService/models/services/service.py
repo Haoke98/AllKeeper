@@ -30,7 +30,8 @@ class ServiceType(BaseAccountModel):
     defaultSuperUserPwd = fields.CharField(max_length=50, verbose_name="默认超级用户密码", null=True, blank=True)
     doc = fields.CharField(max_length=500, verbose_name="文档地址", null=True, blank=True)
     official = fields.CharField(max_length=500, verbose_name="官网地址", null=True, blank=True)
-    code = fields.CharField(max_length=500, verbose_name="源代码仓库地址", placeholder="github/gitee/gitcode....等等开源代码仓库地址即可",
+    code = fields.CharField(max_length=500, verbose_name="源代码仓库地址",
+                            placeholder="github/gitee/gitcode....等等开源代码仓库地址即可",
                             null=True, blank=True)
 
     class Meta:
@@ -79,7 +80,7 @@ class ServiceUser(BaseModel):
 
 class AbstractBaseServiceModel(BaseAccountModel):
     server = models.ForeignKey(to=ServerNew, on_delete=models.CASCADE, verbose_name="服务器", null=True,
-                               blank=False, db_index=True)
+                               blank=False, db_index=True, related_name="services")
     port = models.PositiveIntegerField(verbose_name="端口", default=8888, blank=False, db_index=True)
 
     class Meta:
