@@ -17,13 +17,32 @@ from ..models import OperationSystem, OperationSystemImage, SSHService
 
 @admin.register(OperationSystemImage)
 class OperationSystemImageAdmin(admin.ModelAdmin):
-    list_display = ['id', 'createdAt', 'updatedAt', 'name', 'version', 'deletedAt']
+    list_display = ['id', 'name', 'version', 'updatedAt', 'createdAt', 'deletedAt']
+    fields_options = {
+        'id': FieldOptions.UUID,
+        'code': {
+            'fixed': 'left',
+            'min_width': '88px',
+            'align': 'center'
+        },
+        'createdAt': FieldOptions.DATE_TIME,
+        'updatedAt': FieldOptions.DATE_TIME,
+        'deletedAt': FieldOptions.DATE_TIME,
+        'name': {
+            'min_width': '280px',
+            'align': 'left'
+        },
+        'version': {
+            'min_width': '180px',
+            'align': 'left'
+        }
+    }
 
 
 @admin.register(OperationSystem)
 class OperationSystemAdmin(admin.ModelAdmin):
-    list_display = ['id', 'createdAt', 'updatedAt', 'image', 'server', 'rootUsername', 'rootPassword', 'open_webssh',
-                    'deletedAt']
+    list_display = ['id', 'image', 'server', 'rootUsername', 'rootPassword', 'open_webssh',
+                    'updatedAt', 'createdAt', 'deletedAt']
     list_filter = ['image', 'server']
     search_fields = ['image', 'server']
 
@@ -89,7 +108,8 @@ class OperationSystemAdmin(admin.ModelAdmin):
         },
         'image': {
             'min_width': '160px',
-            'align': 'left'
+            'align': 'left',
+            "show_overflow_tooltip": True
         },
         'rootUsername': FieldOptions.USER_NAME,
         'rootPassword': FieldOptions.PASSWORD,

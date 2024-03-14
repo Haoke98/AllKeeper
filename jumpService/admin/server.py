@@ -9,7 +9,7 @@ from simplepro.decorators import button
 
 from .net import IPAddressInlineAdmin
 from ..models import ServerNew, IPAddress, ServerCabinet, ServerRoom, OperationSystem, OperationSystemImage, \
-    DeviceStatus,ServerStatus
+    DeviceStatus, ServerStatus
 
 
 def sync_device_status():
@@ -46,15 +46,15 @@ class ServerAdmin(BaseAdmin):
                     "mac", "updatedAt", "createdAt", "deletedAt"
                     ]
     list_display_links = ['remark', 'hoster']
-    list_filter = ['hoster', 'cabinet__room', 'cabinet']
-    date_hierarchy = 'updatedAt'
+    list_filter = ['hoster', 'cabinet__room', 'cabinet', 'updatedAt', 'createdAt', 'deletedAt']
     search_fields = ['remark', 'code']
     search_help_text = ['你好，这是搜索帮助语句！']
     autocomplete_fields = []
     list_per_page = 10
-    fields = ['code', 'cabinet', 'hoster', 'status', 'bios', 'mac', 'remark', 'info']
+    fields = ['code', 'cabinet', 'hoster', 'bios', 'mac', 'remark', 'info']
     actions = ['sync', 'migrate', 'sync_status']
     inlines = [IPAddressInlineAdmin]
+    ordering = ('-updatedAt',)
 
     # inlines = [ServerUserInlineAdmin]
     @button(type='danger', short_description='同步状态', enable=True)
@@ -142,7 +142,7 @@ class ServerAdmin(BaseAdmin):
         'id': FieldOptions.UUID,
         'code': {
             'fixed': 'left',
-            'min_width': '88px',
+            'min_width': '98px',
             'align': 'center'
         },
         'createdAt': {
@@ -193,7 +193,6 @@ class ServerAdmin(BaseAdmin):
             'min_width': '200px',
             'align': 'left'
         },
-
         'bios': {
             'min_width': '180',
             'align': 'center'
