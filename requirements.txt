@@ -1,7 +1,7 @@
 DjangoAsyncAdmin>=6.11.2
 djangorestframework==3.14.0
 elasticsearch==8.4.3
-Pygments==2.11.2
+Pygments==2.15.0
 requests==2.28.1
 docutils==0.19
 concurrent-log-handler==0.9.20
