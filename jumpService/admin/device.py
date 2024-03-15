@@ -13,7 +13,7 @@ from ..models import Device, DeviceStatus
 
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
-    list_display = ['id', 'remark', 'createdAt', 'updatedAt', 'deletedAt']
+    list_display = ['id', 'brand', 'remark', 'createdAt', 'updatedAt', 'deletedAt']
     search_fields = ['id', 'status', 'remark', ]
 
 

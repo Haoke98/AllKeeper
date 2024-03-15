@@ -18,3 +18,4 @@ from .server import ServerAdmin
 from .service import ServiceAdmin, ServiceUserAdmin, ServiceTypeAdmin
 from .ssh import SSHServiceAdmin, SSHUserAdmin
 from .operation_system import OperationSystemAdmin
+from .brand import BrandAdmin
