@@ -12,4 +12,4 @@ from .region import Region
 
 
 class Country(Region):
-    code = models.CharField(max_length=4, verbose_name="英文编号", unique=True, primary_key=True)
+    code = models.CharField(max_length=4, verbose_name="英文编号", unique=True)

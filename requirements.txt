@@ -1,4 +1,4 @@
-DjangoAsyncAdmin==6.11.0
+DjangoAsyncAdmin>=6.11.2
 djangorestframework==3.14.0
 elasticsearch==8.4.3
 Pygments==2.11.2
