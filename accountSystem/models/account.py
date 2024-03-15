@@ -1,7 +1,6 @@
 from django.db import models
 from simplepro.components import fields
 
-from lib import pkHelper
 from .baseAccount import BaseAccount
 from .email import Email
 from .tel import Tel

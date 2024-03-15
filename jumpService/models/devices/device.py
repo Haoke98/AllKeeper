@@ -7,10 +7,11 @@
 @disc:
 ======================================="""
 from simplepro.components import fields
+from simplepro.lib import pkHelper
 from simplepro.models import BaseModel
 from django.db import models
 
-from lib import pkHelper
+
 from ..brand import Brand
 
 

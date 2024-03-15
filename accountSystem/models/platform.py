@@ -1,8 +1,7 @@
 from django.db import models
 from simplepro.components import fields
+from simplepro.lib import pkHelper
 from simplepro.models import BaseModel
-
-from lib import pkHelper
 
 
 class Platform(BaseModel):

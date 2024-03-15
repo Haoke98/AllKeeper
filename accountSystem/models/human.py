@@ -2,9 +2,10 @@ import datetime
 
 from django.db import models
 from simplepro.components import fields
+from simplepro.lib import pkHelper
 from simplepro.models import BaseModel
 
-from lib import zodiacHelper, pkHelper
+from lib import zodiacHelper
 from .weibo import Weibo
 
 
