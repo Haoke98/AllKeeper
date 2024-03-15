@@ -20,3 +20,4 @@ from .ssh import SSHServiceAdmin, SSHUserAdmin
 from .operation_system import OperationSystemAdmin
 from .brand import BrandAdmin
 from .channel import ChannelAdmin
+from .port import PortMapAdmin, PortAdmin

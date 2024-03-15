@@ -9,4 +9,4 @@
 from .server import ServerNew, ServerCabinet, ServerRoom, ServerStatus
 from .router import Router
 from .device import Device, DeviceStatus
-from .net_device import NetDevice
+from .net_device import NetDevice, Port

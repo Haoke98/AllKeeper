@@ -7,6 +7,8 @@
 @disc:
 ======================================="""
 from django.db import models
+from simplepro.models import BaseModel
+from simplepro.components import fields
 
 from .device import Device
 
@@ -23,3 +25,18 @@ class NetDevice(Device):
             return f"网络设备({self.id},{self.remark})"
         else:
             return f"网络设备({self.id})"
+
+
+class Port(BaseModel):
+    host = fields.ForeignKey(to=NetDevice, on_delete=models.CASCADE, related_name="ports")
+    num = fields.IntegerField(null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['host', 'num'], name='unique_host_port')
+        ]
+        verbose_name = "端口"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return f"{self.host}:{str(self.num)}"
