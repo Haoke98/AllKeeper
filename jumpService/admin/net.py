@@ -11,7 +11,7 @@ import ipaddress
 from django.contrib import admin
 from django.db.models import QuerySet
 from django.forms import ModelForm
-from simplepro.admin import FieldOptions
+from simplepro.admin import FieldOptions, BaseAdmin
 from simplepro.components.fields.char_field import CharFormField
 
 from ..models import Net, IPAddress, NetDevice
@@ -142,9 +142,10 @@ class NetWorkAdmin(admin.ModelAdmin):
 
 
 @admin.register(NetDevice)
-class NetDeviceAdmin(admin.ModelAdmin):
+class NetDeviceAdmin(BaseAdmin):
     list_display = ['id', 'remark', 'mac', 'createdAt', 'updatedAt', 'deletedAt']
     search_fields = ['status', 'remark', 'net', 'mac']
+    ordering = ('-updatedAt',)
     inlines = [IPAddressInlineAdmin]
     fields_options = {
         'id': FieldOptions.UUID,
@@ -158,9 +159,10 @@ class NetDeviceAdmin(admin.ModelAdmin):
 
 
 @admin.register(IPAddress)
-class IPAddressAdmin(admin.ModelAdmin):
+class IPAddressAdmin(BaseAdmin):
     list_display = ['id', 'net', 'ip', 'device', 'createdAt', 'updatedAt', 'deletedAt']
     search_fields = ['net', 'ip', 'device']
+    ordering = ('-updatedAt',)
     fields_options = {
         'id': FieldOptions.UUID,
         'createdAt': FieldOptions.DATE_TIME,
