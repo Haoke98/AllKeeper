@@ -10,6 +10,7 @@ import logging
 import os.path
 import threading
 import urllib.parse
+import uuid
 from datetime import datetime
 from urllib.parse import urlencode
 
@@ -43,7 +44,7 @@ class AccountAdmin(AjaxAdmin):
         """
         global iService
         qs: AppleId = queryset[0]
-        print(qs.username, qs.passwd)
+        print("被选中的用户名:", qs.username, qs.passwd)
         config = {
             # 弹出层中的输入框配置
 
@@ -232,7 +233,7 @@ class AlbumAdmin(admin.ModelAdmin):
                     'query_comparator', 'query_fieldValue_type', 'query_fieldValue_value']
     list_filter = ['synced', 'createdAt', 'updatedAt', 'query_fieldName',
                    'query_comparator', 'query_fieldValue_type']
-    actions = ['sync', 'collect']
+    actions = ['sync', 'collect', 'handle_pk']
     search_fields = ['name', 'query_fieldValue_value']
 
     def has_change_permission(self, request, obj=None):
@@ -253,7 +254,6 @@ class AlbumAdmin(admin.ModelAdmin):
 
     @button(type='danger', short_description='从icloud中同步相册列表', enable=True, confirm="您确定要生成吗？")
     def sync(self, request, queryset):
-        iService = None
         for i, album_name in enumerate(iService.photos.albums):
             album = iService.photos.albums[album_name]
             total = len(album)
@@ -276,6 +276,25 @@ class AlbumAdmin(admin.ModelAdmin):
         return {
             'state': True,
             'msg': f'采集程序已经启动'
+        }
+
+    @button(type='warning', short_description='处理PK', enable=True, confirm="确定对PK进行特殊处理吗?")
+    def handle_pk(self, request, queryset):
+        for i, album in enumerate(Album.objects.all()):
+            final_pk = None
+            if album.query_fieldValue_value == "" or album.query_fieldValue_value is None:
+                final_pk = uuid.uuid4().__str__()
+            else:
+                final_pk = album.query_fieldValue_value
+            print(f"album{i}:{album.name} ===> {final_pk}")
+            album.id = final_pk
+            album.save()
+            medias = album.medias.all()
+            for j, media in enumerate(medias):
+                print(" " * 10, "|", "-" * 10, f"{j}/{media.__len__()}", media, "===>", final_pk)
+        return {
+            'state': True,
+            'msg': f'处理成功'
         }
 
     fields_options = {

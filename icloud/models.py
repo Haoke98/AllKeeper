@@ -14,6 +14,7 @@ from django.db.models import Count, Sum
 from simplepro.components import fields
 from simplepro.components.fields import PasswordInputField
 from simplepro.editor.fields import JsonTextField
+from simplepro.lib import pkHelper
 from simplepro.models import BaseModel
 
 
@@ -58,7 +59,8 @@ class AppleId(BaseModel):
 
 
 class Album(BaseModel):
-    name = models.CharField(max_length=50, verbose_name="标题", primary_key=True)
+    id = models.CharField(max_length=48, editable=False, default=pkHelper.uuid_generator, primary_key=True)
+    name = models.CharField(max_length=50, verbose_name="标题", unique=True)
     total = models.PositiveIntegerField(default=0, verbose_name="iCloud上的数量")
     count = models.PositiveIntegerField(default=0, verbose_name="已经采集到的数量")
     synced = models.BooleanField(default=False, verbose_name='同步完毕')
@@ -147,7 +149,7 @@ class IMedia(BaseModel):
     asset_date = models.DateTimeField(verbose_name="生成时间", null=True)
     added_date = models.DateTimeField(verbose_name="加入icloud的时间", null=True)
     versions = models.TextField(null=True)
-    albums = fields.ManyToManyField(to=Album, verbose_name="相册")
+    albums = fields.ManyToManyField(to=Album, verbose_name="相册", related_name="medias", blank=True)
     startRank = models.IntegerField(null=True)
     thumbURL = models.TextField(null=True)
 
