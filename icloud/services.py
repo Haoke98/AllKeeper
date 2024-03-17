@@ -25,9 +25,17 @@ from moviepy.video.io.VideoFileClip import VideoFileClip
 from pyicloud.services.photos import PhotoAsset
 
 from lib.icloud import IcloudService
-from .models import IMedia, LocalMedia
+from .models import IMedia, LocalMedia, AppleId
 
 CHUNK_SIZE = 1024 * 1024  # 每个文件块的大小（字节）1M
+
+
+def create_icloud_service(appleId: str) -> tuple[bool, IcloudService]:
+    qs: AppleId = AppleId.objects.filter(email=appleId).first()
+    print("被选中的用户名:", qs.username, qs.passwd)
+    _iService = IcloudService(qs.username, qs.passwd, True)
+    print(f"连接成功！[{_iService.requires_2fa}, {_iService.requires_2sa}]")
+    return _iService.requires_2fa, _iService
 
 
 def insert_or_update_media(startRank: int, p: PhotoAsset, appleId: str):

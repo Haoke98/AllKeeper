@@ -1,7 +1,6 @@
 # Create your views here.
 import datetime
 import json
-import os
 import tempfile
 import threading
 
@@ -13,7 +12,7 @@ from pytz import UTC
 
 from .models import IMedia, LocalMedia
 from .serializers import IMediaSerializer, LocalMediaSerializer
-from .services import update
+from .services import update, create_icloud_service
 
 DLT = datetime.timedelta(hours=1)
 
@@ -49,7 +48,6 @@ def count(request):
 
 
 def thumb(request):
-    from .admin import iService
     _id = request.GET.get("id", None)
     startRank = request.GET.get("startRank", None)
     if _id is None or startRank is None:
@@ -57,12 +55,18 @@ def thumb(request):
     else:
         obj = IMedia.objects.filter(id=_id).first()
         if obj is not None:
-            dlt = datetime.datetime.now(tz=UTC) - obj.updatedAt
+            dlt = datetime.datetime.now() - obj.updatedAt
             if dlt < DLT:
                 print(obj.thumbURL)
                 return HttpResponseRedirect(obj.thumbURL)
         start = max(int(startRank) - 50, 0)
-        response = iService.query_medias(start, limit=200)
+        if obj.appleId is None or obj.appleId.strip() == "":
+            raise Http404("iMedia没有AppleId,无法进行查询")
+        requires_2fa, _iService = create_icloud_service(obj.appleId)
+        if requires_2fa:
+            raise Http404("需要2FA验证")
+
+        response = _iService.query_medias(start, limit=200)
         records: list[dict] = response['records']
         update(records, start)
         for i, record in enumerate(records):
