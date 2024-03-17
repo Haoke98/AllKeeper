@@ -24,29 +24,29 @@ from django.core.files.temp import NamedTemporaryFile
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from pyicloud.services.photos import PhotoAsset
 
-
+from lib.icloud import IcloudService
 from .models import IMedia, LocalMedia
 
 CHUNK_SIZE = 1024 * 1024  # 每个文件块的大小（字节）1M
 
 
-def insert_or_update_media(startRank: int, p: PhotoAsset):
+def insert_or_update_media(startRank: int, p: PhotoAsset, appleId: str):
     fn, ext = os.path.splitext(p.filename)
     ext = str(ext).upper()
     startedAt1 = time.time()
     obj, created = IMedia.objects.get_or_create(id=p.id)
+    obj.appleId = appleId
     print(f"查询[{obj.id}]成功！[Created:{created},Duration:{time.time() - startedAt1} s]")
     startedAt2 = time.time()
-    if created:
-        obj.filename = p.filename
-        obj.ext = ext
-        obj.size = p.size
-        obj.dimensionX = p.dimensions[0]
-        obj.dimensionY = p.dimensions[1]
-        obj.asset_date = p.asset_date
-        obj.added_date = p.added_date
-        # download_thumb(obj, p)
-        # download_prv(obj, p)
+    obj.filename = p.filename
+    obj.ext = ext
+    obj.size = p.size
+    obj.dimensionX = p.dimensions[0]
+    obj.dimensionY = p.dimensions[1]
+    obj.asset_date = p.asset_date
+    obj.added_date = p.added_date
+    # download_thumb(obj, p)
+    # download_prv(obj, p)
     obj.startRank = startRank  # 每次startRank都会变
     obj.versions = json.dumps(p.versions, indent=4, ensure_ascii=False)
     fields: dict = p._master_record['fields']
@@ -135,8 +135,7 @@ EXCEPTION_MSG = None
 EXCEPTION_TRACE_BACK = None
 
 
-def collect_all_medias():
-    from .admin import iService
+def collect_all_medias(iService: IcloudService):
     global STATUS, FINISHED_COUNT, TOTAL, STARTED_AT, EXCEPTION_MSG, EXCEPTION_TRACE_BACK
     # for album in albums:
     #     photos = iService.photos.albums[album.name]
@@ -150,6 +149,7 @@ def collect_all_medias():
     # album.agg()
     # album.save()
     # target_photo = None
+    print("iService:", iService)
     STATUS = STATUS_RUNNING
     STARTED_AT = datetime.datetime.now()
     try:
@@ -167,7 +167,7 @@ def collect_all_medias():
             dlt1 = datetime.timedelta(seconds=dlt_in_second)
             willFinishedAt = datetime.datetime.now() + dlt1
             startedAt = time.time()
-            insert_or_update_media(i, photo)
+            insert_or_update_media(i, photo, iService.user.get("accountName"))
             print(f"{progress:.2f}% ({FINISHED_COUNT}/{TOTAL}), {photo}, [Duration:{time.time() - startedAt} s]")
         STATUS = STATUS_FINISHED
     except Exception as e:

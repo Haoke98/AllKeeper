@@ -25,7 +25,7 @@ class AppleId(BaseModel):
     tel = fields.CharField(verbose_name="绑定的手机号", max_length=11, placeholder="请输入绑定的手机号", null=True,
                            unique=True,
                            blank=True, show_word_limit=True)
-    passwd = PasswordInputField(verbose_name='密码', max_length=12, placeholder='请输入密码', null=True, blank=True,
+    passwd = PasswordInputField(verbose_name='密码', max_length=48, placeholder='请输入密码', null=True, blank=True,
                                 show_password=True, show_word_limit=True, pattern="0123456789", encrypt="md5")
     last2FactorAuthenticateAt = models.DateTimeField(verbose_name="上次两步验证时间", null=True, blank=True,
                                                      editable=False)
@@ -60,7 +60,8 @@ class AppleId(BaseModel):
 
 class Album(BaseModel):
     id = models.CharField(max_length=48, editable=False, default=pkHelper.uuid_generator, primary_key=True)
-    name = models.CharField(max_length=50, verbose_name="标题", unique=True)
+    appleId = fields.CharField(max_length=48, null=True, blank=False, verbose_name="AppleID")
+    name = models.CharField(max_length=50, verbose_name="标题")
     total = models.PositiveIntegerField(default=0, verbose_name="iCloud上的数量")
     count = models.PositiveIntegerField(default=0, verbose_name="已经采集到的数量")
     synced = models.BooleanField(default=False, verbose_name='同步完毕')
@@ -103,8 +104,8 @@ class Album(BaseModel):
                      update_fields=None)
 
     def agg(self):
-        imedia_count = self.imedia_set.aggregate(Count('id'))['id__count']
-        total_size = self.imedia_set.aggregate(total=Sum('size'))['total']
+        imedia_count = self.medias.aggregate(Count('id'))['id__count']
+        total_size = self.medias.aggregate(total=Sum('size'))['total']
         print(f"{self.name}: aggs:[{imedia_count},{total_size}]")
         self.count = imedia_count
         if total_size is not None:
@@ -113,6 +114,12 @@ class Album(BaseModel):
 
     class Meta:
         verbose_name = "iCloud相册"
+        verbose_name_plural = verbose_name
+        constraints = [
+            models.UniqueConstraint(fields=['name', 'appleId'], name="unique_name_appleId"),
+            models.UniqueConstraint(fields=['id', 'appleId'], name="unique_id_appleId"),
+            models.UniqueConstraint(fields=['name', 'id'], name="unique_name_id"),
+        ]
 
 
 def upload(instance, filename, dst_dir):
@@ -141,6 +148,7 @@ def upload_origin(instance, filename):
 
 class IMedia(BaseModel):
     id = models.CharField(max_length=50, primary_key=True)
+    appleId = fields.CharField(max_length=48, null=True, blank=False, verbose_name="AppleID")
     filename = models.CharField(max_length=100, verbose_name="文件名", null=True)
     ext = models.CharField(max_length=10, verbose_name="扩展名")
     size = models.BigIntegerField(verbose_name="大小", null=True)
@@ -183,11 +191,14 @@ class IMedia(BaseModel):
     class Meta:
         verbose_name = "iCloud媒体"
         ordering = ('-asset_date',)
+        constraints = [
+            models.UniqueConstraint(fields=['id', 'appleId'], name="unique_media_id_appleId")
+        ]
 
 
 class LocalMedia(BaseModel):
     id = models.CharField(max_length=50, primary_key=True)
-
+    appleId = fields.CharField(max_length=48, null=True, blank=False, verbose_name="AppleID")
     filename = models.CharField(max_length=100, verbose_name="文件名", null=True, blank=True)
     ext = models.CharField(max_length=10, verbose_name="扩展名", null=True, blank=True)
     size = models.BigIntegerField(verbose_name="大小", null=True, blank=True)
