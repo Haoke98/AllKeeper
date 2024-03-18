@@ -24,3 +24,5 @@ class IPAddress(BaseModel):
         constraints = [
             models.UniqueConstraint(fields=['ip', 'net'], name="net_ip_unique")
         ]
+        verbose_name = "IPAddress"
+        verbose_name_plural = verbose_name

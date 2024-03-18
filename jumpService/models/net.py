@@ -52,8 +52,11 @@ class Net(BaseModel):
     broadcast_address.short_description = "广播地址"
 
     def __str__(self):
+        if self.remark:
+            return "{} ({})".format(self.content, self.remark)
         return self.content
 
     class Meta:
         verbose_name = "网段"
         verbose_name_plural = verbose_name
+        ordering = ('-updatedAt',)

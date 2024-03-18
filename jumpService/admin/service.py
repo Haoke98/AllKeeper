@@ -6,11 +6,18 @@
 @Software: PyCharm
 @disc:
 ======================================="""
+import random
+from datetime import datetime
 
 from django.contrib import admin
 from django.db.models import QuerySet
+from django.http import HttpResponseRedirect, JsonResponse
+from django.urls import path, reverse
+from simplepro.action import CellAction
 from simplepro.admin import FieldOptions, BaseAdmin
 from simplepro.decorators import button
+from simplepro.dialog import ModalDialog
+from simpleui.admin import AjaxAdmin
 
 from ..models import Service, ServiceUser, ServiceType, ServerNew, OperationSystemImage, ElasticSearch
 
@@ -23,6 +30,7 @@ class ServiceTypeAdmin(BaseAdmin):
     search_fields = ['name', 'remark']
     list_filter = ['defaultPort']
     actions = ['migrate']
+    ordering = ('-updatedAt',)
 
     def _url(self, obj):
         res = ""
@@ -107,12 +115,12 @@ class ServiceTypeAdmin(BaseAdmin):
 
 
 @admin.register(Service)
-class ServiceAdmin(BaseAdmin):
-    list_display = ['id', '_type', 'system', 'port', '_url', 'remark', 'updatedAt', 'createdAt',
+class ServiceAdmin(AjaxAdmin):
+    list_display = ['id', '_type', 'system', 'port', '_url', '_user_management', 'remark', 'updatedAt', 'createdAt',
                     'deletedAt']
     search_fields = ['system', 'port', 'remark']
     list_filter = ['_type', 'system__image', 'system__server']
-    actions = ['migrate']
+    actions = ['migrate', 'test_action', ]
 
     def _url(self, obj):
         res = ""
@@ -130,6 +138,81 @@ class ServiceAdmin(BaseAdmin):
         return None
 
     _url.short_description = "入口"
+
+    def get_layer_config(self, request, queryset):
+        print("layer进行了..")
+        return {
+            # 弹出层中的输入框配置
+
+            # 这里指定对话框的标题
+            'title': '异步获取配置的输入框',
+            # 提示信息
+            'tips': '异步获取配置' + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            # 确认按钮显示文本
+            'confirm_button': '确认提交',
+            # 取消按钮显示文本
+            'cancel_button': '取消',
+
+            # 弹出层对话框的宽度，默认50%
+            'width': '40%',
+
+            # 表单中 label的宽度，对应element-ui的 label-width，默认80px
+            'labelWidth': "80px",
+            'params': [{
+                # 这里的type 对应el-input的原生input属性，默认为input
+                'type': 'input',
+                # key 对应post参数中的key
+                'key': 'name',
+                # 显示的文本
+                'label': '名称',
+                # 为空校验，默认为False
+                'require': True,
+                'value': random.randint(0, 100)
+            }, {
+                'type': 'select',
+                'key': 'type',
+                'label': '类型',
+                'width': '200px',
+                # size对应elementui的size，取值为：medium / small / mini
+                'size': 'small',
+                # value字段可以指定默认值
+                'value': '0',
+                'options': [{
+                    'key': '0',
+                    'label': '收入'
+                }]
+            }]
+        }
+
+    @button("测试", enable=True, icon="el-icon-view")
+    def test_action(self, request, queryset):
+        print("TestAction:", queryset)
+        return JsonResponse(data={
+            'status': 'success',
+            'msg': '处理成功！'
+        })
+
+    test_action.layer = get_layer_config
+
+    def _user_management(self, obj):
+        count = ServiceUser.objects.filter(service=obj).count()
+        modal = ModalDialog()
+        modal.width = "1200"
+        modal.height = "600"
+        # 这个是单元格显示的文本
+        modal.cell = f'<el-link type="primary">{count}</el-link>'
+        modal.title = "SSH安全远程链接"
+        # 是否显示取消按钮
+        modal.show_cancel = True
+        # 这里的url可以写死，也可以用django的反向获取url，可以根据model的数据，传到url中
+        modal.url = reverse('admin:jumpService_serviceuser_changelist') + '?service_id=' + obj.id
+        print("正在连接SSH", modal.url)
+        return modal
+        # return CellAction(text=f'<el-link type="primary">{count}</el-link>', action=self.test_action)
+
+    _user_management.short_description = "用户"
+
+    _user_management.layer = get_layer_config
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等
@@ -236,7 +319,8 @@ class ServiceAdmin(BaseAdmin):
 @admin.register(ServiceUser)
 class ServiceUserAdmin(BaseAdmin):
     list_display = ['id', 'service', 'username', 'password']
-    list_filter = ['service__system__server', 'service__system', 'service___type']
+    list_filter = ['service', 'service__system__server', 'service__system', 'service___type']
+    ordering = ('-updatedAt',)
 
     def formatter(self, obj, field_name, value):
         # 这里可以对value的值进行判断，比如日期格式化等

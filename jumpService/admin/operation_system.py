@@ -43,7 +43,7 @@ class OperationSystemImageAdmin(admin.ModelAdmin):
 class OperationSystemAdmin(admin.ModelAdmin):
     list_display = ['id', 'image', 'server', 'rootUsername', 'rootPassword', 'open_webssh',
                     'updatedAt', 'createdAt', 'deletedAt']
-    list_filter = ['image', 'server']
+    list_filter = ['image', 'server__remark']
     search_fields = ['image', 'server']
     ordering = ('-updatedAt',)
 
@@ -52,11 +52,18 @@ class OperationSystemAdmin(admin.ModelAdmin):
         modals = []
 
         def generate_modal(_ip: IPAddress, _port: int):
+            print("ip:", _ip)
+            prefix = "入口"
+            if _ip.net is not None:
+                if _ip.net.is_global():
+                    prefix = "公网"
+                else:
+                    prefix = "内网"
             modal = ModalDialog()
             modal.width = "1200"
             modal.height = "600"
             # 这个是单元格显示的文本
-            modal.cell = f'<el-link type="primary">入口{len(modals) + 1}</el-link>'
+            modal.cell = f'<el-link type="primary">{prefix}{len(modals) + 1}</el-link>'
             modal.title = "SSH安全远程链接"
             # 是否显示取消按钮
             modal.show_cancel = True
