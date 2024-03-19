@@ -23,9 +23,9 @@ class Human(BaseModel):
     collage = models.CharField(verbose_name="毕业院校", null=True, blank=True, max_length=100)
     WB = models.ForeignKey(to=Weibo, on_delete=models.CASCADE, null=True, blank=True, verbose_name="微博账号",
                            help_text="微博首页：https://weibo.com/u/{ID}")
-    DY_home = models.CharField(max_length=100, verbose_name="抖音首页", help_text="抖音首页：https://www.douyin.com/user/{系统ID}",
+    DY_home = models.CharField(max_length=255, verbose_name="抖音首页", help_text="抖音首页：https://www.douyin.com/user/{系统ID}",
                                null=True, blank=True, unique=True)
-    DY_ID = models.CharField(max_length=50, verbose_name="抖音ID", null=True, blank=True, unique=True)
+    DY_ID = models.CharField(max_length=255, verbose_name="抖音ID", null=True, blank=True, unique=True)
     license_plate_number = models.CharField(max_length=50, verbose_name="车牌号", help_text="可以通过人人查中查询到车主信息", null=True,
                                             blank=True, unique=True)
     face = models.ImageField(upload_to="human-face", verbose_name='图片上传', null=True, blank=True)

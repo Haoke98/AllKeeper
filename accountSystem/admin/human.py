@@ -32,7 +32,8 @@ class TelInlineAdmin(admin.TabularInline):
 class HumanAdmin(admin.ModelAdmin):
     list_display = LIST_DISPLAY + ["name", 'face', 'idCardNum', 'sex', 'birthday', 'zodiac', 'ethnic', '_tels',
                                    'collage',
-                                   'douyin',
+                                   'DY_ID',
+                                   'dy_home',
                                    'WB',
                                    'license_plate_number', 'birthplace', 'id_card_front', 'id_card_back', '_count']
     search_fields = ['name', 'idCardNum', 'license_plate_number', 'DY_ID', 'DY_home', 'birthplace']
@@ -90,15 +91,14 @@ class HumanAdmin(admin.ModelAdmin):
 
     weibo_avatar.short_description = "微博头像"
 
-    def douyin(self, obj):
+    def dy_home(self, obj):
         if obj.DY_home:
-            txt = "抖音首页"
+            txt = "点击跳转"
             url = f"https://www.douyin.com/user/{obj.DY_home}"
-            if obj.DY_ID:
-                txt = obj.DY_ID
             return mark_safe(f'''
             <a href="{url}" target="blank">{txt}</a>
             ''')
+    dy_home.short_description = "抖音首页"
 
     fields_options = {
         'id': FieldOptions.UUID,
@@ -133,9 +133,9 @@ class HumanAdmin(admin.ModelAdmin):
             'width': '120px',
             'align': 'left'
         },
-        'douyin': {
-            'width': '120px',
-            'align': 'left'
+        'dy_home': {
+            'width': '100px',
+            'align': 'center'
         },
         'license_plate_number': {
             'width': '120px',
