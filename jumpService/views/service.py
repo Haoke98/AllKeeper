@@ -12,6 +12,7 @@ from ..models import ServiceUser
 
 
 def get_users(request):
+    # FIXME: 该方法返回内容涉及到敏感数据, 需要进行鉴权, 目前是可以公开访问的, 这是一个超严重的BUG
     serviceId = request.GET.get('serviceId')
     if serviceId is None:
         return HttpResponse("参数异常/参数缺漏", status=400)
