@@ -1,7 +1,7 @@
 from django.urls import re_path, include, path
 from rest_framework.routers import DefaultRouter
 
-from .views import ServerViewSet, collect
+from .views import ServerViewSet, collect, service
 
 router = DefaultRouter()
 router.register(r'server', viewset=ServerViewSet)
@@ -13,7 +13,8 @@ router.register(r'server', viewset=ServerViewSet)
 #     'get': 'retrieve'
 # })
 urlpatterns = [
-                  path('server/collect', collect)
+                  path('server/collect', collect),
+                  path('service/users', service.get_users)
                   # path('getSubcribtionAccessToken', getSubcribtionsAccessToken),
                   # path('buyVIP<str:openid>', buyVIP)
               ] + router.urls
