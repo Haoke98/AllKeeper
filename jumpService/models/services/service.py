@@ -46,7 +46,8 @@ class Service(BaseAccountModel):
     _type = fields.ForeignKey(to=ServiceType, on_delete=models.CASCADE, verbose_name="服务类型", null=True, blank=False)
     system = fields.ForeignKey(to=OperationSystem, on_delete=models.CASCADE, verbose_name="操作系统", null=True,
                                blank=False)
-    port = models.PositiveIntegerField(verbose_name="端口", default=8888, blank=False, db_index=True)
+    port = models.PositiveIntegerField(verbose_name="端口", null=True, blank=False, db_index=True)
+    sslPort = models.PositiveIntegerField(verbose_name="SSL端口", null=True, blank=True, db_index=True)
 
     class Meta:
         abstract = False

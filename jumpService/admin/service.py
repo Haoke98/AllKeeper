@@ -116,26 +116,27 @@ class ServiceTypeAdmin(BaseAdmin):
 
 @admin.register(Service)
 class ServiceAdmin(AjaxAdmin):
-    list_display = ['id', '_type', 'system', 'port', '_url', '_user_management', 'remark', 'updatedAt', 'createdAt',
+    list_display = ['id', '_type', 'system', 'port', 'sslPort', '_url', '_user_management', 'remark', 'updatedAt',
+                    'createdAt',
                     'deletedAt']
     search_fields = ['system', 'port', 'remark']
     list_filter = ['_type', 'system__image', 'system__server']
     actions = ['migrate', 'test_action', ]
 
     def _url(self, obj):
-        res = ""
+        _uris = []
         if obj.system:
             ips = obj.system.server.ips.all()
             for i, ipObj in enumerate(ips):
                 print(obj.system, ipObj.ip)
-                uri = "http://"
-                uri += f"{ipObj.ip}:{obj.port}"
-                if len(ips) == 1:
-                    res += f"""<a target="_blank" href="{uri}" >入口</a>"""
-                else:
-                    res += f"""<a target="_blank" href="{uri}" >入口{i}</a></br>"""
-            return res
-        return None
+                if obj.sslPort:
+                    _uris.append("https://{}:{}".format(ipObj.ip, obj.sslPort))
+                if obj.port:
+                    _uris.append("http://{}:{}".format(ipObj.ip, obj.port))
+        res = ""
+        for i, _uri in enumerate(_uris, 1):
+            res += f"""<a target="_blank" style="margin-right:10px;" href="{_uri}" >入口{i}</a>"""
+        return res
 
     _url.short_description = "入口"
 
@@ -246,16 +247,16 @@ class ServiceAdmin(AjaxAdmin):
             'min_width': '160px',
             'align': 'center'
         },
-        'rootUsername': {
-            'min_width': '180px',
+        'port': {
+            'min_width': '100px',
             'align': 'center'
         },
-        'rootPassword': {
-            'min_width': '180px',
+        'sslPort': {
+            'min_width': '140px',
             'align': 'center'
         },
-        'ssh': {
-            'min_width': '120px',
+        '_url': {
+            'min_width': '180px',
             'align': 'center'
         },
         'hoster': {
