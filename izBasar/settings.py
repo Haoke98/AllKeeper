@@ -328,7 +328,7 @@ REST_FRAMEWORK = {
 JWT_EXPIRED_DELTA = datetime.timedelta(hours=1)
 
 DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
-STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"
+# STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"
 # 因为MINIO中不光存储静态资源还会存储动态资源,相对比较铭感,必须强制加密通信
 MINIO_STORAGE_USE_HTTPS = True
 MINIO_STORAGE_MEDIA_OBJECT_METADATA = {"Cache-Control": "max-age=1000"}
@@ -337,3 +337,4 @@ MINIO_STORAGE_MEDIA_BACKUP_BUCKET = 'allkeeper-reycle-bin'
 MINIO_STORAGE_MEDIA_BACKUP_FORMAT = '%c/'
 MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True
 MINIO_STORAGE_STATIC_BUCKET_NAME = 'allkeeper-static'
+MINIO_STORAGE_CERT_CHECK = False

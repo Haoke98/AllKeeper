@@ -17,19 +17,10 @@ if CURRENT_SYSTEM == WINDOWS:
 
 elif CURRENT_SYSTEM == MacOS:
     _DEBUG = True
-    import pymysql
-
-    pymysql.version_info = (1, 4, 13, "final", 0)
-    pymysql.install_as_MySQLdb()  # 使用pymysql代替mysqldb连接数据库
 else:
     """
         服务器环境 
     """
-    # _STATIC_URL = '/sdm/static/'
-    import pymysql
-
-    pymysql.version_info = (1, 4, 13, "final", 0)
-    pymysql.install_as_MySQLdb()  # 使用pymysql代替mysqldb连接数据库
 try:
     _DEBUG = secret._DEBUG
 except:
