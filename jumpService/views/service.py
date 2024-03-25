@@ -6,11 +6,13 @@
 @Software: PyCharm
 @disc:
 ======================================="""
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
 from ..models import ServiceUser
 
 
+@login_required
 def get_users(request):
     # FIXME: 该方法返回内容涉及到敏感数据, 需要进行鉴权, 目前是可以公开访问的, 这是一个超严重的BUG
     serviceId = request.GET.get('serviceId')
