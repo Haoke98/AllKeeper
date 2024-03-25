@@ -43,6 +43,7 @@ class HumanAdmin(admin.ModelAdmin):
     fields = ['name', 'idCardNum', 'sex', 'ethnic', 'birthday', 'zodiac', 'birthplace', 'collage', 'WB', 'DY_home',
               'DY_ID', 'license_plate_number', 'face', 'id_card_front', 'id_card_back', 'info']
     inlines = [TelInlineAdmin]
+    ordering = ('-updatedAt', '-createdAt')
 
     def _count(self, obj):
         return Account.objects.filter(types=obj.id).count()
