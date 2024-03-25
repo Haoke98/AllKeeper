@@ -63,11 +63,6 @@ if not os.path.exists(STATIC_ROOT):
     os.mkdir(STATIC_ROOT)
 
 MEDIA_URL = '/media/'
-
-IMAGE_ROOT = os.path.join(MEDIA_ROOT, "img")
-if not os.path.exists(IMAGE_ROOT):
-    os.mkdir(IMAGE_ROOT)
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
