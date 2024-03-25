@@ -28,10 +28,10 @@ class Human(BaseModel):
     DY_ID = models.CharField(max_length=255, verbose_name="抖音ID", null=True, blank=True, unique=True)
     license_plate_number = models.CharField(max_length=50, verbose_name="车牌号", help_text="可以通过人人查中查询到车主信息", null=True,
                                             blank=True, unique=True)
-    face = models.ImageField(upload_to="human-face", verbose_name='图片上传', null=True, blank=True)
-    id_card_front = models.ImageField(verbose_name='身份证正面', upload_to='id_card',
+    face = fields.ImageField(verbose_name='人脸图', null=True, blank=True)
+    id_card_front = fields.ImageField(verbose_name='身份证正面',
                                       max_length=128, null=True, blank=True)
-    id_card_back = models.ImageField(verbose_name='身份证反面', upload_to='id_card',
+    id_card_back = fields.ImageField(verbose_name='身份证反面',
                                      max_length=128, null=True, blank=True)
 
     class Meta:

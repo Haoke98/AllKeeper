@@ -98,6 +98,7 @@ class HumanAdmin(admin.ModelAdmin):
             return mark_safe(f'''
             <a href="{url}" target="blank">{txt}</a>
             ''')
+
     dy_home.short_description = "抖音首页"
 
     fields_options = {
@@ -164,8 +165,10 @@ class HumanAdmin(admin.ModelAdmin):
     }
 
     def formatter(self, obj, field_name, value):
-        # if field_name == "face":
-        #     if value:
-        #         return f'''<img src="{value}" style="width:100px;height:100px;">'''
+        if field_name in ["face", "id_card_front", "id_card_back"]:
+            if value:
+                print(f"obj:{obj.id}, face:", value)
+                src = f"/media/{value}"
+                return f'''<el-image src="{src}" style="width:100px;height:100px;" :preview-src-list="['{src}',]">'''
         # 这里可以对value的值进行判断，比如日期格式化等
         return value

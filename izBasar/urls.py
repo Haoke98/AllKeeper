@@ -18,10 +18,10 @@ from django.contrib import admin
 from django.contrib.flatpages import sitemaps
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path, re_path
-# from django.contrib.staticfiles.views import serve
 from django.views.generic import RedirectView
 from django.views.static import serve
 from revproxy.views import ProxyView
+from .view import media
 
 import accountSystem.urls
 import eynek.urls
@@ -46,7 +46,7 @@ urlpatterns = [
     path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
     re_path(r'^static/(?P<path>.*)$', serve, ({'document_root': settings.STATIC_ROOT})),
     # FIXME: media资源访问时需要进行鉴权 Security BUG.
-    re_path(r'^media/(?P<path>.*)$', serve, ({'document_root': settings.MEDIA_ROOT})),
+    re_path(r'^media/(?P<path>.*)$', media),
     re_path('^eynek/', include(eynek.urls)),
     path('sp/', include('simplepro.urls')),
     re_path('^jump_service/', include(jumpService.urls)),
