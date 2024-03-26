@@ -43,7 +43,7 @@ class OperationSystemImageAdmin(admin.ModelAdmin):
 class OperationSystemAdmin(admin.ModelAdmin):
     list_display = ['id', 'image', 'server', 'rootUsername', 'rootPassword', 'open_webssh',
                     'updatedAt', 'createdAt', 'deletedAt']
-    list_filter = ['image', 'server__remark']
+    list_filter = ['server', 'image', 'server__remark']
     search_fields = ['image', 'server']
     ordering = ('-updatedAt',)
 
@@ -52,6 +52,7 @@ class OperationSystemAdmin(admin.ModelAdmin):
         modals = []
 
         def generate_modal(_ip: IPAddress, _port: int):
+            # FIXME:影响列表页的渲染, 增加延迟, 需要改成固定, 让用户在单个item的详情页里进行渲染, 在详情页中选入口/切换入口
             print("ip:", _ip)
             prefix = "入口"
             if _ip.net is not None:

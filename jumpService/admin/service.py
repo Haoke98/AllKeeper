@@ -11,9 +11,7 @@ from datetime import datetime
 
 from django.contrib import admin
 from django.db.models import QuerySet
-from django.http import HttpResponseRedirect, JsonResponse
-from django.urls import path, reverse
-from simplepro.action import CellAction
+from django.http import JsonResponse
 from simplepro.admin import FieldOptions, BaseAdmin
 from simplepro.decorators import button
 from simplepro.dialog import ModalDialog
@@ -122,6 +120,7 @@ class ServiceAdmin(AjaxAdmin):
     search_fields = ['system', 'port', 'remark']
     list_filter = ['_type', 'system__image', 'system__server']
     actions = ['migrate', 'test_action', ]
+    ordering = ('-updatedAt', '-createdAt', )
 
     def _url(self, obj):
         _uris = []
@@ -130,9 +129,15 @@ class ServiceAdmin(AjaxAdmin):
             for i, ipObj in enumerate(ips):
                 print(obj.system, ipObj.ip)
                 if obj.sslPort:
-                    _uris.append("https://{}:{}".format(ipObj.ip, obj.sslPort))
+                    if obj.path:
+                        _uris.append("https://{}:{}/{}".format(ipObj.ip, obj.sslPort, obj.path))
+                    else:
+                        _uris.append("https://{}:{}".format(ipObj.ip, obj.sslPort))
                 if obj.port:
-                    _uris.append("http://{}:{}".format(ipObj.ip, obj.port))
+                    if obj.path:
+                        _uris.append("http://{}:{}/{}".format(ipObj.ip, obj.port, obj.path))
+                    else:
+                        _uris.append("http://{}:{}".format(ipObj.ip, obj.port))
         res = ""
         for i, _uri in enumerate(_uris, 1):
             res += f"""<a target="_blank" style="margin-right:10px;" href="{_uri}" >入口{i}</a>"""
@@ -338,10 +343,7 @@ class ServiceUserAdmin(BaseAdmin):
         return value
 
     fields_options = {
-        'id': {
-            'min_width': '88px',
-            'align': 'center'
-        },
+        'id': FieldOptions.UUID,
         'code': {
             'fixed': 'left',
             'min_width': '88px',
@@ -359,57 +361,18 @@ class ServiceUserAdmin(BaseAdmin):
             'min_width': '180px',
             'align': 'left'
         },
-        'ip': {
-            'min_width': '200px',
-            'align': 'center'
-        },
-        'net': {
-            'min_width': '180px',
-            'align': 'center'
-        },
-        'image': {
-            'min_width': '160px',
-            'align': 'center'
-        },
         'username': {
-            'min_width': '180px',
-            'align': 'center'
+            'min_width': '200px',
+            'align': 'left'
         },
         'password': {
-            'min_width': '180px',
-            'align': 'center'
-        },
-        'ssh': {
-            'min_width': '120px',
-            'align': 'center'
-        },
-        'hoster': {
-            'min_width': '320px',
+            'min_width': '200px',
             'align': 'left'
         },
         'service': {
-            'min_width': '220px',
-            'align': 'left'
-        },
-        'status': {
-            'min_width': '180px',
-            'align': 'left'
-        },
-        'remark': {
-            'min_width': '200px',
-            'align': 'left'
-        },
+            'min_width': '300px',
+            'align': 'left',
+            "show_overflow_tooltip": True
 
-        'bios': {
-            'min_width': '180',
-            'align': 'center'
-        },
-        'cabinet': {
-            'min_width': '180',
-            'align': 'center'
-        },
-        'mac': {
-            'min_width': '220px',
-            'align': 'left'
         }
     }

@@ -48,6 +48,7 @@ class Service(BaseAccountModel):
                                blank=False)
     port = models.PositiveIntegerField(verbose_name="端口", null=True, blank=False, db_index=True)
     sslPort = models.PositiveIntegerField(verbose_name="SSL端口", null=True, blank=True, db_index=True)
+    path = models.TextField(verbose_name="路径", null=True, blank=True)
 
     class Meta:
         abstract = False
@@ -83,6 +84,7 @@ class AbstractBaseServiceModel(BaseAccountModel):
     server = models.ForeignKey(to=ServerNew, on_delete=models.CASCADE, verbose_name="服务器", null=True,
                                blank=False, db_index=True, related_name="services")
     port = models.PositiveIntegerField(verbose_name="端口", default=8888, blank=False, db_index=True)
+    path = models.TextField(verbose_name="路径", null=True, blank=True)
 
     class Meta:
         abstract = True
