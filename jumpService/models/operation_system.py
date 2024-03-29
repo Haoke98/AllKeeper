@@ -18,6 +18,7 @@ class OperationSystemImage(BaseModel):
     id = fields.CharField(max_length=48, primary_key=True, editable=False, default=pkHelper.uuid_generator)
     name = fields.CharField(max_length=50, verbose_name="名称")
     version = fields.CharField(max_length=50, verbose_name="版本")
+    # TODO:增加 arch字段 保存是64bit 或者什么架构
 
     class Meta:
         verbose_name = "操作系统镜像"
