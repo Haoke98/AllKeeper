@@ -89,11 +89,7 @@ class NetWorkAdmin(admin.ModelAdmin):
         super(NetWorkAdmin, self).save_model(request, obj, form, change)
 
     fields_options = {
-        'id': {
-            'fixed': 'left',
-            'width': '70px',
-            'align': 'center'
-        },
+        'id': FieldOptions.UUID,
         'createdAt': {
             'width': '180px',
             'align': 'left'
@@ -162,17 +158,24 @@ class NetDeviceAdmin(BaseAdmin):
 class IPAddressAdmin(BaseAdmin):
     list_display = ['id', 'net', 'ip', 'device', 'createdAt', 'updatedAt', 'deletedAt']
     search_fields = ['net', 'ip', 'device']
-    ordering = ('-updatedAt',)
+    ordering = ('-updatedAt', '-createdAt')
     fields_options = {
         'id': FieldOptions.UUID,
         'createdAt': FieldOptions.DATE_TIME,
         'updatedAt': FieldOptions.DATE_TIME,
         'deletedAt': FieldOptions.DATE_TIME,
-        'net': FieldOptions.IP_ADDRESS,
+        'net': {
+            'min_width': "160px",
+            'align': 'left',
+            "resizeable": True,
+            "show_overflow_tooltip": True
+        },
         'ip': FieldOptions.IP_ADDRESS,
         'device': {
-            'width': '240px',
-            'align': 'left'
+            'min_width': '260px',
+            'align': 'left',
+            "resizeable": True,
+            "show_overflow_tooltip": True
         },
         'broadcast_address': {
             'width': '220px',
