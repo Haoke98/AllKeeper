@@ -18,13 +18,17 @@ class OperationSystemImage(BaseModel):
     id = fields.CharField(max_length=48, primary_key=True, editable=False, default=pkHelper.uuid_generator)
     name = fields.CharField(max_length=50, verbose_name="名称")
     version = fields.CharField(max_length=50, verbose_name="版本")
-    # TODO:增加 arch字段 保存是64bit 或者什么架构
+
+    isLTS = models.BooleanField(default=False, verbose_name="LTS")
+    arch = fields.CharField(max_length=50, verbose_name="ARCH", null=True, help_text="什么架构?比如: 32bit or 64bit",
+                            blank=True)
+    iso = models.FileField(verbose_name="镜像", upload_to='system_images', null=True, blank=True)
 
     class Meta:
         verbose_name = "操作系统镜像"
         verbose_name_plural = verbose_name
         constraints = [
-            models.UniqueConstraint(fields=['name', 'version'], name="operation_system_name_version_unique")
+            models.UniqueConstraint(fields=['name', 'version', 'arch'], name="operation_system_name_version_unique")
         ]
 
     def __str__(self):

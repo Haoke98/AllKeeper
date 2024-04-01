@@ -17,7 +17,10 @@ from ..models import OperationSystem, OperationSystemImage, SSHService, IPAddres
 
 @admin.register(OperationSystemImage)
 class OperationSystemImageAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'version', 'updatedAt', 'createdAt', 'deletedAt']
+    list_display = ['id', 'name', 'version', 'arch', 'isLTS', 'updatedAt', 'createdAt', 'deletedAt']
+    list_filter = ['name', 'arch', 'isLTS', 'updatedAt', 'createdAt']
+    search_fields = ['version', 'remark']
+    ordering = ['-updatedAt']
     fields_options = {
         'id': FieldOptions.UUID,
         'code': {
@@ -35,7 +38,11 @@ class OperationSystemImageAdmin(admin.ModelAdmin):
         'version': {
             'min_width': '180px',
             'align': 'left'
-        }
+        },
+        'arch': {
+            'min_width': '100px',
+            'align': 'left'
+        },
     }
 
 
