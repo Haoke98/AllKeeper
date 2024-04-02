@@ -114,13 +114,13 @@ class ServiceTypeAdmin(BaseAdmin):
 
 @admin.register(Service)
 class ServiceAdmin(AjaxAdmin):
-    list_display = ['id', '_type', 'system', 'port', 'sslPort', '_url', '_user_management', 'remark', 'updatedAt',
+    list_display = ['id', '_type', 'system', 'port', '_url', '_user_management', 'remark', 'updatedAt',
                     'createdAt',
                     'deletedAt']
     search_fields = ['system', 'port', 'remark']
     list_filter = ['_type', 'system__image', 'system__server']
     actions = ['migrate', 'test_action', ]
-    ordering = ('-updatedAt', '-createdAt', )
+    ordering = ('-updatedAt', '-createdAt',)
 
     def _url(self, obj):
         _uris = []
@@ -128,22 +128,23 @@ class ServiceAdmin(AjaxAdmin):
             ips = obj.system.server.ips.all()
             for i, ipObj in enumerate(ips):
                 print(obj.system, ipObj.ip)
-                if obj.sslPort:
-                    if obj.path:
-                        _uris.append("https://{}:{}/{}".format(ipObj.ip, obj.sslPort, obj.path))
+                if obj.dashboardPort:
+                    if obj.sslOn:
+                        if obj.dashboardPath:
+                            _uris.append("https://{}:{}/{}".format(ipObj.ip, obj.dashboardPort, obj.dashboardPath))
+                        else:
+                            _uris.append("https://{}:{}".format(ipObj.ip, obj.sslPort))
                     else:
-                        _uris.append("https://{}:{}".format(ipObj.ip, obj.sslPort))
-                if obj.port:
-                    if obj.path:
-                        _uris.append("http://{}:{}/{}".format(ipObj.ip, obj.port, obj.path))
-                    else:
-                        _uris.append("http://{}:{}".format(ipObj.ip, obj.port))
+                        if obj.dashboardPath:
+                            _uris.append("http://{}:{}/{}".format(ipObj.ip, obj.dashboardPort, obj.dashboardPath))
+                        else:
+                            _uris.append("http://{}:{}".format(ipObj.ip, obj.dashboardPort))
         res = ""
         for i, _uri in enumerate(_uris, 1):
             res += f"""<a target="_blank" style="margin-right:10px;" href="{_uri}" >入口{i}</a>"""
         return res
 
-    _url.short_description = "入口"
+    _url.short_description = "Dashboard入口"
 
     def get_layer_config(self, request, queryset):
         print("layer进行了..")
@@ -245,7 +246,9 @@ class ServiceAdmin(AjaxAdmin):
         'deletedAt': FieldOptions.DATE_TIME,
         'system': {
             'min_width': '320px',
-            'align': 'left'
+            'align': 'left',
+            "resizeable": True,
+            "show_overflow_tooltip": True
         },
         'net': FieldOptions.IP_ADDRESS,
         'image': {
@@ -372,6 +375,7 @@ class ServiceUserAdmin(BaseAdmin):
         'service': {
             'min_width': '300px',
             'align': 'left',
+            "resizeable": True,
             "show_overflow_tooltip": True
 
         }
