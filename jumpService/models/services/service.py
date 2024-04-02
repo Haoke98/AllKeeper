@@ -51,6 +51,8 @@ class Service(BaseAccountModel):
     dashboardPort = models.PositiveIntegerField(verbose_name="Dashboard/Console端口", null=True, blank=True, db_index=True)
     dashboardPath = models.TextField(verbose_name="路径", null=True, blank=True)
 
+    # TODO: 确定单用户服务和多用户服务之间的关系的处理, 要分开还是统一处理?
+
     class Meta:
         abstract = False
         verbose_name = "服务"

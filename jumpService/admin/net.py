@@ -165,14 +165,14 @@ class IPAddressAdmin(BaseAdmin):
         'updatedAt': FieldOptions.DATE_TIME,
         'deletedAt': FieldOptions.DATE_TIME,
         'net': {
-            'min_width': "160px",
+            'min_width': "280px",
             'align': 'left',
             "resizeable": True,
             "show_overflow_tooltip": True
         },
         'ip': FieldOptions.IP_ADDRESS,
         'device': {
-            'min_width': '260px',
+            'min_width': '400px',
             'align': 'left',
             "resizeable": True,
             "show_overflow_tooltip": True

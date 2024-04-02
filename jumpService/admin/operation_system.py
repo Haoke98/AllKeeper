@@ -47,7 +47,7 @@ class OperationSystemImageAdmin(admin.ModelAdmin):
 
 
 @admin.register(OperationSystem)
-class OperationSystemAdmin(admin.ModelAdmin):
+class OperationSystemAdmin(BaseAdmin):
     list_display = ['id', 'image', 'server', 'rootUsername', 'rootPassword', 'open_webssh',
                     'updatedAt', 'createdAt', 'deletedAt']
     list_filter = ['server', 'image', 'server__remark']
