@@ -64,7 +64,10 @@ class ServiceTypeAdmin(BaseAdmin):
             'align': 'center'
         },
         'name': FieldOptions.IP_ADDRESS,
-        'defaultPort': FieldOptions.PORT,
+        'defaultPort': {
+            'min_width': "110px",
+            'align': 'center'
+        },
         'rootUsername': {
             'min_width': '180px',
             'align': 'center'
@@ -85,7 +88,12 @@ class ServiceTypeAdmin(BaseAdmin):
             'min_width': '180px',
             'align': 'left'
         },
-        'remark': FieldOptions.REMARK,
+        'remark': {
+            'min_width': '240px',
+            'align': 'left',
+            "resizeable": True,
+            "show_overflow_tooltip": True
+        },
         'bios': {
             'min_width': '180',
             'align': 'center'
