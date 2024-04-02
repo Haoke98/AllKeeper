@@ -133,7 +133,7 @@ class ServiceAdmin(AjaxAdmin):
                         if obj.dashboardPath:
                             _uris.append("https://{}:{}/{}".format(ipObj.ip, obj.dashboardPort, obj.dashboardPath))
                         else:
-                            _uris.append("https://{}:{}".format(ipObj.ip, obj.sslPort))
+                            _uris.append("https://{}:{}".format(ipObj.ip, obj.dashboardPort))
                     else:
                         if obj.dashboardPath:
                             _uris.append("http://{}:{}/{}".format(ipObj.ip, obj.dashboardPort, obj.dashboardPath))
