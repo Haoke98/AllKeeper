@@ -210,19 +210,18 @@ class ServiceAdmin(AjaxAdmin):
     test_action.layer = get_layer_config
 
     def _user_management(self, obj):
-        count = ServiceUser.objects.filter(service=obj).count()
+        # count = ServiceUser.objects.filter(service=obj).count()
         modal = ModalDialog()
         modal.width = "800"
         modal.height = "400"
         # 这个是单元格显示的文本
-        modal.cell = f'<el-link type="primary">{count}</el-link>'
+        modal.cell = f'<el-link type="primary">管理用户</el-link>'
         modal.title = "用户列表"
         # 是否显示取消按钮
         modal.show_cancel = True
         # 这里的url可以写死，也可以用django的反向获取url，可以根据model的数据，传到url中
         # modal.url = reverse('admin:jumpService_serviceuser_changelist') + '?service_id=' + obj.id
         modal.url = '/jump_service/service/users?serviceId=' + obj.id
-        print("正在连接SSH", modal.url)
         return modal
         # return CellAction(text=f'<el-link type="primary">{count}</el-link>', action=self.test_action)
 
