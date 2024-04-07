@@ -3,7 +3,7 @@ import logging
 import jwt
 from django.utils.deprecation import MiddlewareMixin
 
-from izBasar.secret import JWT_SIGNATURE
+from proj.secret import JWT_SIGNATURE
 from utils.http_helper import RestResponse
 
 

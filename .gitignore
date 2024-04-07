@@ -20,5 +20,5 @@ secret.py
 /public/
 nohup.out
 
-/izBasar/test.py
+/proj/test.py
 *.lic

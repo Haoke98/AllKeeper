@@ -310,7 +310,7 @@ sequenceDiagram
 
 ## 🌱 使用教程
 
-先在izbasar目录下新建一个secret.py文件
+先在项目目录下新建一个secret.py文件
 
 ```python
 _DEBUG = False
@@ -471,7 +471,7 @@ python3 manage.py collectstatic
 ```
 然后执行一下命令
 ```shell
-scp -rC /Users/shadikesadamu/Projects/izbasar/django-admin/public root@192.168.1.100:/root/AllKeeper/
+scp -rC /Users/shadikesadamu/Projects/django-admin/public root@192.168.1.100:/root/AllKeeper/
 ```
 ### 问题二：Sqlite版本异常1
 > 异常：django.core.exceptions.ImproperlyConfigured: SQLite 3.9.0 or later is required (found 3.7.17).

@@ -11,7 +11,7 @@ import json
 from django.http import HttpResponse
 from rest_framework import views
 
-from izBasar import esClient
+from proj import esClient
 
 INDEX_DEVICES = "devices"
 

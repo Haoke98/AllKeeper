@@ -11,8 +11,8 @@ import json
 
 from django.views.decorators.csrf import csrf_exempt
 
-from izBasar.secret import ADMIN_USERNAME, ADMIN_PASSWORD, JWT_SIGNATURE, JWT_ISSUER
-from izBasar.settings import JWT_EXPIRED_DELTA
+from proj.secret import ADMIN_USERNAME, ADMIN_PASSWORD, JWT_SIGNATURE, JWT_ISSUER
+from proj.settings import JWT_EXPIRED_DELTA
 from utils.encrypt import md5
 from utils.http_helper import RestResponse
 

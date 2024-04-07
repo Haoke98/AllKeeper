@@ -53,7 +53,7 @@
 
 ## 🌱 运行项目命令
 
-先在izbasar目录下新建一个secret.py文件
+先在项目目录下新建一个secret.py文件
 
 ```python
 _DEBUG = False

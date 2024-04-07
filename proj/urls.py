@@ -1,4 +1,4 @@
-"""izBasar URL Configuration
+"""URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -27,7 +27,7 @@ import accountSystem.urls
 import eynek.urls
 import icloud.urls
 import jumpService.urls
-from izBasar import settings
+from proj import settings
 from . import _STATIC_URL
 from .secret import ADMIN_PATH
 
