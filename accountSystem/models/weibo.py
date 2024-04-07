@@ -6,7 +6,7 @@ from django.db import models
 from simplepro.models import BaseModel
 
 from proj.settings import MEDIA_ROOT
-from lib import weiboHelper
+from utils import weiboHelper
 
 
 # Create your models here.

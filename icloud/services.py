@@ -24,7 +24,7 @@ from django.core.files.temp import NamedTemporaryFile
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from pyicloud.services.photos import PhotoAsset
 
-from lib.icloud import IcloudService
+from utils.icloud import IcloudService
 from .models import IMedia, LocalMedia, AppleId
 
 CHUNK_SIZE = 1024 * 1024  # 每个文件块的大小（字节）1M

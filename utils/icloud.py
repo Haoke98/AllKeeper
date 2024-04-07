@@ -18,9 +18,10 @@ from subprocess import call
 from urllib.parse import urlencode
 
 from pyicloud import PyiCloudService as __iCloudService__
+from pyicloud.exceptions import PyiCloudAPIResponseException, PyiCloudFailedLoginException
 from pyicloud.services.photos import PhotoAsset, PhotosService
 
-from lib import jpeg
+from utils import jpeg
 
 
 class IPhoto(PhotoAsset):
@@ -42,6 +43,30 @@ class IcloudService(__iCloudService__):
             self.HOME_ENDPOINT = "https://www.icloud.com.cn"
             self.SETUP_ENDPOINT = "https://setup.icloud.com.cn/setup/ws/1"
         super().__init__(apple_id, password, cookie_directory, verify, client_id, with_family)
+
+    def _authenticate_with_token(self):
+        """Authenticate using session token."""
+        data = {
+            "apple_id": self.user.get("accountName"),
+            "password": self.user.get("password"),
+            "accountCountryCode": self.session_data.get("account_country"),
+            "dsWebAuthToken": self.session_data.get("session_token"),
+            "extended_login": True,
+            "trustToken": self.session_data.get("trust_token", ""),
+        }
+
+        try:
+            req = self.session.post(
+                "%s/accountLogin" % self.SETUP_ENDPOINT, data=json.dumps(data)
+            )
+            self.data = req.json()
+            print("登陆结果:", self.data)
+        except PyiCloudAPIResponseException as error:
+            msg = "Invalid authentication token."
+            print("[登陆]有可能是密码错误:", msg)
+            raise PyiCloudFailedLoginException(msg, error) from error
+        except Exception as e:
+            print("[登陆]未知异常发生:", e)
 
     def handle(self, outputDir: str, recent: int, photo: PhotoAsset, modify_olds: bool, auto_delete: bool):
 
@@ -106,7 +131,8 @@ class IcloudService(__iCloudService__):
                        modify_olds: bool = False, max_thread_count: int = 3):
         def handle(album, recent):
             _all = album.photos
-            logging.info(f"相册[{album.name}]里总共有{len(album)}个媒体对象（包括视频，短视频，Live实况图，动图，JPG，JPEG，PNG...etc.)")
+            logging.info(
+                f"相册[{album.name}]里总共有{len(album)}个媒体对象（包括视频，短视频，Live实况图，动图，JPG，JPEG，PNG...etc.)")
             if recent is None:
                 recent = len(album)
             if max_thread_count == 1:

@@ -5,7 +5,7 @@ from simplepro.components import fields
 from simplepro.lib import pkHelper
 from simplepro.models import BaseModel
 
-from lib import zodiacHelper
+from utils import zodiacHelper
 from .weibo import Weibo
 
 

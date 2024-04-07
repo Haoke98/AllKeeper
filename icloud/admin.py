@@ -22,7 +22,7 @@ from simplepro.decorators import button, layer
 from simplepro.dialog import MultipleCellDialog, ModalDialog
 from simpleui.admin import AjaxAdmin
 
-from lib import human_readable_bytes, human_readable_time, icloud
+from utils import human_readable_bytes, human_readable_time, icloud
 from .models import IMedia, Album, LocalMedia, AppleId
 from .services import collect_all_medias, delete_from_icloud, migrateIcloudToLocal
 from .views import DLT
@@ -905,11 +905,11 @@ class LocalMediaAdmin(admin.ModelAdmin):
                 return f"""<span title="{value}">{human_readable_bytes(value)}</span>"""
         if field_name == 'thumb':
             if value:
-                STORAGE_END_POINT = get_setting("MINIO_STORAGE_ENDPOINT")
-                BUCKET_NAME = get_setting("MINIO_STORAGE_MEDIA_BUCKET_NAME")
-                final_url = "http://" + STORAGE_END_POINT + '/' + BUCKET_NAME + '/' + value
-                print(STORAGE_END_POINT, print(final_url))
-                return f"""<img src="{final_url}" style="height:100px;">"""
+                # STORAGE_END_POINT = get_setting("MINIO_STORAGE_ENDPOINT")
+                # BUCKET_NAME = get_setting("MINIO_STORAGE_MEDIA_BUCKET_NAME")
+                final_url = "/media/" + value
+                # print(STORAGE_END_POINT, print(final_url))
+                return f"""<el-image src="{final_url}" style="height:100px;" :preview-src-list="['{final_url}']" lazy >"""
         if field_name == "duration":
             if value:
                 return f"""<span title="{value}">{human_readable_time(value)}</span>"""

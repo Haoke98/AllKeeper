@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 from django.contrib import admin
 from simplepro.decorators import button
 
-from lib import human_readable_bytes
+from utils import human_readable_bytes
 from .models import NginxLog
 
 
