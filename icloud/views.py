@@ -47,7 +47,7 @@ def test(request):
     smart = request.GET.get("smart", "All Photos")
     response = iService.query_medias(startRank, endRank, direction, limit, smart)
     records = response['records']
-    update(records, startRank)
+    update(iService,records, startRank)
     return JsonResponse(response)
 
 
@@ -79,7 +79,7 @@ def thumb(request):
 
         response = _iService.query_medias(start, limit=200)
         records: list[dict] = response['records']
-        update(records, start)
+        update(_iService, records, start)
         for i, record in enumerate(records):
             print(i, record["recordName"], _id, record["recordName"] == _id)
             if record["recordName"] == _id:
