@@ -877,7 +877,7 @@ class LocalMediaAdmin(admin.ModelAdmin):
 
     def dialog_lists(self, model):
         return MultipleCellDialog([
-            ModalDialog(url=f'/icloud/detail?id={urllib.parse.quote(model.id)}&source=LocalMedia', title=model.filename,
+            ModalDialog(url=f'/icloud/preview?id={urllib.parse.quote(model.id)}&source=LocalMedia', title=model.filename,
                         cell='<el-link type="primary">预览</el-link>', width="840px", height="600px"),
         ])
 

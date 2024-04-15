@@ -112,22 +112,23 @@ def insert_or_update_media(startRank: int, p: PhotoAsset, appleId: str):
     return obj
 
 
-def update(records, startRank):
-    from .admin import iService
+def update(_iService, records, startRank):
     def do(_records, _startRank):
-        iPhotos = iService.record2iphoto(_records)
+        iPhotos = _iService.record2iphoto(_records)
         for i, iphoto in enumerate(iPhotos):
-            insert_or_update_media(_startRank + i, iphoto)
+            insert_or_update_media(_startRank + i, iphoto, _iService.user.get("accountName"))
 
     th = threading.Thread(target=do, args=(records, startRank))
     th.start()
 
 
-def collect(startRank: int, _id):
-    from .admin import iService
-    resp = iService.query_medias(startRank=startRank)
+def collect(startRank: int, appleId):
+    require2fa, _iService = create_icloud_service(appleId)
+    if require2fa:
+        raise Exception("2FA required to create icloud service.")
+    resp = _iService.query_medias(startRank=startRank)
     records: list[dict] = resp['records']
-    update(records, startRank)
+    update(_iService, records, startRank)
 
 
 STATUS_FINISHED = "FINISHED"

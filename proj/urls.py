@@ -38,6 +38,7 @@ admin.site.site_header = 'AllKeeper'
 
 admin.autodiscover()
 urlpatterns = [
+    re_path(r'^media/(?P<path>.*)$', media),
     path(f"{ADMIN_PATH}/", admin.site.urls),
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
@@ -46,7 +47,6 @@ urlpatterns = [
     path("favicon.ico", RedirectView.as_view(url=_STATIC_URL + 'favicon.ico')),
     re_path(r'^static/(?P<path>.*)$', serve, ({'document_root': settings.STATIC_ROOT})),
     # FIXME: media资源访问时需要进行鉴权 Security BUG.
-    re_path(r'^media/(?P<path>.*)$', media),
     re_path('^eynek/', include(eynek.urls)),
     path('sp/', include('simplepro.urls')),
     re_path('^jump_service/', include(jumpService.urls)),

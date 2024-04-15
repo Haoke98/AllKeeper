@@ -90,17 +90,17 @@
                     fetch("/icloud/sync_progress", {
                         method: "GET",
                     }).then(resp => {
-                        console.log("resp:", resp.status, resp.statusText, resp.headers.get("Content-Type"))
+                        //console.log("resp:", resp.status, resp.statusText, resp.headers.get("Content-Type"))
                         if (resp.headers.get("Content-Type") === "application/json") {
                             resp.json().then(respJson => {
-                                console.log("Body:", respJson)
+                                //console.log("Body:", respJson)
                                 _this.STATUS = respJson.STATUS
                                 _this.TOTAL = respJson.TOTAL
                                 _this.FINISHED_COUNT = respJson.FINISHED_COUNT
                                 _this.STARTED_AT = new Date(respJson.STARTED_AT);
                                 _this.EXCEPTION_MSG = respJson.EXCEPTION_MSG
                                 _this.EXCEPTION_TRACE_BACK = respJson.EXCEPTION_TRACE_BACK
-                                console.log("app:", _this)
+                                //console.log("app:", _this)
                             })
                         }
                     })
