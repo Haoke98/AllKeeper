@@ -25,7 +25,8 @@ class BaseAccountModel(BaseModel):
 
 class ServiceType(BaseAccountModel):
     name = fields.CharField(max_length=50, verbose_name="名称")
-    defaultPort = fields.IntegerField(verbose_name="默认端口", null=True, blank=True)
+    port = fields.IntegerField(verbose_name="默认端口", null=True, blank=True)
+    dashboardPort = fields.IntegerField(verbose_name="默认Dashboard端口", null=True, blank=True)
     defaultSuperUsername = fields.CharField(max_length=50, verbose_name="默认超级用户名", null=True, blank=True)
     defaultSuperUserPwd = fields.CharField(max_length=50, verbose_name="默认超级用户密码", null=True, blank=True)
     doc = fields.CharField(max_length=500, verbose_name="文档地址", null=True, blank=True)
@@ -48,7 +49,8 @@ class Service(BaseAccountModel):
                                blank=False)
     port = models.PositiveIntegerField(verbose_name="端口", null=True, blank=True, db_index=True)
     sslOn = models.BooleanField(verbose_name="SSL", default=False)
-    dashboardPort = models.PositiveIntegerField(verbose_name="Dashboard/Console端口", null=True, blank=True, db_index=True)
+    dashboardPort = models.PositiveIntegerField(verbose_name="Dashboard/Console端口", null=True, blank=True,
+                                                db_index=True)
     dashboardPath = models.TextField(verbose_name="路径", null=True, blank=True)
 
     # TODO: 确定单用户服务和多用户服务之间的关系的处理, 要分开还是统一处理?

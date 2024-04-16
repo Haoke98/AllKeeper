@@ -21,7 +21,7 @@ class DbService(AbstractBaseServiceModel):
         for a, b in self.typeOpts:
             if self.ttype == a:
                 ttype = b
-        return f"{b}({self.server.ip}:{self.port}）"
+        return f"{b}({self.server}:{self.port}）"
 
 
 class DbServiceUser(AbstractBaseServiceUserModel):

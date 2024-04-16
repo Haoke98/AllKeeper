@@ -22,11 +22,12 @@ from ..models import Service, ServiceUser, ServiceType, ServerNew, OperationSyst
 
 @admin.register(ServiceType)
 class ServiceTypeAdmin(BaseAdmin):
-    list_display = ['id', 'name', 'remark', 'defaultPort', 'defaultSuperUsername', 'defaultSuperUserPwd', 'official',
+    list_display = ['id', 'name', 'remark', 'port', 'dashboardPort', 'defaultSuperUsername', 'defaultSuperUserPwd',
+                    'official',
                     'code', 'doc', 'updatedAt', 'createdAt',
                     'deletedAt']
     search_fields = ['name', 'remark']
-    list_filter = ['defaultPort']
+    list_filter = ['port', 'dashboardPort', ]
     actions = ['migrate']
     ordering = ('-updatedAt',)
 
@@ -64,8 +65,12 @@ class ServiceTypeAdmin(BaseAdmin):
             'align': 'center'
         },
         'name': FieldOptions.IP_ADDRESS,
-        'defaultPort': {
+        'port': {
             'min_width': "110px",
+            'align': 'center'
+        },
+        'dashboardPort': {
+            'min_width': "180px",
             'align': 'center'
         },
         'rootUsername': {
