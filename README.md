@@ -536,12 +536,10 @@ from pysqlite3 import dbapi2 as Database #新加这段代码
 ## 联系我们
 
 - 如果二次开发或者部署过程中有什么问题，可以随时联系我们。
-<table>
-<tr>
-<td>
-<img width="200px" src="http://59.110.225.84/static/sdm/qr_qq.png">
-</td>
-</tr>
-</table>
+
+* QQ邮箱：1903249375@qq.com
+
+<img width="280" src="https://github.com/user-attachments/assets/b8f1d843-1683-4396-b880-35870d07ab51" />
+
 
 ## 友情链接
