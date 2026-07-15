@@ -25,6 +25,14 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = 'none'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# === AllKeeper Core (git submodule) ===
+# 内核 apps (accountSystem/jumpService/utils) 位于 core/ 子模块中,
+# 加入 sys.path 后 INSTALLED_APPS 及 app 内部 import 均无需改动。
+import sys as _sys
+_CORE_DIR = str(BASE_DIR / 'core')
+if _CORE_DIR not in _sys.path:
+    _sys.path.insert(0, _CORE_DIR)
+
 LOG_FILE_DIR = os.path.join(BASE_DIR, 'log')
 if not os.path.exists(LOG_FILE_DIR):
     os.mkdir(LOG_FILE_DIR)
@@ -52,7 +60,7 @@ STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
 # 注：当DEBUG=False时，Django将不会再启动静态资源，如果启动了静态资源，也将会从STATIC__ROOT文件夹中搜取静态资源。
 # 注：当执行python manage.py collectstatic 命令时，将把STATICFILES__DIR中的所有静态资源复制到STATIC__ROOT中去
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'accountSystem/static'),
+    os.path.join(BASE_DIR, 'core/accountSystem/static'),
     os.path.join(BASE_DIR, 'common-static'),
     os.path.join(BASE_DIR, 'icloud/static'),
     os.path.join(BASE_DIR, 'eynek/static'),

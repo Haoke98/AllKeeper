@@ -1,0 +1,3 @@
+[submodule "core"]
+	path = core
+	url = https://github.com/Haoke98/allkeeper-core.git
